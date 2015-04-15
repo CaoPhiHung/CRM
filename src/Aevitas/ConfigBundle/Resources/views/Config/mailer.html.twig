@@ -1,0 +1,28 @@
+{% extends "AevitasConfigBundle::Config/layout.html.twig" %}
+
+{% block title %}Symfony - Configure database{% endblock %}
+
+{% block content %}
+    {% form_theme form "AevitasConfigBundle::Config/form.html.twig" %}
+
+    <div class="step">
+        {{ form_errors(form) }}
+        <form action="{{ path('config_mailer') }}" method="POST">
+            <div class="symfony-form-column">
+                {{ form_row(form.mtransport) }}
+                {{ form_row(form.mhost) }}
+            </div>
+            <div class="symfony-form-column">
+                {{ form_row(form.muser) }}
+                {{ form_row(form.mpassword) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            <div class="symfony-form-footer">
+                <p>* mandatory fields</p>
+            </div>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+{% endblock %}

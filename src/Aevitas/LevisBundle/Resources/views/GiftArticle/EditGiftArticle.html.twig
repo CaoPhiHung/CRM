@@ -1,0 +1,192 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}
+<style>
+        .tab-content input[type="radio"]{
+            float: left;
+            margin-right: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+        <li class="divider"></li>
+        <li>Gift Article</li>
+        <li class="divider"></li>
+        <li>Add Gift</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="alert alert-faded">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+    </div>
+                {% endfor %}
+    <div class="widget widget-2 widget-tabs widget-tabs-2 border-bottom-none">
+        <div class="widget-head">
+            <ul>
+                <li class="active"><a class="" href="#general-info" data-toggle="tab"><i></i>General Infomation</a></li>
+                <li class=""><a class="" href="#settings" data-toggle="tab"><i></i>Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST">
+        <div class="tab-content" style="padding: 0;">
+            <div class="tab-pane active" id="general-info">
+                <div class="row-fluid">
+                    <div class="span9">
+                   {{ form_label(form.name) }}
+                   {{ form_widget(form.name, {'attr': {'placeholder': 'Name gift article.'| trans, 'class': 'span10'}}) }}
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="Name is required."><i></i></span>
+                            <span class="error">{{ form_errors(form.name) }}</span>
+                            {{form_label(form.cat)}}
+                            {{form_widget(form.cat)}}
+                            <div class="separator"></div>
+                        {{form_label(form.categories)}}
+                        {{ form_widget(form.categories) }}
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="Category is required"><i></i></span>
+                            <div class="separator"></div>
+                        {{form_label(form.tags)}}
+                        {{form_widget(form.tags)}}
+                            <div class="separator"></div>
+                        {{form_label(form.excerpt)}}
+                        {{ form_widget(form.excerpt, {'attr': {'class': 'wysihtml5 span12', 'rows':'5' }}) }}
+                            <div class="separator"></div>
+                        {{form_label(form.description)}}
+                        {{ form_widget(form.description, {'attr': {'class': 'wysihtml5 span12', 'rows':'5' }}) }}
+                            <div class="separator"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="settings">
+                    <div class="row-fluid">
+                        {{ form_label(form.point) }}
+                            {{ form_widget(form.point) }}
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="Point is required, must is numberic."><i></i></span>
+                            <div class="separator"></div>
+                        {{ form_label(form.inventory) }}
+                            {{ form_widget(form.inventory) }}
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="Inventory is required, must is numberic."><i></i></span>
+                            {{form_label(form.images)}}
+                                    <div class="separator line bottom"></div>
+                            {{ form_widget(form.images)}}
+                                    <div>
+                                        <span id="addimages" href="{{uploaded}}" style="cursor:pointer"><i class="icon-plus-sign"></i>
+                                    {{'Upload Images' | trans}}
+                                            </span>
+                                            <div class="images"></div>
+                                        </div>
+                                        <div class="separator line bottom"></div>
+                        {{ form_label(form.gender) }}
+                            {{ form_widget(form.gender) }}
+                                        <div class="separator line bottom"></div>
+                        {{ form_label(form.isActive) }}
+                            {{ form_widget(form.isActive) }}
+                                        <div class="separator line bottom"></div>
+                        {{ form_label(form.DeliveryType) }}
+                            {{ form_widget(form.DeliveryType) }}
+                                        <div class="separator"></div>
+                                    </div>
+                                </div>
+                                <div class="separator line bottom"></div>
+            {{ form_rest(form) }}
+                                <div class="form-actions" style="margin: 0;">
+                                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+                                </div>
+                        </form>
+{% endblock %}
+
+        {% block extendjs %}
+	{% javascripts output='js/backend_gift_edit_compress.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-miniColors/jquery.miniColors.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery.cookie.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/themer.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/pixelmatrix-uniform/jquery.uniform.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/js/bootstrap.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-select/bootstrap-select.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js'
+            '@AevitasLevisBundle/Resources/public/js/select2.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/load.js'
+        %}
+                        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+{% block javascript %}
+{% javascripts output='js/uploader.js' filter='yui_js' 
+            '@VietlandElfinderBundle/Resources/public/js/elFinder1.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder2.view.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder3.ui.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder4.quickLook.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder6.eventsManager.js'
+        %}
+                        <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets output='bundles/vietlandelfinder/css/elfinder_compress.css' filter='yui_css'
+    '@VietlandElfinderBundle/Resources/public/css/elfinder.css'
+%}
+                        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+                        <style type="text/css">
+                                span.img{position:relative;display:inline-block;margin-right:5px;border:1px dashed #dedede}
+                                span.img img{width:48px;height:48px}
+                            </style>
+{% endstylesheets %}
+                            <link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/bootstrap/css/tagit.css') }}" />
+                            <script src="{{ asset('bundles/aevitaslevis/front/js/tag-it.min.js') }}"></script>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#aevitas_gift_tags').tagit();
+                                    url_finder = '{{path('levis_upload_gift')}}';
+                                    uploaded = $('#aevitas_gift_images').val().split(';');
+                                    uploadurl = $('#addimages').attr('href');
+                                    $.each(uploaded, function(i, el) {
+                                        $('.images').append('<span class="img"><img src="' + uploadurl + '/' + el + '" rel="' + el + '"/><i style="position:absolute;right:0px;top:0px;cursor:pointer" class="icon-remove-sign"></i></span>')
+                                    })
+                                    $('.images').delegate('.icon-remove-sign', 'click', function() {
+                                        $(this).parent('.img').remove();
+                                        var images = [];
+                                        $.each($('.images .img'), function(i, el) {
+                                            images.push($(el).find('img').attr('rel'));
+                                        })
+                                        $('#aevitas_gift_images').val(images.join(';'));
+                                    });
+                                    $('#addimages').on('click', function() {
+                                        var finderContainer = $('<div></div>').appendTo('body');
+                                        var FINDER = finderContainer.elfinder({
+                                            url: url_finder,
+                                            docked: false,
+                                            selectMultiple: true,
+                                            cutURL: 'root',
+                                            dialog: {
+                                                title: 'Upload Hình: Ctr+Click -> đề chọn nhiều hình',
+                                                height: 500,
+                                                zIndex: 9999,
+                                                width: 630
+                                            },
+                                            closeOnEditorCallback: true,
+                                            editorCallback: function(items) {
+                                                var images = [];
+                                                $.each($('.images .img'), function(i, el) {
+                                                    images.push($(el).find('img').attr('rel'));
+                                                })
+                                                $.each(items, function(i, el) {
+                                                    images.push(el.name);
+                                                    $('.images').append('<span class="img"><img src="' + el.tmb + '" rel="' + el.name + '"/><i style="position:absolute;right:0px;top:0px;cursor:pointer" class="icon-remove-sign"></i></span>')
+                                                })
+                                                $('#aevitas_gift_images').val(images.join(';'));
+                                            }
+                                        });
+                                    })
+                                });
+                                </script>
+{% endblock %}

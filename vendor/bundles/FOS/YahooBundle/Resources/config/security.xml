@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="fos_yahoo.auth" class="FOS\YahooBundle\Security\Authentication\Provider\YahooProvider" public="false">
+            <argument /> <!-- Provider-shared Key -->
+            <argument type="service" id="fos_yahoo.api" />
+        </service>
+
+        <service id="fos_yahoo.logout_handler" class="FOS\YahooBundle\Security\Logout\YahooHandler" public="false">
+            <argument type="service" id="fos_yahoo.api" />
+        </service>
+
+        <service id="fos_yahoo.security.authentication.listener"
+                 class="FOS\YahooBundle\Security\Firewall\YahooListener"
+                 parent="security.authentication.listener.abstract"
+                 abstract="true">
+        </service>
+
+        <service  id="fos_yahoo.security.authentication.entry_point" 
+                  class="FOS\YahooBundle\Security\EntryPoint\YahooAuthenticationEntryPoint" 
+                  public="false" 
+                  abstract="true">
+            <argument type="service" id="fos_yahoo.api" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,4 @@
+<div class="lang_selector">
+    <a href="{{path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'vi'}))}}" title="Vietnamese" data-lang="vn" class="vn {{app.request.locale}}">Vietnamese</a>
+    <a href="{{path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}" title="United States" data-lang="en" class="el {{app.request.locale}}">United States</a>
+</div>

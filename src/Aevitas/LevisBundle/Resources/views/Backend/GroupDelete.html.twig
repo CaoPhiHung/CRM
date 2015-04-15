@@ -1,0 +1,32 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="{{ asset('backend') }}"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+	<li><a href="{{ asset('backend/user/group/list') }}">Group</a></li>
+        <li class="divider"></li>
+        <li>Delete</li>
+    </ul>
+{% endblock %}
+    
+{% block content %}
+    <div class="block full-block">
+            <div class="control-group">
+                <div class="controls">
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ app.session.flash('notice') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <a href="{{ asset('backend/user/group/list') }}"><span class="btn btn-large color-6">Goback List</span></a>
+            </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    
+{% endblock %}

@@ -1,0 +1,357 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}    
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="{{ path('backend_point_rules_addnew') }}">Point Rule</a></li>
+        <li class="divider"></li>
+	<li>Addnew rules</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <form class="form-horizontal" action="{{ path('backend_point_rules_addnew') }}" {{ form_enctype(form) }} method="POST">
+    <div class="block full-block">
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-faded">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            <div class="separator line bottom"></div>
+
+            <div class="control-group">
+                <label class="control-label">Rule name</label>
+                <div class="controls">
+                    {{ form_widget(form.name, {'attr': {}}) }}
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Store</label>
+                <div class="controls">
+                    <select id="select-stores" name="select-stores" multiple="multiple">
+                        {% for store in stores %}
+                            <option value="{{ store.getOldId }}">{{ store.name }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ form_widget(form.store, {'attr': {}}) }}
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Level</label>
+                <div class="controls">
+                    {{ form_widget(form.level, {'attr': {}}) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Point</label>
+                <div class="controls">
+                    {{ form_widget(form.point, {'attr': {}}) }}
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Point Operation</label>
+                <div class="controls">
+                    {{ form_widget(form.operation, {'attr': {}}) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Action</label>
+                <div class="controls">
+                    {{ form_widget(form.action, {'attr': {}}) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Gender</label>
+                <div class="controls">
+                    {{ form_widget(form.gender, {'attr': {}}) }}
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">City</label>
+                <div class="controls">
+                    <select id="select-city" name="select-city">
+                        <option value="0" selected="selected">-- Global</option>
+                        {% for city in cities %}
+                        <option value="{{ city.map }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <input type="hidden" name="city-name" id="city-name">
+            <input type="hidden" name="district-name" id="district-name">
+            
+            <div class="control-group">
+                <label class="control-label">District</label>
+                <div class="controls">
+                    <select id="select-district" name="select-district" style="width:220px">
+                        
+                    </select>
+                    <div id="loading-district"></div>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Anniversary check</label>
+                <div class="controls">
+                    {{ form_widget(form.anniversary, {'attr': {}}) }}
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Birthday check</label>
+                <div class="controls">
+                    {{ form_widget(form.birthday, {'attr': {}}) }}
+                </div>
+            </div>
+                
+            <div class="control-group">
+                <label class="control-label">Bonus point check</label>
+                <div class="controls">
+                    {{ form_widget(form.bonus, {'attr': {}}) }}
+                </div>
+            </div>
+            
+            <div class="separator line bottom"></div>
+
+            <div class="row-fluid">
+            <div class="span3">
+                    <input type="checkbox" name="turn-IntervalDate" id="turn-IntervalDate" onchange="TurnBlock(this)"/> &nbsp;
+                    <strong>Interval date</strong>
+                    <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="span9" id="block-IntervalDate">
+                    <div class="row-fluid">
+                    <div class="span6">
+                            <div class="control-group">
+                                <label>Start date:</label>
+                                <div class="input-prepend">
+                                    <input type="text" id="sDate" name="sDate" />
+                                </div>
+                            </div>
+                    </div>
+                    <div class="span6">
+                            <div class="control-group">
+                                <label>Finish date:</label>
+                                <div class="input-prepend">
+                                    <input type="text" id="fDate" name="fDate" />
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+            </div>
+            </div>
+
+            <div class="separator line bottom"></div>
+
+            <div class="row-fluid">
+            <div class="span3">
+                    <input type="checkbox" name="turn-DayOfMonth" id="turn-DayOfMonth" onchange="TurnBlock(this)"/> &nbsp;
+                    <strong>Days of Month options</strong>
+                    <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="span9" id="block-DayOfMonth">
+                    <div class="row-fluid">
+                    <div class="span6">
+                            <div class="control-group">
+                                <label>Start day of month:</label>
+                                <div class="input-prepend">
+                                    <select id="sDayMonth" name="sDayMonth"?>
+                                    {% for ii in range(1,31) %}
+                                        <option>{{ ii }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="span6">
+                            <div class="control-group">
+                                <label>Finish day of month:</label>
+                                <div class="input-prepend">
+                                    <select id="fDayMonth" name="fDayMonth"?>
+                                    {% for ii in range(1,31) %}
+                                        <option>{{ ii }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+            </div>
+            </div>
+
+            <div class="row-fluid">
+            <div class="span3">
+                    <input type="checkbox" name="turn-DayOfWeek" id="turn-DayOfWeek" onchange="TurnBlock(this)"/> &nbsp;
+                    <strong>Days of Week options</strong>
+                    <p class="muted">example for list [Monday, Wedday, Friday and Sunday]: "2,4,6,1" or: "1,2,4,6" ... <br/>(<strong>1</strong> denote for Sunday)</p>
+            </div>
+            <div class="span9" id="block-DayOfWeek">
+                    <div class="control-group">
+                        <label>List of days of week:</label>
+                        <input id="sDayWeek" name="sDayWeek" type="text" placeholder="" class="span10"?>
+                        <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="days much be [1..7] (value 1 is sunday) and separated by comma ( , )"><i></i></span>
+                    </div>
+            </div>
+            </div>
+
+            <div class="row-fluid">
+            <div class="span3">
+                    <input type="checkbox" name="turn-HourOfDay" id="turn-HourOfDay" onchange="TurnBlock(this)"/> &nbsp;
+                    <strong>Hours of Day options</strong>
+                    <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="span9" id="block-HourOfDay">
+                    <div class="row-fluid">
+                    <div class="span6">
+                            <div class="control-group">
+                                <label>Start hour of day:</label>
+                                <div class="input-prepend">
+                                    <select id="sHourDay" name="sHourDay"?>
+                                    {% for ii in range(0,23) %}
+                                        <option>{{ ii }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="span6">
+                            <div class="control-group">
+                                <label>Finish hour of day:</label>
+                                <div class="input-prepend">
+                                    <select id="fHourDay" name="fHourDay"?>
+                                    {% for ii in range(0,23) %}
+                                        <option>{{ ii }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+            </div>
+            </div>
+
+            <div class="row-fluid">
+            <div class="span3">
+                    <input type="checkbox" name="turn-DayParity" id="turn-DayParity" onchange="TurnBlock(this)"/> &nbsp;
+                    <strong>Day parity</strong>
+                    <p class="muted">even-day or odd-day</p>
+            </div>
+            <div class="span9" id="block-DayParity">
+                    <div class="control-group">
+                        <input type="radio" value="1" id="DayParity" name="DayParity"/> even day<br/>
+                        <input type="radio" value="2" id="DayParity" name="DayParity"/> odd day<br/>
+                        <input type="radio" value="3" checked="checked" id="DayParity" name="DayParity"/> both
+                    </div>
+            </div>
+            </div>
+
+            {{form_rest(form)}}
+
+            <div class="separator line bottom"></div>
+
+            <div class="form-actions" style="margin: 0;">
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Add new</button>
+            </div>
+
+    </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <!-- select2 js -->
+    <script src="{{ asset('bundles/aevitaslevis/js/select2.js') }}"></script>
+    <script>
+        $('.row-fluid .control-group input').attr('disabled','disabled');
+        $('.row-fluid .control-group select').attr('disabled','disabled');
+        
+        $(function() {
+          $( "#sDate" ).datepicker({
+            minDate: new Date(),
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function( selectedDate ) {
+              if ($( "#sDate" ).attr('value')==''){
+                  $( "#fDate" ).datepicker( "option", "minDate", new Date() );
+              }else{
+                  $( "#fDate" ).datepicker( "option", "minDate", selectedDate );
+              }
+            }
+          });
+          $( "#fDate" ).datepicker({
+            minDate: new Date(),
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function( selectedDate ) {
+              $( "#sDate" ).datepicker( "option", "maxDate", selectedDate );
+            }
+          });
+        });
+
+        function TurnBlock(obj){
+            var did = $(obj).attr('name');
+            did = did.replace("turn","block");
+
+            if ($(obj).attr('checked')!='checked'){
+                $('#'+did+' input').attr('disabled','disabled');
+                $('#'+did+' select').attr('disabled','disabled');
+            }else{
+                $('#'+did+' input').removeAttr('disabled');
+                $('#'+did+' select').removeAttr('disabled');
+            }/**/
+        }
+        
+        function doSelectCity(obj){
+            var cityname = $(obj).find(":selected").text();
+            $('#city-name').val(cityname);
+            $('#loading-district').addClass('loading');
+            $.ajax({
+                url: '{{ path('home_search_district') }}/'+$(obj).val(),
+                dataType: 'json',
+                success: function(data){
+                    $('#loading-district').removeClass('loading');
+                    $('#select-district').select2("destroy");
+                    $('#select-district').html('<option value="">-- Global</option>'+data.html).select2();
+                }
+            });
+        }
+        
+        $('select#select-city').on('change',function(){
+            doSelectCity(this);
+        });
+        
+        $('#select-stores').select2({
+            width: '220px'
+        }).on('change',function(e){
+            var strval = '_';
+            var val = e.val;
+            for (i in val){
+                strval += val[i]+'_';
+            }
+            $('#aevitas_point_rule_store').val(strval);
+            //console.log($('#aevitas_point_rule_store').val());
+        });
+        
+        $('select#select-district').on('change',function(){
+            var districtname = $(this).find(":selected").text();
+            $('#district-name').val(districtname);
+        });
+    </script>
+{% endblock %}

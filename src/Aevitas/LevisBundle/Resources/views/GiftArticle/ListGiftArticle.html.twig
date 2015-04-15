@@ -1,0 +1,73 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>Gift Article</li>
+    <li class="divider"></li>
+    <li>List</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+
+<div class="control-group">
+    <a href="{{ path('backend_gift_create') }}"><span class="btn btn-large color-7">Create new gift</span></a>
+</div>
+<div class="separator"></div>
+
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-gift" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 15%;" aria-sort="ascending" aria-label="Rendering eng.: activate to sort column descending">Name.</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 30%;" aria-label="Browser: activate to sort column ascending">Category</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 10%;" aria-label="Platform(s): activate to sort column ascending">Status</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 25%;" aria-label="Eng. vers.: activate to sort column ascending">Description</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 10%;" aria-label="CSS grade: activate to sort column ascending">Point</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 10%;" aria-label="CSS grade: activate to sort column ascending">Operations</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+               {% if giftArticle is empty %}
+            <tr><td>
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}</td></tr>
+                {% else %}
+        {% for item in giftArticle %}
+            <tr class="{{ cycle(['odd', 'even'], loop.index)}} gradeA remove_item_{{ item.id }}">
+                <td class="center item-name">{{ item.name }}</td>
+                <td class="item-image" style="width:20%;">Top Category: {{item.getCat}}<br/>Sub Category: {{item.getCategory.getName}}</td>
+                <td class="center item-status">
+                          {% if item.isActive == 0 %} 
+                        <div class="unactive_kard" title="inactive">unactive</div> 
+                          {% else %} 
+                        <div class="active_kard" title="active">active</div> 
+                          {% endif %}
+                    </td>
+
+                    <td class="center item-category" categoryId="{{item.description}}">{{ item.description }}</td>
+                    <td class="center item-price">{{ item.point }}</td> 
+                    <td class="center item-price" colspan="2"><a href="{{ path('backend_gift_Edit', {'id':item.id}) }}">{{ 'Edit'|trans }}</a> | <a rel="{{ item.id }} "class="delete-item-gift" href="{{ path('backend_gift_delete', {'id':item.id}) }}">{{ 'Delete'|trans }}</a></td> 
+                </tr>
+           {% endfor %}
+            {% endif %}
+            </tbody></table>
+     <div id="open-form-delete" style="display: none;" title="Note">
+                Are you sure want to delete this item ?
+            </div>
+{% endblock %}
+
+{% block javascript %}
+ <script>
+        var backend_gift_delete = '{{ path('backend_gift_delete') }}';
+    </script>
+    <script src="{{ asset('bundles/aevitaslevis/js/giftArticle.js') }}"></script>
+{% endblock %}

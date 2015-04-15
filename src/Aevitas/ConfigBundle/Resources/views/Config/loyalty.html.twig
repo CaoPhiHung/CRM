@@ -1,0 +1,112 @@
+{% extends "AevitasConfigBundle::Config/layout.html.twig" %}
+
+{% block title %}Symfony - Configure database{% endblock %}
+
+{% block content %}
+    {% form_theme form "AevitasConfigBundle::Config/form.html.twig" %}
+
+<div class="step">
+        {{ form_errors(form) }}
+        <form action="{{ path('config_loyalty') }}" method="POST">
+            <div class="symfony-form-column" style="float:left;">
+                <h3>Loyalty System</h3>
+                {{ form_row(form.locale) }}
+                {{ form_row(form.cdn) }}
+                {{ form_row(form.smsclient) }}
+                {{ form_row(form.smspassword) }}
+                <h3>Parent Gift Category</h3>
+                {{form_row(form.categories)}}
+            </div>
+
+            <div class="symfony-form-column" style="float:left;margin-left:50px">
+                <h3>Level Rule</h3>
+            {{ form_row(form.prbssilver)}}
+            {{ form_row(form.prbsgold)}}
+            {{ form_row(form.prbsplatin)}}
+            {# form_row(form.gold) }}
+            {{ form_row(form.goldlimit) }}
+            {{ form_row(form.platin) }}
+            {{ form_row(form.platinlimit) #}
+            {{ form_row(form.goldinterval) }}
+            {{ form_row(form.platinuminterval) }}
+                {{ form_row(form.expiredgold) }}
+                {{ form_row(form.expiredplatinum) }}
+            </div>
+            <div class="symfony-form-column">
+                <h3>Facebook App Setting</h3>
+                {{form_row(form.facebook_app_id)}}
+                {{form_row(form.facebook_secret)}}
+                {{form_row(form.facebook_share_description)}}
+                {{form_row(form.facebook_share_caption)}}
+                {{form_row(form.facebook_share_name)}}
+                {{form_row(form.facebook_share_picture)}}
+                <button class="btn btn-primary">Upload Image</button>
+                {{form_row(form.facebook_share_link)}}
+                <h3>Redeem Setting</h3>
+                {{ form_row(form.redeemsilver) }}
+                {{ form_row(form.redeemgold) }}
+                {{ form_row(form.redeemplatinum) }}
+                {{ form_row(form.refcel) }}
+                {{ form_row(form.ref) }}
+                {{ form_row(form.joinbonus) }}
+                {{ form_row(form.redeemlimit) }}
+                {{ form_row(form.cashback) }}
+            </div>
+            <div class="symfony-form-column" style="float:left;margin-left:50px">
+                <h3>Point Rule</h3>
+            {{form_row(form.prfb)}}
+            {{ form_rest(form) }}
+            </div>
+            <div class="symfony-form-footer">
+                <p>* mandatory fields</p>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-icon btn-primary"/>
+        </form>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% javascripts output='js/uploader.js' filter='yui_js' 
+            '@VietlandElfinderBundle/Resources/public/js/elFinder1.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder2.view.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder3.ui.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder4.quickLook.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder6.eventsManager.js'
+        %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets output='bundles/vietlandelfinder/css/elfinder_compress.css' filter='yui_css'
+    '@VietlandElfinderBundle/Resources/public/css/elfinder.css'
+%}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/bootstrap/css/tagit.css') }}" />
+    <script src="{{ asset('bundles/aevitaslevis/front/js/tag-it.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            upload = '{{path('backend_config_upload_image')}}';
+            $('#system_setting_categories').tagit();
+            $('.loyalty button').on('click', function(e) {
+                e.preventDefault();
+                var finderContainer = $('<div id="elfinder"></div>').appendTo('body');
+                var FINDER = finderContainer.elfinder({
+                    url: upload,
+                    docked: false,
+                    selectMultiple: false,
+                    cutURL: 'root',
+                    dialog: {
+                        title: 'Upload Hình: Ctr+Click -> đề chọn nhiều hình',
+                        height: 500,
+                        zIndex: 9999,
+                        width: 630
+                    },
+                    closeOnEditorCallback: true,
+                    editorCallback: function(items) {
+                        $('#system_setting_facebook_share_picture').val('/media/facebook/' + items);
+                        console.log(items);
+                    }
+                });
+            })
+        });
+        </script>
+{% endblock %}

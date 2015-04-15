@@ -1,0 +1,56 @@
+<div class="fos_user_user_show">
+    <form action="{{ path('_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="_user_profile_edit">
+        <div class="avatars">
+            {{ form_widget(form.user.avatars, {'attr': {'placeholder': 'Select file to change Avatar'|trans}}) }}
+        </div>
+        <div>
+        {{ form_label(form.user.username) }}
+        {{ form_widget(form.user.username, {'attr': {'placeholder': 'Username'| trans,'disabled': 'disabled', 'class': 'title' }}) }}
+        <span class="error">{{ form_errors(form.user.username) }}</span>
+        </div>
+            
+        <div>
+        {{ form_label(form.user.email) }}
+        {{ form_widget(form.user.email, {'attr': {'placeholder': 'Email'| trans,'disabled': 'disabled', 'class': 'email' }}) }}
+        <span class="error">{{ form_errors(form.user.email) }}</span>
+        </div>
+            
+        <div class="datepicker" >
+        {{ form_label(form.user.dob) }}
+        {{ form_widget(form.user.dob, {'attr': {'placeholder': 'vietland.dob'| trans,'disabled': 'disabled', 'class': 'date'}}) }}
+        <span class="error">{{ form_errors(form.user.dob) }}</span>
+        </div>
+        
+        <div>
+            {{ form_label(form.user.sex) }}
+            <div  class="select">
+                {{ form_widget(form.user.sex, {'attr': {'placeholder': 'vietland.sex'| trans,'disabled': 'disabled', 'class': 'sex' }}) }}
+                <span class="error">{{ form_errors(form.user.sex) }}</span>
+            </div>
+        </div>
+        
+        <div>
+        {{ form_label(form.user.cellphone) }}
+        {{ form_widget(form.user.cellphone, {'attr': {'placeholder': 'vietland.cellphone'| trans,'disabled': 'disabled', 'class': 'cellphone' }}) }}
+        <span class="error">{{ form_errors(form.user.cellphone) }}</span>
+        </div>
+        
+        <div>
+        {{ form_label(form.user.smsConfirm) }}
+        {{ form_widget(form.user.smsConfirm, {'attr': {'placeholder': 'vietland.smsConfirm'| trans,'disabled': 'disabled', 'class': 'sms' }}) }}
+        <span class="error">{{ form_errors(form.user.smsConfirm) }}</span>
+        </div>
+        
+        {{ form_rest(form) }}
+            <div class="hide" style="display:none">
+                <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+        <a href="#" class="edit">{{"Edit"| trans}}</a>
+    </form>
+        <div class="crop_avatar">
+            <img src="{{userimage}}" style="float: left; margin-right: 10px;" id="thumbnail" alt="Create Thumbnail" />
+            <div style="float:left; position:relative; overflow:hidden; width:100px; height:100px;">
+                    <img src="{{userimage}}" style="position: relative;" alt="Thumbnail Preview" />
+            </div>
+        </div>
+</div>

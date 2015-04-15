@@ -1,0 +1,39 @@
+.nextgrade{clear:both;overflow:hidden;}
+div.clock{width:214px;position:relative;height:210px;margin-left:20px}
+div.clock canvas{position: absolute;z-index:1}
+div.clock>div{    clear: both;
+    display: inline;
+    height: 428px;
+    overflow: hidden;
+    width: 214px;}
+h4.avro, h3.avro{font-family: 'Rockwell';font-size:16px;text-align:center;line-height:26px}
+h4.avro{font-size:15px;font-weight:normal}
+div.clockitem{width:254px;float:left;padding-left:18px}
+div.clockitem + div.clockitem{margin-left:30px}
+div.clock .led{width:16px;height:17px;background:url("../img/sprite.png") no-repeat scroll left -699px;display:block;position:absolute}
+div.clock .min{top:110px;position:absolute}div.clock .max{top:110px;right:0;position:absolute}
+div.clock input{    background: url("../img/grader.jpg") no-repeat scroll center 17px transparent !important;
+    color: #858585 !important;border:none !important;
+    font: bold 32px Arial !important;
+    font-weight: normal !important;
+    height:210px !important;
+    margin: 0 auto !important;
+    width: 100% !important;z-index:0}
+.bar .tooltip{top:30px !important}
+div.static>div{margin:40px 60px 0}
+div.static .bar{margin-top:0px;height:15px;-webkit-box-shadow: inset 1px 1px 8px 0px #dedede;overflow:hidden;
+box-shadow: inset 1px 1px 8px 0px #dedede;
+-webkit-border-radius: 10px;
+border-radius: 10px;}div.static .points{background:url(../img/points.jpg) repeat-x;height:15px;-webkit-border-radius: 10px;float:left;diplay:inline-block;border-radius: 10px}.body.static{padding:10px 0 40px}
+div.static>div>span{width:151px;float:left}
+div.static>div>span.postend{width: 80px}
+span.postend + span{width:75px !important;float:right !important;text-align:right}
+.static>strong{margin-left:40px}.static>span{float:right;margin-right:30px}
+.yellow_button.small{margin:20px 0 20px;height:35px;line-height:35px;padding:0 10px;font-size:13px}
+.addwishlist{margin-left:0;float:right}.clockitem .gift{padding:0 28px}
+.gift a>img{display:block;margin:0 auto}#ttpoint{float:left;display:block;width:1px;height:1px}
+.level{position:relative;margin-top:25px !important}.level>div.point{font-weight:bold;left:-54px;position:absolute;top:-25px;}
+.level>div>span{width:25%;float:left}
+.level>div>span.gold{width:10%}
+.level>div>span.platin{width:50%;text-align:right}
+.level .point.tier{top:0}

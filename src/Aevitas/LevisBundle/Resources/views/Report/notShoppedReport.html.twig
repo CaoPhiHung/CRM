@@ -1,0 +1,27 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> {{'BACKEND' | trans}}</a></li>
+    <li class="divider"></li>
+    <li>{{'Download Report' | trans}}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    {{form_rest(form)}}
+    <div class="form-actions" style="margin: 0;">
+        <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Download</button>
+    </div>
+</form>
+{% endblock %}
+{% block javascript %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#form_start').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#form_end').datepicker({dateFormat: 'yy-mm-dd'});
+});
+    </script>
+{% endblock %}

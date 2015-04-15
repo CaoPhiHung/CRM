@@ -1,0 +1,3 @@
+phone -> 0909546519 | email -> 8315003075@tbfvietnam.com | gender -> 1 | birthday -> empty | firstname -> NGUYEN | lastname -> PHUONG TU | middlename -> DINH | ccode -> 8315003075 | postid -> 120985
+phone -> 0939241288 | email -> 8315005795@tbfvietnam.com | gender -> 2 | birthday -> empty | firstname -> NGUYEN | lastname -> KHOA | middlename -> PHAM DANG | ccode -> 8315005795 | postid -> 120984
+phone -> 0903385379 | email -> 8315004162@tbfvietnam.com | gender -> 2 | birthday -> empty | firstname -> CHU | lastname -> empty | middlename -> BA LOC | ccode -> 8315004162 | postid -> 120997

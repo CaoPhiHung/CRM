@@ -1,0 +1,17 @@
+{% extends "AevitasLevisBundle::Backend/root.html.twig" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('bundles/sensiodistribution/webconfigurator/css/configurator.css') }}" />
+    <style type="text/css">
+    .loyalty .step .symfony-form-field{height:auto !important}
+    .loyalty .step .symfony-form-row{padding-bottom:10px}
+        </style>
+{% endblock %}
+
+{% block title 'Web Configurator Bundle' %}
+
+{% block body %}
+    <div class="block">
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

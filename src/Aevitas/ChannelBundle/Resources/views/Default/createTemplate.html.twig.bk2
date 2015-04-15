@@ -1,0 +1,129 @@
+{% extends "AevitasChannelBundle:eLRTE:root.html.twig" %}
+
+{% block import %}    
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="#">Template</a></li>
+        <li class="divider"></li>
+	<li>Create</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-faded">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    <form action="" method="POST">
+        {{ form_rest(form) }}
+        {% set content = '' %}
+        <div class="alert alert-message">
+            List avaiable variables for SMS template:<br/>
+            {% for var in listvars %}
+                &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('sms','{{ var.code }}')" class="label label-info">{{var.code}}</label>
+            {% endfor %}
+        </div>
+        <br/>body <b>Email</b> template
+        {% include "AevitasChannelBundle:eLRTE:elrte.html.twig" %}
+        <div class="separator"></div>
+        <div class="alert alert-message">
+            List avaiable variables for Email template:<br/>
+            {% for var in listvars %}
+                &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('email','{{ var.code }}')" class="label label-info">{{var.code}}</label>
+            {% endfor %}
+        </div>
+        
+        <div id="addtion-attr">
+            <div class="control-group">
+                <label class="control-label">City</label>
+                <div class="controls">
+                    <select id="select-city" onchange="doSelectCity(this)" name="select-city">
+                        <option value="0" selected="selected">-- Global</option>
+                        {% for city in cities %}
+                        <option value="{{ city.map }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="city-name" id="city-name">
+            <input type="hidden" name="district-name" id="district-name">
+
+            <div class="control-group">
+                <label class="control-label">District</label>
+                <div class="controls">
+                    <select id="select-district" onchange="doSelectDistrict(this)" name="select-district" style="width:220px">
+                        <option value="0">-- Global</option>
+                    </select>
+                    <div id="loading-district"></div>
+                </div>
+            </div>
+        </div>
+        <div class="separator"></div>
+        <div style="text-align: right">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block javascript %}
+    <!-- select2 js -->
+    <script src="{{ asset('bundles/aevitaslevis/js/select2.js') }}"></script>
+    <script>
+        $('#aevitas_edit_template_name').css({'width':'220px', 'height':'25px'});
+        $('#aevitas_edit_template_bodysms').css({'width':'600px', 'height':'150px'});
+        
+        $('#aevitas_edit_template_district').after($('#addtion-attr'));
+        
+        $('#aevitas_edit_template_gender').select2({
+            width: '220px'
+        });
+        
+        $('#aevitas_edit_template_level').select2({
+            width: '220px'
+        });
+        
+        $('#select-city').select2({
+            width: '220px'
+        });
+        
+        function doSelectCity(obj){
+            var cityname = $(obj).find(":selected").text();
+            $('#city-name').val(cityname);
+            //console.log($('#city-name').val());
+            $('#loading-district').addClass('loading');
+            $.ajax({
+                url: '{{ path('home_search_district') }}/'+$(obj).val(),
+                dataType: 'json',
+                success: function(data){
+                    $('#loading-district').removeClass('loading');
+                    $('#select-district').select2("destroy");
+                    $('#select-district').html('<option value="0">-- Global</option>'+data.html).select2();
+                }
+            });
+        }
+        
+        function doSelectDistrict(obj){
+            var districtname = $(obj).find(":selected").text();
+            $('#district-name').val(districtname);
+            //console.log($('#district-name').val());
+        }
+        
+        function innerCode(type, code){
+            if (type == 'sms'){
+                $('#aevitas_edit_template_bodysms').append(code);
+            }else{
+                rte[0].elrte.selection.insertText(code);
+            }
+        }
+    </script>
+{% endblock %}

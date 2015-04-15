@@ -1,0 +1,338 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>Item</li>
+    <li class="divider"></li>
+    <li>List</li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+<form action="{{path('backend_user_advancedseeking')}}" method="GET" id="advancesearchuser" class="clearfix">
+    
+    <div class="section_left">
+        <div class="row-input">
+            {{form_rest(form_level)}}
+            <div>
+                <label for="form_CCode">C code</label><input type="text" id="form_CCode" name="form[CCode]" value="{% if data.CCode is defined %} {{-data.CCode-}} {% endif %}">
+            </div>
+            <div>
+                <label for="form_name">Name</label><input type="text" id="form_name" name="form[name]" value="{% if data.name is defined %} {{-data.name-}} {% endif %}">
+            </div>
+        </div>
+        <div class="row-input">
+            <div>
+                <div style="width:60%; float:left;">
+                    <label for="form_cellphone">Cellphone</label>
+                </div>
+                <div style="width:25%; float:left">
+                    <input type="checkbox" name="form[empty_cellphone]" id="empty_cellphone" style="float:left; width:20%" /><label for="empty_cellphone">Empty</label>
+                </div>
+                <input type="text" id="form_cellphone" name="form[cellphone]" value="{% if data.cellphone is defined %} {{-data.cellphone-}} {% endif %}">
+            </div>
+            <div>
+                <div style="width:60%; float:left;">
+                    <label for="form_email">Email</label>
+                </div>
+                <div style="width:25%; float:left">
+                    <input type="checkbox" name="form[empty_email]" id="empty_email" style="float:left; width:20%" /><label for="empty_email">Empty</label>
+                </div>
+                <input type="text" id="form_email" name="form[email]" value="{% if data.email is defined %} {{-data.email-}} {% endif %}">
+            </div>
+            <div class="date_picker">
+                <label for="not_active_day">Not Active from day</label>
+                <input type="text" id="not_active_day" name="form[not_active_day]" style="width:65%;" value="{% if data.not_active_day is defined %} {{-data.not_active_day-}} {% endif %}">
+            </div>        
+        </div>
+
+        <div class="row-input">
+            <div>
+                <label for="form_fcardno">From Card No</label><input type="text" id="form_fcardno" name="form[fcardno]" value="{% if data.fcardno is defined %} {{-data.fcardno-}} {% endif %}">
+            </div>
+            <div>
+                <label for="form_tcardno">To Card No</label><input type="text" id="form_tcardno" name="form[tcardno]" value="{% if data.tcardno is defined %} {{-data.tcardno-}} {% endif %}">
+            </div>
+            <div class="date_picker">
+                <label for="bday_month">Bday Month</label>
+                <input type="text" id="bday_month" name="form[bday_month]" style="width:65%;" value="{% if data.bday_month is defined %} {{-data.bday_month-}} {% endif %}">
+            </div> 
+        </div>
+        
+        <div class="row-input">
+            {{form_rest(form_gender)}}
+            <div>
+                <label for="form_city">City</label><input type="text" id="form_city" name="form[city]" value="{% if data.city is defined %} {{-data.city-}} {% endif %}">
+            </div>
+            <div>
+                <label for="form_district">District</label><input type="text" id="form_district" name="form[district]" value="{% if data.district is defined %} {{-data.district-}} {% endif %}">
+            </div>
+        </div>
+
+        <div class="row-input">
+            {{form_rest(form_marital)}}
+            <div class="date_picker">
+                <label for="triple_point_dates">Triple point dates</label>
+                <input type="text" id="triple_point_dates" name="form[triple_point_dates]" style="width:65%;" value="{% if data.triple_point_dates is defined %} {{-data.triple_point_dates-}} {% endif %}">
+            </div>
+            <div style="padding-top:28px;">
+                <input type="checkbox" name="form[enrolment]" id="enrolment" style="float:left; margin-right:10px;">
+                <label for="enrolment">completed online enrolment</label>
+            </div>
+        </div>
+
+        <div class="row-input">
+            {{form_rest(form_status)}}        
+            <div>
+                <label for="form_registration_store">Registration Store</label><input type="text" id="form_registration_store" name="form[registration_store]" value="{% if data.registration_store is defined %} {{-data.registration_store-}} {% endif %}">
+            </div>
+        </div>
+    </div>
+    <div class="section_right">
+        <input type="submit" class="btn btn-action" value="Search"/>
+        <input type="button" class="btn btn-action" value="Resend RegCode"/>
+        <input type="button" class="btn btn-action" value="Downgrade"/>
+    </div>
+    <div class="line_section"></div>
+
+    <div class="row-input">
+        {{form_rest(form_bill)}}
+        <div style="width:60%;">
+            <div style="float:left;width:100%;">
+                <input type="checkbox" name="form[lifetime]" id="lifetime" style="float:left; margin-right:5px;" /><label for="lifetime">Life Time</label>
+            </div>
+            <div style="float:left;width:25%;">
+                <label for="form_fbill" style="float:left;width:30%;">From</label>
+                <input type="text" id="form_fbill" name="form[fbill]" placeholder="Value" style="width:40%" value="{% if data.fbill is defined %} {{-data.fbill-}} {% endif %}">
+            </div>
+            <div style="float:left;width:25%;">
+                <label for="form_tbill" style="float:left;width:30%;">To</label>
+                <input type="text" id="form_tbill" name="form[tbill]" placeholder="Value" style="width:40%" value="{% if data.tbill is defined %} {{-data.tbill-}} {% endif %}">
+            </div>
+            <div style="float:left;width:50%;">
+                <label for="form_lastdays" style="float:left;width:35%;">Within the last</label>
+                <input type="text" id="form_lastdays" name="form[lastdays]" placeholder="number of" style="float:left;width:25%" value="{% if data.lastdays is defined %} {{-data.lastdays-}} {% endif %}">
+                <label for="form_lastdays" style="float:left;width:20%;margin-left:5px;">days</label>
+            </div>
+
+        </div>    
+    </div>
+    <div class="row-input">
+        {{form_rest(form_tier)}}
+        <div style="width:60%;margin-top:20px;">
+            
+            <div style="float:left;width:25%;">
+                <label for="form_ftier" style="float:left;width:30%;">From</label>
+                <input type="text" id="form_ftier" name="form[ftier]" placeholder="Value" style="width:40%" value="{% if data.ftier is defined %} {{-data.ftier-}} {% endif %}">
+            </div>
+            <div style="float:left;width:25%;">
+                <label for="form_ttier" style="float:left;width:30%;">To</label>
+                <input type="text" id="form_ttier" name="form[ttier]" placeholder="Value" style="width:40%" value="{% if data.ttier is defined %} {{-data.ttier-}} {% endif %}">
+            </div>
+            <div style="float:left;width:50%;">
+                <label for="form_tier_lastdays" style="float:left;width:35%;">Within the last</label>
+                <input type="text" id="form_tier_lastdays" name="form[tier_lastdays]" placeholder="number of" style="float:left;width:25%" value="{% if data.tier_lastdays is defined %} {{-data.tier_lastdays-}} {% endif %}">
+                <label for="form_tier_lastdays" style="float:left;width:20%;margin-left:5px;">days</label>
+            </div>
+
+        </div>    
+    </div>
+    <div class="row-input">
+        {{form_rest(form_point)}}
+        <div style="width:60%;">
+            <div style="float:left;width:100%;">
+                <input type="checkbox" name="form[p_lifetime]" id="p_lifetime" style="float:left; margin-right:5px;" /><label for="p_lifetime">Life Time</label>
+            </div>
+            <div style="float:left;width:25%;">
+                <label for="form_fpoint" style="float:left;width:30%;">From</label>
+                <input type="text" id="form_fpoint" name="form[fpoint]" placeholder="Value" style="width:40%" value="{% if data.fpoint is defined %} {{-data.fpoint-}} {% endif %}">
+            </div>
+            <div style="float:left;width:25%;">
+                <label for="form_tpoint" style="float:left;width:30%;">To</label>
+                <input type="text" id="form_tpoint" name="form[tpoint]" placeholder="Value" style="width:40%" value="{% if data.tpoint is defined %} {{-data.tpoint-}} {% endif %}">
+            </div>
+            <div style="float:left;width:50%;">
+                <label for="form_p_lastdays" style="float:left;width:35%;">Within the last</label>
+                <input type="text" id="form_p_lastdays" name="form[p_lastdays]" placeholder="number of" style="float:left;width:25%" value="{% if data.p_lastdays is defined %} {{-data.p_lastdays-}} {% endif %}">
+                <label for="form_p_lastdays" style="float:left;width:20%;margin-left:5px;">days</label>
+            </div>
+
+        </div>    
+    </div>
+
+    <div class="row-input">
+        <div style="float:left;width:100%;">
+            <label>Joining Date</label>
+        </div>
+        <div class="date_picker">
+            <label for="fjoiningdate" style="float:left;width:15%;padding-top:3px;">From</label>
+            <input type="text" id="fjoiningdate" name="form[fjoiningdate]" style="width:61%" value="{% if data.fjoiningdate is defined %} {{-data.fjoiningdate-}} {% endif %}">
+        </div>
+        <div class="date_picker">
+            <label for="tjoiningdate" style="float:left;width:15%;padding-top:3px;">From</label>
+            <input type="text" id="tjoiningdate" name="form[tjoiningdate]" style="width:60%" value="{% if data.tjoiningdate is defined %} {{-data.tjoiningdate-}} {% endif %}">
+        </div>        
+    </div>
+
+    <div class="row-input">
+        <div style="float:left;width:100%;">
+            <label>Bonus Point is expired on the date</label>
+        </div>
+        <div class="date_picker">
+            <label for="fexpireddate" style="float:left;width:15%;padding-top:3px;">From</label>
+            <input type="text" id="fexpireddate" name="form[fexpireddate]" style="width:61%" value="{% if data.fexpireddate is defined %} {{-data.fexpireddate-}} {% endif %}">
+        </div>
+        <div class="date_picker">
+            <label for="texpireddate" style="float:left;width:15%;padding-top:3px;">From</label>
+            <input type="text" id="texpireddate" name="form[texpireddate]" style="width:60%" value="{% if data.texpireddate is defined %} {{-data.texpireddate-}} {% endif %}">
+        </div>        
+    </div>
+
+    <div class="line_section"></div>
+
+    <div class="row-input">
+        {{form_rest(form_bonuspoint)}}
+        <div style="float:left;width:60%;margin-top:26px;">
+            <div style="float:left;width:35%;margin-right:20px;">
+                <input type="text" id="form_amountpoint" name="form[amountpoint]" placeholder="Amount of points" style="width:90%;" value="{% if data.amountpoint is defined %} {{-data.amountpoint-}} {% endif %}">
+            </div>
+            <div class="date_picker" style="float:left;width:40%;margin-right:20px;">
+                <input type="text" id="expired_date" name="form[expired_date]" placeholder="Expired Date" style="width:75%;"  value="{% if data.expired_date is defined %} {{-data.expired_date-}} {% endif %}">
+            </div>
+            <div style="float:left;width:15%;">
+                <input type="button" class="btn btn-action" value="Add points" style="width:135px;"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="line_section"></div>
+
+    <!--<div class="row-input">
+        <div>
+            <label for="form_spoint">from point</label><input type="text" id="form_spoint" name="form[spoint]">
+        </div>
+        <div>
+            <label for="form_fpoint">to point</label><input type="text" id="form_fpoint" name="form[fpoint]">
+        </div>
+    </div>-->
+
+    <input type="hidden" id="form__token" name="form[_token]" value="">
+
+    <!--<input type="submit" class="btn btn-action" value="Search"/>-->
+</form>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th><input type="checkbox" id="checkall" name="toggle" value="" ></th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Firstname'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Lastname'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Email'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Point'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'C.Code'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Level'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Status'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Action'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {% for user in users %}
+        <tr class="{{ cycle(['odd', 'even'], loop.index)}} gradeA remove_item_{{ user.getId }}">
+            <td><input type="checkbox" class="check-row" id="cb{{ user.getId }}" name="cid[]" value="{{ user.getId }}" ></td>
+            <td>{{user.getFirstname}}</td>
+            <td>{{user.getLastname}}</td>
+            <td class="center item-name">{{ user.getEmail }}</td>
+            <td class="center item-name">{{ user.getPoint }}</td>
+            <td class="center item-name">{{ user.getCCode }}</td>
+            <td>{{user.getLevel}}</td>
+            <td>Enabled</td>
+            <td class="center item-price" colspan="2">
+                <a rel="{{ user.getId }}" href="{{ path('backend_report_userstatement', {'id':user.getId}) }}" title="download user statement">{{ 'Download'|trans }}</a> | 
+                <a rel="{{ user.getId }}" href="{{ path('backend_edit_user', {'id':user.getId}) }}">{{ 'Edit'|trans }}</a> | 
+                <a rel="{{ user.getId }}" href="{{ path('admin_delete_user', {'id':user.getId}) }}">{{ 'Delete' | trans }}</a>
+            </td>
+        </tr>
+           {% endfor %}
+    </tbody></table>
+    {{pagination | raw}}
+<input type="hidden" name="boxchecked" value="">
+
+<a href="{{exporturl}}" class="btn btn-primary">{{'Export' | trans}}</a>
+
+<form action="{{ path('user_import') }}"  {{ form_enctype(import) }} method="POST">
+        {{ form_rest(import) }}
+    <button class="btn btn-primary">Import</button>
+</form>
+<div id="open-form-delete" style="display: none;" title="!Important">
+    Are you sure want to delete this item ?
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var backend_item_delete = '{{ path('backend_item_delete') }}';
+    jQuery(function() {
+        jQuery( "#not_active_day" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+        jQuery( "#bday_month" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+        jQuery( "#triple_point_dates" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+        jQuery( "#fjoiningdate" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+        jQuery( "#tjoiningdate" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+        jQuery( "#fexpireddate" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+        jQuery( "#texpireddate" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+        jQuery( "#expired_date" ).datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
+        });
+
+        jQuery("#table-list-store_wrapper .row-fluid>div:first-child").attr('class','span5');
+        jQuery("#table-list-store_wrapper .row-fluid>div:nth-child(2)").attr('class','span7');
+
+        jQuery("#table-list-store_filter label").append('<input type="button" id="btn_enabled" name="btn_enabled" value="Enabled All" class="button-status" /> <input type="button" id="btn_disabled" name="btn_disabled" value="Disabled All" class="button-status" />');
+        
+        jQuery("#checkall").click(function(){
+            if(this.checked) {
+                $('.check-row').each(function() {
+                    this.checked = true;          
+                });
+            }else{
+                $('.check-row').each(function() {
+                    this.checked = false;                 
+                });         
+            }
+        });
+    });
+
+</script>
+<script src="{{ asset('bundles/aevitaslevis/js/store.js') }}"></script>
+{% endblock %}

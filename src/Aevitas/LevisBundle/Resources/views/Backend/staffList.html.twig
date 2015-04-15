@@ -1,0 +1,54 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>Item</li>
+    <li class="divider"></li>
+    <li>List</li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Firstname'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Lastname'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Email'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Point'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'C.Code'|trans }}</th>
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Level'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Action'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {% for user in users %}
+            <tr class="{{ cycle(['odd', 'even'], loop.index)}} gradeA remove_item_{{ user.getId }}">
+                <td>{{user.getFirstname}}</td>
+                <td>{{user.getLastname}}</td>
+                <td class="center item-name">{{ user.getEmail }}</td>
+                <td class="center item-name">{{ user.getQualifyPoint }}</td>
+                <td class="center item-name">{{ user.getCCode }}</td>
+                <td>{{user.getLevel}}</td>
+                <td class="center item-price" colspan="2">
+                    <a rel="{{ user.getId }}" class="delete-item" href="{{ path('backend_edit_user', {'id':user.getId}) }}">{{ 'Edit'|trans }}</a> | 
+                    <a rel="{{ user.getId }}" href="{{ path('admin_delete_user', {'id':user.getId}) }}">{{ 'Delete' | trans }}</a>
+                </td>
+            </tr>
+           {% endfor %}
+        </tbody></table>
+    {{pagination | raw}}
+    <div id="open-form-delete" style="display: none;" title="!Important">
+        Are you sure want to delete this item ?
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+           var backend_item_delete = '{{ path('backend_item_delete') }}';
+        </script>
+        <script src="{{ asset('bundles/aevitaslevis/js/store.js') }}"></script>
+{% endblock %}

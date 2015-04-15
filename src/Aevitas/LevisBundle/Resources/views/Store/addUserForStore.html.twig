@@ -1,0 +1,67 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+ {% block head %}
+<link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+ {% endblock %}
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>{{ 'Store'|trans }}</li>
+    <li class="divider"></li>
+    <li>{{ 'Add user'|trans }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+<div class="alert alert-faded">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+</div>
+                {% endfor %}
+<form class="form-horizontal" action="{{ path('backend_store_adduser_forstore') }}" method="POST">
+    <div class="row-fluid">
+        <div class="span9">
+            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="user is required."><i></i></span>
+            <div class="separator"></div>
+            <select id="choosen-user" style="width:220px">
+                <option selected="" value="0">{{'Choose store' | trans}}</option>
+                    {% for item in store %}
+                <option value="{{ item.getOldId }}">{{ item.name }}</option>
+                        {% endfor %}
+            </select>
+            <div>
+                    {{form_label(form.email)}}
+                    {{form_widget(form.email)}}
+                    {{form_errors(form.email)}}
+                </div>
+                {{form_rest(form)}}
+                {{form_errors(form)}}
+                <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="please select a store."><i></i></span>
+                <div class="separator"></div>
+
+            </div>
+        </div>
+        <div class="separator line bottom"></div>
+        <div class="form-actions" style="margin: 0;">
+            <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var backend_user_search = '{{ path('backend_user_search',{"_format":'json'}) }}';
+        $('#choosen-user').select2();
+        $('#choosen-user').on('change', function() {
+            $('#fos_user_profile_form_storeId').val($('#choosen-user').val());
+        })
+        $('#fos_user_profile_form_email').on('keyup', function() {
+            $('#fos_user_profile_form_username').val($(this).val())
+        });
+        </script>
+        <script src="{{ asset('bundles/aevitaslevis/js/store.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/js/select2.js') }}"></script>
+{% endblock %}

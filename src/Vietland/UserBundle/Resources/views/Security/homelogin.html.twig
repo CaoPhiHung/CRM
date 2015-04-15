@@ -1,0 +1,33 @@
+<!-- Login Form -->
+<form class="clearfix" id="form_login" action="{{ path("fos_user_security_check") }}" method="post">
+    <h2>{{'Member Login'| trans}}</h2>
+    <label class="grey" for="log">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+    <input class="field" type="text"  name="_username" value="{{ last_username }}" id="log" size="23" />
+    <label class="grey" for="pwd">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+    <input class="field" type="password" name="_password" id="pwd" size="23" />
+    <label><input name="_remember_me" value="on" id="rememberme" type="checkbox" checked="checked" /> &nbsp;{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+    <div class="clear"></div>
+    <button class="submit"><span><span>{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</span></span></button>
+    <a class="lost-pwd" href="/change-password">{{ "Lost password" | trans }}</a>
+</form>
+<script>
+        $('#form_login').iframePostForm
+        ({
+            json : true,
+            post : function ()
+            {
+                $('#form_login').animate({
+                    opacity: 0.2
+                });
+            },
+            complete : function (response)
+            {
+                if(response.status == false){
+                    alert(response.error);
+                    return false;
+                }
+                $('#panel div.content').html('');
+                $('.cpanel.disable').removeClass('disable').slideDown();
+            }
+        });
+</script>

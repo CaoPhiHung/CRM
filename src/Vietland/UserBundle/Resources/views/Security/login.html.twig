@@ -1,0 +1,24 @@
+{% extends "VietlandUserBundle::layout.html.twig" %}
+{% block head %}
+    <title>Login - Starclub</title>
+{% endblock %}
+
+
+{% block content %}
+<div id="login">
+<div class="loginWrap">
+<h2 class="glyphicons unlock form-signin-heading"><i></i> Please sign in</h2>
+<form class="form-signin" action="{{ path("fos_user_security_check") }}" method="POST">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <label class="strong" for="_username">{{ 'User'|trans }}</label>
+        <input type="text" name="_username" class="input-block-level" value="{{ last_username }}" placeholder="User name" />
+        <label class="strong" for="inputPassword">{{ 'Password'|trans }}</label>
+        <input type="password" class="input-block-level" name="_password" placeholder="Password" />
+        <div class="separator line"></div>
+        <span class="pull-left uniformjs"><label class="checkbox"><input type="checkbox" value="{{ 'remember-me'|trans }}">Remember me</label></span>
+        <button type="submit" class="btn btn-large btn-primary pull-right">{{ 'login.submit'|trans }}</button>
+        <div class="clearfix"></div>
+</form>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+parameters:
+    actions: [signuponline, signup,newuser]
+    smsactions: [confirmRedeem, redeemProcess, resendRegCode, signup]
+    categories: [Eyewear, Watches, Footwear, Levis, 'Cosmetics & Fragrances']
+    locale: en
+    #cdn: 'http://90.0.0.15'
+    cdn: 'http://www.starclubvn.com'
+    secret: 134sdfaewrfasdfe
+    smsclient: CL8438
+    smspassword: '123456789'
+    facebook_app_id: '345868738898988'
+    facebook_secret: e81cefc0ffd2c28301e7aa07fd0077fe
+    facebook_share_description: 'TBF Start Club'
+    facebook_share_caption: 'TBF Star Club - Levis'
+    facebook_share_name: 'Share with your friends to get more point'
+    facebook_share_picture: /media/facebook/tmp/redemption.png
+    facebook_share_link: 'http://www.starclubvn.com/'
+    baserate: '10000'
+    ref: '50000'
+    praddress1: 25000
+    prdob: 25000
+    prbssilver: 33
+    prbsgold: 20
+    prbsplatin: 14
+    prfone: 0
+    prfb: 50000
+    pranniversary: 10
+    prcity: 10000
+    prdistrict: 10000
+    prfirstname: 0
+    prlastname: 0
+    prsex: 25000
+    prkids: 10000
+    prmari: 10000
+    procpu: 10000
+    princo: 10000
+    pranni: 15000
+    premail: 15000
+    bronze: 1000
+    bronzelimit: 200
+    platin: 2417
+    platinlimit: 1500
+    gold: 750
+    goldlimit: 80
+    refcel: 50000
+    joinbonus: 50000
+    redeemsilver: 1
+    redeemgold: 1
+    redeemplatinum: 1
+    redeemlimit: 100000
+    expiredsilver: 3000
+    expiredgold: 365
+    expiredplatinum: 365
+    cashback: 0
+    goldinterval: 4000000
+    platinuminterval: 10000000

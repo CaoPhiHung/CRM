@@ -1,0 +1,57 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'Star Club - Store Location' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_store.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/store_location.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<!-- Carousel
+================================================== -->
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>About Starclub & Starclub</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+<section id="main" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <!--  -->
+                <div id="panel-left">
+                    <div class="text-title">
+                        <span>
+                            <img src="{{asset('bundles/aevitaslevis/images/about_side.jpg')}}" alt="Starclub Brand"/>
+                        </span>
+                    </div>
+                </div>
+                <div id="panel-right">
+                    <div><h2>About TBF</h2>
+                        <p>Thanh Bac Fashion Group (TBF), a group that is consistently raising its bar in the retail world from last 50 years by introducing some premium, international. aspirational, lifestyle brands in the fashion industry of Vietnam.  For over half a century Starclub has been making significant contribution to Vietnamese retail 
+                            industry with its diversified product portfolio.  We promise to offer iconic brands and products to our customers with unparalleled reliability, service and customer experience.</p>
+                        <img src="{{asset('bundles/aevitaslevis/images/tbfbanner.jpg')}}" alt="Starclub store banner"/>
+                    </div>
+                    <div><h2>About Starclub</h2>
+                        <p>Star club is a loyalty program that is exclusively designed for Starclub customers, who are keeping our international brands as part of their lifestyle. The program membership entitles customers to valuable rewards and exclusive privileges.</p>
+                        <img src="{{asset('bundles/aevitaslevis/images/abtbanner.jpg')}}" alt="Starclub customer"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

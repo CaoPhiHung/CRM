@@ -1,0 +1,64 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+        <title>{{'Complete Enrollment' | trans}} - {{'Step 1' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>Become A Member</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+<section id="form_reg" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                <ul class="steps">
+                    <li class="active step1"><span><span>1. {{'Update Password' | trans}}</span></span></li>
+                    <li class="active step2"><span><span>2. {{'Review Information' | trans}}</span></span></li>
+                    <li class="active step3"><span><span>3. {{'Extended Profile' | trans}}</span></span></li>
+                    <li class="active step4"><span><span>4. {{'Opt In' | trans}}</span></span></li>
+                </ul>
+                <div class="info stepfour">
+                    <span class="title"><h3>4. {{'Opt In' | trans}}</h3></span>
+                    <div>
+                        <p>{{'You can choose to receive our inform via Email' | trans}}</p>
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                        <form action="{{ path('levis_home_complete_enrollment_step4') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                            {{form_widget(form.nlt)}}
+                            {{form_label(form.nlt)}}
+                            <div class="row">
+                                <a onclick="shareFacebook()" href="#" class="fb">Share Facebook</a>
+                            </div>
+                            {{form_rest(form)}}
+                                <p>{{'Every month you will get a newsletter to keep you informed Starclub\'s latest new, exclusive offer and your account summary.' | trans}}</p>
+                                <input type="submit" class="yellow_button" value="{{'Finish' | trans}}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+{% block javascript %}
+function shareFacebook(){
+    FB.ui({
+      method: 'feed',
+      link: 'https://developers.facebook.com/docs/reference/dialogs/',
+      picture: 'http://fbrell.com/f8.jpg',
+      name: 'Facebook Dialogs',
+      caption: 'Reference Documentation',
+      description: 'Using Dialogs to interact with people.'
+    }, function(response){});
+}
+$(document).ready(function(){
+    $('#form_nlt').uniform();
+
+});
+{% endblock %}

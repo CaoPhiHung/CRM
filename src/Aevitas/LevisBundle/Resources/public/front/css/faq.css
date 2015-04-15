@@ -1,0 +1,96 @@
+#main{margin-top:40px;margin-bottom:30px;}
+#main .content{background-color:#fff;}
+#main .shadow_wrapper{background-position: left -92px;}
+#main .shadow_wrapper>div{background-position: right -92px;}
+
+#faq-image {
+	/* chỗ này thay bằng ảnh nền đẹp hơn (ảnh này em chụp từ file jpg) */
+	background: url('../img/FAQ-head-image.jpg') no-repeat scroll 7px 7px;
+	/* thay đổi chiều cao và rộng của ảnh full cho phù hợp với kích thước ảnh */
+	height:525px;
+	width:951px;
+}
+
+#faq-content {
+	margin-top:-220px;
+	padding-bottom:20px;
+}
+
+.faq-box {
+	margin:0 30px;
+	background:#fff;
+	border:1px solid #ddd;
+	border-left-color:#eee;
+	border-right-color:#eee;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.faq-section, .faq-question, .faq-answer {
+	padding:0 30px;
+	font-size:15px;
+	text-transform: uppercase;
+}
+
+.faq-section {
+	font-size:16px;
+	height:55px;
+	line-height:55px;
+	background: #ede518;
+	font-weight:bold;
+}
+
+.faq-question {
+	height:55px;
+	line-height:55px;
+	border-top: 1px solid #ddd;
+        cursor: pointer
+}
+
+.faq-question .q-left {
+	float:left;
+	width: 800px;
+}
+
+.faq-question .q-arrow {
+	margin-left: 820px;
+	cursor:pointer;
+}
+
+.arrow-close, .arrow-open,.clo .arrow, .open .arrow{
+	border-style: dashed;
+	border-color: transparent;
+	border-width: 0.53em;
+	display: -moz-inline-box;
+	display: inline-block;
+	/* Use font-size to control the size of the arrow. */
+	font-size: 15px;
+	height: 0;
+	line-height: 0;
+	position: relative;
+	vertical-align: middle;
+	width: 0;
+}
+
+.arrow-close, .clo .arrow{
+	border-left-width: 1em;
+	border-left-style: solid;
+	border-left-color: #666;
+	left: 0.25em;
+}
+
+.arrow-open, .open .arrow{
+	border-top-width: 1em;
+	border-top-style: solid;
+	border-top-color: #666;
+	top: 0.25em;
+}
+
+.faq-answer {
+	padding:15px 30px;
+	text-transform: none;
+	display:none;
+	background: #e6e6e6;
+}

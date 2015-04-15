@@ -1,0 +1,11 @@
+<div class="popular-tag amodule">
+    {% set count = statistic['count'] %}
+    {% set tags = statistic['data'] %}
+        <div class="module-title">{{'Popular Tags' | trans}}</div>
+        <div class="module-content tags">
+                                {% for tag in tags %}
+                <a href="javascript:void(0);" style="font-size:{{tag['value']['count']*200/count}}%">{{tag['_id']}}</a>
+                                {% endfor %}
+                <div class="view-all-tag"><a href="javascript:void(0);">View All Tags</a></div>
+            </div>
+        </div>

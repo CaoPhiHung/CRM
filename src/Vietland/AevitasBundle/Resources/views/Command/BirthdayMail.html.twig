@@ -1,0 +1,33 @@
+<html lang="en">
+    <head>
+        <title>Happy birthday</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    </head>
+    <body>
+        <div><img src="{{ cdn~'/bundles/vietlandaevitas/images/birthday_party_card-01.jpg' }}" width="945" /></div>
+        <div style="font-size:18px;width:1100;margin:auto;line-height:25px;margin-top:-200px">
+            &nbsp;&nbsp;&nbsp;&nbsp;Công ty Thanh Bắc Thời Trang (TBF) xin kính chúc quý khách có một ngày sinh nhật thật ấm áp và vui vẻ bên người thân và gia đình. Kính chúc quý khách bước sang tuổi mới với thật nhiều niềm vui, sức khỏe cùng thành công trong cuộc sống và công việc. 
+            <br/>&nbsp;&nbsp;&nbsp;&nbsp;TBF chân thành cảm ơn sự ủng hộ của quý khách hàng trong suốt thời gian qua, TBF luôn phấn đấu để đáp ứng hơn nữa sự mong mỏi và kỳ vọng của quý khách. 
+            {% if content|length > 0 %}
+                <br/>&nbsp;&nbsp;&nbsp;&nbsp;Nhân dịp đặc biệt này, quý khách khi mua sắm trong suốt tháng sinh nhật của mình tại bất kỳ cửa hàng nào của Levi’s trực thuộc TBF sẽ được tích lũy mức điểm ưu đãi theo những hạng thẻ cụ thể sau:
+                <br/><table width="100%">
+                    <tr>
+                        <th>Store</th>
+                        <th>Level</th>
+                        <th>Operation</th>
+                        <th>Multiply by quantity</th>
+                    </tr>
+                    {% for cts in content%}
+                        <tr>
+                            <td>{{ cts['store'] }}</td>
+                            <td>{{ cts['level'] }}</td>
+                            <td>{{ cts['operation'] }}</td>
+                            <td align="center">{{ cts['qty'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            <br/><br/>Kính chúc quý khách có những trải nghiệm mua sắm vui vẻ và thú vị cùng TBF.
+        </div>
+    </body>
+</html>

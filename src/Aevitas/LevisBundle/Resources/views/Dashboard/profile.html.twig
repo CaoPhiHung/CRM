@@ -1,0 +1,318 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'User Dashboard' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_profile.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/select2.css'
+    '@AevitasLevisBundle/Resources/public/front/css/datepicker.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward_detail.css'
+    '@AevitasLevisBundle/Resources/public/front/css/account.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<div id="breadcrums">
+    <ul>
+        <li onclick="void(0);" class="br-home"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_user_dashboard')}}">{{'Customer Account' | trans}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_user_profile')}}">{{'Profile' | trans}}</a></li>
+        <li class="br-arrow2"></li></ul>
+</div>
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id="userdash" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <div class="info">
+                    <ul class="topnav">
+                        <li><a href="{{path('levis_user_dashboard')}}">{{'Dashboard' | trans}}</a></li>
+                        <li class="active"><a href="{{path('levis_user_profile')}}">{{'Profile' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_activity')}}">{{'Point History' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_shopping')}}">{{'Shopping Hitory' | trans}}</a></li>
+                    </ul>
+                    <section>
+                        <ul class="extpro"><li class="active"><a href="{{path('levis_user_dashboard')}}">{{'Basic Information' | trans}}</a></li><li><a href="{{path('levis_user_extended_profile')}}">{{'Extended Information' | trans}}</a></li></ul>
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                        <form action="{{path('levis_user_profile')}}" method="POST" id="saveprofile">
+                            <div class="block person clearfix">
+                                <span>{{'Personal Information' | trans}}</span>
+                                <div>
+                                    <img src="{{asset(user.getThumbnail(140,140))}}{% if user.getEdited is defined %} {{app.user.getEdited}}{% endif %}"/>
+                                    <button class="yellow_button">Upload Image</button>
+                                </div>
+                                <div>
+                                    <div class="row">{{ form_row(form.firstname) }}{{ form_row(form.lastname) }}
+                                    </div>
+                                    <div class="row">{{ form_row(form.email,{'help': 'Please contact us at +84 3941 5001 to change your email' | trans}) }}{{ form_row(form.cellphone, {'help': 'Please contact us at +84 3941 5001 to change your phone number'}) }}
+                                    </div>
+                                    <div class="row">{{ form_row(form.dob) }}{{ form_row(form.sex) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block clearfix">
+                                <span>Location</span>
+                                <div>
+                                    <div class="row">{{ form_row(form.city) }}{{ form_row(form.district) }}
+                                    </div>
+                                    <div class="row">{{ form_row(form.address1) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block clearfix">
+                                <span>{{'Shipping Address' | trans}}</span>
+                                <div>
+                                    <div class="row">
+                                        <div class="form-row">{{form_label(form.address2)}}{{form_widget(form.address2)}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-row">{{form_widget(form.dship)}}{{form_label(form.dship)}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{form_rest(form)}}
+                            </div>
+                            <button class="yellow_button">{{'Submit' | trans}}</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="popup">
+    <!-- Modal -->
+    <div id="updateava" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">{{'Crop your avatar' | trans}}</h3>
+        </div>
+        <div class="modal-body">
+            <form id='frm' action='{{path('dashboard_crop_avatar')}}' method='post' >
+                <div id='parent_container' style='position:relative'>
+
+                    <!-- Load the image which needs to be cropped -->
+                    <img src="#" id='crop_img'/>
+
+                    <!-- Div for marking cropping area -->
+                    <div id="resizable"></div>
+
+                    <!-- Hidden fields to submit resize and crop values -->
+                    <input type='hidden' name='img_width' id='img_width' />
+                    <input type='hidden' name='img_height' id='img_height' />
+                    <input type='hidden' name='source_x' id='source_x' />
+                    <input type='hidden' name='source_y' id='source_y' />
+
+
+                    <input type="submit" value='Crop' />
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" onclick="crop();">Save changes</button>
+        </div>
+    </div>
+</div>
+<script type="text/template" id="citydata">
+    {% for city in cities %}
+        <option value="{{city.getMap}}" rel="{{ city.getName }}">{{city.getName}}</option>
+    {% endfor %}
+    </script>
+{% endblock %}
+    {% block jslib %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+    {% javascripts output='js/front_compress_profile.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-transition.js'
+            '@AevitasLevisBundle/Resources/public/front/js/jquery.uniform.min.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-modal.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-dropdown.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-tooltip.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-popover.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-carousel.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-grayscale.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-datepicker.js'
+            '@AevitasLevisBundle/Resources/public/front/js/select2.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-holder.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+{% javascripts output='js/uploader.js' filter='yui_js' 
+            '@VietlandElfinderBundle/Resources/public/js/elFinder1.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder2.view.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder3.ui.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder4.quickLook.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder6.eventsManager.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets output='bundles/vietlandelfinder/css/elfinder_compress.css' filter='yui_css'
+    '@VietlandElfinderBundle/Resources/public/css/elfinder.css'
+%}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+        
+<script>
+function crop(){
+    $('form#frm').submit();
+}
+</script>
+        {% endblock %}
+{% block javascript %}
+var query = '{{path('home_search_district')}}', upload = '{{path('cpanel_user_upload_image')}}', searchXhr, formvalid = true;
+
+function processKeyEvents(event) {
+    event.preventDefault();
+}
+function search(){
+    if(typeof searchXhr != 'undefined')
+        searchXhr.abort();
+    searchXhr = $.ajax({
+        url: '{{path('validate_email_cellphone')}}',
+        dataType: 'json',
+        data: {cellphone: $('#fos_user_profile_form_cellphone').val(), email: $('#fos_user_profile_form_email').val()},
+        type: 'POST',
+        success: function(data){
+            if(!data.status){
+                formvalid = false
+                $('#label-fos_user_profile_form_'+data.error.input).find('.help').html(data.error.message).tooltip('toggle');
+            } else {$('.help').tooltip('hide');formvalid = true}
+        }
+    });
+}
+$('input.disable').on('keypress',processKeyEvents);
+$('input.disable').on('keydown',processKeyEvents);
+$('input.disable').on('blur',processKeyEvents);
+$('input.input-box').on('keyup', search);
+$('span.help').tooltip();
+$('#saveprofile').on('submit', function(e){if(formvalid) return true; else e.preventDefault()});
+$('.person button').on('click', function(e) {
+    e.preventDefault();
+    var finderContainer = $('<div id="elfinder"></div>').appendTo('body');
+    var FINDER = finderContainer.elfinder({
+        url: upload,
+        docked: false,
+        selectMultiple: false,
+        cutURL: 'root',
+        dialog: {
+            title: 'Upload Hình: Ctr+Click -> đề chọn nhiều hình',
+            height: 500,
+            zIndex: 9999,
+            width: 630
+        },
+        closeOnEditorCallback: true,
+        editorCallback: function(items) {
+            $.ajax({
+                url: '{{path('levis_user_update_avatar', {'_format': 'json'})}}',
+                type: 'POST',
+                dataType: 'json',
+                data: {avatar: items},
+                beforeSend: function(){
+                    $('#updateava').modal();
+                },
+                success: function(data){
+                    $('#crop_img').attr('src', data.src);
+                    $('#crop_img').load(function() {
+                        $('#updateava').modal()
+                        $("#resizable").resizable({containment: "parent"});
+                        $("#resizable").draggable({containment: "parent"});
+
+                        var img_width = $('#crop_img img').width();
+                        var img_height = $('#crop_img img').height();
+                        $("#parent_container").width(img_width);
+                        $("#parent_container").height(img_height);
+
+                    });
+                    $('#frm').on('submit', function(e) {
+                        e.preventDefault();
+                        var position = $('#resizable').position();
+                        var position_img = $('#crop_img').position();
+                        $('#img_width').val($('#resizable').width());
+                        $('#img_height').val($('#resizable').height());
+                        $('#source_x').val(position.left);
+                        $('#source_y').val(position.top);
+                        $.ajax({
+                            url: $('#frm').attr('action'),
+                            dataType: 'json',
+                            type: 'POST',
+                            data: $('#frm').serialize(),
+                            success: function(data){
+                                $('.block.person img').attr('src','/'+data.src);
+                                $('#updateava').modal('hide');
+                            }
+                        });
+                    });
+                }
+            })
+
+            console.log(items);
+        }
+    });
+})
+$('#fos_user_profile_form_dship').uniform();
+$('#fos_user_profile_form_dob').datepicker({format: "dd-mm-yyyy"})
+$('#fos_user_profile_form_sex').select2({placeholder: "Gender"});
+$('#fos_user_profile_form_city').after('<select id="city">' + $('#citydata').html() + '</select>');
+$('#fos_user_profile_form_district').after('<select id="district"></select>');
+$('select#city').select2({placeholder: "{{ user.getCity }}"});
+$('select#district').select2();
+$('select#district').on('change', function() {
+    dist = $(this).val();
+    $('#fos_user_profile_form_district').val($('#district option:selected').text())
+});
+$('select#city').on('change', function() {
+    city = $(this).val();
+    $('.title h3').addClass('loading');
+    $('#fos_user_profile_form_city').val($('#city option:selected').text());
+    $.ajax({
+        url: query + '/' + $(this).val(),
+        dataType: 'json',
+        success: function(data) {
+            $('.title h3').removeClass('loading');
+            $('#district').select2("destroy");
+            $('#district').html(data.html).select2({placeholder: "{{user.getDistrict}}"});
+            $('#fos_user_profile_form_district').val($('#district option:first').text())
+        }
+    });
+})
+        
+        function doSelectCity(obj, CallBack){
+            city = $('#fos_user_profile_form_city').val();
+            $.ajax({
+                url: '{{ path('home_search_district') }}/'+city,
+                dataType: 'json',
+                type: 'POST',
+                data: {data: city},
+                success: function(data){
+                    $('#city option[rel="{{user.getCity}}"]').attr('selected', 'selected');
+                    $('#city').select2("destroy").select2();
+                    $('#district').select2("destroy");
+                    $('#district').html(data.html)
+                    $('#district option[rel="{{user.getDistrict}}"]').attr('selected', 'selected');
+                    $('#district').select2();
+                }
+            });
+        }
+        
+        
+        if ($('select#city').val()!=0){
+            doSelectCity(document.getElementById('city'),function(){
+                var val=parseInt($('#fos_user_profile_form_district').val());
+                $("#district").select2("val", val);
+            });
+        }
+{% endblock %}

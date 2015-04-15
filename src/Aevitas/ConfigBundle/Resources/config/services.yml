@@ -1,0 +1,17 @@
+parameters:
+    aevitas.extension.class: Aevitas\ConfigBundle\Extension\AevitasTwigExtension
+services:
+    aevitas.twig:
+        class: %aevitas.extension.class%
+        arguments: ["@service_container", %prdob%, %prcity%, %prdistrict%, %prfirstname%, %prlastname%, %prsex%, %prkids%, %prmari%, %procpu%, %princo%, %pranni%, %praddress1%, %baserate%, %categories%, %locale%]
+        tags:
+            - { name: 'twig.extension' }
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    admin.logger:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: [app]
+        calls:
+             - [pushHandler, ["@admin.logger_handler"]]
+    admin.logger_handler:
+        class: Monolog\Handler\StreamHandler       
+        arguments: [%kernel.logs_dir%/%kernel.environment%.admin.log, 200]

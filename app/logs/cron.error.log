@@ -1,0 +1,781 @@
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+
+
+                                                         
+  [InvalidArgumentException]                             
+  There are no commands defined in the "crm" namespace.  
+                                                         
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Warning:  require(/var/www/html/levis-crm/app/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/levis-crm/app/autoload.php on line 9
+PHP Fatal error:  require(): Failed opening required '/var/www/html/levis-crm/app/../vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/levis-crm/app/autoload.php on line 9
+
+
+                                                                                                                                                                                                  
+  [Doctrine\DBAL\DBALException]                                                                                                                                                                   
+  An exception occurred while executing 'Select  Store.Branchid as StoreID, b.billidno as Billidno , B.AccountsCVID as ledgerID ,   Store.BranchName As StoreName, Store.regionid as RegionID ,   
+  ( Case When (Store.regionid ='284')Then  'HCM' When (Store.regionid ='283')Then  'HN' Else convert(varchar, Store.regionid) end ) as Region ,                                                   
+  B.BillDate As BillDate,DATEPART(year,B.BillDate) As year , DATEname(month,B.BillDate) As Month , DATEname(dw,B.BillDate) As Day ,                                                               
+  (case when ( DATEPART(dw, B.BillDate) ) > 5 then 'Weekend' else 'Weekday' end ) as Workday ,                                                                                                    
+  datepart(WK ,B.BillDate) as Week ,                                                                                                                                                              
+  DATEPART(HOUR,B.etime) As Billtime ,                                                                                                                                                            
+  (B.Prefix + '/' + cast(B.BillNo as varchar) + (Case When B.Suffix = '' Then '' Else '/'+B.Suffix End)) As BillNo,                                                                               
+  (case when (B.VoucherType = '17') then (Sum ( BI.StkQty * -1 )) else  (Sum (BI.StkQty)) end ) as SaleQty ,                                                                                      
+  MstSalesMan.SalesManName,                                                                                                                                                                       
+  Party.AccountsName As PartyName, Party.AccountsidName As PartyID , CardType.CardName As CardTypeName,                                                                                           
+  Party.CellNo As CellNo, Party.Email As Email,                                                                                                                                                   
+  (case when (B.VoucherType = '17') then (B.SaleValue * -1 ) else  B.SaleValue end ) as GrossAmount ,                                                                                             
+  (B.Misc1 + B.Misc2 + B.Misc3 + B.Misc4 + B.Misc5) As Discount,                                                                                                                                  
+  (case when (B.VoucherType = '17') then (B.Amount * -1 ) else  B.Amount end ) as NetValue ,                                                                                                      
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  '0 To 1 Mil' When (B.Amount > 1000001 and B.Amount < 2000000   )Then  '1 Mil To 2 Mil'                                                       
+  When (B.Amount > 2000001 and B.Amount < 3000000   )Then  '2 Mil To 3 Mil' When (B.Amount > 3000001 and B.Amount < 4000000   )Then  '3 Mil To 4 Mil'                                             
+  When (B.Amount > 4000001 and B.Amount < 5000000   )Then  '4 Mil To 5 Mil' When (B.Amount > 5000001 and B.Amount < 6000000   )Then  '5 Mil To 6 Mil'                                             
+  When (B.Amount > 6000001 and B.Amount < 7000000   )Then  '6 Mil To 7 Mil' When (B.Amount > 7000001 and B.Amount < 8000000   )Then  '7 Mil To 8 Mil'                                             
+  When (B.Amount > 8000001 and B.Amount < 9000000   )Then  '8 Mil To 9 Mil' When (B.Amount > 9000001 and B.Amount < 10000000   )Then  '9 Mil To 10 Mil'                                           
+  When (B.Amount > 10000001 )Then  'More Than 10 Mil' Else  'No value' end ) as AmtSlab,                                                                                                          
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  'Non-CRMEligible' When (B.Amount > 1000001 and B.Amount < 999999999999   )Then  'CRM Eligible'                                               
+   Else  'No value' end ) as CRMEligible,                                                                                                                                                         
+   ( case When (CardType.CardName = 'Star Club') Then 'CRMBill' Else 'Non-CRM' end) As CRMBill ,                                                                                                  
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) as GVAmount,                                                          
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) as Cash ,                                                            
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as CC ,                                                              
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) +                                                                     
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) +                                                                    
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as TotalPaid                                                         
+  From EtBillFile B                                                                                                                                                                               
+  LEFT OUTER JOIN EtBillFileItems BI On BI.BillIDNo = B.BillIDNo                                                                                                                                  
+  inner join mstitem Item on bi.itemid = Item.itemID                                                                                                                                              
+  inner join MstItemSubGroup Itemsub on item.ItemSubGroupId = Itemsub.ItemSubGroupId                                                                                                              
+  inner join MstItemGroup Itemgroup on itemsub.ItemGroupId = Itemgroup.ItemGroupId and Itemgroup.ItemGroupId in (1,2,3,4,5,6,7,15)                                                                
+  Left Outer Join MstAcctCVLedger Party On Party.LedgerID = B.AccountsCVID                                                                                                                        
+  Left Outer Join MstBGBranch Store On Store.BranchID = B.BranchID                                                                                                                                
+  Left Outer Join POSMstCardType CardType On CardType.CardID = Party.CardID                                                                                                                       
+  LEFT OUTER JOIN MstSalesMan ON MstSalesMan.SalesManID = B.SalesManId                                                                                                                            
+  where                                                                                                                                                                                           
+  B.BillDate >='09/29/2014' and B.BillDate <='10/01/2014'  -- MM/DD/YYYY                                                                                                                          
+  and CardType.CardID = 20                                                                                                                                                                        
+  And Itemsub.ItemGroupId In (15,7,4,1,2,3)                                                                                                                                                       
+  And ISNULL(B.DOACase,0)=0                                                                                                                                                                       
+  And ISNULL(B.Passed,0)=0                                                                                                                                                                        
+  and B.VoucherType in (14,15,16,17,8,10,11,129,214)                                                                                                                                              
+  group by Store.BranchName , Store.Branchid ,  Store.regionid                                                                                                                                    
+  , b.BillDate , b.etime , b.prefix , b.billno , b.suffix , MstSalesMan.SalesManName , Party.AccountsName ,  Party.AccountsidName , CardType.CardName , party.CellNo , party.email                
+  , b.salevalue , b.Misc1 , b.Misc2, b.Misc3 , b.Misc4 , b.Misc5 , b.amount , b.billidno , b.Vouchertype , b.billidno  , B.AccountsCVID                                                           
+  order by Store.BranchName, store.branchID ,B.BillDate':                                                                                                                                         
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]                                                                                                  
+                                                                                                                                                                                                  
+
+
+
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]  
+                                                                                                  
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                    
+  [PDOException]                                                                                    
+  SQLSTATE[HY000] Unable to connect: Adaptive Server is unavailable or does not exist (severity 9)  
+                                                                                                    
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                                                                                                                  
+  [Doctrine\DBAL\DBALException]                                                                                                                                                                   
+  An exception occurred while executing 'Select  Store.Branchid as StoreID, b.billidno as Billidno , B.AccountsCVID as ledgerID ,   Store.BranchName As StoreName, Store.regionid as RegionID ,   
+  ( Case When (Store.regionid ='284')Then  'HCM' When (Store.regionid ='283')Then  'HN' Else convert(varchar, Store.regionid) end ) as Region ,                                                   
+  B.BillDate As BillDate,DATEPART(year,B.BillDate) As year , DATEname(month,B.BillDate) As Month , DATEname(dw,B.BillDate) As Day ,                                                               
+  (case when ( DATEPART(dw, B.BillDate) ) > 5 then 'Weekend' else 'Weekday' end ) as Workday ,                                                                                                    
+  datepart(WK ,B.BillDate) as Week ,                                                                                                                                                              
+  DATEPART(HOUR,B.etime) As Billtime ,                                                                                                                                                            
+  (B.Prefix + '/' + cast(B.BillNo as varchar) + (Case When B.Suffix = '' Then '' Else '/'+B.Suffix End)) As BillNo,                                                                               
+  (case when (B.VoucherType = '17') then (Sum ( BI.StkQty * -1 )) else  (Sum (BI.StkQty)) end ) as SaleQty ,                                                                                      
+  MstSalesMan.SalesManName,                                                                                                                                                                       
+  Party.AccountsName As PartyName, Party.AccountsidName As PartyID , CardType.CardName As CardTypeName,                                                                                           
+  Party.CellNo As CellNo, Party.Email As Email,                                                                                                                                                   
+  (case when (B.VoucherType = '17') then (B.SaleValue * -1 ) else  B.SaleValue end ) as GrossAmount ,                                                                                             
+  (B.Misc1 + B.Misc2 + B.Misc3 + B.Misc4 + B.Misc5) As Discount,                                                                                                                                  
+  (case when (B.VoucherType = '17') then (B.Amount * -1 ) else  B.Amount end ) as NetValue ,                                                                                                      
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  '0 To 1 Mil' When (B.Amount > 1000001 and B.Amount < 2000000   )Then  '1 Mil To 2 Mil'                                                       
+  When (B.Amount > 2000001 and B.Amount < 3000000   )Then  '2 Mil To 3 Mil' When (B.Amount > 3000001 and B.Amount < 4000000   )Then  '3 Mil To 4 Mil'                                             
+  When (B.Amount > 4000001 and B.Amount < 5000000   )Then  '4 Mil To 5 Mil' When (B.Amount > 5000001 and B.Amount < 6000000   )Then  '5 Mil To 6 Mil'                                             
+  When (B.Amount > 6000001 and B.Amount < 7000000   )Then  '6 Mil To 7 Mil' When (B.Amount > 7000001 and B.Amount < 8000000   )Then  '7 Mil To 8 Mil'                                             
+  When (B.Amount > 8000001 and B.Amount < 9000000   )Then  '8 Mil To 9 Mil' When (B.Amount > 9000001 and B.Amount < 10000000   )Then  '9 Mil To 10 Mil'                                           
+  When (B.Amount > 10000001 )Then  'More Than 10 Mil' Else  'No value' end ) as AmtSlab,                                                                                                          
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  'Non-CRMEligible' When (B.Amount > 1000001 and B.Amount < 999999999999   )Then  'CRM Eligible'                                               
+   Else  'No value' end ) as CRMEligible,                                                                                                                                                         
+   ( case When (CardType.CardName = 'Star Club') Then 'CRMBill' Else 'Non-CRM' end) As CRMBill ,                                                                                                  
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) as GVAmount,                                                          
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) as Cash ,                                                            
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as CC ,                                                              
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) +                                                                     
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) +                                                                    
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as TotalPaid                                                         
+  From EtBillFile B                                                                                                                                                                               
+  LEFT OUTER JOIN EtBillFileItems BI On BI.BillIDNo = B.BillIDNo                                                                                                                                  
+  inner join mstitem Item on bi.itemid = Item.itemID                                                                                                                                              
+  inner join MstItemSubGroup Itemsub on item.ItemSubGroupId = Itemsub.ItemSubGroupId                                                                                                              
+  inner join MstItemGroup Itemgroup on itemsub.ItemGroupId = Itemgroup.ItemGroupId and Itemgroup.ItemGroupId in (1,2,3,4,5,6,7,15)                                                                
+  Left Outer Join MstAcctCVLedger Party On Party.LedgerID = B.AccountsCVID                                                                                                                        
+  Left Outer Join MstBGBranch Store On Store.BranchID = B.BranchID                                                                                                                                
+  Left Outer Join POSMstCardType CardType On CardType.CardID = Party.CardID                                                                                                                       
+  LEFT OUTER JOIN MstSalesMan ON MstSalesMan.SalesManID = B.SalesManId                                                                                                                            
+  where                                                                                                                                                                                           
+  B.BillDate >='10/07/2014' and B.BillDate <='10/09/2014'  -- MM/DD/YYYY                                                                                                                          
+  and CardType.CardID = 20                                                                                                                                                                        
+  And Itemsub.ItemGroupId In (15,7,4,1,2,3)                                                                                                                                                       
+  And ISNULL(B.DOACase,0)=0                                                                                                                                                                       
+  And ISNULL(B.Passed,0)=0                                                                                                                                                                        
+  and B.VoucherType in (14,15,16,17,8,10,11,129,214)                                                                                                                                              
+  group by Store.BranchName , Store.Branchid ,  Store.regionid                                                                                                                                    
+  , b.BillDate , b.etime , b.prefix , b.billno , b.suffix , MstSalesMan.SalesManName , Party.AccountsName ,  Party.AccountsidName , CardType.CardName , party.CellNo , party.email                
+  , b.salevalue , b.Misc1 , b.Misc2, b.Misc3 , b.Misc4 , b.Misc5 , b.amount , b.billidno , b.Vouchertype , b.billidno  , B.AccountsCVID                                                           
+  order by Store.BranchName, store.branchID ,B.BillDate':                                                                                                                                         
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]                                                                                                  
+                                                                                                                                                                                                  
+
+
+
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]  
+                                                                                                  
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                                                                                                                  
+  [Doctrine\DBAL\DBALException]                                                                                                                                                                   
+  An exception occurred while executing 'Select  Store.Branchid as StoreID, b.billidno as Billidno , B.AccountsCVID as ledgerID ,   Store.BranchName As StoreName, Store.regionid as RegionID ,   
+  ( Case When (Store.regionid ='284')Then  'HCM' When (Store.regionid ='283')Then  'HN' Else convert(varchar, Store.regionid) end ) as Region ,                                                   
+  B.BillDate As BillDate,DATEPART(year,B.BillDate) As year , DATEname(month,B.BillDate) As Month , DATEname(dw,B.BillDate) As Day ,                                                               
+  (case when ( DATEPART(dw, B.BillDate) ) > 5 then 'Weekend' else 'Weekday' end ) as Workday ,                                                                                                    
+  datepart(WK ,B.BillDate) as Week ,                                                                                                                                                              
+  DATEPART(HOUR,B.etime) As Billtime ,                                                                                                                                                            
+  (B.Prefix + '/' + cast(B.BillNo as varchar) + (Case When B.Suffix = '' Then '' Else '/'+B.Suffix End)) As BillNo,                                                                               
+  (case when (B.VoucherType = '17') then (Sum ( BI.StkQty * -1 )) else  (Sum (BI.StkQty)) end ) as SaleQty ,                                                                                      
+  MstSalesMan.SalesManName,                                                                                                                                                                       
+  Party.AccountsName As PartyName, Party.AccountsidName As PartyID , CardType.CardName As CardTypeName,                                                                                           
+  Party.CellNo As CellNo, Party.Email As Email,                                                                                                                                                   
+  (case when (B.VoucherType = '17') then (B.SaleValue * -1 ) else  B.SaleValue end ) as GrossAmount ,                                                                                             
+  (B.Misc1 + B.Misc2 + B.Misc3 + B.Misc4 + B.Misc5) As Discount,                                                                                                                                  
+  (case when (B.VoucherType = '17') then (B.Amount * -1 ) else  B.Amount end ) as NetValue ,                                                                                                      
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  '0 To 1 Mil' When (B.Amount > 1000001 and B.Amount < 2000000   )Then  '1 Mil To 2 Mil'                                                       
+  When (B.Amount > 2000001 and B.Amount < 3000000   )Then  '2 Mil To 3 Mil' When (B.Amount > 3000001 and B.Amount < 4000000   )Then  '3 Mil To 4 Mil'                                             
+  When (B.Amount > 4000001 and B.Amount < 5000000   )Then  '4 Mil To 5 Mil' When (B.Amount > 5000001 and B.Amount < 6000000   )Then  '5 Mil To 6 Mil'                                             
+  When (B.Amount > 6000001 and B.Amount < 7000000   )Then  '6 Mil To 7 Mil' When (B.Amount > 7000001 and B.Amount < 8000000   )Then  '7 Mil To 8 Mil'                                             
+  When (B.Amount > 8000001 and B.Amount < 9000000   )Then  '8 Mil To 9 Mil' When (B.Amount > 9000001 and B.Amount < 10000000   )Then  '9 Mil To 10 Mil'                                           
+  When (B.Amount > 10000001 )Then  'More Than 10 Mil' Else  'No value' end ) as AmtSlab,                                                                                                          
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  'Non-CRMEligible' When (B.Amount > 1000001 and B.Amount < 999999999999   )Then  'CRM Eligible'                                               
+   Else  'No value' end ) as CRMEligible,                                                                                                                                                         
+   ( case When (CardType.CardName = 'Star Club') Then 'CRMBill' Else 'Non-CRM' end) As CRMBill ,                                                                                                  
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) as GVAmount,                                                          
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) as Cash ,                                                            
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as CC ,                                                              
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) +                                                                     
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) +                                                                    
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as TotalPaid                                                         
+  From EtBillFile B                                                                                                                                                                               
+  LEFT OUTER JOIN EtBillFileItems BI On BI.BillIDNo = B.BillIDNo                                                                                                                                  
+  inner join mstitem Item on bi.itemid = Item.itemID                                                                                                                                              
+  inner join MstItemSubGroup Itemsub on item.ItemSubGroupId = Itemsub.ItemSubGroupId                                                                                                              
+  inner join MstItemGroup Itemgroup on itemsub.ItemGroupId = Itemgroup.ItemGroupId and Itemgroup.ItemGroupId in (1,2,3,4,5,6,7,15)                                                                
+  Left Outer Join MstAcctCVLedger Party On Party.LedgerID = B.AccountsCVID                                                                                                                        
+  Left Outer Join MstBGBranch Store On Store.BranchID = B.BranchID                                                                                                                                
+  Left Outer Join POSMstCardType CardType On CardType.CardID = Party.CardID                                                                                                                       
+  LEFT OUTER JOIN MstSalesMan ON MstSalesMan.SalesManID = B.SalesManId                                                                                                                            
+  where                                                                                                                                                                                           
+  B.BillDate >='10/10/2014' and B.BillDate <='10/12/2014'  -- MM/DD/YYYY                                                                                                                          
+  and CardType.CardID = 20                                                                                                                                                                        
+  And Itemsub.ItemGroupId In (15,7,4,1,2,3)                                                                                                                                                       
+  And ISNULL(B.DOACase,0)=0                                                                                                                                                                       
+  And ISNULL(B.Passed,0)=0                                                                                                                                                                        
+  and B.VoucherType in (14,15,16,17,8,10,11,129,214)                                                                                                                                              
+  group by Store.BranchName , Store.Branchid ,  Store.regionid                                                                                                                                    
+  , b.BillDate , b.etime , b.prefix , b.billno , b.suffix , MstSalesMan.SalesManName , Party.AccountsName ,  Party.AccountsidName , CardType.CardName , party.CellNo , party.email                
+  , b.salevalue , b.Misc1 , b.Misc2, b.Misc3 , b.Misc4 , b.Misc5 , b.amount , b.billidno , b.Vouchertype , b.billidno  , B.AccountsCVID                                                           
+  order by Store.BranchName, store.branchID ,B.BillDate':                                                                                                                                         
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]                                                                                                  
+                                                                                                                                                                                                  
+
+
+
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]  
+                                                                                                  
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                                                                                                                  
+  [Doctrine\DBAL\DBALException]                                                                                                                                                                   
+  An exception occurred while executing 'Select  Store.Branchid as StoreID, b.billidno as Billidno , B.AccountsCVID as ledgerID ,   Store.BranchName As StoreName, Store.regionid as RegionID ,   
+  ( Case When (Store.regionid ='284')Then  'HCM' When (Store.regionid ='283')Then  'HN' Else convert(varchar, Store.regionid) end ) as Region ,                                                   
+  B.BillDate As BillDate,DATEPART(year,B.BillDate) As year , DATEname(month,B.BillDate) As Month , DATEname(dw,B.BillDate) As Day ,                                                               
+  (case when ( DATEPART(dw, B.BillDate) ) > 5 then 'Weekend' else 'Weekday' end ) as Workday ,                                                                                                    
+  datepart(WK ,B.BillDate) as Week ,                                                                                                                                                              
+  DATEPART(HOUR,B.etime) As Billtime ,                                                                                                                                                            
+  (B.Prefix + '/' + cast(B.BillNo as varchar) + (Case When B.Suffix = '' Then '' Else '/'+B.Suffix End)) As BillNo,                                                                               
+  (case when (B.VoucherType = '17') then (Sum ( BI.StkQty * -1 )) else  (Sum (BI.StkQty)) end ) as SaleQty ,                                                                                      
+  MstSalesMan.SalesManName,                                                                                                                                                                       
+  Party.AccountsName As PartyName, Party.AccountsidName As PartyID , CardType.CardName As CardTypeName,                                                                                           
+  Party.CellNo As CellNo, Party.Email As Email,                                                                                                                                                   
+  (case when (B.VoucherType = '17') then (B.SaleValue * -1 ) else  B.SaleValue end ) as GrossAmount ,                                                                                             
+  (B.Misc1 + B.Misc2 + B.Misc3 + B.Misc4 + B.Misc5) As Discount,                                                                                                                                  
+  (case when (B.VoucherType = '17') then (B.Amount * -1 ) else  B.Amount end ) as NetValue ,                                                                                                      
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  '0 To 1 Mil' When (B.Amount > 1000001 and B.Amount < 2000000   )Then  '1 Mil To 2 Mil'                                                       
+  When (B.Amount > 2000001 and B.Amount < 3000000   )Then  '2 Mil To 3 Mil' When (B.Amount > 3000001 and B.Amount < 4000000   )Then  '3 Mil To 4 Mil'                                             
+  When (B.Amount > 4000001 and B.Amount < 5000000   )Then  '4 Mil To 5 Mil' When (B.Amount > 5000001 and B.Amount < 6000000   )Then  '5 Mil To 6 Mil'                                             
+  When (B.Amount > 6000001 and B.Amount < 7000000   )Then  '6 Mil To 7 Mil' When (B.Amount > 7000001 and B.Amount < 8000000   )Then  '7 Mil To 8 Mil'                                             
+  When (B.Amount > 8000001 and B.Amount < 9000000   )Then  '8 Mil To 9 Mil' When (B.Amount > 9000001 and B.Amount < 10000000   )Then  '9 Mil To 10 Mil'                                           
+  When (B.Amount > 10000001 )Then  'More Than 10 Mil' Else  'No value' end ) as AmtSlab,                                                                                                          
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  'Non-CRMEligible' When (B.Amount > 1000001 and B.Amount < 999999999999   )Then  'CRM Eligible'                                               
+   Else  'No value' end ) as CRMEligible,                                                                                                                                                         
+   ( case When (CardType.CardName = 'Star Club') Then 'CRMBill' Else 'Non-CRM' end) As CRMBill ,                                                                                                  
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) as GVAmount,                                                          
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) as Cash ,                                                            
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as CC ,                                                              
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) +                                                                     
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) +                                                                    
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as TotalPaid                                                         
+  From EtBillFile B                                                                                                                                                                               
+  LEFT OUTER JOIN EtBillFileItems BI On BI.BillIDNo = B.BillIDNo                                                                                                                                  
+  inner join mstitem Item on bi.itemid = Item.itemID                                                                                                                                              
+  inner join MstItemSubGroup Itemsub on item.ItemSubGroupId = Itemsub.ItemSubGroupId                                                                                                              
+  inner join MstItemGroup Itemgroup on itemsub.ItemGroupId = Itemgroup.ItemGroupId and Itemgroup.ItemGroupId in (1,2,3,4,5,6,7,15)                                                                
+  Left Outer Join MstAcctCVLedger Party On Party.LedgerID = B.AccountsCVID                                                                                                                        
+  Left Outer Join MstBGBranch Store On Store.BranchID = B.BranchID                                                                                                                                
+  Left Outer Join POSMstCardType CardType On CardType.CardID = Party.CardID                                                                                                                       
+  LEFT OUTER JOIN MstSalesMan ON MstSalesMan.SalesManID = B.SalesManId                                                                                                                            
+  where                                                                                                                                                                                           
+  B.BillDate >='10/31/2014' and B.BillDate <='11/02/2014'  -- MM/DD/YYYY                                                                                                                          
+  and CardType.CardID = 20                                                                                                                                                                        
+  And Itemsub.ItemGroupId In (15,7,4,1,2,3)                                                                                                                                                       
+  And ISNULL(B.DOACase,0)=0                                                                                                                                                                       
+  And ISNULL(B.Passed,0)=0                                                                                                                                                                        
+  and B.VoucherType in (14,15,16,17,8,10,11,129,214)                                                                                                                                              
+  group by Store.BranchName , Store.Branchid ,  Store.regionid                                                                                                                                    
+  , b.BillDate , b.etime , b.prefix , b.billno , b.suffix , MstSalesMan.SalesManName , Party.AccountsName ,  Party.AccountsidName , CardType.CardName , party.CellNo , party.email                
+  , b.salevalue , b.Misc1 , b.Misc2, b.Misc3 , b.Misc4 , b.Misc5 , b.amount , b.billidno , b.Vouchertype , b.billidno  , B.AccountsCVID                                                           
+  order by Store.BranchName, store.branchID ,B.BillDate':                                                                                                                                         
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]                                                                                                  
+                                                                                                                                                                                                  
+
+
+
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]  
+                                                                                                  
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+                                                                                                                                                                                                  
+  [Doctrine\DBAL\DBALException]                                                                                                                                                                   
+  An exception occurred while executing 'Select  Store.Branchid as StoreID, b.billidno as Billidno , B.AccountsCVID as ledgerID ,   Store.BranchName As StoreName, Store.regionid as RegionID ,   
+  ( Case When (Store.regionid ='284')Then  'HCM' When (Store.regionid ='283')Then  'HN' Else convert(varchar, Store.regionid) end ) as Region ,                                                   
+  B.BillDate As BillDate,DATEPART(year,B.BillDate) As year , DATEname(month,B.BillDate) As Month , DATEname(dw,B.BillDate) As Day ,                                                               
+  (case when ( DATEPART(dw, B.BillDate) ) > 5 then 'Weekend' else 'Weekday' end ) as Workday ,                                                                                                    
+  datepart(WK ,B.BillDate) as Week ,                                                                                                                                                              
+  DATEPART(HOUR,B.etime) As Billtime ,                                                                                                                                                            
+  (B.Prefix + '/' + cast(B.BillNo as varchar) + (Case When B.Suffix = '' Then '' Else '/'+B.Suffix End)) As BillNo,                                                                               
+  (case when (B.VoucherType = '17') then (Sum ( BI.StkQty * -1 )) else  (Sum (BI.StkQty)) end ) as SaleQty ,                                                                                      
+  MstSalesMan.SalesManName,                                                                                                                                                                       
+  Party.AccountsName As PartyName, Party.AccountsidName As PartyID , CardType.CardName As CardTypeName,                                                                                           
+  Party.CellNo As CellNo, Party.Email As Email,                                                                                                                                                   
+  (case when (B.VoucherType = '17') then (B.SaleValue * -1 ) else  B.SaleValue end ) as GrossAmount ,                                                                                             
+  (B.Misc1 + B.Misc2 + B.Misc3 + B.Misc4 + B.Misc5) As Discount,                                                                                                                                  
+  (case when (B.VoucherType = '17') then (B.Amount * -1 ) else  B.Amount end ) as NetValue ,                                                                                                      
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  '0 To 1 Mil' When (B.Amount > 1000001 and B.Amount < 2000000   )Then  '1 Mil To 2 Mil'                                                       
+  When (B.Amount > 2000001 and B.Amount < 3000000   )Then  '2 Mil To 3 Mil' When (B.Amount > 3000001 and B.Amount < 4000000   )Then  '3 Mil To 4 Mil'                                             
+  When (B.Amount > 4000001 and B.Amount < 5000000   )Then  '4 Mil To 5 Mil' When (B.Amount > 5000001 and B.Amount < 6000000   )Then  '5 Mil To 6 Mil'                                             
+  When (B.Amount > 6000001 and B.Amount < 7000000   )Then  '6 Mil To 7 Mil' When (B.Amount > 7000001 and B.Amount < 8000000   )Then  '7 Mil To 8 Mil'                                             
+  When (B.Amount > 8000001 and B.Amount < 9000000   )Then  '8 Mil To 9 Mil' When (B.Amount > 9000001 and B.Amount < 10000000   )Then  '9 Mil To 10 Mil'                                           
+  When (B.Amount > 10000001 )Then  'More Than 10 Mil' Else  'No value' end ) as AmtSlab,                                                                                                          
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  'Non-CRMEligible' When (B.Amount > 1000001 and B.Amount < 999999999999   )Then  'CRM Eligible'                                               
+   Else  'No value' end ) as CRMEligible,                                                                                                                                                         
+   ( case When (CardType.CardName = 'Star Club') Then 'CRMBill' Else 'Non-CRM' end) As CRMBill ,                                                                                                  
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) as GVAmount,                                                          
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) as Cash ,                                                            
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as CC ,                                                              
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) +                                                                     
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) +                                                                    
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as TotalPaid                                                         
+  From EtBillFile B                                                                                                                                                                               
+  LEFT OUTER JOIN EtBillFileItems BI On BI.BillIDNo = B.BillIDNo                                                                                                                                  
+  inner join mstitem Item on bi.itemid = Item.itemID                                                                                                                                              
+  inner join MstItemSubGroup Itemsub on item.ItemSubGroupId = Itemsub.ItemSubGroupId                                                                                                              
+  inner join MstItemGroup Itemgroup on itemsub.ItemGroupId = Itemgroup.ItemGroupId and Itemgroup.ItemGroupId in (1,2,3,4,5,6,7,15)                                                                
+  Left Outer Join MstAcctCVLedger Party On Party.LedgerID = B.AccountsCVID                                                                                                                        
+  Left Outer Join MstBGBranch Store On Store.BranchID = B.BranchID                                                                                                                                
+  Left Outer Join POSMstCardType CardType On CardType.CardID = Party.CardID                                                                                                                       
+  LEFT OUTER JOIN MstSalesMan ON MstSalesMan.SalesManID = B.SalesManId                                                                                                                            
+  where                                                                                                                                                                                           
+  B.BillDate >='11/06/2014' and B.BillDate <='11/08/2014'  -- MM/DD/YYYY                                                                                                                          
+  and CardType.CardID = 20                                                                                                                                                                        
+  And Itemsub.ItemGroupId In (15,7,4,1,2,3)                                                                                                                                                       
+  And ISNULL(B.DOACase,0)=0                                                                                                                                                                       
+  And ISNULL(B.Passed,0)=0                                                                                                                                                                        
+  and B.VoucherType in (14,15,16,17,8,10,11,129,214)                                                                                                                                              
+  group by Store.BranchName , Store.Branchid ,  Store.regionid                                                                                                                                    
+  , b.BillDate , b.etime , b.prefix , b.billno , b.suffix , MstSalesMan.SalesManName , Party.AccountsName ,  Party.AccountsidName , CardType.CardName , party.CellNo , party.email                
+  , b.salevalue , b.Misc1 , b.Misc2, b.Misc3 , b.Misc4 , b.Misc5 , b.amount , b.billidno , b.Vouchertype , b.billidno  , B.AccountsCVID                                                           
+  order by Store.BranchName, store.branchID ,B.BillDate':                                                                                                                                         
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]                                                                                                  
+                                                                                                                                                                                                  
+
+
+
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]  
+                                                                                                  
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+
+
+                                                                                                                                                                                                  
+  [Doctrine\DBAL\DBALException]                                                                                                                                                                   
+  An exception occurred while executing 'Select  Store.Branchid as StoreID, b.billidno as Billidno , B.AccountsCVID as ledgerID ,   Store.BranchName As StoreName, Store.regionid as RegionID ,   
+  ( Case When (Store.regionid ='284')Then  'HCM' When (Store.regionid ='283')Then  'HN' Else convert(varchar, Store.regionid) end ) as Region ,                                                   
+  B.BillDate As BillDate,DATEPART(year,B.BillDate) As year , DATEname(month,B.BillDate) As Month , DATEname(dw,B.BillDate) As Day ,                                                               
+  (case when ( DATEPART(dw, B.BillDate) ) > 5 then 'Weekend' else 'Weekday' end ) as Workday ,                                                                                                    
+  datepart(WK ,B.BillDate) as Week ,                                                                                                                                                              
+  DATEPART(HOUR,B.etime) As Billtime ,                                                                                                                                                            
+  (B.Prefix + '/' + cast(B.BillNo as varchar) + (Case When B.Suffix = '' Then '' Else '/'+B.Suffix End)) As BillNo,                                                                               
+  (case when (B.VoucherType = '17') then (Sum ( BI.StkQty * -1 )) else  (Sum (BI.StkQty)) end ) as SaleQty ,                                                                                      
+  MstSalesMan.SalesManName,                                                                                                                                                                       
+  Party.AccountsName As PartyName, Party.AccountsidName As PartyID , CardType.CardName As CardTypeName,                                                                                           
+  Party.CellNo As CellNo, Party.Email As Email,                                                                                                                                                   
+  (case when (B.VoucherType = '17') then (B.SaleValue * -1 ) else  B.SaleValue end ) as GrossAmount ,                                                                                             
+  (B.Misc1 + B.Misc2 + B.Misc3 + B.Misc4 + B.Misc5) As Discount,                                                                                                                                  
+  (case when (B.VoucherType = '17') then (B.Amount * -1 ) else  B.Amount end ) as NetValue ,                                                                                                      
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  '0 To 1 Mil' When (B.Amount > 1000001 and B.Amount < 2000000   )Then  '1 Mil To 2 Mil'                                                       
+  When (B.Amount > 2000001 and B.Amount < 3000000   )Then  '2 Mil To 3 Mil' When (B.Amount > 3000001 and B.Amount < 4000000   )Then  '3 Mil To 4 Mil'                                             
+  When (B.Amount > 4000001 and B.Amount < 5000000   )Then  '4 Mil To 5 Mil' When (B.Amount > 5000001 and B.Amount < 6000000   )Then  '5 Mil To 6 Mil'                                             
+  When (B.Amount > 6000001 and B.Amount < 7000000   )Then  '6 Mil To 7 Mil' When (B.Amount > 7000001 and B.Amount < 8000000   )Then  '7 Mil To 8 Mil'                                             
+  When (B.Amount > 8000001 and B.Amount < 9000000   )Then  '8 Mil To 9 Mil' When (B.Amount > 9000001 and B.Amount < 10000000   )Then  '9 Mil To 10 Mil'                                           
+  When (B.Amount > 10000001 )Then  'More Than 10 Mil' Else  'No value' end ) as AmtSlab,                                                                                                          
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  'Non-CRMEligible' When (B.Amount > 1000001 and B.Amount < 999999999999   )Then  'CRM Eligible'                                               
+   Else  'No value' end ) as CRMEligible,                                                                                                                                                         
+   ( case When (CardType.CardName = 'Star Club') Then 'CRMBill' Else 'Non-CRM' end) As CRMBill ,                                                                                                  
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) as GVAmount,                                                          
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) as Cash ,                                                            
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as CC ,                                                              
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) +                                                                     
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) +                                                                    
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as TotalPaid                                                         
+  From EtBillFile B                                                                                                                                                                               
+  LEFT OUTER JOIN EtBillFileItems BI On BI.BillIDNo = B.BillIDNo                                                                                                                                  
+  inner join mstitem Item on bi.itemid = Item.itemID                                                                                                                                              
+  inner join MstItemSubGroup Itemsub on item.ItemSubGroupId = Itemsub.ItemSubGroupId                                                                                                              
+  inner join MstItemGroup Itemgroup on itemsub.ItemGroupId = Itemgroup.ItemGroupId and Itemgroup.ItemGroupId in (1,2,3,4,5,6,7,15)                                                                
+  Left Outer Join MstAcctCVLedger Party On Party.LedgerID = B.AccountsCVID                                                                                                                        
+  Left Outer Join MstBGBranch Store On Store.BranchID = B.BranchID                                                                                                                                
+  Left Outer Join POSMstCardType CardType On CardType.CardID = Party.CardID                                                                                                                       
+  LEFT OUTER JOIN MstSalesMan ON MstSalesMan.SalesManID = B.SalesManId                                                                                                                            
+  where                                                                                                                                                                                           
+  B.BillDate >='11/06/2014' and B.BillDate <='11/08/2014'  -- MM/DD/YYYY                                                                                                                          
+  and CardType.CardID = 20                                                                                                                                                                        
+  And Itemsub.ItemGroupId In (15,7,4,1,2,3)                                                                                                                                                       
+  And ISNULL(B.DOACase,0)=0                                                                                                                                                                       
+  And ISNULL(B.Passed,0)=0                                                                                                                                                                        
+  and B.VoucherType in (14,15,16,17,8,10,11,129,214)                                                                                                                                              
+  group by Store.BranchName , Store.Branchid ,  Store.regionid                                                                                                                                    
+  , b.BillDate , b.etime , b.prefix , b.billno , b.suffix , MstSalesMan.SalesManName , Party.AccountsName ,  Party.AccountsidName , CardType.CardName , party.CellNo , party.email                
+  , b.salevalue , b.Misc1 , b.Misc2, b.Misc3 , b.Misc4 , b.Misc5 , b.amount , b.billidno , b.Vouchertype , b.billidno  , B.AccountsCVID                                                           
+  order by Store.BranchName, store.branchID ,B.BillDate':                                                                                                                                         
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]                                                                                                  
+                                                                                                                                                                                                  
+
+
+
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]  
+                                                                                                  
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+
+
+
+                                                                                                                                                                                                  
+  [Doctrine\DBAL\DBALException]                                                                                                                                                                   
+  An exception occurred while executing 'Select  Store.Branchid as StoreID, b.billidno as Billidno , B.AccountsCVID as ledgerID ,   Store.BranchName As StoreName, Store.regionid as RegionID ,   
+  ( Case When (Store.regionid ='284')Then  'HCM' When (Store.regionid ='283')Then  'HN' Else convert(varchar, Store.regionid) end ) as Region ,                                                   
+  B.BillDate As BillDate,DATEPART(year,B.BillDate) As year , DATEname(month,B.BillDate) As Month , DATEname(dw,B.BillDate) As Day ,                                                               
+  (case when ( DATEPART(dw, B.BillDate) ) > 5 then 'Weekend' else 'Weekday' end ) as Workday ,                                                                                                    
+  datepart(WK ,B.BillDate) as Week ,                                                                                                                                                              
+  DATEPART(HOUR,B.etime) As Billtime ,                                                                                                                                                            
+  (B.Prefix + '/' + cast(B.BillNo as varchar) + (Case When B.Suffix = '' Then '' Else '/'+B.Suffix End)) As BillNo,                                                                               
+  (case when (B.VoucherType = '17') then (Sum ( BI.StkQty * -1 )) else  (Sum (BI.StkQty)) end ) as SaleQty ,                                                                                      
+  MstSalesMan.SalesManName,                                                                                                                                                                       
+  Party.AccountsName As PartyName, Party.AccountsidName As PartyID , CardType.CardName As CardTypeName,                                                                                           
+  Party.CellNo As CellNo, Party.Email As Email,                                                                                                                                                   
+  (case when (B.VoucherType = '17') then (B.SaleValue * -1 ) else  B.SaleValue end ) as GrossAmount ,                                                                                             
+  (B.Misc1 + B.Misc2 + B.Misc3 + B.Misc4 + B.Misc5) As Discount,                                                                                                                                  
+  (case when (B.VoucherType = '17') then (B.Amount * -1 ) else  B.Amount end ) as NetValue ,                                                                                                      
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  '0 To 1 Mil' When (B.Amount > 1000001 and B.Amount < 2000000   )Then  '1 Mil To 2 Mil'                                                       
+  When (B.Amount > 2000001 and B.Amount < 3000000   )Then  '2 Mil To 3 Mil' When (B.Amount > 3000001 and B.Amount < 4000000   )Then  '3 Mil To 4 Mil'                                             
+  When (B.Amount > 4000001 and B.Amount < 5000000   )Then  '4 Mil To 5 Mil' When (B.Amount > 5000001 and B.Amount < 6000000   )Then  '5 Mil To 6 Mil'                                             
+  When (B.Amount > 6000001 and B.Amount < 7000000   )Then  '6 Mil To 7 Mil' When (B.Amount > 7000001 and B.Amount < 8000000   )Then  '7 Mil To 8 Mil'                                             
+  When (B.Amount > 8000001 and B.Amount < 9000000   )Then  '8 Mil To 9 Mil' When (B.Amount > 9000001 and B.Amount < 10000000   )Then  '9 Mil To 10 Mil'                                           
+  When (B.Amount > 10000001 )Then  'More Than 10 Mil' Else  'No value' end ) as AmtSlab,                                                                                                          
+  ( Case                                                                                                                                                                                          
+  When (B.Amount > 0 and B.Amount < 1000000   )Then  'Non-CRMEligible' When (B.Amount > 1000001 and B.Amount < 999999999999   )Then  'CRM Eligible'                                               
+   Else  'No value' end ) as CRMEligible,                                                                                                                                                         
+   ( case When (CardType.CardName = 'Star Club') Then 'CRMBill' Else 'Non-CRM' end) As CRMBill ,                                                                                                  
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) as GVAmount,                                                          
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) as Cash ,                                                            
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as CC ,                                                              
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0))From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=5),0) +                                                                     
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=0),0) +                                                                    
+  ISNULL((Select Sum(ISNULL(Taken,0)-ISNULL(Given,0)) From POSEtBillTenderDetail Where BillID = B.BillIDNo And PayMode=2),0) as TotalPaid                                                         
+  From EtBillFile B                                                                                                                                                                               
+  LEFT OUTER JOIN EtBillFileItems BI On BI.BillIDNo = B.BillIDNo                                                                                                                                  
+  inner join mstitem Item on bi.itemid = Item.itemID                                                                                                                                              
+  inner join MstItemSubGroup Itemsub on item.ItemSubGroupId = Itemsub.ItemSubGroupId                                                                                                              
+  inner join MstItemGroup Itemgroup on itemsub.ItemGroupId = Itemgroup.ItemGroupId and Itemgroup.ItemGroupId in (1,2,3,4,5,6,7,15)                                                                
+  Left Outer Join MstAcctCVLedger Party On Party.LedgerID = B.AccountsCVID                                                                                                                        
+  Left Outer Join MstBGBranch Store On Store.BranchID = B.BranchID                                                                                                                                
+  Left Outer Join POSMstCardType CardType On CardType.CardID = Party.CardID                                                                                                                       
+  LEFT OUTER JOIN MstSalesMan ON MstSalesMan.SalesManID = B.SalesManId                                                                                                                            
+  where                                                                                                                                                                                           
+  B.BillDate >='11/18/2014' and B.BillDate <='11/20/2014'  -- MM/DD/YYYY                                                                                                                          
+  and CardType.CardID = 20                                                                                                                                                                        
+  And Itemsub.ItemGroupId In (15,7,4,1,2,3)                                                                                                                                                       
+  And ISNULL(B.DOACase,0)=0                                                                                                                                                                       
+  And ISNULL(B.Passed,0)=0                                                                                                                                                                        
+  and B.VoucherType in (14,15,16,17,8,10,11,129,214)                                                                                                                                              
+  group by Store.BranchName , Store.Branchid ,  Store.regionid                                                                                                                                    
+  , b.BillDate , b.etime , b.prefix , b.billno , b.suffix , MstSalesMan.SalesManName , Party.AccountsName ,  Party.AccountsidName , CardType.CardName , party.CellNo , party.email                
+  , b.salevalue , b.Misc1 , b.Misc2, b.Misc3 , b.Misc4 , b.Misc5 , b.amount , b.billidno , b.Vouchertype , b.billidno  , B.AccountsCVID                                                           
+  order by Store.BranchName, store.branchID ,B.BillDate':                                                                                                                                         
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]                                                                                                  
+                                                                                                                                                                                                  
+
+
+
+
+                                                                                                  
+  [PDOException]                                                                                  
+  SQLSTATE[HY000]: General error: 20006 Write to the server failed [20006] (severity 9) [(null)]  
+                                                                                                  
+
+
+crm:searchbill [--start[="..."]] [--end[="..."]]
+
+

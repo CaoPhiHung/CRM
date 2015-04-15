@@ -1,0 +1,56 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'Star Club - Store Location' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_store.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/store_location.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<!-- Carousel
+================================================== -->
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>Giới thiệu về & Starclub</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+<section id="main" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <!--  -->
+                <div id="panel-left">
+                    <div class="text-title">
+                        <span>
+                            <img src="{{asset('bundles/aevitaslevis/images/about_side.jpg')}}" alt="Brand"/>
+                        </span>
+                    </div>
+                </div>
+                <div id="panel-right">
+                    <div><h2>Giới thiệu về TBF</h2>
+                        <p>Thanh Bắc Fashion (TBF), một công ty không ngừng nâng cao vị thế của mình trong thế giới bán lẻ từ 50 năm qua bằng cách mang đến cho khách hàng sự sang trọng,  đẳng cấp quốc tế, khát vọng, thương hiệu và lối sống trong ngành công nghiệp thời trang của Việt Nam. Trong hơn một nửa thế kỷqua, đã có những đóng góp đáng kể cho ngành bán lẻ Việt Nam với danh mục sản phẩm đa dạng. Chúng tôi hứa sẽ cung cấp các thương hiệu và sản phẩm mang tính biểu tượng cho khách hàng với độ tin cậy tuyệt vời, dịch vụ và trải nghiệm mua sắm.</p>
+                        <img src="{{asset('bundles/aevitaslevis/images/tbfbanner.jpg')}}" alt="store banner"/>
+                    </div>
+                    <div><h2>Giới thiệu về Star Club</h2>
+                        <p>Star Club là một chương trình được thiết kế dành riêng cho khách hàng than thiết của TBF, những người đang sở hữu những thương hiệu quốc tế của chúng tôi như một phần cho lối sống của họ. Các thành viên tham gia chương trình sẽ có được những quyền hạn đặc biệt cùng những phần thưởng có giá trị.</p>
+                        <img src="{{asset('bundles/aevitaslevis/images/abtbanner.jpg')}}" alt="customer"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

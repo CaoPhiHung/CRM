@@ -1,0 +1,55 @@
+<div id="fb-root"></div>
+{% if not async %}
+<script type="text/javascript" src="http://connect.facebook.net/{{ culture }}/all.js"></script>
+{% endif %}
+<script type="text/javascript">
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{appId}}";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+{% autoescape false %}
+{% if async %}
+window.fbAsyncInit = function() {
+{% endif %}
+  FB.init({{ {'appId':appId, 'xfbml':xfbml, 'oauth':oauth, 'status':status, 'cookie':cookie, 'logging':logging }|json_encode }});
+{% if async %}
+
+};
+function shareFacebook(){
+    FB.ui({
+      method: 'feed',
+      link: '{{link}}{% if app.user != null %}?ref={{app.user.getId}}{% endif %}',
+      picture: '{{asset(picture)}}',
+      name: '{{name}}',
+      caption: '{{caption}}',
+      description: '{{description}}'
+    }, function(response){});
+}
+function fblogin(){
+$('#myModal').modal();
+FB.login(function(response) {
+    if (response.authResponse) {
+        $.ajax({
+            url: '{{ path('_security_check') }}',
+            dataType: 'json',
+            success: function(data){
+                if(typeof data.location) window.location = data.location;
+            }
+        })
+    } else {
+        // The person cancelled the login dialog
+    }
+},{scope: '{{scope}}' });    
+}
+(function() {
+  var e = document.createElement('script');
+  e.src = document.location.protocol + {{ "//connect.facebook.net/%s/all.js"|format(culture)|json_encode }};
+  e.async = true;
+  document.getElementById('fb-root').appendChild(e);
+}());
+{% endif %}
+{% endautoescape %}
+</script>

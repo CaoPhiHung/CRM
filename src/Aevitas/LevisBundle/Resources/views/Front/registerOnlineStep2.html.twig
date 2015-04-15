@@ -1,0 +1,504 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+<title>{{'Become A Member' | trans}} - {{'Step 2' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>Become A Member</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+<section id="form_reg" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                <ul class="steps">
+                    <li class="active step1"><span><span>1. {{'Create Account' | trans}}</span></span></li>
+                    <li class="active step2"><span><span>2. {{'Update Your Information' | trans}}</span></span></li>
+                    <li class="step4"><span><span>3. {{'Opt In' | trans}}</span></span></li>
+                </ul>
+                <div class="info steptwo">
+                    <span class="title"><h3>2. {{'Fill Basic Information' | trans}}</h3></span>
+                    <div>
+                        <p><strong>{{'Current point' | trans}}:</strong><em class="points">{{app.user.getPoint}}</em></p>
+                        <p>{{'Here is your information which we might contact in this program.' | trans}}</p>
+                        {% if app.user.getFbid == null %}
+
+
+                        <p>{{'You can also integrate your facebook account' | trans}} <a href="#" class="btn btn-primary fbbutton" onclick="fbintegrate();">{{'Integrate your Facebook account' | trans}}</a></p>
+                        <div id="ifb" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">{{'Integrate your Facebook Account' | trans}}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <i>Loading...</i>
+                                <div class="alert alert-faded alert-success hide">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <span>{{'Load your facebook account successfully' | trans}}</span>
+                                </div>
+                                <div class="alert alert-faded alert-error hide">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <span>{{'Can not load your facebook account' | trans}}</span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            </div>
+                        </div>
+                        <script>
+                            function fbintegrate() {
+                                $('#ifb').modal();
+                                FB.login(function(response) {
+                                    if (response.authResponse) {
+                                        $.ajax({
+                                            url: '{{path('registration_facebook_integrate')}}',
+                                            dataType: 'json',
+                                            success: function(data) {
+                                                if (data.status) {
+                                                    $('#ifb i').remove();
+                                                    $('#ifb .alert-success').removeClass('hide');
+                                                    $('.btn.btn-primary').removeClass('btn-primary').attr('onclick', '');
+                                                }
+                                                else {
+                                                    $('#ifb i').remove();
+                                                    $('#ifb .alert-success').removeClass('hide').find('span').text(data.error);
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        // The person cancelled the login dialog
+                                    }
+                                }, {scope: 'email,user_birthday,user_location,publish_actions'});
+                            }
+                            </script>
+                        {% endif %}
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                            <form action="{{ path('levis_home_register_online_step2') }}" {{ form_enctype(form) }} method="POST" class="formstep2">
+                                <div class="row">{{ form_row(form.firstname, {'help': pointrule.getPrFirstname ~ ' ' ~('points' | trans)}) }}{{ form_row(form.lastname, {'help': pointrule.getPrlastname ~ ' ' ~('points' | trans)}) }}
+                                </div>
+                                <div class="row"><div class="form-row row">{{ form_row(form.dob, {'help': pointrule.getPrdob ~ ' ' ~('points' | trans)}) }}{{ form_row(form.email, {'help': pointrule.getPremail ~ ' ' ~('points' | trans)}) }}</div><div class="form-row row">{{ form_row(form.cellphone, {'help': pointrule.getPrfone ~ ' ' ~('points' | trans)}) }}{{ form_row(form.sex, {'help': pointrule.getPrsex ~ ' ' ~('points' | trans)}) }}</div>
+                                </div>
+                                <div class="row">{{ form_row(form.address1, {'help': pointrule.getPraddress1 ~ ' ' ~('points' | trans)}) }}
+                                    <div class="form-row row">
+                                    {{ form_row(form.city, {'help': pointrule.getPrcity ~ ' ' ~('points' | trans)}) }}<div>{{ form_row(form.district, {'help': pointrule.getPrdistrict ~ ' ' ~('points' | trans)}) }}<select id="district" class="alldist"></select></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">{{ form_row(form.mari, {'help': pointrule.getPrmari ~ ' ' ~('points' | trans)}) }}{{ form_row(form.kids, {'help': pointrule.getPrkids ~ ' ' ~('points' | trans)}) }}
+                                    </div>
+                                    <div class="row">{{ form_row(form.ocpu, {'help': pointrule.getProcpu ~ ' ' ~('points' | trans)}) }}{{ form_row(form.inco, {'help': pointrule.getPrinco ~ ' ' ~('points' | trans)}) }}
+                                    </div>
+                                    {{ form_rest(form) }}
+
+                                </form>
+                            <div class="row aniv tripledate">
+                                <span>{% trans with {'%day%' : app.user.getTrippleDateLimit} %}Do you want to gain triple bonus points? Just book %day% days that you will come and shopping with us!{% endtrans %}{{'' | trans}}</span>
+                                <div class="annies">{{ render_esi(controller("AevitasLevisBundle:Dashboard:renderTripleDates", {"id": app.user.getId})) }}</div>
+                            </div>
+                        <div class="row aniv">
+                            <span>{{'Anniversary Date (you can add up to 5 dates)' | trans}}<strong>({{pointrule.getPranni~ ' ' ~('points' | trans)}})</strong></span><a href="{{path('home_add_anniversary')}}" class="addmore">+</a>
+                                <div class="annies">
+                                {{ anniversaries |raw }}
+                                </div>
+                        </div>
+                            <span class="expand">
+                                <strong>{{'Fill up the survey below for 300 bonus points'}}</strong><em>{{'click here' | trans}}</em></span>
+                            <div class="survey">
+                            <div>
+                                <span>1. {{'What are the top 3 websites that you visit the most?' | trans}}(40 {{'points' | trans}})</span>
+                                <div class="anwser">
+                                        {% set ans1 = user.getAns1 %}
+                                    <form class="qform data1" action="{{path('home_answer_1')}}" method="GET" data="{{ans1}}">
+                                    <input class="ans1" name="ans1[1]" type="text" />
+                                    <input class="ans1" name="ans1[2]" type="text" />
+                                    <input class="ans1" name="ans1[3]" type="text" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div>
+                                <span>2. {{'Please rank (1 to 5) the ways that you use most often to communicate with your loved ones?' | trans}}(40 {{'points' | trans}})</span>
+                                <div class="anwser">
+                                    {% set ans2 = user.getAns2 %}
+                                    <form class="qform data2" class="form1" action="{{path('home_answer_2')}}" method="GET" data="{{ans2|json_encode()}}">
+                                        <div><label>1</label><input class="ans2" name="ans2[1]" type="text" rel="1"/></div>
+                                        <div><label>2</label><input class="ans2" name="ans2[2]" type="text" rel="2"/></div>
+                                        <div><label>3</label><input class="ans2" name="ans2[3]" type="text" rel="3"/></div>
+                                        <div><label>4</label><input class="ans2" name="ans2[4]" type="text" rel="4"/></div>
+                                        <div><label>5</label><input class="ans2" name="ans2[5]" type="text" rel="5"/></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div>
+                                <span>3. {{'Tell us about your favorite brands?' | trans}}(40 {{'points' | trans}})</span>
+                                <div class="anwser">
+                                    {% set ans3 = user.getAns3 %}
+                                        <form class="qform data3" action="{{path('home_answer_3')}}" method="GET" data="{{ans3|json_encode()}}">
+                                    <div><label>{{'Eyewear' | trans}}</label><input class="ans3" type="text" name="ans3[eyewear]" rel="eyewear"/>
+                                    </div>
+                                    <div><label>{{'Watch' | trans}}</label><input class="ans3" type="text" name="ans3[watch]" rel="watch"/>
+                                    </div>
+                                    <div><label>{{'Perfume' | trans}}</label><input class="ans3" type="text" name="ans3[perfume]" rel="perfume"/>
+                                    </div>
+                                    <div><label>{{'Cosmetic' | trans}}</label><input class="ans3" type="text" name="ans3[comestic]" rel="comestic"/>
+                                    </div>
+                                    <div><label>{{'Shoes' | trans}}</label><input class="ans3" type="text" name="ans3[shoes]" rel="shoes"/>
+                                    </div>
+                                    <div><label>{{'Clothes' | trans}}</label><input class="ans3" type="text" name="ans3[clothes]" rel="clothes"/>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div>
+                                <span>4. {{'How many jeans do you have?' | trans}}(40 {{'points' | trans}})</span>
+                                <div class="anwser">
+                                    <form class="qform" action="{{path('home_answer_4')}}" method="GET">
+                                    <input class="ans4" type="text" name="ans4" placeholder="{{'Select your answer' | trans}}" value="{{user.getAns4}}"/>
+                                    </form>
+                                </div>
+                            </div>
+                            <div>
+                                <span>5. {{'How many jeans that did you purchase in the last 1 year?' | trans}}(40 {{'points' | trans}})</span>
+                                <div class="anwser">
+                                    <form class="qform" action="{{path('home_answer_5')}}" method="GET">
+                                    <input class="ans5" type="text" name="ans5"  placeholder="{{'Select your answer' | trans}}" value="{{user.getAns5}}"/>
+                                    </form>
+                                </div>
+                            </div>
+                            <div>
+                                <span>6. {{'What are your top 3 favorite jean’s brands?' | trans}}(40 {{'points' | trans}})</span>
+                                <div class="anwser">
+                                    {% set ans6 = user.getAns6 %}
+                                    <form class="qform data6" action="{{path('home_answer_6')}}" method="GET" data="{{ans6}}">
+                                    <input class="ans6" name="ans6[1]" type="text" />
+                                    <input class="ans6" name="ans6[2]" type="text" />
+                                    <input class="ans6" name="ans6[3]" type="text" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div>
+                                <span>7. {{'What’s your favorite fit of jeans?' | trans}}(60 {{'points' | trans}})</span>
+                                <div class="anwser anwser7">
+                                    {% set ans7 = user.getAns7 %}
+                                    {% set extract = (ans7 | split('|')) %}
+                                    <form class="qform data7" action="{{path('home_answer_7')}}" method="GET" data="{{ans7}}">
+                                    <table border="1">
+                                        <tbody>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image001.jpg')}}"/><img src="{{asset('/images/survey/image003.jpg')}}"/></td>
+                                                <td><input name="ans7[1]" class="ans7" type="checkbox" value="straight" {% if 'straight' in extract %}checked="checked"{% endif %}/><strong>{{'STRAIGHT' | trans}}</strong>
+                                                <p>({{'Sits on/below waist, Straight through hip and thigh, Straight leg' | trans}})</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image005.jpg')}}"/></td>
+                                                <td><input name="ans7[2]" class="ans7" type="checkbox" value="slim" {% if 'slim' in extract %}checked="checked"{% endif %}/><strong>{{'SLIM' | trans}}</strong>
+                                                <p>({{'Sits below waist, Slim through hip and thigh, Slim leg' | trans}})</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image007.jpg')}}"/><img src="{{asset('/images/survey/image009.jpg')}}"/></td>
+                                                <td><input name="ans7[3]" class="ans7" type="checkbox" value="skinny" {% if 'skinny' in extract %}checked="checked"{% endif %}/><strong>{{'SKINNY' | trans}}</strong>
+                                                <p>({{'Skinny through hip and thigh, Skinny leg' | trans}})</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image011.jpg')}}"/></td>
+                                                <td><input name="ans7[4]" class="ans7" type="checkbox" value="relaxed" {% if 'relaxed' in extract %}checked="checked"{% endif %}/><strong>{{'RELAXED' | trans}}</strong>
+                                                <p>({{'Sits at waist, Relaxed through hip and thigh, Slightly tapered leg' | trans}})</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image013.jpg')}}"/><img src="{{asset('/images/survey/image015.jpg')}}"/></td>
+                                                <td><input name="ans7[5]" class="ans7" type="checkbox" value="bootcut" {% if 'bootcut' in extract %}checked="checked"{% endif %}/><strong>{{'BOOT CUT' | trans}}</strong>
+                                                <p>({{'Sits at waist, Slim through hip and thigh, Boot cut leg' | trans}})</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image017.jpg')}}"/></td>
+                                                <td><input name="ans7[6]" class="ans7" type="checkbox" value="tapper" {% if 'tapper' in extract %}checked="checked"{% endif %}/><strong>{{'TAPPER' | trans}}</strong>
+                                                <p>({{'Hangs on hip, Straight through hip and thigh, Tapered leg' | trans}})</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image019.jpg')}}"/></td>
+                                                <td><input name="ans7[7]" class="ans7" type="checkbox" value="legging" {% if 'legging' in extract %}checked="checked"{% endif %}/><strong>{{'LEGGING' | trans}}</strong>
+                                                <p>({{'Stretchy, Very slim through the hip and thigh, Super skinny leg' | trans}})</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="images"><img src="{{asset('/images/survey/image021.jpg')}}"/></td>
+                                                <td><input name="ans7[8]" class="ans7" type="checkbox" value="boyfriend" {% if 'boyfriend' in extract %}checked="checked"{% endif %}/><strong>{{'BOYFRIEND' | trans}}</strong>
+                                                <p>({{'Loose fit, Low rise, Cuffed hems' | trans}})</p></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div>
+                                <input type="submit" value="{{ 'Next Step'|trans }}" class="yellow_button" />
+                            </div>
+                            </div>
+                        </div>
+                        <span class="points"><em>+10</em></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script type="text/template" id="citydata">
+            <option value="">{{'City/Province' | trans}}</option>
+            {% for city in cities %}
+                <option value="{{city.getMap}}">{{city.getName}}</option>
+            {% endfor %}
+            </script>
+            <script type="text/template" id="districtdata">
+            <option value="">{{'District' | trans}}</option>
+                </script>
+{{render_esi(controller("AevitasConfigBundle:Config:renderPointsConfig"))}}
+{% endblock %}
+{% block javascript %}
+                    var query = '{{path('home_search_district')}}';
+                    $(document).ready(function() {
+                        $('form.triple input.unedit').attr('disabled', true);
+                        $('form.triple input.unedit1').datepicker({format: "dd-mm-yyyy"});
+                        $('form.triple input').on('changeDate',function(){
+                            $form = $(this).parents('form');
+                            $.ajax({
+                                url: $form.attr('action'),
+                                dataType: 'json',
+                                type: 'POST',
+                                data: $form.serialize(),
+                                success: function(data){
+                                    $form.find('input#form_id').val(data.id);
+                                }
+                            });
+                        });
+                        $('#reg_step_cellphone').on('keypress',function(e){if((e.charCode > 47 && e.charCode < 58) || e.keyCode == 46 || e.keyCode == 8) return true; else return false;})
+                        $('.formstep2').change(function() {
+                            $form = $(this);
+                            $('.title h3').addClass('loading');
+                            $.ajax({
+                                url: $form.attr('action') + '.json',
+                                dataType: 'json',
+                                data: $form.serialize(),
+                                type: 'POST',
+                                success: function(data) {
+                                    if (data.points) {
+                                        cPoint = parseInt($('em.points').text()) + data.points;
+                                        $('em.points').text(cPoint).animate({fontSize: 28}, 200, function(){$(this).animate({fontSize:18})});
+                                    }
+                                    $('.title h3').removeClass('loading');
+                                }
+                            });
+                        });
+                        $('#reg_step_city').attr('type', 'hidden');
+                        $('#reg_step_district').attr('type', 'hidden');
+                        $('select#reg_step_sex').select2({showSearchInput: false,placeholder: 'Sex'});
+                        $('#reg_step_city').after('<select id="city">' + $('#citydata').html() + '</select>');
+                        $('#district').html($('#districtdata').html());
+                        $('select#city').select2({placeholder: '{{'City/Province' | trans}}'});
+                        $('select#district').select2({placeholder: '{{'District' | trans}}'});
+                        $('select#district').on('change', function() {
+                            dist = $(this).val();
+                            console.log(dist);
+                            $('#reg_step_district').val(dist)
+                        });
+                        $('#reg_step_mari').select2();
+                        $('#reg_step_kids').select2();
+                        $('#reg_step_ocpu').select2();
+                        $('#reg_step_inco').select2();
+                        function doSelectCity(obj, CallBack) {
+                            city = $('#reg_step_city').val();
+                            $('select#city').find("option[value=" + city + "]").attr('selected', 'selected');
+                            $.ajax({
+                                url: '{{ path('home_search_district') }}/' + $('#reg_step_city').val(),
+                                dataType: 'json',
+                                success: function(data) {
+                                    $('#city').select2("destroy").select2();
+                                    $('#district').select2("destroy");
+                                    $('#district').html(data.html).select2();
+                                    if (typeof(CallBack) != 'undefined') {
+                                        window.setTimeout(function() {
+                                            CallBack();
+                                        }, 500);
+                                    }
+                                }
+                            });
+                        }
+
+
+                        if ($('select#city').val() != 0) {
+                            doSelectCity(document.getElementById('city'), function() {
+                                var val = parseInt($('#reg_step_district').val());
+                                $("#district").select2("val", val);
+                            });
+                        }
+                        $('select#city').on('change', function() {
+                            city = $(this).val();
+                            $('.title h3').addClass('loading');
+                            $('#reg_step_city').val(city);
+                            $.ajax({
+                                url: query + '/' + $(this).val() + '.json',
+                                dataType: 'json',
+                                success: function(data) {
+                                    $('.title h3').removeClass('loading');
+                                    $('#district').select2("destroy");
+                                    $('#district').html(data.html).select2();
+                                    $('#reg_step_district').val($('#district option:first').val())
+                                }
+                            });
+                        })
+                    });
+    $('.expand em').click(function(){if($('.survey').hasClass('open')) $('.survey').removeClass('open').slideUp(); else {$('.survey').addClass('open').slideDown()}})
+    $('form.qform').change(function(){
+        that = this;
+        $.ajax({
+            url: $(this).attr('action'),
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function(data){
+                    if(data.points){
+                    cPoint = parseInt($('em.points').text()) + data.points;
+                    $('em.points').text(cPoint).animate({fontSize: 28}, 200, function(){$(this).animate({fontSize:18})});
+                    }
+                    $(that).tooltip({title: data.message});setTimeout(function(){$(that).tooltip('destroy')},8000)}
+        })
+    });
+    //initialize data form 1
+    dF1 = $('form.data1').attr('data').split('|');
+    $('form.data1 input').each(function(i, e){
+        $(e).val(dF1[i]);
+    })
+    //initialize data form 6
+    dF6 = $('form.data6').attr('data').split('|');
+    $('form.data6 input').each(function(i, e){
+        $(e).val(dF6[i]);
+    })
+    if($('form.data3').attr('data').length > 2) {
+        dF3 = JSON.parse($('form.data3').attr('data'));
+        $('input.ans3').each(function(){
+            $(this).val(dF3[$(this).attr('rel')])
+        });
+    }
+    if($('form.data2').attr('data').length > 2) {
+        dF2 = JSON.parse($('form.data2').attr('data'));
+        $('input.ans2').each(function(){
+            $(this).val(dF2[$(this).attr('rel')])
+        });
+    }
+    ans2 = [{id: '{{'Phone Call' | trans}}', text: '{{'Phone Call' | trans}}'},{id: '{{'SMS' | trans}}', text: '{{'SMS' | trans}}'},{id: '{{'Email' | trans}}', text: '{{'Email' | trans}}'},{id: '{{'Facebook' | trans}}', text: '{{'Facebook' | trans}}'},{id: '{{'Face to face' | trans}}', text: '{{'Face to face' | trans}}'}];
+    $('input.ans2').select2({
+        placeholder: '{{'Select option' | trans}}',
+        allowClear: true,
+        data: ans2
+    })
+    ans4 = [{id: '1', text: '1'},{id: '2', text: '2'},{id: '3', text: '3'},{id: '4', text: '4'},{id: '5', text: '5'},{id: 'Other', text: 'Other'}]
+    $('input.ans4').select2({
+        allowClear: true,
+        data: ans4
+    });
+    $('input.ans5').select2({
+        allowClear: true,
+        data: ans4
+    });
+    
+    $('input.ans5').on('change',function(e){
+        if(e.val == '{{'Other' | trans}}') {$('input.ans5').removeClass('select2-offscreen').val('').attr('placeholder', '{{'Type your own' | trans}}');$('input.ans5').prev().hide()}
+    })
+    $('input.ans4').on('change',function(e){
+        if(e.val == '{{'Other' | trans}}') {$('input.ans4').removeClass('select2-offscreen').val('').attr('placeholder', '{{'Type your own' | trans}}');$('input.ans4').prev().hide()}
+    })
+    $('input.ans7').uniform();
+    function initAnniversary(el){
+        status = parseInt($('#reg_step_mari').val());
+        if(status > 1) var elDate = customDate = [{id: '{{'Birthday' | trans}}', text: '{{'Birthday' | trans}}'},{id: '{{'Wedding' | trans}}', text: '{{'Wedding' | trans}}'},{id: "{{'Son\'s birthday' | trans | raw}}", text: "{{'Son\'s birthday' | trans | raw}}"},{id: "{{'Daughter\'s birthday' | trans | raw}}", text: "{{'Daughter\'s birthday' | trans | raw}}"}];
+        else var elDate = customDate = [{id: '{{'Love Anniversary' | trans}}', text: '{{'Love Anniversary' | trans}}'},{id: "{{'Parent\'s Wedding Anniversary' | trans}}", text: "{{'Parent\'s Wedding Anniversary' | trans | raw}}"},{id: "{{'Mom\'s birthday' | trans | raw}}", text: "{{'Mom\'s birthday' | trans | raw}}"},{id: "{{'Dad\'s birthday' | trans | raw}}", text: "{{'Dad\'s birthday' | trans | raw}}"}];
+        if($(el).val() != "" && $(el).val() != '{{'Love Anniversary' | trans}}' && $(el).val() != "{{'Parent\'s Wedding Anniversary' | trans}}" && $(el).val() != "{{'Mom\'s birthday' | trans | raw}}" && $(el).val() != "{{'Dad\'s birthday' | trans | raw}}" && $(el).val() != '{{'Birthday' | trans}}' && $(el).val() != '{{'Wedding' | trans}}'  && $(el).val() !=  "{{'Son\'s birthday' | trans | raw}}" && $(el).val() != "{{'Daughter\'s birthday' | trans | raw}}"){
+            elDate.push({id: $(el).val(), text: $(el).val()});
+        }
+        elDate.push({id: '{{'Custom Date' | trans}}', text: '{{'Custom Anniversary date' | trans}}'});
+        $(el).select2({
+            placeholder: "Select report type",
+            allowClear: true,
+            data: elDate
+            });
+
+        $(el).on('change',function(e){
+        if(e.val == '{{'Custom Date' | trans}}') {$(el).removeClass('select2-offscreen');$(el).prev().hide()}
+        })
+        delete elDate;
+    }
+    $('form.reg_step').change(function(){
+        url = $(this).attr('action');
+        $form = $(this);
+        $('.title h3').addClass('loading');
+        $.ajax({
+            url: url+'.json',
+            type:'POST',
+            data: $form.serialize(),
+            dataType: 'json',
+            success: function(data){
+                $('.title h3').removeClass('loading');
+                if(data.points) {
+                    cPoint = parseInt($('em.points').text()) + data.points;
+                    $('em.points').text(cPoint).animate({fontSize: 28}, 200, function(){$(this).animate({fontSize:18})});
+                }
+            }
+        });
+    });
+    $('.annies form input.datetime').datepicker({format: "dd-mm-yyyy",onSelect: function(){console.log('changing')}})
+    $('.aniv a.addmore').on('click', function(e){
+        e.preventDefault();
+        url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function(data){
+                if(data.status) $('.annies:last').append(data.html);
+                else alert(data.html);
+                $('.annies form:last input.datetime').datepicker({format: "dd-mm-yyyy"})
+                el = $('.annies form:last input.anniname');
+                initAnniversary(el);
+            }
+        });
+    });
+    $.each($('.annies form input.anniname'), function(i, el){
+    initAnniversary(el);
+    });
+    $('.annies form input.datetime').on('changeDate',function(){
+        $form = $(this).parents('form');
+        $('.title h3').addClass('loading');
+        $.ajax({
+            url: $form.attr('action'),
+            dataType: 'json',
+            data: $form.serialize(),
+            type: 'POST',
+            success: function(data){
+                $('.title h3').removeClass('loading');
+                if(data.points) {
+                    cPoint = parseInt($('em.points').text()) + data.points;
+                    $('em.points').text(cPoint).animate({fontSize: 28}, 200, function(){$(this).animate({fontSize:18})});
+                }
+            }
+        })
+    });
+    $('.annies').delegate('form', 'change', function(){
+        $form = $(this);
+        $('.title h3').addClass('loading');
+        $.ajax({
+            url: $form.attr('action'),
+            dataType: 'json',
+            data: $form.serialize(),
+            type: 'POST',
+            success: function(data){
+                $('.title h3').removeClass('loading');
+                if(data.id) $form.find('#anni_id').val(data.id);
+                if(data.points) {
+                    cPoint = parseInt($('em.points').text()) + data.points;
+                    $('em.points').text(cPoint).animate({fontSize: 28}, 200, function(){$(this).animate({fontSize:18})});
+                }
+            }
+        })
+    });
+    $('.yellow_button').click(function(){$('form.formstep2').submit()});
+{% endblock %}

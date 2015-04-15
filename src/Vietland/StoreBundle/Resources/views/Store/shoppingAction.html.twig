@@ -1,0 +1,82 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> {{'Store' | trans}}</a></li>
+    <li class="divider"></li>
+    <li>{{'CRM Data' | trans}}</li>
+    <li class="divider"></li>
+    <li>{{'Shopping Action' | trans}}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in notices %}
+<div class="alert alert-faded">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+</div>
+                {% endfor %}
+<div class="widget finances_summary">
+    <div class="widget-head">
+        <h4 class="heading">{{'Bill is created at' | trans}} {{store.bDate | date("F jS \\a\\t g:ia")}}</h4>
+    </div>
+    <div class="widget-body">
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="well">{{'Number product' | trans}}<strong>{{store.itemNumber}}</strong>
+                </div>
+                <div class="separator bottom center">
+                    <span class="glyphicons flash standard"><i></i></span>
+                </div>
+                <div class="well">{{'Total Payment' | trans}}<strong>{{store.Amount}}</strong>
+                </div>
+            </div>
+            {% if usercrm is defined %}
+                {{ include("VietlandStoreBundle:Store:userLastActivities.html.twig",{"user": usercrm}) }}
+            {% endif %}
+        </div>
+        <a class="glyphicons list single" href=""><i></i> View details</a>
+    </div>
+</div>
+<div class="widget">
+    <div class="widget-head">
+        <h4 class="heading">{{'Bill Detail' | trans}}</h4>
+    </div>
+    <div class="widget-body">
+        <table class="table table-condensed table-striped table-vertical-center table-thead-simple">
+            <thead>
+                <tr>
+                    <th class="center" style="width: 1%">No.</th>
+                    <th>{{'Item Code' | trans}}</th>
+                    <th class="center">{{'Item Description' | trans}}</th>
+                    <th class="center">{{'Amount' | trans}}</th>
+                    <th class="right">{{'Quantity' | trans}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                        {% set index = 1 %}
+                        {% for item in items %}
+                    <tr class="selectable">
+                        <td class="center">{{index}}</td>
+                        <td class="important">{{item.iCode}}</td>
+                        <td class="center"><span class="label label-important">{{item.iDesc}}</span></td>
+                        <td class="center">{{item.iValue}}đ</td>
+                        <td class="right">{{item.Qty}}</td>
+                    </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+            <div class="separator top"><a href="{{path('store_save_shopping',{'billno': billno,'ledgerid': ledgerid})}}" class="glyphicons list single"><i></i> {{'Accumulate points for THIS BILL' | trans}}</a></div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('button.action').live('click', function(){
+            window.open($('select.actions').val(), '_blank');
+        });
+    });
+        </script>
+{% endblock %}

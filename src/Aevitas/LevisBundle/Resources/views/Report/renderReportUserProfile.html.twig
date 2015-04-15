@@ -1,0 +1,34 @@
+<div class="widget">
+    <div class="widget-head">
+        <h4 class="heading">{{'Account percentage for each profile\'s field' | trans}}</h4>
+    </div>
+    <div class="widget-body">
+
+        <script type="text/javascript">
+            google.load('visualization', '1', {packages: ['corechart']});
+            </script>
+            <script type="text/javascript">
+                function drawVisualization() {
+                    // Some raw data (not necessarily accurate)
+                    var data = google.visualization.arrayToDataTable([
+                  {{ label | raw }},
+                  {{ gdata | raw }}
+                    ]);
+
+                    var options = {
+                        title: 'Percentage filup profile attribute',
+                        vAxis: {title: "Percent",maxValue: 100},
+                        hAxis: {title: "Profile field"},
+                        seriesType: "bars",
+                        chartArea: {height: 300},
+                        series: {5: {type: "line"}}
+                    };
+
+                    var chart = new google.visualization.ComboChart(document.getElementById('combochart'));
+                    chart.draw(data, options);
+                }
+                google.setOnLoadCallback(drawVisualization);
+                </script>
+                <div id="combochart" style="height: 400px"></div>
+            </div>
+        </div>

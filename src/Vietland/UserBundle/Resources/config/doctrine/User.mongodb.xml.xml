@@ -1,0 +1,17 @@
+<doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"  
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping  
+                    http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">  
+  
+    <document name="Vietland\UserBundle\Document\User" collection="users" customId="true">  
+          
+        <field fieldName="id" id="true" strategy="INCREMENT" />  
+        <field fieldName="first_name" type="string" />    
+        <field fieldName="last_name" type="string" />    
+        <field fieldName="language" type="string" />  
+        <field fieldName="sex" type="string" /> 
+        <reference-many target-document="Vietland\UserBundle\Document\Group" field="groups"> />  
+         
+    </document>  
+      
+</doctrine-mongo-mapping> 

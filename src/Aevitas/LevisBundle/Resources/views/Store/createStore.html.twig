@@ -1,0 +1,42 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>{{ 'Store'|trans }}</li>
+    <li class="divider"></li>
+    <li>{{ 'Add'|trans }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+    <form class="form-horizontal" action="{{ path('backend_store_create') }}" {{ form_enctype(form) }} method="POST">
+        <div class="row-fluid">
+            <div class="span9">
+           {{ form_label(form.name) }}
+           {{ form_widget(form.name, {'attr': {'placeholder': 'Store name.'| trans, 'class': 'span10'}}) }}
+                    <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="Name is required."><i></i></span>
+                    <span class="error">{{ form_errors(form.name) }}</span>
+                    <div class="separator"></div>
+             
+                </div>
+            </div>
+            <div class="separator line bottom"></div>
+            {{ form_rest(form) }}
+            <div class="form-actions" style="margin: 0;">
+                <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+            </div>
+        </form>
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

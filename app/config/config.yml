@@ -1,0 +1,137 @@
+imports:
+    - { resource: database.yml }
+    - { resource: loyalty.yml }
+    - { resource: mailer.yml }
+    - { resource: security.yml }
+    - { resource: supervisord.yml }
+    - { resource: "@VietlandUserBundle/Resources/config/services.yml" }
+    - { resource: "@VietlandAevitasBundle/Resources/config/services.yml" }
+    - { resource: "@AevitasLevisBundle/Resources/config/services.yml" }
+    - { resource: "@AevitasPointBundle/Resources/config/services.yml" }
+    - { resource: "@AevitasConfigBundle/Resources/config/services.yml" }
+parameters:
+    login_success_handler_class: Vietland\UserBundle\Service\LoginSuccessHandler
+    logout_success_handler_class: Vietland\UserBundle\Service\LogoutSuccessHandler
+
+services:
+    login_success_handler:
+        class:  %login_success_handler_class%
+        arguments:  [@router, @security.context, @event_dispatcher, @point.rule,@fos_user.user_manager, %locale%]
+    logout_success_handler:
+        class:  %logout_success_handler_class%
+        arguments:  [@router]
+framework:
+    esi:             { enabled: true }
+    fragments:      {path: /_proxy}
+    trusted_proxies:
+        - 127.0.0.1
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:
+        assets_version:   v=4.6
+        engines:     ['twig']
+        assets_base_urls:
+            http:
+                - %cdn%
+            ssl:
+                - %cdn%
+    default_locale:  %locale%
+    session:
+        save_path: "%kernel.root_dir%/sessions"
+        cookie_lifetime: 0
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    base_template_class: Vietland\AevitasBundle\Helper\AevitasTwigTemplate
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles: ["AevitasLevisBundle","VietlandElfinderBundle","VietlandStoreBundle","AevitasConfigBundle","AevitasChannelBundle"]
+    java: /usr/bin/java
+    filters:
+        #cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        yui_js:
+            jar: %kernel.root_dir%/../java/yuicompressor-2.4.5.jar
+            apply_to: "\.js$"
+        yui_css:
+            jar: %kernel.root_dir%/../java/yuicompressor-2.4.5.jar
+            apply_to: "\.css$"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %dbdriver%
+        driver_class:   \Realestate\MssqlBundle\Driver\PDODblib\Driver
+        host:     %dbhost%
+        port:     %dbport%
+        dbname:   %dbname%
+        user:     %dbuser%
+        password: %dbpassword%
+        charset:  UTF8
+
+    orm:
+        auto_mapping: true
+        # the standard distribution overrides this to be true in debug, false otherwise
+        auto_generate_proxy_classes: true
+        #proxy_namespace: Proxies
+        #proxy_dir: "%kernel.cache_dir%/doctrine/orm/Proxies"
+        #default_entity_manager: default
+        #metadata_cache_driver: apc
+        #query_cache_driver: apc
+        #result_cache_driver: apc
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mtransport%
+    host:      %mhost%
+    username:  %muser%
+    password:  %mpassword%
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://127.0.0.1
+            options:
+                connect: true
+#                persist: true
+#                replicaSet: rs1
+#                slaveOkay: false
+#                db: nhacthanh
+#                username: jayesh
+#                password: bao@jayesh
+                db: levis_20_dev
+    default_database: levis_20_dev
+    document_managers:
+        default:
+            auto_mapping: true
+jms_security_extra:
+    # Whether you want to secure all services (true), or only secure specific
+    # services (false); see also below
+    secure_all_services: false
+
+    # Enabling this setting will add an additional special attribute "IS_IDDQD".
+    # Anybody with this attribute will effectively bypass all security checks.
+    enable_iddqd_attribute: false
+
+    # Enables expression language
+    expressions: false
+
+    # Allows you to disable some, or all built-in voters
+    voters:
+        disable_authenticated: false
+        disable_role:          false
+        disable_acl:           false
+
+    # Allows you to specify access control rules for specific methods, such
+    # as controller actions
+    method_access_control: { }

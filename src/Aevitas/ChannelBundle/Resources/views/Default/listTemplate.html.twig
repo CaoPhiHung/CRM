@@ -1,0 +1,167 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="#">Template</a></li>
+        <li class="divider"></li>
+	<li style="text-transform:uppercase;"> {{type}} List </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-faded">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+ {#   <div class="control-group">
+        <a href="{{ path('backend_create_template',{'type':'mail'}) }}"><span class="btn btn-large color-7">Add new Template</span></a>
+    </div>#}
+    <div class="separator"></div>
+    <table aria-describedby="DataTables_Table_0_info" id="DataTables_Table_0" class="dynamicTable table table-striped table-bordered table-condensed dataTable" className="">
+            <thead>
+                <tr role="row" style="color:#0F0">
+                    <th>Template Name</th>
+
+                    <th>Type</th>
+
+                    <th>Action</th>
+                    
+            </thead>
+
+            <tbody aria-relevant="all" aria-live="polite" role="alert">
+                {% for item in lists %}
+                    <tr class="gradeA odd">
+                        <td class=" ">{{ item.name }}</td>
+                        <td class=" ">
+                            {{item.type}}
+                            {#Gender: <span style="color:#0f0"><b>
+                            {% if item.gender is null %}
+                                Global
+                            {% else %}
+                                {{ genderArr[item.gender] }}
+                            {% endif %}
+                            </b></span>
+                            <br/>Level: <span style="color:#0f0"><b>
+                            {% if item.level is null %}
+                                null
+                            {% else %}
+                                {{ levelArr[item.level] }}
+                            {% endif %}
+                            </b></span>
+                            <br/>City: <span style="color:#0f0"><b>
+                                {{item.cityName}}
+                            </b></span>
+                            <br/>District: <span style="color:#0f0"><b>
+                                {{item.districtName}}
+                            </b></span>#}
+                        </td>
+                        <td>
+                            {#<a style="color:#0f0" href="javascript:DoSend({{item.id}})" class="glyphicons no-js envelope"><i></i>Send</a> #}
+                            &nbsp;&nbsp;&nbsp;<a href="
+                            {{ path('backend_edit_template', {'id':item.id,'type':item.type}) }}" class="glyphicons no-js edit"><i></i>Edit</a>
+                            &nbsp;&nbsp;&nbsp;<a href="javascript:if(confirm('Are you sure want to delete this Template?')){window.location='{{ path('backend_delete_template', {id:item.id}) }}'}" class="glyphicons no-js delete"><i></i>delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+
+    <div class="modal fade" id="myModal" style="color:#000">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" style="color:#000">Send email</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="bt-process">Send</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        function DoSend(tid){
+            $('.loading-bar').show();
+            $('#myModal #bt-process').removeAttr('disabled');
+            $.ajax({
+                url: '{{ path('backend_send_info_template') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {id:tid},
+                success: function(response){
+                    $('.loading-bar').hide();
+                    console.log(response);
+                    if (typeof(response.error)!='undefined'){
+                        alert(response.error);
+                        return;
+                    }
+                    if (response.count == 0){
+                        $('#bt-process').attr({'disabled':true});
+                    }else{
+                        $('#bt-process').removeAttr('disabled');
+                    }
+                    //
+                    var cts = '<div id ="div-mes"></div>';
+                    cts += '<div>total users: '+response.count+'</div>';
+                    if (typeof(response.mail) != 'undefined' && response.mail == true){
+                        cts += '<div><label class="checkbox"><input type="checkbox" id="send-email"/>send E-mail</label></div>';
+                    }else{
+                        cts += '<div><label class="checkbox"><input type="checkbox" id="send-email" disabled="true"/>send E-mail</label></div>';
+                    }
+                    if (typeof(response.sms) != 'undefined' && response.sms == true){
+                        cts += '<div><label class="checkbox"><input type="checkbox" id="send-sms" />send SMS</label></div>';
+                    }else{
+                        cts += '<div><label class="checkbox"><input type="checkbox" id="send-sms" disabled="true" />send SMS</label></div>';
+                    }
+                    cts += '<div id="v-status" style="display:none;">Processing...</div>';
+                    cts += '<input type="hidden" id="uid" value="'+tid+'">'
+                    $('#myModal .modal-body').html(cts);
+                    $('#myModal').modal("show");
+                }
+            });
+        }
+        
+        $('#myModal #bt-process').click(function(){
+            var smsCheck = $('#send-sms').is(':checked')?1:0;
+            var emailCheck = $('#send-email').is(':checked')?1:0;
+            $('#v-status').show();
+            $('#div-mes').removeClass('alert-success');
+            $('#div-mes').removeClass('alert-danger');
+            $('#div-mes').html('');
+            $.ajax({
+                url: '{{ path('backend_send_process_template') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {
+                    'send-email': emailCheck,
+                    'send-sms': smsCheck,
+                    'id': $('#uid').val()
+                },
+                success: function(response){
+                    $('#v-status').hide();
+                    if (typeof(response.error) != 'undefined' || typeof(response.msg) == 'undefined' || response.msg != 'ok'){
+                        // error
+                        $('#div-mes').addClass('alert-danger');
+                        $('#div-mes').html(response.error);
+                    }else{
+                        // success
+                        $('#myModal #bt-process').attr({'disabled':'disabled'});
+                        $('#div-mes').addClass('alert-success');
+                        $('#div-mes').html(response.msg);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

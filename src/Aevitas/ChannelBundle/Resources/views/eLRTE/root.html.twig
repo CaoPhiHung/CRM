@@ -1,0 +1,141 @@
+{% spaceless %}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+<head>
+        {% block head %}
+	<title>METRO - Premium Bootstrap Admin Template</title>
+        {% endblock %}
+	
+	<!-- Meta -->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+	<!-- Bootstrap -->
+	<link href="{{ asset('bundles/aevitaslevis/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+	
+	<!-- Bootstrap Extended -->
+	
+	<link href="{{ asset('bundles/aevitaslevis/bootstrap/extend/jasny-bootstrap/css/jasny-bootstrap-responsive.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/aevitaslevis/bootstrap/extend/bootstrap-wysihtml5/css/bootstrap-wysihtml5-0.0.2.css') }}" rel="stylesheet">
+	
+	<!-- Glyphicons -->
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/theme/css/glyphicons.css') }}" />
+	
+	<!-- Bootstrap Extended -->
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/bootstrap/extend/bootstrap-select/bootstrap-select.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/bootstrap/extend/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css') }}" />
+	
+	<!-- Uniform -->
+	<link rel="stylesheet" media="screen" href="{{ asset('bundles/aevitaslevis/theme/scripts/pixelmatrix-uniform/css/uniform.default.css') }}" />
+
+	<!-- MiniColors -->
+	<link rel="stylesheet" media="screen" href="{{ asset('bundles/aevitaslevis/theme/scripts/jquery-miniColors/jquery.miniColors.css') }}" />
+	
+	<!-- Theme -->
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/theme/css/style.min.css?1361543579') }}" />
+	
+	<!-- Google Analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-36057737-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+	
+	
+	{#<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">#}
+
+	<!-- LESS 2 CSS -->
+	<script src="{{ asset('bundles/aevitaslevis/theme/scripts/less-1.3.3.min.js') }}"></script>
+	
+	
+	<!--[if IE]><script type="text/javascript" src="{{ asset('bundles/aevitaslevis/theme/scripts/excanvas/excanvas.js') }}"></script><![endif]-->
+	<!--[if lt IE 8]><script type="text/javascript" src="{{ asset('bundles/aevitaslevis/theme/scripts/json2.js') }}"></script><![endif]-->
+
+        {% block import %}
+        {% endblock %}
+</head>
+<body class="{{app.request.get('_route') | replace({'_':' '})}}">
+	
+	<!-- Start Content -->
+	<div class="container">
+	<div id="wrapper">
+
+            <!-- sidebar start -->
+            {% include "AevitasLevisBundle:Backend:sidebar.html.twig" %}
+            <!-- sidebar end -->
+
+            <div id="content" class="color-4">
+                <!-- Menu Toggle on mobile -->
+                        <button type="button" class="btn btn-navbar main">
+                                <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                        </button>
+                        <a href="#themer" data-toggle="collapse" class="btn btn-primary btn-icon glyphicons eyedropper"><i></i> Themer</a>
+                        <div class="relativeWrap pull-right">
+                        <a href="#" data-toggle="dropdown"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/en.png') }}" alt="en" /></a>
+                <ul class="dropdown-menu pull-right">
+                        <li class="active"><a href="?page=index&amp;lang=en" title="English"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/en.png') }}" alt="English"> English</a></li>
+                        <li><a href="?page=index&amp;lang=ro" title="Romanian"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/ro.png') }}" alt="Romanian"> Romanian</a></li>
+                        <li><a href="?page=index&amp;lang=it" title="Italian"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/it.png') }}" alt="Italian"> Italian</a></li>
+                        <li><a href="?page=index&amp;lang=fr" title="French"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/fr.png') }}" alt="French"> French</a></li>
+                        <li><a href="?page=index&amp;lang=pl" title="Polish"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/pl.png') }}" alt="Polish"> Polish</a></li>
+                </ul>
+                </div>
+		<div class="relativeWrap">
+			<div id="themer" class="collapse">
+				<div class="wrapper">
+					<span class="close2">&times; close</span>
+					<h4>Themer <span>color</span></h4>
+					<ul>
+						<li>Primary Color: <input type="text" data-type="minicolors" data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left" id="themer-primary-cp" /><div class="clearfix"></div></li>
+						<li>Page: <select id="themer-theme" class="pull-right"></select><div class="clearfix"></div></li>
+						<li>
+							<span class="link" id="themer-custom-reset">reset page</span>
+							<span class="pull-right"><label>advanced <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>
+						</li>
+					</ul>
+					<div id="themer-getcode" class="hide">
+						<div class="separator"></div>
+						<button class="btn btn-primary btn-small pull-right btn-icon glyphicons download" id="themer-getcode-less"><i></i>Get LESS</button>
+						<button class="btn btn-inverse btn-small pull-right btn-icon glyphicons download" id="themer-getcode-css"><i></i>Get CSS</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+                <div class="separator"></div>
+
+                {% block breadcrumb %}
+                
+                {% endblock %}
+
+                <div class="separator"></div>
+
+            <!-- content start -->
+            {% block content %}
+
+            {% endblock %}
+            <!-- content end -->
+            </div>
+
+	</div>
+	</div>
+	{% block javascript %}
+
+        {% endblock %}
+</body>
+</html>
+{% endspaceless %}

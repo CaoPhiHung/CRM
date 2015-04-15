@@ -1,0 +1,51 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> {{'BACKEND' | trans}}</a></li>
+    <li class="divider"></li>
+    <li>{{'Import Users' | trans}}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" action="{{ path('backend_import_city') }}" {{ form_enctype(form) }} method="POST">
+    <div class="block full-block">
+        <div class="block_content">
+            <div class="control-group row-fluid">
+                <label class="control-label">Choose data file</label>
+                <div class="controls">
+                    <div class="fileupload fileupload-new" data-provides="fileupload"><input name="" value="" type="hidden">
+                        <div class="input-append">
+                            <div class="uneditable-input span3">
+                                <i class="icon-file fileupload-exists"></i> 
+                                <span class="fileupload-preview"></span>
+                            </div>
+                            <span class="btn btn-file">
+                                <span class="fileupload-new">{{'Select file' | trans}}</span>
+                                <span class="fileupload-exists">{{'Change' | trans}}</span>
+                                    {{ form_widget(form.fileupload, {'attr': {}}) }}
+                            </span>
+                            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="Excel or CSV file"><i></i></span>
+                        </div>
+                    </div>
+
+                    {{ form_rest(form) }}
+                </div>
+            </div>
+
+            <div class="separator line bottom"></div>
+
+            <div class="form-actions" style="margin: 0;">
+                <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save changes</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

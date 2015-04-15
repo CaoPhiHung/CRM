@@ -1,0 +1,5 @@
+<div id="shopcart" class="shopcart">
+    <div>
+        <a href="{{path('checkout_step_one')}}"><span><strong>{{count}}</strong> {% if count < 2 %}{{'items' | trans}}{% else %}{{'item' | trans}}{% endif %}</span></a>
+    </div>
+</div>

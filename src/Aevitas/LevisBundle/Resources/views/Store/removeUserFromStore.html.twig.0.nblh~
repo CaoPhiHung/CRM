@@ -1,0 +1,55 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+ {% block head %}
+ {% endblock %}
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>{{ 'Store'|trans }}</li>
+    <li class="divider"></li>
+    <li>{{ 'Remove user'|trans }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+         {% if app.session.hasFlash('notice') %}
+<div class="flash-notice">
+     {{ app.session.flash('notice') }}
+    </div>
+    {% endif %} 
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+    <form class="form-horizontal" action="{{ path('backend_store_adduser') }}" method="POST">
+        <div class="row-fluid">
+            <div class="span9">
+                   <label class="required" for="aevitas_store_name">Select store:</label>
+                <select id="choosen-store-item" name="store_id">
+                    <option selected="" value="0">choosen store</option>
+                    {% for item in store %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                        {% endfor %}
+                </select>
+         
+                <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="please select a store."><i></i></span>
+                <div class="separator"></div>
+                <div id="list-user-update"></div>
+
+            </div>
+        </div>
+        <div class="separator line bottom"></div>
+        <div class="form-actions" style="margin: 0;">
+            <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+        </div>
+    </form>
+    <div id="open-form-delete" style="display: none;" title="!Important">
+                Are you sure want to remove this user ?
+            </div>
+{% endblock %}
+{% block javascript %}
+<script>
+ var backend_store_removeuser = '{{ path('backend_search_user_by_store') }}';
+ var backend_user_search = '{{ path('backend_user_search',{"_format":'json'}) }}';
+</script>
+ <script src="{{ asset('bundles/aevitaslevis/js/select2.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/js/store.js') }}"></script>
+{% endblock %}

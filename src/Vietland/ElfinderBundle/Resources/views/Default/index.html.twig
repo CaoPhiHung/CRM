@@ -1,0 +1,105 @@
+{% set activeMenu = 'home' %}
+{% extends "AtipsoBackendBundle::backend.html.twig" %}
+{% block javascript %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/atipsoelfinder/js/elFinder.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="{{ asset('bundles/atipsoelfinder/js/elFinder.view.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="{{ asset('bundles/atipsoelfinder/js/elFinder.ui.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="{{ asset('bundles/atipsoelfinder/js/elFinder.quickLook.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="{{ asset('bundles/atipsoelfinder/js/elFinder.eventsManager.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="{{ asset('bundles/atipsoelfinder/js/i18n/elfinder.ru.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="{{ asset('bundles/atipsoelfinder/js/i18n/elfinder.de.js') }}" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    $j().ready(function() {
+        var f = $j('#finder').elfinder({
+                url : '{{ path('_elfinder_editor') }}',
+                lang : 'de',
+                docked : true,
+                // editorCallback : function(url) { window.console.log(url) },
+                // closeOnEditorCallback : false,
+                selectMultiple : true,
+                dialog : {
+                        title : 'File manager',
+                        height : 500
+                }
+        })
+
+        // window.console.log(f)
+
+        $j('#close,#open,#dock,#undock,#destroy').click(function() {
+                $j('#finder').elfinder($j(this).attr('id'));
+        })
+
+        $j('#mkdir').click(function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                window.console.log(f[0].elfinder)
+                f[0].elfinder.ui.exec('mkdir')
+        })
+
+        // var opts = {
+        // 	url : 'connectors/php/connector.php',
+        // 	lang : 'ru',
+        // 	// editorCallback : function(url) { window.console.log(url) },
+        // 	closeOnEditorCallback : true,
+        // 	dialog : {
+        // 		title : 'File manager',
+        // 		height : 500
+        // 	}
+        // }
+        //
+        // $('#i1,#i2').click(function() {
+        // 	var t = $(this),
+        // 		id = t.attr('id')+'_elfinder',
+        // 		f = $('#'+id);
+        //
+        // 	$('.my-elfinder').elfinder('close')
+        //
+        // 	if (f.length) {
+        // 		f.elfinder('open')
+        // 	} else {
+        // 		$('<div class="my-elfinder" id="'+id+'"/>').elfinder($.extend({}, opts, { editorCallback : function(url) { t.val(url).focus() } }))
+        // 	}
+        //
+        // })
+
+    })
+</script>
+{% endblock %}
+
+{% block styles %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/atipsoelfinder/css/elfinder.css') }}" type="text/css" media="screen" title="no title" charset="utf-8">
+<style type="text/css">
+#close, #open, #dock, #undock, #destroy {
+        width: 100px;
+        position:relative;
+        display: -moz-inline-stack;
+        display: inline-block;
+        vertical-align: top;
+        zoom: 1;
+        *display: inline;
+        margin:0 3px 3px 0;
+        padding:1px 0;
+        text-align:center;
+        border:1px solid #ccc;
+        background-color:#eee;
+        margin:1em .5em;
+        padding:.3em .7em;
+        border-radius:5px;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        cursor:pointer;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<a href="#" id="mkdir">mkdir</a>
+	<div id="open">open</div><div id="close">close</div><div id="dock">dock</div><div id="undock">undock</div>
+	<div id="finder">finder</div>
+
+
+{% endblock %}

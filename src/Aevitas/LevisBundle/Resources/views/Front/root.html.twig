@@ -1,0 +1,321 @@
+{% spaceless %}
+    <!DOCTYPE html>
+    <!--[if lt IE 8]>   <html lang="{{app.request.locale}} class="lt-ie9 lt-ie8" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+    <!--[if IE 8]>     <html lang="{{app.request.locale}} class="lt-ie9" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+    <!--[if gt IE 8]><!--> <html lang="{{app.request.locale}}" class="gt-ie8" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
+        <head>
+            <meta charset="utf-8">
+            {% block title %}
+        <title>{{'Star Club' | trans}}</title>
+            {% endblock %}
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Star Club">
+            {% block header %}
+                <meta property="og:app_id" content="546740148720877" />
+                <meta property="fb:app_id" content="546740148720877" />
+                <!-- Le styles -->
+                <link rel="stylesheet" href="/bundles/aevitaslevis/front/css/fonts.css" type="text/css" media="screen" />
+                {% stylesheets output='bundles/aevitaslevis/front/cpassets/compress.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+            '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+            '@AevitasLevisBundle/Resources/public/front/css/select2.css'
+            '@AevitasLevisBundle/Resources/public/front/css/datepicker.css'
+            '@AevitasLevisBundle/Resources/public/front/css/style.css'
+                %}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+                {% endstylesheets %}
+            {% endblock %}
+            <link rel="shortcut icon" href="/ico/favicon.ico">
+        <script type="text/javascript">var switchTo5x=true;</script>
+{#<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>#}
+<script type="text/javascript">stLight.options({publisher: "ur-aa108a06-5d8d-4eb2-da84-9fe9e749928f", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+        </head>
+        <body class="{{app.request.get('_route')}}">
+            {{ render_esi(controller("AevitasConfigBundle:Config:facebookInit"))}}
+            <div class="navbar-wrapper">
+                <div class="container">
+                    <div class="navbar navbar-inverse">
+                        <div class="navbar-inner">
+                            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="brand" href="/" title="Star Club">Star Club</a>
+                            <div class="nav-collapse collapse">
+                                {{ render_esi(controller('AevitasLevisBundle:Home:renderTopMenu', {'route': app.request.get('_route')})) }}
+                                <!-- Top Panel -->
+                                <div id="user_control">
+                                    {{ render_esi(controller('AevitasLevisBundle:Home:renderLoginPanel'))}}
+                                    {{localize() | raw }}
+                                </div>
+                            </div><!--/.nav-collapse -->
+                        </div><!-- /.navbar-inner -->
+                    </div><!-- /.navbar -->
+                </div> <!-- /.container -->
+            </div><!-- /.navbar-wrapper -->
+
+            <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">{{'Log in via Facebook' | trans}}</h3>
+                </div>
+                <div class="modal-body">
+                    <p>{{'Loading' | trans}}...</p>
+                </div>
+            </div>
+            {% block content %}
+                <div id="myCarousel" class="carousel slide carousel-fade">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="{{asset('img/banner new-01.jpg')}}" alt="">
+                            <div class="container">
+                                <!--div class="carousel-caption">
+                                    <h2>Show off your class</h2>
+                                    <p class="lead">You Deserve Special Treatment</p>
+                                </div-->
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('img/banner new-02.jpg')}}" alt="">
+                            <div class="container">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('img/banner new-03.jpg')}}" alt="">
+                            <div class="container">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('img/banner new-04.jpg')}}" alt="">
+                            <div class="container">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('img/banner new-05.jpg')}}" alt="">
+                            <div class="container">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('img/banner new-06.jpg')}}" alt="">
+                            <div class="container">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('img/banner new-07.jpg')}}" alt="">
+                            <div class="container">
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                </div>
+                <section id="registration" class="clearfix">
+                    <form action="{{path('levis_home_complete_enrollment')}}" id="instore_reg" method="post">
+                        <legend>{{'Complete Enrolment' | trans}}</legend>
+                        <div>                
+                            {% for flashMessage in app.session.flashbag.get('notice_enroll') %}
+                                <div class="alert alert-faded">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
+                            <p>{{'Thank you for joining Star Club. Please enter the SMS registration code you got from us to start enjoying all the privileges and exploring exciting rewards exclusively for you.'|trans}}</p>
+                            {{form_label(form.registration)}}
+                            {{form_widget(form.registration)}}
+                            {{form_rest(form)}}
+                            <!--a href="javascript:void(0);" title="Forgotten your ID">Forgotten your ID</a-->
+                            <input type="submit" class="yellow_button" name="instore_reg_submit" id="instore_reg_submit" value="{{'Continue' | trans}}" />
+                        </div>
+                    </form>
+                    <form action="{{path('levis_home_register_online')}}" id="online_reg" method="get">
+                        <legend>{{'Join Program Now' | trans}}</legend>
+                        <div>
+                            <p>{{'You can easily join Star Club using your Facebook account. This is highly recommended to give you the best experience as a Star Club member. You also get an extra 100 points doing so.' | trans}}.</p>
+                            {{ facebook_login_button({'autologoutlink': false, 'onlogin' :path('_security_check')}) }}
+                            <p class="separator">{{'OR' | trans}}</p>
+                            <label for="online_reg_id" class="required">{{'YOUR EMAIL' | trans}}</label>
+                            <input type="email" name="email" id="online_reg_id" value="" />
+                            <input type="submit" class="yellow_button" name="instore_reg_submit" id="instore_reg_submit" value="{{'Continue' | trans}}" /><span class="agree"><input type="checkbox" id="aggree"/> {{'Accept our Term of Use' | trans}}</span>
+                            <p>{{'Click here' | trans}} <a href="{{path('privacy_policy',{'locale': app.request.locale})}}" title="Privacy Policy">{{'Privacy Policy' | trans}}</a> {{'to see our Privacy Policy' | trans}}. {{'By clicking above you acknowledge and accept our' | trans}} <a href="{{path('term_of_use',{'locale': app.request.locale})}}" title="Terms of Service">{{'Terms of Use' | trans}}</a>, {{'and consent to receive emails from Starclub. You can update your email preferences anytime at www.starclubvn.com.' | trans}} </p>
+                        </div>
+                    </form>
+                </section>
+                <div id="agtos" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">{{'Term of Use' | trans}}</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{'Agree our Term of Use first' | trans}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{{'Close' | trans}}</button>
+                    </div>
+                </div>
+            {% endblock %}
+            <div class="branches">
+                <div>
+                    <span class="prev">pre</span>
+                    <div id="logo_carousel">
+                        <ul>
+                            <li><a href="javascript:void(0);" title="Levi's"><img src="/images/logo/levis.png" alt="Levi's" /></a></li>
+                            <li><a href="javascript:void(0);" title="Cartier"><img src="/images/logo/cartier.png" alt="Cartier" /></a></li>
+                            <li><a href="javascript:void(0);" title="Armani"><img src="/images/logo/armani.png" alt="Armani" /></a></li>
+                            <li><a href="javascript:void(0);" title="Silhouette"><img src="/images/logo/silhouette.png" alt="Silhouette" /></a></li>
+                            <li><a href="javascript:void(0);" title="DKNY"><img src="/images/logo/dkny.png" alt="DKNY" /></a></li>
+                            <li><a href="javascript:void(0);" title="Eyewear"><img src="/images/logo/eyewear.png" alt="Eyewear" /></a></li>
+                            <li><a href="javascript:void(0);" title="TagHeuer"><img src="/images/logo/tagheuer.png" alt="TagHeuer" /></a></li>
+                            <li><a href="javascript:void(0);" title="Levi's"><img src="/images/logo/levis.png" alt="Levi's" /></a></li>
+                            <li><a href="javascript:void(0);" title="Cartier"><img src="/images/logo/cartier.png" alt="Cartier" /></a></li>
+                            <li><a href="javascript:void(0);" title="Armani"><img src="/images/logo/armani.png" alt="Armani" /></a></li>
+                            <li><a href="javascript:void(0);" title="Silhouette"><img src="/images/logo/silhouette.png" alt="Silhouette" /></a></li>
+                            <li><a href="javascript:void(0);" title="DKNY"><img src="/images/logo/dkny.png" alt="DKNY" /></a></li>
+                            <li><a href="javascript:void(0);" title="Eyewear"><img src="/images/logo/eyewear.png" alt="Eyewear" /></a></li>
+                            <li><a href="javascript:void(0);" title="TagHeuer"><img src="/images/logo/tagheuer.png" alt="TagHeuer" /></a></li>
+                        </ul>
+                    </div>
+                    <span class="next">next</span>
+                </div>
+            </div>
+            <footer>
+                <div>
+                    <div class="moreinfo">
+                        <div>
+                            <h3>{{'About' | trans}}</h3>
+                            <span class="yellow"></span>
+                            <ul>
+                                    <li><a href="{{path('about_us', {'locale': app.request.getLocale})}}">{{'Starclub' | trans}}</a></li>
+                                    <li><a href="{{path('about_brands', {'locale': app.request.getLocale})}}">{{'Brands' | trans}}</a></li>
+                                <li><a href="{{path('levis_store_location')}}">{{'Store Locations' | trans}}</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>{{'Products' | trans}}</h3>
+                            <span class="yellow"></span>
+                            <ul>
+                                <li><a href="#team">{{'For Men' | trans}}</a></li>
+                                <li><a href="#team">{{'For Women' | trans}}</a></li>
+                                <li><a href="#team">{{'Sale Off' | trans}}</a></li>
+                                <!--li><a href="#team">{{'Look Book' | trans}}</a></li-->
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>{{'Support' | trans}}</h3>
+                            <span class="yellow"></span>
+                            <ul>
+                                <li><a href="{{path('levis_contact_us')}}">{{'Contact Us' | trans}}</a></li>
+                                <li><a href="#team">{{'Shipping & Delivery' | trans}}</a></li>
+                                <li><a href="#team">{{'Sitemap' | trans}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tos">
+                    <div>
+                        <ul>
+                            <li><a href="#">{{'Privacy Policy' | trans}}</a></li>
+                            <li><a href="#">{{'License Agreement' | trans}}</a></li>
+                            <li><a href="#">{{'Term of Use' | trans}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+            {% block jslib %}
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+                {% javascripts output='js/front_compress.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap.min.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-alert.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-transition.js'
+            '@AevitasLevisBundle/Resources/public/front/js/jquery.uniform.min.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-modal.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-dropdown.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-tooltip.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-popover.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-carousel.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-grayscale.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-datepicker.js'
+            '@AevitasLevisBundle/Resources/public/front/js/select2.js'
+            '@AevitasLevisBundle/Resources/public/front/js/jquery.dataTables.min.js'
+            '@AevitasLevisBundle/Resources/public/front/js/DT_bootstrap.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-holder.js'
+                %}
+                <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+            {% endblock %}
+            <script>
+                !function($) {
+                    $(function() {
+                        //Logo grayscale
+                        //grayscale($('#logo_carousel img'));
+                        //$('#logo_carousel img').hover(function() {
+                        //    grayscale.reset($(this));
+                        //},
+                        //        function() {
+                        //            grayscale($(this));
+                        //        });
+                        // Logo bxSlider
+                        $('#logo_carousel').jCarouselLite({
+                            btnNext: "span.next",
+                            btnPrev: "span.prev",
+                            mouseWheel: true,
+                            visible: 8,
+                            auto: 1,
+                            speed: 1000
+                                  });;
+                        // carousel demo
+                        $('#myCarousel').carousel();
+
+                        // User Dropdown Box
+                        $('.signin_button > .yellow_button, .login > a').click(function(e) {
+                            e.preventDefault();
+                            $(this).next().slideToggle();
+                        });
+
+                        //Hide Dropdown box when not focusing
+                        $(document).mouseup(function(e) {
+                            var $dropbox = $('.signin_button, .login');
+                            if ($dropbox.has(e.target).length == 0) {
+                                $dropbox.children('div').slideUp();
+                            }
+                        });
+                {% if app.request.get('ref') != null %}
+                            $.ajax({
+                                url: '{{path('front_set_ref', {'ref': app.request.get('ref')})}}',
+                                dataType: 'json'
+                            })
+                {% endif %}
+                            //Carousel controller
+                            $('.carousel-control').fadeTo(1, 0.01);
+                            $('#myCarousel').hover(function() {
+                                $(this).find('.carousel-control').stop().fadeTo(300, 1);
+                            },
+                                    function() {
+                                        $(this).find('.carousel-control').stop().fadeTo(300, 0.01);
+                                    });
+                {% block javascript %}
+                            $('#aggree').uniform();
+                          $('form#online_reg').on('submit',function(e){if($('.checker span').hasClass('checked')) return true; else {$('#agtos').modal();return false;};})
+                            var scrolled = false;
+                            $('form legend').on('click', function() {
+                                $form = $(this).parents('form');
+                                if ($form.height() > 100)
+                                    $form.animate({height: 55 + 'px'});
+                                else {
+                                    $form.animate({height: 532 + 'px'});
+                                    $("html, body").animate({scrollTop: 500}, 700);
+                                }
+                            });
+                            $(window).scroll(function() {
+                                if ($(window).scrollTop() >= 100 && $('#online_reg').height() < 100 && !scrolled) {
+                                    $('#registration form').animate({height: 532 + 'px'});
+                                    scrolled = true;
+                                }
+                            })
+                {% endblock %}
+                        })
+                    }(window.jQuery)
+            </script>
+        </body>
+    </html>
+{% endspaceless %}

@@ -1,0 +1,36 @@
+{% block sidebar %}
+<div id="menu" class="hidden-phone">
+    <span class="profile">
+        <a class="img" href="form_demo.html?lang=en"><img src="" alt="Mr. Awesome" /></a>
+        <span>
+            <strong>{% if app.user.username is defined %}{{app.user.username}}{% endif %}</strong>
+            <a href="{{path('fos_user_security_logout')}}">{{'Log out' | trans}}</a>
+        </span>
+    </span>
+
+    <div id="search">
+        <input type="text" placeholder="Quick search ..." />
+        <button class="glyphicons search"><i></i></button>
+    </div>
+
+    <ul>
+        <li class="hasSubmenu active"><a data-toggle="collapse" href="#config" class="glyphicons cogwheel color-6"><i></i><span>{{'Store Management' | trans}}</span></a>
+            <ul class="collapse in" id="config">
+                <li><a href="{{path('store_search_user')}}">{{'CRM Tracking' | trans}}</a></li>
+            </ul>
+        </li>
+        <!--
+        <li class="glyphicons coins"><a href="finances.html?lang=en" class="color-8"><i></i><span>Finances</span></a></li>
+        <li class="hasSubmenu">
+                <a data-toggle="collapse" class="glyphicons shopping_cart color-9" href="#menu_ecommerce"><i></i><span>Online Shop</span></a>
+                <ul class="collapse" id="menu_ecommerce">
+                        <li class=""><a href="products.html?lang=en"><span>Products</span></a></li>
+                        <li class=""><a href="product_edit.html?lang=en"><span>Add product</span></a></li>
+                </ul>
+        </li>
+        <li class="glyphicons picture"><a href="gallery.html?lang=en" class="color-11"><i></i><span>Photo Gallery</span></a></li>
+        <li class="glyphicons adress_book"><a href="bookings.html?lang=en" class="color-12"><i></i><span>Bookings</span></a></li>
+        -->
+    </ul>
+</div>
+{% endblock %}

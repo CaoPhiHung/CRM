@@ -1,0 +1,9 @@
+<span class="profile">
+    <a class="img" href="form_demo.html?lang=en"><img src="" alt="Mr. Awesome" /></a>
+    <span>
+        <strong>{% if app.user.username is defined %}{{app.user.username}}{% endif %}</strong>
+            {% if app.session.get('storename') != null %}<strong>{{'Store' | trans}}:{{app.session.get('storename') }}</strong>{% endif %}
+            <br/>
+        <a class="pull-right" href="{{path('fos_user_security_logout')}}">{{'Log out' | trans}}</a>
+    </span>
+</span>

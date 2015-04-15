@@ -1,0 +1,48 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+        <title>{{'Complete Enrollment' | trans}} - {{'Step 1' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>Become A Member</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+<section id="form_reg" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                <ul class="steps">
+                    <li class="active step1"><span><span>1. {{'Create Password' | trans}}</span></span></li>
+                    <li class="step2"><span><span>2. {{'Update Information' | trans}}</span></span></li>
+                    <li class="step4"><span><span>3. {{'Opt In' | trans}}</span></span></li>
+                </ul>
+                <div class="info steptwo">
+                    <span class="title"><h3>1. {{'Update Password' | trans}}</h3></span>
+                    <div>
+                        <p>{{'Please create the password.' | trans}}</p>
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                        <form action="{{ path('levis_home_complete_enrollment_step1') }}" {{ form_enctype(form) }} method="POST" class="formstep2">
+                            <div class="row">{{ form_row(form.plainPassword) }}
+                            </div>{{ form_rest(form) }}
+                            <div>
+                                <input type="submit" value="{{ 'Next Step'|trans }}" class="yellow_button" />
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <span class="points"><em>+10</em></span>
+            </div>
+        </div>
+    </div>
+</section>
+{{pointsConfig() | raw}}
+{% endblock %}
+{% block javascript %}
+{% endblock %}

@@ -1,0 +1,356 @@
+{% extends "AevitasChannelBundle:eLRTE:root.html.twig" %}
+
+{% block import %}    
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="#">Template</a></li>
+        <li class="divider"></li>
+	<li>Edit</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="preview_template" class="modal fade" style="color:#000;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" style="text-transform:uppercase;color:#000;">{{type}}</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-faded">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {#<form id="submit_create_template" action="" method="POST">
+        {{ form_rest(form) }}
+        {% include "AevitasChannelBundle:eLRTE:elrte.html.twig" %}
+        <div class="alert alert-message">
+            List avaiable variables for SMS template:<br/>
+            {% for var in listvars %}
+                &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('sms','{{ var.code }}')" class="label label-info">{{var.code}}</label>
+            {% endfor %}
+        </div>
+        <br/>body <b>Email</b> template
+        {% include "AevitasChannelBundle:eLRTE:elrte.html.twig" %}
+        <div class="separator"></div>
+        <div class="alert alert-message">
+            List avaiable variables for Email template:<br/>
+            {% for var in listvars %}
+                &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('email','{{ var.code }}')" class="label label-info">{{var.code}}</label>
+            {% endfor %}
+        </div>
+        
+        {% if type == 'sms' %}
+            <div class="alert alert-message">
+                List avaiable variables for SMS template:<br/>
+                {% for var in listvars %}
+                    &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('sms','{{ var.code }}')" class="label label-info">{{var.code}}</label>
+                {% endfor %}
+            </div>
+        {% elseif type == 'mail' %}
+            <!-- <br/>body <b>Email</b> template -->
+            <div class="separator"></div>
+            <div class="alert alert-message">
+                List avaiable variables for Email template:<br/>
+                {% for var in listvars %}
+                    &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('email','{{ var.code }}')" class="label label-info">{{var.code}}</label>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div id="addtion-attr">
+            <div class="control-group">
+                <label class="control-label">City</label>
+                <div class="controls">
+                    <select id="select-city" onchange="doSelectCity(this)" name="select-city">
+                        <option value="0">-- Global</option>
+                        {% for acity in cities %}
+                            {% if city == acity.map %}
+                                <option selected="selected" value="{{ acity.map }}">{{ acity.name }}</option>
+                            {% else %}
+                                <option value="{{ acity.map }}">{{ acity.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="city-name" id="city-name">
+            <input type="hidden" name="district-name" id="district-name">
+            <input type="hidden" name="template-type" id="template-type" value="{{type}}">
+
+            <div class="control-group">
+                <label class="control-label">District</label>
+                <div class="controls">
+                    <select id="select-district" onchange="doSelectDistrict(this)" name="select-district" style="width:220px">
+                        <option value="0">-- Global</option>
+                    </select>
+                    <div id="loading-district"></div>
+                </div>
+            </div>
+        </div>
+        <div class="separator"></div>
+        <div style="text-align: right">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>#}
+    <form id="submit_create_template" action="" {{ form_enctype(form) }} method="POST">
+        {#{{ form_rest(form) }}#}
+        
+        {% set content = '' %}
+            <table>
+
+        {% include "AevitasChannelBundle:eLRTE:elrte.html.twig" %}
+        
+        <tr>
+
+            <table>
+                <tr>
+                    <td>
+                        {{form_label(form.type)}}
+                        {{ form_widget( form.type,{ 'attr':{'style':'text-align:center;width:80%;height:25px'} } )}}
+                        {{ form_errors(form) }}
+                        {{ form_widget(form._token) }}
+                     </td>
+
+                    <td>
+                        {{form_label(form.name)}}
+                        {{ form_widget( form.name,{ 'attr':{'style':'padding-left:10px'} } )}}
+                        {{ form_errors(form) }}
+                        {{ form_widget(form._token) }}
+                    </td>
+
+                    <td>
+                        <div style="text-align:center;padding-left:10px;padding-top:15px;">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </td>
+
+                    <td>
+                        <div style="text-align:center;padding-left:10px;padding-top:15px;">
+                            <input type="button" value="Preview" class="btn btn-primary" data-toggle ="modal" href="#preview_template" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+        </tr>
+        <tr>
+            <table>
+                <tr>
+                    <td id='bodycontent'>
+                        <div id="label_for_bodycontent">
+                            {% if type == 'sms' %}
+
+                            {{form_label(form.bodysms)}}
+                        </div>
+                            {{form_widget(form.bodysms)}}
+                            {{ form_errors(form) }}
+                            {{ form_widget(form._token) }}
+
+                            {% elseif type == 'mail' %}
+
+                            {{form_label(form.bodymail)}}
+                        </div>
+                            {{ form_widget( form.bodymail,{ 'attr':{'style':'width:600px;height:150px'} } )}}
+                            {{ form_errors(form) }}
+                            {{ form_widget(form._token) }}
+
+                            {% endif %}
+
+                    </td>
+
+                    <td>
+                        {% if type == 'sms' %}
+                        <div class="alert alert-message insert-variable" style="height:300px;">
+                            List avaiable variables for SMS template:<br/>
+                            {% for var in listvars %}
+                                &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('sms','{{ var.code }}')" class="label label-info">{{var.code}}</label></br>
+                        {% endfor %}
+                        </div>
+                        {% elseif type == 'mail' %}
+                        <!-- <br/>body <b>Email</b> template -->
+                        <div class="separator"></div>
+                        <div class="alert alert-message insert-variable" style="height:300px;">
+                            List avaiable variables for Email template:<br/>
+                            {% for var in listvars %}
+                                &nbsp;-&nbsp;{{var.name}} <label onclick="innerCode('email','{{ var.code }}')" class="label label-info">{{var.code}}</label></br>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                
+            </table>
+            
+        </tr>
+        
+        <input type="hidden" name="template-type" id="template-type" value="{{type}}">
+        <div class="separator"></div>
+        
+    </table>
+    </form>
+
+{% endblock %}
+
+{% block javascript %}
+    <!-- select2 js -->
+    <script src="{{ asset('bundles/aevitaslevis/js/select2.js') }}"></script>
+    <script>
+        $('#aevitas_edit_template_name').css({'width':'220px', 'height':'25px'});
+        $('#aevitas_edit_template_bodysms').css({'width':'600px', 'height':'150px'});
+        
+        $('#aevitas_edit_template_district').after($('#addtion-attr'));
+        
+        $('#aevitas_edit_template_gender').select2({
+            width: '220px'
+        });
+        
+        $('#aevitas_edit_template_level').select2({
+            width: '220px'
+        });
+
+        //get language button
+        $('div.relativeWrap.pull-right a').on('click',function(e){
+            e.preventDefault();
+        });
+
+        //add template into preview modal 
+        $('#preview_template').on('show.bs.modal', function (e) {
+            var template_content=$('<div></div>').html($('textarea').val()).text();
+            template_content='<div>'+template_content+'</div>';
+          $(this).find('div.modal-body').html($(template_content));
+          $(this).css({
+            'width':'800px'
+          });
+        });
+        
+        {% if city is not null %}
+            $('#select-city').select2({
+                width: '220px'
+            }).val({{ city }});
+        {% else %}
+            $('#select-city').select2({
+                width: '220px'
+            });
+        {% endif %}
+        
+        function doSelectCity(obj){
+            var cityname = $(obj).find(":selected").text();
+            $('#city-name').val(cityname);
+            //console.log($('#city-name').val());
+            $('#loading-district').addClass('loading');
+            $.ajax({
+                url: '{{ path('home_search_district') }}/'+$(obj).val(),
+                dataType: 'json',
+                success: function(data){
+                    $('#loading-district').removeClass('loading');
+                    $('#select-district').select2("destroy");
+                    {% if district is not null %}
+                        var xhtml = (data.html).replace('value="{{district}}"', 'value="{{district}}" selected="selected"');
+                    {% else %}
+                        var xhtml = '';
+                    {% endif %}
+                    $('#select-district').html('<option value="0">-- Global</option>'+xhtml).select2();
+                    {% if district is not null %}
+                        //console.log($('#select-district').val());
+                        doSelectDistrict(document.getElementById('select-district'));
+                    {% endif %}
+                }
+            });
+        }
+        
+        function doSelectDistrict(obj){
+            var districtname = $(obj).find(":selected").text();
+            $('#district-name').val(districtname);
+            //console.log($('#district-name').val());
+        }
+        
+        function innerCode(type, code){
+            if (type == 'sms'){
+                var temp = $('#aevitas_edit_template_bodysms').val();
+                temp += code;
+                $('#aevitas_edit_template_bodysms').val(temp);
+                // $('#aevitas_edit_template_bodysms').append(code);
+            }else{
+                var temp = $('#aevitas_edit_template_bodymail').val();
+                temp += code;
+                $('#aevitas_edit_template_bodymail').val(temp);
+                // $('#aevitas_edit_template_bodymail').append(code);
+            }
+            var wysihtml5_editor =$('.wysihtml5').data("wysihtml5").editor;
+            
+            wysihtml5_editor.composer.commands.exec("insertHTML",code);
+        }
+
+        
+        var templatetype= "{{type}}";
+        var margin_bottom_variable=0;
+        $(document).ready(function(){
+
+            if(templatetype=='sms'){
+                margin_bottom_variable=3-$('#aevitas_edit_template_bodysms-wysihtml5-toolbar').height()-$('div#label_for_bodycontent >label').height();
+
+            $('.insert-variable').css(
+                {
+                    'margin-bottom':margin_bottom_variable
+                }
+                );
+        }else{
+            margin_bottom_variable=23-$('#aevitas_edit_template_bodymail-wysihtml5-toolbar').height()-$('div#label_for_bodycontent >label').height();
+            $('.insert-variable').css(
+                {
+                    'margin-bottom':margin_bottom_variable
+                }
+                
+                );
+        }
+        });
+        
+        
+    </script>
+    <style>
+    iframe.wysihtml5-sandbox{
+        height: 305px !important;
+    }
+    </style>
+    
+        <!--must import with right order like this for text editot to be create-->
+        <script src="{{ asset('bundles/aevitaslevis/bootstrap/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/bootstrap/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js') }}"></script>
+        
+        <script src="{{ asset('bundles/aevitaslevis/bootstrap/extend/bootstrap-select/bootstrap-select.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/bootstrap/js/bootstrap.min.js') }}"></script>
+        
+        <script src="{{ asset('bundles/aevitaslevis/theme/scripts/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/theme/scripts/jquery-miniColors/jquery.miniColors.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/theme/scripts/jquery.cookie.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/bootstrap/extend/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js') }}"></script>
+        <script src="{{ asset('bundles/aevitaslevis/theme/scripts/pixelmatrix-uniform/jquery.uniform.min.js') }}"></script>
+            <script src="{{ asset('bundles/aevitaslevis/front/js/tag-it.min.js') }}"></script>
+            <script>
+            $('.wysihtml5').wysihtml5(
+            {
+                "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
+                "emphasis": false, //Italics, bold, etc. Default true
+                "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+                "htmlable": false    , //Button which allows you to edit the generated HTML. Default false
+                "link": false, //Button to insert a link. Default true
+                "image": false, //Button to insert an image. Default true,
+                "color": false //Button to change color of font 
+            }
+                );
+            </script>
+{% endblock %}

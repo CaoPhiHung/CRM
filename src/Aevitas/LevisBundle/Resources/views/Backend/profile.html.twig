@@ -1,0 +1,65 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>Profile</li>
+    <li class="divider"></li>
+    <li>Edit Profile</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="widget widget-2 widget-tabs widget-tabs-2 border-bottom-none">
+    <div class="widget-head">
+        <ul>
+            <li class="active"><a class="glyphicons settings" href="#account-settings" data-toggle="tab"><i></i>Account settings</a></li>
+        </ul>
+    </div>
+</div>
+
+<form class="form-horizontal" action="{{ path('backend_edit_user', {'id' : user.getId}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    <div class="tab-content" style="padding: 0;">
+        {{ form_errors(form) }}
+        <div>
+        {{form_label(form.regcode)}}
+            {{form_widget(form.regcode)}}<a href="{{path('backend_confirm_sms', {'id': user.getId})}}" class="confirm btn">{{'Resend RegCode'| trans}}</a></div>
+                {{form_rest(form)}}
+        </div>
+        <div class="form-actions" style="margin: 0;">
+            <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save changes</button>
+        </div>
+    </form>
+    <!-- Modal -->
+    <div id="confirm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <strong id="myModalLabel" style="color:#000">{{'Resend Registration code' | trans}}</strong>
+        </div>
+        <div class="modal-body" style="color:#000">
+            <i>Sending... wait...</i>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function(){
+    $('a.confirm').click(function(e){
+        e.preventDefault();
+        $('#confirm').modal();
+        $.ajax({
+            url: $(this).attr('href'),
+            dataType: 'json',
+            success: function(data){
+                $('#confirm .modal-body i').text('Done');
+                $('#form_regcode').val(data.regcode);
+            }
+        })
+    })
+    });
+</script>
+{% endblock %}

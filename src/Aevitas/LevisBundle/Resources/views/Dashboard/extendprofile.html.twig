@@ -1,0 +1,257 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'User Dashboard' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_profile.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/select2.css'
+    '@AevitasLevisBundle/Resources/public/front/css/datepicker.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward_detail.css'
+    '@AevitasLevisBundle/Resources/public/front/css/account.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<div id="breadcrums">
+    <ul>
+        <li onclick="void(0);" class="br-home"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_user_dashboard')}}">{{'Customer Account' | trans}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_user_profile')}}">{{'Extended profile' | trans}}</a></li>
+        <li class="br-arrow2"></li></ul>
+</div>
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id="userdash" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <div class="info">
+                    <ul class="topnav">
+                        <li><a href="{{path('levis_user_dashboard')}}">{{'Dashboard' | trans}}</a></li>
+                        <li class="active"><a href="{{path('levis_user_profile')}}">{{'Profile' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_activity')}}">{{'Point History' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_shopping')}}">{{'Shopping Hitory' | trans}}</a></li>
+                    </ul>
+                    <section>
+                        <ul class="extpro"><li><a href="{{path('levis_user_profile')}}">{{'Basic Information' | trans}}</a></li><li class="active"><a href="{{path('levis_user_extended_profile')}}">{{'Extended Information' | trans}}</a></li></ul>
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                        <form action="{{path('levis_user_extended_profile')}}" method="POST">
+                            <div class="block clearfix">
+                                <span>{{'Your special occasions' | trans}}</span>
+                                <div>
+                                    <div class="row">{{ form_row(form.mari) }}{{ form_row(form.kids) }}
+                                    </div>
+                                    <div class="row">{{ form_row(form.ocpu) }}{{ form_row(form.inco) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="yellow_button">{{'Submit' | trans}}</button>
+                        </form>
+                            <div class="block clearfix">
+                                <span>{{'Your Anniversary days' | trans}}</span>
+                                <div>
+                                    <div class="row aniv tripledate">
+                                        <span>{% trans with {'%day%' : app.user.getTrippleDateLimit} %}Do you want to gain triple bonus points? Just book %day% days that you will come and shopping with us!{% endtrans %}{{'' | trans}}</span>
+                                        <div class="annies">{{ render_esi(controller("AevitasLevisBundle:Dashboard:renderTripleDates", {"id": app.user.getId})) }}</div>
+                                    </div>
+                                    <div class="row aniv">
+                                        <span>{{'Anniversary Date (you can add up to 5 dates)' | trans}}</span><a href="{{path('home_add_anniversary')}}" class="addmore">+</a>
+                                            <div class="annies">
+                                            {{ anniversaries |raw }}
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <span class="points"><em>+10</em></span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+{{pointsConfig() | raw}}
+</section>
+<div class="popup">
+    <!-- Modal -->
+    <div id="updateava" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">{{'Crop your avatar' | trans}}</h3>
+        </div>
+        <div class="modal-body">
+            <form id='frm' action='{{path('dashboard_crop_avatar')}}' method='post' >
+                <div id='parent_container' style=''>
+
+                    <!-- Load the image which needs to be cropped -->
+                    <img src="test.jpg" id='crop_img'/>
+
+                    <!-- Div for marking cropping area -->
+                    <div id="resizable"></div>
+
+                    <!-- Hidden fields to submit resize and crop values -->
+                    <input type='hidden' name='img_width' id='img_width' />
+                    <input type='hidden' name='img_height' id='img_height' />
+                    <input type='hidden' name='source_x' id='source_x' />
+                    <input type='hidden' name='source_y' id='source_y' />
+
+
+                    <input type="submit" value='Crop' />
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" onclick="crop();">Save changes</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+    {% block jslib %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+    {% javascripts output='js/front_compress_profile_extended.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-transition.js'
+            '@AevitasLevisBundle/Resources/public/front/js/jquery.uniform.min.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-modal.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-dropdown.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-tooltip.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-popover.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-carousel.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-grayscale.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-datepicker.js'
+            '@AevitasLevisBundle/Resources/public/front/js/select2.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-holder.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+{% javascripts output='js/uploader.js' filter='yui_js' 
+            '@VietlandElfinderBundle/Resources/public/js/elFinder1.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder2.view.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder3.ui.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder4.quickLook.js'
+            '@VietlandElfinderBundle/Resources/public/js/elFinder6.eventsManager.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets output='bundles/vietlandelfinder/css/elfinder_compress.css' filter='yui_css'
+    '@VietlandElfinderBundle/Resources/public/css/elfinder.css'
+%}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+        
+<script>
+function crop(){
+    $('form#frm').submit();
+}
+</script>
+        {% endblock %}
+{% block javascript %}
+var query = '{{path('home_search_district')}}', upload = '{{path('cpanel_user_upload_image')}}';
+
+    $('form.triple input.unedit').attr('disabled', true);
+    $('form.triple input.unedit1').datepicker({format: "dd-mm-yyyy"});
+    $('form.triple input').on('changeDate',function(){
+        $form = $(this).parents('form');
+        $.ajax({
+            url: $form.attr('action'),
+            dataType: 'json',
+            type: 'POST',
+            data: $form.serialize(),
+            success: function(data){
+                $form.find('input#form_id').val(data.id);
+            }
+        });
+    });
+    $('select').select2();
+    function initAnniversary(el){
+        status = parseInt($('#reg_step_mari').val());
+        if(status > 1) var elDate = customDate = [{id: '{{'Birthday' | trans}}', text: '{{'Birthday' | trans}}'},{id: '{{'Wedding' | trans}}', text: '{{'Wedding' | trans}}'},{id: "{{'Son\'s birthday' | trans | raw}}", text: "{{'Son\'s birthday' | trans | raw}}"},{id: "{{'Daughter\'s birthday' | trans | raw}}", text: "{{'Daughter\'s birthday' | trans | raw}}"}];
+        else var elDate = customDate = [{id: '{{'Love Anniversary' | trans}}', text: '{{'Love Anniversary' | trans}}'},{id: "{{'Parent\'s Wedding Anniversary' | trans}}", text: "{{'Parent\'s Wedding Anniversary' | trans | raw}}"},{id: "{{'Mom\'s birthday' | trans | raw}}", text: "{{'Mom\'s birthday' | trans | raw}}"},{id: "{{'Dad\'s birthday' | trans | raw}}", text: "{{'Dad\'s birthday' | trans | raw}}"}];
+        if($(el).val() != "" && $(el).val() != '{{'Love Anniversary' | trans}}' && $(el).val() != "{{'Parent\'s Wedding Anniversary' | trans}}" && $(el).val() != "{{'Mom\'s birthday' | trans | raw}}" && $(el).val() != "{{'Dad\'s birthday' | trans | raw}}" && $(el).val() != '{{'Birthday' | trans}}' && $(el).val() != '{{'Wedding' | trans}}'  && $(el).val() !=  "{{'Son\'s birthday' | trans | raw}}" && $(el).val() != "{{'Daughter\'s birthday' | trans | raw}}"){
+            elDate.push({id: $(el).val(), text: $(el).val()});
+        }
+        elDate.push({id: '{{'Custom Date' | trans}}', text: '{{'Custom Anniversary date' | trans}}'});
+        $(el).select2({
+            placeholder: "Select report type",
+            allowClear: true,
+            data: elDate
+            });
+
+        $(el).on('change',function(e){
+        if(e.val == '{{'Custom Date' | trans}}') {$(el).removeClass('select2-offscreen');$(el).prev().hide()}
+        })
+        delete elDate;
+    }
+    $('#s2id_reg_step_mari').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.mari+' {{'points' | trans}}').attr('data-original-title','{{'Mariage'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('#s2id_reg_step_ocpu').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.ocpu+' {{'points' | trans}}').attr('data-original-title','{{'Occupation'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('#s2id_reg_step_kids').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.kids+' {{'points' | trans}}').attr('data-original-title','{{'Children'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('#s2id_reg_step_inco').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.inco+' {{'points' | trans}}').attr('data-original-title','{{'Income'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('form.reg_step').change(function(){
+        url = $(this).attr('action');
+        $form = $(this);
+        $('.title h3').addClass('loading');
+        $.ajax({
+            url: url+'.json',
+            type:'POST',
+            data: $form.serialize(),
+            dataType: 'json',
+            success: function(data){
+                $('.title h3').removeClass('loading');
+                if(data.points) {
+                $badge = $('.content span.points:first').clone();
+                $('span.points').after($badge);
+                $badge.find('em').text('+'+data.points);
+                $badge.css({display: "block",opacity: 0}).animate({bottom: '500px',opacity: 1}, 5000, 'swing', function(){$(this).fadeOut('slow').remove()})
+                }
+            }
+        });
+    });
+    $('.annies form input.datetime').datepicker({format: "dd-mm-yyyy"})
+    $('.aniv a.addmore').on('click', function(e){
+        e.preventDefault();
+        url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function(data){
+                if(data.status) $('.annies:last').append(data.html);
+                else alert(data.html);
+                $('.annies form:last input.datetime').datepicker({format: "dd-mm-yyyy"})
+                el = $('.annies form:last input.anniname');
+                initAnniversary(el);
+            }
+        });
+    });
+    $.each($('input.anniname'), function(i, el){
+    initAnniversary(el);
+    });
+    $('.row.aniv').delegate('form', 'change', function(){
+        $form = $(this);
+        $('.title h3').addClass('loading');
+        $.ajax({
+            url: $form.attr('action'),
+            dataType: 'json',
+            data: $form.serialize(),
+            type: 'POST',
+            success: function(data){
+                $('.title h3').removeClass('loading');
+                if(data.points) {
+                $badge = $('.content span.points:first').clone();
+                $('span.points').after($badge);
+                $badge.find('em').text('+'+data.points);
+                $badge.css({display: "block",opacity: 0}).animate({bottom: '500px',opacity: 1}, 5000, 'swing', function(){$(this).animate({opacity:0},5000,'swing',function(){$(this).fadeOut().remove()})})
+                }
+            }
+        })
+    });
+{% endblock %}

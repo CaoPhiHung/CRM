@@ -1,0 +1,6 @@
+{# empty Twig template #}
+<ul class="list-user-by-store">
+    {% for user in users %}
+        <li class="remove_{{ user.id }}"><a class="remove-user-from-store" style="cursor:pointer;" rel="{{user.id}}"> {{ user.username }} - <span style="color:red;">Remove</span></a> </li>    
+{% endfor %}
+</ul>

@@ -1,0 +1,251 @@
+<html>
+<title>Repair Database</title>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+	var process_list = [];
+
+	window.render = function(template, data) {
+        var html, index, match, pattern, result, var_;
+        html = $("#" + template).html();
+        pattern = /\{[\sa-z0-9_\.\$]+\}/g;
+        result = "";
+        index = 0;
+        var_ = void 0;
+        while (match = pattern.exec(html)) {
+            var_ = match[0].substring(1, match[0].length - 1).trim();
+            result += html.substring(index, match.index);
+            eval("result+=data." + var_);
+            index = pattern.lastIndex;
+        }
+        result += html.substring(index, html.length);
+        return result;
+	};
+
+	window.append = function(data) {
+		process_list.push(data.id);
+		$('#process_list').prepend(render('process_item', data));
+	}
+
+	window.change = function(selector, percent) {
+		$(selector).attr('aria-valuenow', percent);
+		$(selector).attr('style', 'width:' + percent + '%');
+	}
+
+	$(document).ready(function() {
+		var socket = io();
+
+		$('#start').click(function() {
+			process_list = []
+			$('#process_list').html("");
+			$(this).attr('disabled', 'disabled');
+			$('#load_box').html('<img src="http://jul.github.io/cv/img/loading.gif"/>');
+			$('#loading').modal('show');
+			socket.emit('start', {});
+		});
+
+		$('#repair').click(function() {
+			process_list = []
+			$('#process_list').html("");
+			$(this).attr('disabled', 'disabled');
+			$('#load_box').html('<img src="http://jul.github.io/cv/img/loading.gif"/>');
+			$('#loading').modal('show');
+			socket.emit('repair', {});
+		});
+
+		$('#stop').click(function() {
+			$(this).attr('disabled', 'disabled');
+			socket.emit('stop', {});
+			$('#start').removeAttr('disabled');
+		});
+
+		socket.on('process', function(data) {
+			console.log('Processing')
+			console.log(data);
+			$('#loading').modal('hide');
+			append(data);
+			change('#process_bar', data.percent);
+		});
+
+		socket.on('progress', function(data) {
+			change('#progress_bar', data.percent);
+		});
+
+		socket.on('thread', function(data) {
+			change('#thread_' + data.id, data.percent);
+			//console.log('THREAD ' + data.id + " : " + data.percent)
+			if (data.percent == 100) {
+				$('#thread_' + data.id).removeClass('active')
+				$('#status_' + data.id).text('Complete')
+			} else {
+				$('#status_' + data.id).text('Processing')
+			}
+		});
+
+		socket.on('point', function(data) {
+			$('#points_' + data.id).html(data.points)
+			$('#birthday_' + data.id).text(data.birthday)
+			$('#old_point_' + data.id).text(data.oldpoint)
+			$('#old_level_' + data.id).text(data.old_level)
+			$('#level_' + data.id).html(data.level)
+			$('#totalpayment_' + data.id).html(data.totalpayment)
+		})
+
+		socket.on('error', function(data) {
+			$('#status_' + data.id).text('Error')
+		});
+
+		socket.on('done', function(data) {
+			var id, point;
+			setTimeout(function(){
+				for (i in process_list) {
+					id = process_list[i]
+					point = $('#points_' + id).text()
+
+					if (point == '0') {
+						$('#status_' + id).text('Error');
+					}
+				}
+				$('#load_box').html('DONE');
+				$('#loading').modal('show');
+			}, 1000);
+		});
+
+		socket.on('error', function(data) {
+			console.error(data)
+		})
+	});
+
+</script>
+<style>
+	#wrapper {
+		margin: 20 auto;
+		width: 1200px;
+	}
+	.block {
+		margin-top:10px;
+		margin-bottom:20px;
+	}
+	.load_area {
+		height: 310px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
+	.title {
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+<div id="process_item" style="display:none">
+	<li class="list-group-item" id="process_{id}">
+		<table>
+			<tr>
+				<td class="title" width="3%">{ id }</td>
+				<td class="title" width="11%">{ account }</td>
+				<td class="title" width="11%">
+					<div class="progress" style="height: 16px;margin-bottom: 0px;">
+						<div
+							id="thread_{id}"
+							class="progress-bar progress-bar-info progress-bar-striped active"
+							role="progressbar"
+							aria-valuenow="0"
+							aria-valuemin="0"
+							aria-valuemax="100"
+							style="width: 0%">
+				      	</div>
+				    </div>
+			    </td>
+				<td id="status_{id}" class="title" width="11%">Pending</td>
+				<td id="birthday_{id}" class="title" width="11%">-</td>
+				<td id="old_point_{id}" class="title" width="10%">0</td>
+				<td id="old_level_{id}" class="title" width="10%">-</td>
+			    <td id="points_{id}" class="title" width="11%">0</td>
+			    <td id="level_{id}" class="title" width="11%">-</td>
+			    <td id="totalpayment_{id}" class="title" width="11%">-</td>
+			    <td>
+			</tr>
+		</table>
+	</li>
+</div>
+<div id="wrapper">
+<div class="panel panel-default">
+  	<div class="panel-heading">REPAIR DATABASE</div>
+  	<div class="panel-body">
+
+		<div class="block">
+		  	 	<button style="width: 90px;margin-right: 20px;" id="start" type="button" class="btn btn-success">Update</button>
+		  	 	<button style="width: 90px;margin-right: 20px;" id="repair" type="button" class="btn btn-success">Repair</button>
+		</div>
+
+		<div class="block">
+	  		<div class="progress">
+	  			<div
+	  				id="progress_bar"
+	  				class="progress-bar progress-bar-success progress-bar-striped"
+	  				role="progressbar"
+	  				aria-valuenow="0"
+	  				aria-valuemin="0"
+	  				aria-valuemax="100"
+	  				style="width: 0%">
+	  		</div>
+	  	</div>
+
+</div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  	<div class="panel-heading" style="padding-left: 16px; padding-right:16px">
+  		<table width="100%">
+				<tr>
+					<td class="title" width="3%">#ID</td>
+					<td class="title" width="11%">Account ID</td>
+					<td class="title" width="11%">Progress</td>
+					<td class="title" width="11%">Status</td>
+					<td class="title" width="11%">Birthday</td>
+					<td class="title" width="10%">Old Point</td>
+					<td class="title" width="11%">Old Level</td>
+					<td class="title" width="11%">New Point</td>
+					<td class="title" width="10%">New Level</td>
+					<td class="title" width="11%">Total Payment</td>
+				</tr>
+			</table>
+  	</div>
+  	<div class="panel-body" style="magin:0px; margin-top: -11px;padding:0px;margin-left:-1px">
+		<div class="block" style="margin-bottom:5px">
+			<div class="load_area">
+				<ul class="list-group" id="process_list">
+				</ul>
+			</div>
+		</div>
+
+</div>
+  </div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Status</h4>
+      </div>
+      <div class="modal-body">
+      <div align="center" id="load_box">
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,220 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}
+<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/css/Point2VndCSS.css') }}" type="text/css" media="print" />
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>users</li>
+    <li class="divider"></li>
+    <li>search</li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+<form action="{{path('backend_staff_point2vnd')}}" method="GET" id="searchuser">
+{{form_rest(form)}}
+<input type="submit" class="btn btn-action" value="Search"/>
+</form>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th>{{ 'Firstname'|trans }}</th>
+            <th>{{ 'Lastname'|trans }}</th>
+            <th>{{ 'Email'|trans }}</th>
+            <th>{{ 'Point'|trans }}</th>
+            <th>{{ 'C.Code'|trans }}</th>
+            <th>{{ 'Level'|trans }}</th>
+            <th>{{ 'Action'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {% for user in users %}
+            <tr class="{{ cycle(['odd', 'even'], loop.index)}} gradeA remove_item_{{ user.getId }}">
+                <td>{{user.getFirstname}}</td>
+                <td>{{user.getLastname}}</td>
+                <td class="center item-name">{{ user.getEmail }}</td>
+                <td class="center item-name">{{ user.getPoint }}</td>
+                <td class="center item-name">{{ user.getCCode }}</td>
+                <td>{{user.getLevel}}</td>
+                <td class="center item-price" colspan="2"><a href="javascript:showCvPopup({{ user.getId }})">{{ 'Redeemption'|trans }}</a></td>
+            </tr>
+           {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="modal fade" id="myModal" style="color:#000">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" style="color:#000">Converting point to VND</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="bt-process">Convert</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/aevitaslevis/js/print.js') }}"></script>
+    <script>
+        window.setTimeout(function(){
+            $('#table-list-store_filter').hide();
+        },1000);
+        
+        function showCvPopup(uid){
+            $('.loading-bar').show();
+            $.ajax({
+                url: '{{ path('backend_staff_redeemption_info') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {userid:uid},
+                success: function(response){
+                    $('.loading-bar').hide();
+                    console.log(response);
+                    if (typeof(response.error)!='undefined'){
+                        alert(response.error);
+                        return;
+                    }
+                    //
+                    var cts = '<div></div>';
+                    cts += '<div>total points: <span id="max-point">'+response.point+'</span></div>';
+                    cts += '<div>base rate: <span id="base-rate">'+response.baserate+' (1point = '+(parseInt(response.baserate))+'VND)</span></div>';
+                    if (response.point < response.redeemlimit){
+                        $('#myModal #bt-process').attr({'disabled':'disabled'})
+                        cts += '<div class="label label-warning">your point much be NOT less than redeem limit (<b>'+response.redeemlimit+' point</b>)</div>';
+                    }else{
+                        $('#myModal #bt-process').removeAttr('disabled');
+                        cts += '<div>points <input type="text" value="0" id="point-value" onkeyup="Point2Vnd(this,'+response.baserate+','+response.point+','+response.redeemlimit+')"/> to VND <input type="text" value="0" id="vnd-value"/>';
+                    }
+                    cts += '<div id="v-status"style="display:none;">Processing...</div>';
+                    cts += '<input type="hidden" id="uid" value="'+uid+'">'
+                    $('#myModal .modal-body').html(cts);
+                    $('#myModal').modal("show");
+                }
+            });
+        }
+        
+        var redeemlimit;
+        
+        function Point2Vnd(obj,baserate,point,rlimit){
+            var p = parseInt($(obj).val());
+            if ($(obj).val() == ''){
+                p = 0;
+            }
+            redeemlimit = rlimit;
+            /*if (p < rlimit){
+                alert('the point to redeem much be NOT less than redeemption limit ('+rlimit+' point)');
+                return;
+                $(obj).val(rlimit);
+                p = rlimit;
+            }/**/
+            if (p > point){
+                $(obj).val(point);
+                p = point;
+            }
+            if (p < 0){
+                p = 0;
+                $(obj).val(0);
+            }
+            var rs = p*baserate;
+            $('#vnd-value').val(rs);
+        }
+        
+        $('#myModal #bt-process').click(function(){
+            var p = parseInt($('#point-value').val());
+            var point = parseInt($('#max-point').html());
+            baserate = parseInt($('#base-rate').html());
+            if (p<1 || p>point){
+                return;
+            }
+            if (p < redeemlimit){
+                alert('the point to redeem much be NOT less than redeemption limit ('+redeemlimit+' point)');
+                return;
+            }
+            if (!confirm('are you sure?')){
+                return;
+            }
+            $('#myModal #bt-process').attr({'disable':'disable'});
+            $('#myModal .modal-body #v-status').show();
+	    var rs = p*baserate;
+	     $.ajax({
+                url: '{{ path('backend_staff_redeemption_process') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {userid:$('#uid').val(), point:p},
+                success: function(response){
+                    console.log(response);
+                    $('#myModal .modal-body #v-status').hide();
+                    if (typeof(response.error)!='undefined'){
+                        alert(response.error);
+                        return;
+                    }
+                    //showCvPopup($('#uid').val());
+                    //<button class="btn btn-primary" onclick="DoPrint()">Print</button>
+                    var cts = '<div id="vauth" style="text-align:right"><input type="text" id="input-code" class="input-small" style="border:1px solid #c00"/>&nbsp;&nbsp;<button class="btn btn-primary" onclick="DoAuth()" id="bt-auth">Authenticate</button></div>';
+                    cts += '<input type="hidden" id="redeem-id" value="'+response.id+'"/>';
+                    cts += '<div id="printable" style=""><p style="text-align:left" id="hashcode"></p>';
+                    cts += '<p style="text-align:left">Time: '+response.time+'</p>';
+                    cts += '<p style="font-size:20px;text-align:center;padding-bottom:20px">Point Receipt</p>';
+                    cts += '<table align="center" class="dynamicTable table table-striped table-bordered table-condensed dataTable" aria-describedby="DataTables_Table_1_info">';
+                    cts += '<tr><th>Store</th><td>'+response.store+'</td></tr>';
+                    cts += '<tr><th>Customer</th><td>'+response.name+'</td></tr>';
+                    cts += '<tr><th>C.Code</th><td>'+response.ccode+'</td></tr>';
+                    cts += '<tr><th>Point to convert</th><td>'+response.point+'</td></tr>';
+                    cts += '<tr><th>Point remaining</th><td>'+response.remaining+'</td></tr>';
+                    cts += '<tr><th>Current baserate</th><td>'+response.baserate+'</td></tr>';
+                    cts += '<tr><th>VND</th><td>'+response.vnd+'</td></tr>';
+                    cts += '</table><div>';
+                    $('#myModal .modal-body').html(cts);
+                    $('#myModal #bt-process').attr({'disabled':'disabled'});
+                    $('#myModal').modal("show");
+                }
+            });
+        });
+        
+        function DoPrint(){
+            $("#printable").printElement({
+                overrideElementCSS:[
+                   '{{ asset('bundles/aevitaslevis/css/Point2VndCSS.css') }}',
+                   { href:'{{ asset('bundles/aevitaslevis/css/Point2VndCSS.css') }}',media:'print'}
+                ]
+            });
+        }
+        
+        function DoAuth(){
+            var authcode = $('#input-code').val();
+            if (authcode.length != 8){
+                alert('please input a valid code !');
+            }
+            $('#myModal #bt-auth').attr({'disabled':'disabled'});
+            var rid = $('#redeem-id').val();
+            $.ajax({
+                url: '{{ path('backend_staff_redeemption_auth') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {code:authcode, id:rid},
+                success: function(response){
+                    console.log(response);
+                    if (typeof(response.msg) == 'undefined' || response.msg != 'ok'){
+                        $('#myModal #bt-auth').removeAttr('disabled');
+                        alert('Authentication has failed');
+                    }else{
+                        $('#vauth').html('<label class="label label-success"><i class="icon-thumbs-up"></i> Success!</label> <br/> <button class="btn btn-success" onclick="DoPrint()">Print</button>');
+                        $('#hashcode').html('code: '+authcode);
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

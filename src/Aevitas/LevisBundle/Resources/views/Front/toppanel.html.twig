@@ -1,0 +1,39 @@
+{% if app.user.getId is defined %}
+    <div class="login">
+        <img src="{{asset(app.user.getThumbnail(40,40))}}{% if app.user.getEdited is defined %} {{app.user.getEdited}}{% endif %}"/><a href="javascript:void(0);" title="Sign In" class="avatar">{{app.user.getUsername}}</a>
+        <div class="panel">
+            <ul class="usernav">
+                <li><a href="{{path('levis_user_dashboard')}}" title="Dashboard">{{'My Dashboard' | trans}}</a></li>
+                <li><a href="{{path('levis_user_profile')}}" title="Profile">{{'My Profile' | trans}}</a></li>
+                <li><a href="{{path('fos_user_security_logout')}}" title="Logout">{{'Logout' | trans}}</a></li>
+            </ul>
+        </div>
+    </div>
+{% else %}
+<div class="signin_button">
+    <a href="#" title="Sign In" class="yellow_button">{{'Sign In' | trans}}</a>
+    <div>
+        <h3>{{'Login To Your Account' | trans}}</h3>
+        <form action="{{ path("fos_user_security_check", {'locate':'homepage'}) }}" method="post">
+            <fieldset>
+                <label for="_username">{{'Your Email' | trans}}</label>
+                <input type="text" name="_username" class="input-block-level" value="{{ last_username }}" placeholder="User name" />
+            </fieldset>
+            <fieldset>
+                <label for="signin_pass">{{'Password' | trans}}</label>
+                <input type="password" class="input-block-level" name="_password" id="signin_pass" placeholder="Password" />
+            </fieldset>
+            <fieldset>
+                <a href="{{path('levis_home_forget_password')}}" title="Recover your password">{{'Forgotten your password?' | trans}}</a>
+                <input type="checkbox" id="signin_remember" name="signin_remember" />
+                <label for="signin_remember">{{'Remember me' | trans}}</label>
+            </fieldset>
+            <div><input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <input type="submit" id="signin_submit" name="signin_submit" value="Login" class="yellow_button" />
+            </div>
+        </form>
+        <a href="#" title="Login with Facebook" class="login_fb" onclick="fblogin()">{{'Login with Facebook' | trans}}</a>
+        <a href="#" title="Register" class="user_register">{{'New User? Register now' | trans}}</a>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,27 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+{% block head %}
+<title>Nhac thanh</title>
+<link rel="stylesheet" href="{{ asset('bundles/vietlandads/css/style.css') }}">
+{% endblock %}
+{% block slider %}
+<div class="slider">
+    <img class="image-siler" src="/images/banner.jpg">
+</div>
+{% endblock %}
+{% block maincontent %}
+<div class="third-left list">
+    <div>
+        <div class="nav">
+            <div><h4>Đăng ký thành viên</h4></div>
+        </div>
+        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
+    {% if app.session is not empty %}
+        {% set targetUrl = app.session.get('_security.target_path') %}
+        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans({}, 'FOSUserBundle') }}</a></p>{% endif %}
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}

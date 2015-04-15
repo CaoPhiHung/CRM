@@ -1,0 +1,933 @@
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+8412925028701 is ignored. Account ID = 8315005978 is duplicated cellphone
+8812926032001 is ignored. Account ID = 8315005978 is duplicated cellphone
+105272905798101 is ignored. Account ID = 8315006123 is duplicated cellphone
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+8812926032001 is ignored. Account ID = 8315005978 is duplicated cellphone
+8412925028701 is ignored. Account ID = 8315005978 is duplicated cellphone
+105272905798101 is ignored. Account ID = 8315006123 is duplicated cellphone
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+8812926032001 is ignored. Account ID = 8315005978 is duplicated cellphone
+8412925028701 is ignored. Account ID = 8315005978 is duplicated cellphone
+105272905798101 is ignored. Account ID = 8315006123 is duplicated cellphone
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+8812926032001 is ignored. Account ID = 8315005978 is duplicated cellphone
+8412925028701 is ignored. Account ID = 8315005978 is duplicated cellphone
+105272905798101 is ignored. Account ID = 8315006123 is duplicated cellphone
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+8812926032001 is ignored. Account ID = 8315005978 is duplicated cellphone
+8412925028701 is ignored. Account ID = 8315005978 is duplicated cellphone
+105272905798101 is ignored. Account ID = 8315006123 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+03/04/2015 09:18:04: new search bill command start at 02/05/2015, end at 03/04/2015
+18502908000301 is transfered successful !
+111122905798101 is transfered successful !
+13112926032001 is transfered successful !
+109972905798101 is transfered successful !
+109982905798101 is transfered successful !
+110962905798101 is transfered successful !
+110062905798101 is transfered successful !
+76872905619501 is transfered successful !
+109282909222601 is transfered successful !
+109332909222601 is transfered successful !
+12432926032001 is transfered successful !
+33902904297201 is transfered successful !
+33922904297201 is transfered successful !
+6382929836801 is transfered successful !
+6322929836801 is transfered successful !
+11892925630901 is transfered successful !
+23312921222001 is transfered successful !
+28342925530801 is transfered successful !
+28002925530801 is transfered successful !
+6272929836801 is transfered successful !
+6912929836801 is transfered successful !
+68972905497901 is transfered successful !
+69112905497901 is transfered successful !
+67772905497901 is transfered successful !
+66972905497901 is transfered successful !
+67202905497901 is transfered successful !
+66642905497901 is transfered successful !
+67722905497901 is transfered successful !
+23202921222001 is transfered successful !
+66702905497901 is transfered successful !
+80322923527201 is transfered successful !
+79682923527201 is transfered successful !
+79442923527201 is transfered successful !
+23282921222001 is transfered successful !
+107902906699001 is transfered successful !
+5682928835201 is transfered successful !
+4992928835201 is transfered successful !
+15782924331801 is transfered successful !
+15802924331801 is transfered successful !
+15822924331801 is transfered successful !
+16632924331801 is transfered successful !
+56082911904801 is transfered successful !
+91852903996101 is transfered successful !
+91862903996101 is transfered successful !
+91882903996101 is transfered successful !
+91892903996101 is transfered successful !
+92152903996101 is transfered successful !
+91952903996101 is transfered successful !
+93732903996101 is transfered successful !
+91972903996101 is transfered successful !
+92022903996101 is transfered successful !
+92042903996101 is transfered successful !
+15872924331801 is transfered successful !
+5962928835201 is transfered successful !
+57472905997801 is transfered successful !
+105622906699001 is transfered successful !
+16512906406401 is transfered successful !
+16522906406401 is transfered successful !
+16932906406401 is transfered successful !
+16542906406401 is transfered successful !
+79702923527201 is transfered successful !
+78792923527201 is transfered successful !
+80352923527201 is transfered successful !
+69002905497901 is transfered successful !
+68422905497901 is transfered successful !
+112442903506001 is transfered successful !
+24492926332101 is transfered successful !
+5342928835201 is transfered successful !
+57452905997801 is transfered successful !
+27812925530801 is transfered successful !
+6372929836801 is transfered successful !
+109432909222601 is transfered successful !
+109642909222601 is transfered successful !
+112922905798101 is transfered successful !
+110182905798101 is transfered successful !
+110222905798101 is transfered successful !
+110242905798101 is transfered successful !
+111082905798101 is transfered successful !
+16662924331801 is transfered successful !
+16442924331801 is transfered successful !
+15902924331801 is transfered successful !
+16412924331801 is transfered successful !
+16972924331801 is transfered successful !
+15962924331801 is transfered successful !
+15982924331801 is transfered successful !
+110282905798101 is transfered successful !
+110302905798101 is transfered successful !
+110322905798101 is transfered successful !
+76092905619501 is transfered successful !
+112262905798101 is transfered successful !
+109852909222601 is transfered successful !
+109892909222601 is transfered successful !
+25022904496701 is transfered successful !
+6442929836801 is transfered successful !
+6452929836801 is transfered successful !
+6472929836801 is transfered successful !
+109602909222601 is transfered successful !
+109632909222601 is transfered successful !
+111752909222601 is transfered successful !
+109712909222601 is transfered successful !
+109722909222601 is transfered successful !
+109752909222601 is transfered successful !
+6712929836801 is transfered successful !
+112282903506001 is transfered successful !
+12522926032001 is transfered successful !
+27002925530801 is transfered successful !
+27052925530801 is transfered successful !
+16582906406401 is transfered successful !
+16602906406401 is transfered successful !
+34432904297201 is transfered successful !
+34892904297201 is transfered successful !
+5082928835201 is transfered successful !
+30752904596801 is transfered successful !
+24522926332101 is transfered successful !
+25082926332101 is transfered successful !
+105742906699001 is transfered successful !
+105762906699001 is transfered successful !
+68752905497901 is transfered successful !
+17052906406401 is transfered successful !
+17332906406401 is transfered successful !
+105632906699001 is transfered successful !
+105652906699001 is transfered successful !
+105692906699001 is transfered successful !
+105712906699001 is transfered successful !
+105722906699001 is transfered successful !
+57562905997801 is transfered successful !
+57572905997801 is transfered successful !
+81582903695801 is transfered successful !
+33622903896001 is transfered successful !
+18522908000301 is transfered successful !
+18542908000301 is transfered successful !
+55432911904801 is transfered successful !
+34792914920701 is transfered successful !
+93722903996101 is transfered successful !
+92142903996101 is transfered successful !
+92192903996101 is transfered successful !
+92212903996101 is transfered successful !
+92222903996101 is transfered successful !
+80412923527201 is transfered successful !
+79172923527201 is transfered successful !
+78812923527201 is transfered successful !
+112232909222601 is transfered successful !
+92382903996101 is transfered successful !
+81672903695801 is transfered successful !
+41042905897701 is transfered successful !
+18572908000301 is transfered successful !
+5162928835201 is transfered successful !
+27232925530801 is transfered successful !
+27242925530801 is transfered successful !
+68772905497901 is transfered successful !
+68702905497901 is transfered successful !
+81692903695801 is transfered successful !
+81702903695801 is transfered successful !
+112792905798101 is transfered successful !
+12562926032001 is transfered successful !
+12892926032001 is transfered successful !
+12582926032001 is transfered successful !
+92302903996101 is transfered successful !
+92322903996101 is transfered successful !
+92352903996101 is transfered successful !
+105842906699001 is transfered successful !
+105952906699001 is transfered successful !
+106032906699001 is transfered successful !
+3602930037301 is transfered successful !
+30812904596801 is transfered successful !
+30852904596801 is transfered successful !
+34232904297201 is transfered successful !
+34612904297201 is transfered successful !
+16672906406401 is transfered successful !
+16652906406401 is transfered successful !
+16662906406401 is transfered successful !
+27762925530801 is transfered successful !
+27142925530801 is transfered successful !
+75962905619501 is transfered successful !
+23292921222001 is transfered successful !
+23652921222001 is transfered successful !
+6512929836801 is transfered successful !
+6522929836801 is transfered successful !
+110052909222601 is transfered successful !
+110202909222601 is transfered successful !
+110092909222601 is transfered successful !
+110112909222601 is transfered successful !
+111332909222601 is transfered successful !
+110152909222601 is transfered successful !
+112942905798101 is transfered successful !
+110562905798101 is transfered successful !
+110592905798101 is transfered successful !
+112242905798101 is transfered successful !
+110622905798101 is transfered successful !
+16232924331801 is transfered successful !
+16292924331801 is transfered successful !
+16032924331801 is transfered successful !
+16042924331801 is transfered successful !
+16052924331801 is transfered successful !
+16062924331801 is transfered successful !
+8122925230201 is transfered successful !
+7912925230201 is transfered successful !
+16982924331801 is transfered successful !
+58252905997801 is transfered successful !
+34872914920701 is transfered successful !
+110372909222601 is transfered successful !
+110322909222601 is transfered successful !
+110312909222601 is transfered successful !
+16742906406401 is transfered successful !
+23332921222001 is transfered successful !
+32672905398401 is transfered successful !
+31142904596801 is transfered successful !
+106122906699001 is transfered successful !
+92422903996101 is transfered successful !
+92752903996101 is transfered successful !
+92452903996101 is transfered successful !
+92462903996101 is transfered successful !
+92832903996101 is transfered successful !
+56222911904801 is transfered successful !
+41102905897701 is transfered successful !
+41112905897701 is transfered successful !
+41122905897701 is transfered successful !
+32362906799301 is transfered successful !
+12612926032001 is transfered successful !
+6542929836801 is transfered successful !
+6572929836801 is transfered successful !
+67172905497901 is transfered successful !
+12172925630901 is transfered successful !
+27302925530801 is transfered successful !
+27322925530801 is transfered successful !
+27332925530801 is transfered successful !
+23602921222001 is transfered successful !
+27352925530801 is transfered successful !
+24702926332101 is transfered successful !
+18602908000301 is transfered successful !
+28262925530801 is transfered successful !
+27402925530801 is transfered successful !
+6592929836801 is transfered successful !
+6612929836801 is transfered successful !
+24832926332101 is transfered successful !
+12642926032001 is transfered successful !
+33322906799301 is transfered successful !
+41142905897701 is transfered successful !
+92522903996101 is transfered successful !
+92532903996101 is transfered successful !
+92542903996101 is transfered successful !
+93022903996101 is transfered successful !
+4312931239001 is transfered successful !
+107142906699001 is transfered successful !
+106372906699001 is transfered successful !
+34612903896001 is transfered successful !
+23492921222001 is transfered successful !
+67812905497901 is transfered successful !
+23882921222001 is transfered successful !
+78422923527201 is transfered successful !
+78442923527201 is transfered successful !
+110382909222601 is transfered successful !
+110472909222601 is transfered successful !
+110642909222601 is transfered successful !
+34252904297201 is transfered successful !
+78492923527201 is transfered successful !
+113532909222601 is transfered successful !
+17152906406401 is transfered successful !
+16132924331801 is transfered successful !
+16142924331801 is transfered successful !
+16672924331801 is transfered successful !
+16162924331801 is transfered successful !
+60962904306201 is transfered successful !
+67282905497901 is transfered successful !
+17242906406401 is transfered successful !
+57882905997801 is transfered successful !
+23612921222001 is transfered successful !
+23682921222001 is transfered successful !
+23372921222001 is transfered successful !
+33982903896001 is transfered successful !
+106412906699001 is transfered successful !
+92602903996101 is transfered successful !
+92662903996101 is transfered successful !
+92672903996101 is transfered successful !
+12832926032001 is transfered successful !
+12662926032001 is transfered successful !
+110652909222601 is transfered successful !
+110722909222601 is transfered successful !
+110772909222601 is transfered successful !
+110812909222601 is transfered successful !
+78772923527201 is transfered successful !
+112882905798101 is transfered successful !
+27512925530801 is transfered successful !
+27532925530801 is transfered successful !
+27552925530801 is transfered successful !
+5492928835201 is transfered successful !
+35652914920701 is transfered successful !
+34952914920701 is transfered successful !
+27582925530801 is transfered successful !
+27592925530801 is transfered successful !
+27602925530801 is transfered successful !
+111022905798101 is transfered successful !
+111032905798101 is transfered successful !
+111052909222601 is transfered successful !
+110842909222601 is transfered successful !
+110872909222601 is transfered successful !
+110902909222601 is transfered successful !
+110912909222601 is transfered successful !
+13152926032001 is transfered successful !
+13052926032001 is transfered successful !
+12702926032001 is transfered successful !
+35062914920701 is transfered successful !
+92682903996101 is transfered successful !
+92692903996101 is transfered successful !
+92712903996101 is transfered successful !
+92732903996101 is transfered successful !
+106502906699001 is transfered successful !
+106512906699001 is transfered successful !
+4312929536001 is transfered successful !
+78572923527201 is transfered successful !
+78672923527201 is transfered successful !
+34042903896001 is transfered successful !
+60422904306201 is transfered successful !
+16192924331801 is transfered successful !
+16202924331801 is transfered successful !
+34362904297201 is transfered successful !
+34382904297201 is transfered successful !
+26282926332101 is transfered successful !
+16872906406401 is transfered successful !
+16882906406401 is transfered successful !
+28352925530801 is transfered successful !
+31042904596801 is transfered successful !
+94172903996101 is transfered successful !
+92842903996101 is transfered successful !
+92852903996101 is transfered successful !
+92892903996101 is transfered successful !
+92902903996101 is transfered successful !
+92932903996101 is transfered successful !
+25232926332101 is transfered successful !
+23412921222001 is transfered successful !
+23622921222001 is transfered successful !
+58112905997801 is transfered successful !
+111412905798101 is transfered successful !
+68692905497901 is transfered successful !
+57982905997801 is transfered successful !
+57992905997801 is transfered successful !
+59562905997801 is transfered successful !
+58092905997801 is transfered successful !
+67502905497901 is transfered successful !
+60512904306201 is transfered successful !
+60522904306201 is transfered successful !
+60532904306201 is transfered successful !
+60542904306201 is transfered successful !
+60552904306201 is transfered successful !
+60562904306201 is transfered successful !
+60572904306201 is transfered successful !
+60582904306201 is transfered successful !
+60592904306201 is transfered successful !
+60622904306201 is transfered successful !
+23452921222001 is transfered successful !
+23472921222001 is transfered successful !
+23902921222001 is transfered successful !
+78732923527201 is transfered successful !
+79982923527201 is transfered successful !
+78862923527201 is transfered successful !
+16962906406401 is transfered successful !
+16902906406401 is transfered successful !
+16972906406401 is transfered successful !
+106592906699001 is transfered successful !
+106642906699001 is transfered successful !
+106662906699001 is transfered successful !
+92772903996101 is transfered successful !
+92782903996101 is transfered successful !
+5862928835201 is transfered successful !
+13262926032001 is transfered successful !
+13292926032001 is transfered successful !
+6732929836801 is transfered successful !
+6742929836801 is transfered successful !
+6772929836801 is transfered successful !
+111942909222601 is transfered successful !
+111072905798101 is transfered successful !
+111092905798101 is transfered successful !
+111112905798101 is transfered successful !
+111142905798101 is transfered successful !
+111152905798101 is transfered successful !
+111202909222601 is transfered successful !
+34302903896001 is transfered successful !
+111262909222601 is transfered successful !
+111402909222601 is transfered successful !
+10772925028701 is transfered successful !
+16252924331801 is transfered successful !
+10752925028701 is transfered successful !
+113162903506001 is transfered successful !
+113232903506001 is transfered successful !
+113792903506001 is transfered successful !
+25582904496701 is transfered successful !
+16302924331801 is transfered successful !
+16322924331801 is transfered successful !
+17002924331801 is transfered successful !
+60692904306201 is transfered successful !
+60772904306201 is transfered successful !
+60802904306201 is transfered successful !
+60812904306201 is transfered successful !
+60822904306201 is transfered successful !
+60852904306201 is transfered successful !
+12802926032001 is transfered successful !
+12812926032001 is transfered successful !
+35212914920701 is transfered successful !
+35222914920701 is transfered successful !
+76422905619501 is transfered successful !
+41352905897701 is transfered successful !
+106932906699001 is transfered successful !
+106942906699001 is transfered successful !
+107002906699001 is transfered successful !
+60892904306201 is transfered successful !
+27942925530801 is transfered successful !
+27982925530801 is transfered successful !
+28022925530801 is transfered successful !
+23502921222001 is transfered successful !
+23532921222001 is transfered successful !
+23542921222001 is transfered successful !
+41382905897701 is transfered successful !
+41392905897701 is transfered successful !
+107732906699001 is transfered successful !
+67742905497901 is transfered successful !
+111562909222601 is transfered successful !
+111672909222601 is transfered successful !
+111782909222601 is transfered successful !
+58302905997801 is transfered successful !
+4392929536001 is transfered successful !
+17032906406401 is transfered successful !
+17062906406401 is transfered successful !
+17082906406401 is transfered successful !
+17092906406401 is transfered successful !
+17102906406401 is transfered successful !
+17132906406401 is transfered successful !
+17172906406401 is transfered successful !
+17182906406401 is transfered successful !
+25322926332101 is transfered successful !
+25372926332101 is transfered successful !
+18812908000301 is transfered successful !
+92952903996101 is transfered successful !
+92962903996101 is transfered successful !
+92972903996101 is transfered successful !
+92982903996101 is transfered successful !
+93012903996101 is transfered successful !
+93042903996101 is transfered successful !
+93072903996101 is transfered successful !
+93092903996101 is transfered successful !
+93122903996101 is transfered successful !
+93162903996101 is transfered successful !
+93172903996101 is transfered successful !
+93192903996101 is transfered successful !
+93422903996101 is transfered successful !
+78932923527201 is transfered successful !
+79032923527201 is transfered successful !
+79052923527201 is transfered successful !
+31102904596801 is transfered successful !
+28632925530801 is transfered successful !
+28272925530801 is transfered successful !
+28332925530801 is transfered successful !
+34492904297201 is transfered successful !
+23872921222001 is transfered successful !
+79162923527201 is transfered successful !
+79192923527201 is transfered successful !
+79562923527201 is transfered successful !
+93212903996101 is transfered successful !
+93222903996101 is transfered successful !
+93232903996101 is transfered successful !
+61152904306201 is transfered successful !
+61182904306201 is transfered successful !
+61192904306201 is transfered successful !
+18872908000301 is transfered successful !
+18882908000301 is transfered successful !
+35302914920701 is transfered successful !
+35332914920701 is transfered successful !
+35352914920701 is transfered successful !
+112392905798101 is transfered successful !
+112952905798101 is transfered successful !
+112292909222601 is transfered successful !
+112112909222601 is transfered successful !
+112122909222601 is transfered successful !
+112162909222601 is transfered successful !
+112382905798101 is transfered successful !
+111652905798101 is transfered successful !
+107222906699001 is transfered successful !
+112732909222601 is transfered successful !
+107322906699001 is transfered successful !
+107342906699001 is transfered successful !
+107372906699001 is transfered successful !
+107422906699001 is transfered successful !
+5462928835201 is transfered successful !
+23642921222001 is transfered successful !
+79782923527201 is transfered successful !
+6902929836801 is transfered successful !
+60982904306201 is transfered successful !
+61022904306201 is transfered successful !
+61032904306201 is transfered successful !
+61092904306201 is transfered successful !
+61102904306201 is transfered successful !
+61122904306201 is transfered successful !
+61132904306201 is transfered successful !
+93362903996101 is transfered successful !
+93372903996101 is transfered successful !
+93402903996101 is transfered successful !
+93532903996101 is transfered successful !
+93412903996101 is transfered successful !
+93432903996101 is transfered successful !
+58552905997801 is transfered successful !
+67872905497901 is transfered successful !
+59262905997801 is transfered successful !
+67952905497901 is transfered successful !
+67982905497901 is transfered successful !
+16792924331801 is transfered successful !
+16462924331801 is transfered successful !
+112432909222601 is transfered successful !
+112422909222601 is transfered successful !
+112372909222601 is transfered successful !
+28222925530801 is transfered successful !
+113252909222601 is transfered successful !
+112482909222601 is transfered successful !
+112522909222601 is transfered successful !
+112532909222601 is transfered successful !
+112542909222601 is transfered successful !
+12862926032001 is transfered successful !
+12882926032001 is transfered successful !
+18222925330501 is transfered successful !
+18242925330501 is transfered successful !
+5712928835201 is transfered successful !
+16342924331801 is transfered successful !
+10842925028701 is transfered successful !
+114052903506001 is transfered successful !
+114132903506001 is transfered successful !
+1172930237501 is transfered successful !
+112602909222601 is transfered successful !
+112712909222601 is transfered successful !
+112742909222601 is transfered successful !
+112782909222601 is transfered successful !
+112872909222601 is transfered successful !
+93522903996101 is transfered successful !
+93652903996101 is transfered successful !
+93562903996101 is transfered successful !
+79382923527201 is transfered successful !
+2162928935301 is transfered successful !
+5522928835201 is transfered successful !
+41522905897701 is transfered successful !
+107552906699001 is transfered successful !
+15122906999501 is transfered successful !
+15132906999501 is transfered successful !
+17282906406401 is transfered successful !
+111962905798101 is transfered successful !
+112002905798101 is transfered successful !
+11012925028701 is transfered successful !
+10982925028701 is transfered successful !
+18902908000301 is transfered successful !
+61262904306201 is transfered successful !
+61302904306201 is transfered successful !
+61312904306201 is transfered successful !
+23712921222001 is transfered successful !
+23722921222001 is transfered successful !
+34622904297201 is transfered successful !
+34682904297201 is transfered successful !
+18292925330501 is transfered successful !
+12952926032001 is transfered successful !
+13222926032001 is transfered successful !
+23742921222001 is transfered successful !
+11062925028701 is transfered successful !
+28432925530801 is transfered successful !
+28442925530801 is transfered successful !
+28462925530801 is transfered successful !
+17342906406401 is transfered successful !
+79502923527201 is transfered successful !
+79512923527201 is transfered successful !
+25832904496701 is transfered successful !
+25882926332101 is transfered successful !
+112942909222601 is transfered successful !
+5562928835201 is transfered successful !
+113042909222601 is transfered successful !
+68142905497901 is transfered successful !
+68312905497901 is transfered successful !
+28512925530801 is transfered successful !
+77262905619501 is transfered successful !
+4842925731001 is transfered successful !
+107862906699001 is transfered successful !
+93582903996101 is transfered successful !
+93602903996101 is transfered successful !
+93922903996101 is transfered successful !
+93642903996101 is transfered successful !
+93682903996101 is transfered successful !
+93692903996101 is transfered successful !
+93742903996101 is transfered successful !
+93752903996101 is transfered successful !
+23132909001001 is transfered successful !
+28622925530801 is transfered successful !
+4882925731001 is transfered successful !
+28652925530801 is transfered successful !
+28662925530801 is transfered successful !
+5652928835201 is transfered successful !
+5662928835201 is transfered successful !
+93852903996101 is transfered successful !
+76902905619501 is transfered successful !
+8332925230201 is transfered successful !
+28672925530801 is transfered successful !
+28682925530801 is transfered successful !
+28692925530801 is transfered successful !
+7162929836801 is transfered successful !
+18962908000301 is transfered successful !
+56432911904801 is transfered successful !
+79692923527201 is transfered successful !
+7192929836801 is transfered successful !
+34902904297201 is transfered successful !
+28712925530801 is transfered successful !
+113302909222601 is transfered successful !
+26182926332101 is transfered successful !
+83392903695801 is transfered successful !
+16722924331801 is transfered successful !
+61622904306201 is transfered successful !
+76972905619501 is transfered successful !
+23792921222001 is transfered successful !
+68492905497901 is transfered successful !
+49192906098301 is transfered successful !
+11092925028701 is transfered successful !
+35682914920701 is transfered successful !
+13022926032001 is transfered successful !
+13092926032001 is transfered successful !
+68682905497901 is transfered successful !
+76992905619501 is transfered successful !
+107952906699001 is transfered successful !
+112402905798101 is transfered successful !
+112482905798101 is transfered successful !
+113372909222601 is transfered successful !
+107982906699001 is transfered successful !
+59242905997801 is transfered successful !
+61642904306201 is transfered successful !
+16782924331801 is transfered successful !
+18432925330501 is transfered successful !
+13102926032001 is transfered successful !
+16822924331801 is transfered successful !
+68822905497901 is transfered successful !
+68842905497901 is transfered successful !
+23832921222001 is transfered successful !
+77062905619501 is transfered successful !
+94002903996101 is transfered successful !
+28742925530801 is transfered successful !
+28752925530801 is transfered successful !
+61672904306201 is transfered successful !
+26302926332101 is transfered successful !
+112722905798101 is transfered successful !
+112762905798101 is transfered successful !
+112662905798101 is transfered successful !
+112672905798101 is transfered successful !
+34942904297201 is transfered successful !
+28772925530801 is transfered successful !
+28782925530801 is transfered successful !
+79922923527201 is transfered successful !
+94032903996101 is transfered successful !
+94042903996101 is transfered successful !
+94062903996101 is transfered successful !
+108042906699001 is transfered successful !
+59522905997801 is transfered successful !
+68892905497901 is transfered successful !
+16832924331801 is transfered successful !
+16842924331801 is transfered successful !
+16882924331801 is transfered successful !
+16872924331801 is transfered successful !
+5832928835201 is transfered successful !
+80172923527201 is transfered successful !
+59592905997801 is transfered successful !
+94072903996101 is transfered successful !
+94082903996101 is transfered successful !
+94092903996101 is transfered successful !
+94122903996101 is transfered successful !
+113482909222601 is transfered successful !
+112802905798101 is transfered successful !
+112832905798101 is transfered successful !
+112842905798101 is transfered successful !
+7342924928601 is transfered successful !
+16932924331801 is transfered successful !
+112892905798101 is transfered successful !
+28812925530801 is transfered successful !
+41872905897701 is transfered successful !
+28832925530801 is transfered successful !
+28842925530801 is transfered successful !
+80292923527201 is transfered successful !
+69012905497901 is transfered successful !
+69032905497901 is transfered successful !
+94152903996101 is transfered successful !
+113612909222601 is transfered successful !
+113012905798101 is transfered successful !
+16992924331801 is transfered successful !
+16962924331801 is transfered successful !
+17382906406401 is transfered successful !
+113022905798101 is transfered successful !
+113032905798101 is transfered successful !
+113662909222601 is transfered successful !
+113672909222601 is transfered successful !
+113052905798101 is transfered successful !
+113072905798101 is transfered successful !
+26442926332101 is transfered successful !
+115332903506001 is transfered successful !
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+03/04/2015 11:18:05: new search bill command start at 03/04/2015, end at 03/04/2015
+69112905497901 is transfered successful !
+23902921222001 is transfered successful !
+13292926032001 is transfered successful !
+5962928835201 is transfered successful !
+17002924331801 is transfered successful !
+80412923527201 is transfered successful !
+80462923527201 is transfered successful !
+77262905619501 is transfered successful !
+113022905798101 is transfered successful !
+113032905798101 is transfered successful !
+113052905798101 is transfered successful !
+113072905798101 is transfered successful !
+113662909222601 is transfered successful !
+113672909222601 is transfered successful !
+49192906098301 is transfered successful !
+26442926332101 is transfered successful !
+115332903506001 is transfered successful !
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+03/05/2015 01:18:05: new search bill command start at 03/04/2015, end at 03/05/2015
+69112905497901 is transfered successful !
+77262905619501 is transfered successful !
+5962928835201 is transfered successful !
+80412923527201 is transfered successful !
+80462923527201 is transfered successful !
+23902921222001 is transfered successful !
+115332903506001 is transfered successful !
+17002924331801 is transfered successful !
+26442926332101 is transfered successful !
+113022905798101 is transfered successful !
+113032905798101 is transfered successful !
+113052905798101 is transfered successful !
+113072905798101 is transfered successful !
+113662909222601 is transfered successful !
+113672909222601 is transfered successful !
+13292926032001 is transfered successful !
+49192906098301 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+03/05/2015 03:18:06: new search bill command start at 03/05/2015, end at 03/05/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+03/05/2015 05:18:07: new search bill command start at 03/05/2015, end at 03/05/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+03/05/2015 07:18:07: new search bill command start at 03/05/2015, end at 03/05/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+03/05/2015 09:18:08: new search bill command start at 03/05/2015, end at 03/05/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/14/2015 01:25:15: new search bill command start at 04/13/2015, end at 04/14/2015
+18132906406401 is transfered successful !
+71832905497901 is transfered successful !
+116642905798101 is transfered successful !
+116662905798101 is transfered successful !
+116682905798101 is transfered successful !
+116692905798101 is transfered successful !
+18142906406401 is transfered successful !
+24562921222001 is transfered successful !
+117352909222601 is transfered successful !
+13642925630901 is transfered successful !
+7432928835201 is transfered successful !
+35952904297201 is transfered successful !
+110592906699001 is transfered successful !
+18382924331801 is transfered successful !
+15212926032001 is transfered successful !
+15222926032001 is transfered successful !
+30522925530801 is transfered successful !
+43512905897701 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/14/2015 03:25:16: new search bill command start at 04/14/2015, end at 04/14/2015
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/14/2015 05:25:17: new search bill command start at 04/14/2015, end at 04/14/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/14/2015 07:25:18: new search bill command start at 04/14/2015, end at 04/14/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/14/2015 09:25:19: new search bill command start at 04/14/2015, end at 04/14/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/14/2015 11:25:20: new search bill command start at 04/14/2015, end at 04/14/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/14/2015 01:25:22: new search bill command start at 04/14/2015, end at 04/14/2015
+84352923527201 is transfered successful !
+116702905798101 is transfered successful !
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone

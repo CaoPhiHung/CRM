@@ -1,0 +1,6 @@
+{% extends ":mail:root.html.twig" %}
+{% block content %}<h2><strong>Dear {{user.getName}},<br />
+            Thank you for your purchase and registration to Star club.</strong></h2>
+    Please login to <a href="www.starclubvn.com">www.starclubvn.com</a> and used this code to complete your enrollment. CODE: <strong>{{code}}</strong><br/><br />
+    Then you can fill up your information to get more point from our program.
+{% endblock %}

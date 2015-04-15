@@ -1,0 +1,112 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}    
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="#">Point Rule</a></li>
+        <li class="divider"></li>
+	<li>List Rules</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-faded">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+    <div class="control-group">
+        <a href="{{ path('backend_point_rules_addnew') }}"><span class="btn btn-large color-7">Add new Point Rule</span></a>
+    </div>
+    <div class="separator"></div>
+    <div>
+        <select id="store-kw">
+            {% for store in stores %}
+                <option value="{{ store.oldId }}">{{ store.name }}</option>
+            {% endfor %}
+        </select>
+        &nbsp;&nbsp;<button class="btn btn-primary" onclick="DoFilter()">Search</button>
+    </div>
+    <table aria-describedby="DataTables_Table_0_info" id="DataTables_Table_0" class="dynamicTable table table-striped table-bordered table-condensed dataTable">
+            <thead>
+                <tr role="row" style="color:#0F0">
+
+                    <th aria-label="Rendering eng.: activate to sort column descending" aria-sort="ascending" style="width: 40px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting_asc">ID</th>
+
+                    <th aria-label="Browser: activate to sort column ascending" style="width: 250px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">Name</th>
+
+                    <th aria-label="Browser: activate to sort column ascending" colspan="2" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">Attributes</th>
+
+                    <th aria-label="Platform(s): activate to sort column ascending" style="width: 60px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">Point</th>
+                    
+                    <th aria-label="Rendering eng.: activate to sort column descending" aria-sort="ascending" style="width: 60px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting_asc"></th>
+                    
+            </thead>
+
+            <tbody aria-relevant="all" aria-live="polite" role="alert">
+                {% for rule in rules %}
+                    <tr class="gradeA odd">
+                        <td class="  sorting_1">{{ rule.id }}</td>
+                        <td class=" ">{{ rule.name }}</td>
+                        <td class=" ">
+                            Level: <span style="color:#0f0"><b>{{ rule.getLevelLabel }}</b></span><br/>
+                            Store: <span style="color:#0f0" class="list-stores">{{ rule.store }}</span><br/>
+                            action: <span style="color:#0f0"><b>{{ attribute(actions,rule.action) }}</b></span><br/>
+                            locate: <span style="color:#0f0"><b>{{ rule.locate }}</b></span><br/>
+                            {% if rule.sDay is null or rule.fDay is null %}
+                                interval-time: <span style="color:#0f0"><b>--</b></span><br/>
+                            {% else %}
+                                interval-time: <span style="color:#0f0"><b>{{ rule.sDay|dateconvert }} : {{ rule.fDay|dateconvert }}</b></span><br/>
+                            {% endif %}
+                            gender: <span style="color:#0f0"><b>{{ rule.gender }}</b></span><br/>
+                            {{ ((('%s : <b>' ~ (rule.schema|replace({'_':'<span style="color:#0f0">---</span>'})))|replace({'&':'</b><br/>%s : <b>'}))|format('<span style="display:none">', 'gender', '</span></td><td class=" "><span style="display:none">interval-time', '</span>day in month', 'day in week', 'hour', 'parity', 'anniversary', 'birthday', 'bonus</b>', '<span style="display:none">', ''))|raw }}</span></td>
+                        <td class=" ">{{ rule.point }}</td>
+                        <td>
+                            <a href="{{ path('backend_point_rules_edit',{'ruleID':rule.id}) }}" class="glyphicons no-js edit"><i></i>Edit</a>
+                            <br/><a href="javascript:if(confirm('Are you sure want to delete this Rule?')){window.location='{{ path('backend_point_rules_delete',{'ruleID':rule.id})}}'}" class="glyphicons no-js delete"><i></i>delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascript %}
+    <!-- select2 js -->
+    <script src="{{ asset('bundles/aevitaslevis/js/select2.js') }}"></script>
+    <script>
+        var storeName = [];
+        {% for store in stores %}
+            storeName['{{ store.oldId }}'] = '{{ store.name }}';
+        {% endfor %}
+        $('.list-stores').each(function(){
+            var listStores = $(this).html();
+            arrStores = listStores.split('_');
+            var results = '';
+            for (i in arrStores){
+                if (typeof(storeName[arrStores[i]]) != 'undefined'){
+                    results += storeName[arrStores[i]]+', ';
+                }
+            }
+
+            $(this).html(results);
+        });
+
+        $('#store-kw').select2({
+            width: '300px'
+        });
+
+        function DoFilter(){
+            var kw = $('#store-kw').val();
+            window.location = '{{ path('backend_point_rules_list') }}/'+kw;
+        }
+    </script>
+{% endblock %}

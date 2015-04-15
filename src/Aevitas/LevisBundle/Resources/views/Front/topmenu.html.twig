@@ -1,0 +1,16 @@
+<ul class="nav">
+    {% set extract = route | split('_') %}
+    <li class="{% if 'welcome' in extract %}active{% endif %}"><a href="/">{{'Home' | trans}}</a></li>
+    <li class="dropdown {% if 'member' in extract %}active{% elseif 'faq' in extract %}{% endif %}"><a href="javascript:void(0);" title="How It Works">{{'Benefits' | trans}}</a>
+        <ul class="dropdown-menu">
+            <li><a href="{{path('levis_member_tier')}}" title="{{'Rewards tiers' | trans}}">{{'Membership Tiers' | trans}}</a></li>
+            <li><a href="{{path('levis_faq')}}" title="{{'FAQ' | trans}}">{{'FAQ' | trans}}</a></li>
+        </ul>
+    </li>
+    <li><a href="#">{{'Shop' | trans}}</a></li>
+    <!--li class="dropdown {% if 'gift' in extract %}active{% endif %}">
+        <a href="{{path('levis_gift_category')}}" title="Rewards">{{'Rewards' | trans}}</a>
+        {#topmenureward() | raw#}
+    </li-->
+    {% if app.user.getId is defined %}<li class="{% if 'dashboard' in extract %}active{% endif %}"><a href="{{path('levis_user_dashboard')}}">{{'My Account' | trans}}</a></li>{% else %}<li class="{% if 'register' in extract %}active{% endif %}"><a href="{{path('levis_home_register_online')}}">{{'Register' | trans}}</a></li>{% endif %}
+</ul>

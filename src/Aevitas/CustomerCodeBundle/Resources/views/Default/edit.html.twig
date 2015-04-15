@@ -1,0 +1,145 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}    
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li><a href="{{ path('backend_customer_code_list') }}">Customer Code</a></li>
+    <li class="divider"></li>
+    <li>Edit</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST">
+    <div class="block full-block">
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-faded">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+        </div>
+                {% endfor %}
+        <div class="separator line bottom"></div>
+        <div class="control-group">
+            <label class="control-label">Store</label>
+            <div class="controls">
+                    {{ form_widget(form.store) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Prefix</label>
+                <div class="controls">
+                    {{ form_widget(form.prefix) }}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Start number</label>
+                    <div class="controls">
+                    {{ form_widget(form.start) }}
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">End number</label>
+                        <div class="controls">
+                    {{ form_widget(form.end) }}
+                            </div>
+                        </div>
+
+            {{form_rest(form)}}
+
+                        <div class="form-actions" style="margin: 0;">
+                            <button class="btn btn-icon btn-primary glyphicons circle_ok pull-right addtransfer"><i></i>Transfer</button>
+                            <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Create</button>
+                        </div>
+
+                    </div>
+                </form>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Created'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Start'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'End'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Used'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {% for item in trans %}
+            <tr class="gradeA remove_item">
+                <td class="center item-name">{{ item.created | date('m/d/Y') }}</td>
+                <td>{{item.start}}</td>
+                <td>{{item.end}}</td>
+                <td></td>
+            </tr>
+           {% endfor %}
+        </tbody></table>
+    <!-- Modal -->
+    <div id="addtransfer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <strong id="myModalLabel" style="color:#000">{{'Searching...' | trans}}</strong>
+        </div>
+        <div class="modal-body" style="color:#000">
+            
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Save</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<style type="text/css">
+.modal input{color:#000;border: 1px solid #dedede}
+.modal label{float:left;clear:left;min-width:80px;padding-top:5px}
+</style>
+<script>
+    $(document).ready(function(){
+        var min = 0, max = 0;
+        $('#addtransfer').delegate('form','submit', function(e){
+            e.preventDefault();
+            $('#transfer_start').attr('disabled', false);
+            data = $(this).serialize();
+            $('#transfer_start').attr('disabled', true);
+            $.ajax({
+                url:$(this).attr('action'),
+                dataType: 'json',
+                data: data,
+                type: 'POST',
+                success:function(data){
+                    if(!data.status)
+                        alert('The range should be between '+ min + 'and' + max);
+                    else {
+                        $('#addtransfer').modal('hide');
+                        $('table tbody').append('<tr class="gradeA remove_item odd"><td class="center item-name  sorting_1">'+data.created+'</td><td class=" ">'+data.start+'</td><td class=" ">'+data.end+'</td><td class=" "></td></tr>');
+                    }
+                }
+            });
+        }).delegate('.btn-primary', 'click', function(){$('.modal form').submit()})
+        $('.addtransfer').on('click',function(e){
+            e.preventDefault();
+            $('#addtransfer').modal();
+            path = window.location.pathname.split('/');
+            formid = path[path.length - 1];
+            $.ajax({
+                url: '{{path('form_add_transfer')}}'+'/'+formid+'.json',
+                dataType: 'json',
+                success: function(data){
+                    $('.modal-body').html(data.html);
+                    min = parseInt($('#transfer_start').val());
+                    max = parseInt($('#transfer_end').val());
+                }
+            })
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'StarClubVN - Ngày Tri Ân Khách Hàng' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_contact_us_faq.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/faq.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<div id="panel" class="toppanel" style="height:auto;padding:0;background-color:#fef105">
+<img style="display:block;margin:0 auto" src="/images/landingpage.jpg">
+</div>
+{% endblock %}
+{% block javascript %}
+    $(document).ready(function() {
+        $('.faq-question').on('click', function() {
+            if($(this).hasClass('open'))
+                $(this).removeClass('open').addClass('clo').next().hide()
+            else $(this).addClass('open').removeClass('clo').next().show()
+        })
+    });
+{% endblock %}

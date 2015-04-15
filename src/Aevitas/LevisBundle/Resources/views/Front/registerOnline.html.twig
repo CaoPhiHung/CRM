@@ -1,0 +1,53 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+        <title>{{'Become A Member' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>{{'Become A Member' | trans}}</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+<style type="text/css">
+        .stepone .form-row + .form-row{float:none}
+</style>
+<section id="form_reg" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                <ul class="steps">
+                    <li class="active step1"><span><span>1. {{'Create Password' | trans}}</span></span></li>
+                    <li class="step2"><span><span>2. {{'Update Your Information' | trans}}</span></span></li>
+                    <li class="step4"><span><span>3. {{'Opt In' | trans}}</span></span></li>
+                </ul>
+                <div class="info stepone">
+                    <span class="title"><h3>1. {{'Create Password'|trans}}</h3></span>
+                    <div>
+                        <p>{{'To get started, you first need to create a password for your account so that you can access your point history and rewards later.'| trans}}</p>
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                        <form action="{{ path('levis_home_register_online') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                                <div>{{ form_label(form.email) }}{{form_widget(form.email)}}{{form_errors(form.email)}}</div>
+                                <div class="hide">{{ form_label(form.username) }}{{form_widget(form.username)}}{{form_errors(form.username)}}</div>
+                                <div>{{form_widget(form.plainPassword)}}{{form_errors(form.plainPassword)}}</div>
+                                {{ form_rest(form) }}
+                                <div>
+                                    <input type="submit" value="{{ 'Next Step'|trans }}" class="yellow_button" />
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block javascript %}
+        $('.stepone #fos_user_registration_form_email').on('keyup',function(){
+            $('.stepone #fos_user_registration_form_username').val($('.stepone #fos_user_registration_form_email').val());
+        })
+{% endblock %}

@@ -1,0 +1,116 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>Store</li>
+    <li class="divider"></li>
+    <li>Edit</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+<div class="alert alert-faded">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+</div>
+                {% endfor %}
+<form class="form-horizontal" action="{{ path('backend_store_Edit', {'id':id}) }}" {{ form_enctype(form) }} method="POST">
+    <div class="row-fluid">
+        <div class="span9">
+           {{ form_label(form.name) }}
+           {{ form_widget(form.name, {'attr': {'placeholder': 'Name gift article.'| trans, 'class': 'span10'}}) }}
+                <span class="error">{{ form_errors(form.name) }}</span>             
+            </div>
+        </div>
+        <div class="separator bottom"></div>
+        <div class="row-fluid">
+        <div class="span9">
+           {{ form_label(form.address) }}
+           {{ form_widget(form.address, {'attr': {'placeholder': 'Store Address'| trans, 'class': 'span10'}}) }}
+                <span class="error">{{ form_errors(form.name) }}</span>             
+            </div>
+        </div>
+        <div class="separator bottom"></div>
+        <div class="row-fluid">
+        <div class="span9">
+           {{ form_label(form.visible) }}
+           {{ form_widget(form.visible) }}
+                <span class="error">{{ form_errors(form.visible) }}</span>             
+            </div>
+        </div>
+        <div class="separator bottom"></div>
+            {{ form_rest(form) }}
+        <div class="form-actions" style="margin: 0;">
+            <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+        </div>
+    </form>
+<script type="text/template" id="citydata">
+    {% for city in cities %}
+        <option value="{{city.getMap}}">{{city.getName}}</option>
+    {% endfor %}
+    </script>
+{% endblock %}
+
+{% block javascript %}
+    <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+    <style>
+            .select2-container span{min-width:120px}
+    </style>
+    <script type="text/javascript">
+        query = '{{ path('home_search_district') }}';
+ $('#aevitas_store_city').after('<select id="city">' + $('#citydata').html() + '</select>');
+$('#aevitas_store_district').after('<select id="district"></select>');
+$('select#city').select2();
+$('select#district').select2();
+$('select#district').on('change', function() {
+    dist = $(this).val();
+    $('#aevitas_store_district').val(dist)
+});
+$('select#city').on('change', function() {
+    city = $(this).val();
+    $('.title h3').addClass('loading');
+    $('#aevitas_store_city').val(city);
+    $.ajax({
+        url: query + '/' + $(this).val() + '.json',
+        dataType: 'json',
+        success: function(data) {
+            $('.title h3').removeClass('loading');
+            $('#district').select2("destroy");
+            $('#district').html(data.html).select2();
+            $('#aevitas_store_district').val($('#district option:first').val())
+        }
+    });
+})
+        
+        function doSelectCity(obj, CallBack){
+            city = $('#aevitas_store_city').val();
+            $('select#city').find("option[value="+city+"]").attr('selected','selected');
+            $.ajax({
+                url: query+'/'+$('#aevitas_store_city').val()+'.json',
+                dataType: 'json',
+                success: function(data){
+                    $('#city').select2("destroy").select2();
+                    $('#district').select2("destroy");
+                    $('#district').html(data.html).select2();
+                    if (typeof(CallBack)!='undefined'){
+                        window.setTimeout(function(){
+                            CallBack();
+                        }, 500);
+                    }
+                }
+            });
+        }
+        
+        
+        if ($('select#city').val()!=0){
+            doSelectCity(document.getElementById('city'),function(){
+                var val=parseInt($('#aevitas_store_district').val());
+                $("#district").select2("val", val);
+            });
+        }
+    </script>
+{% endblock %}

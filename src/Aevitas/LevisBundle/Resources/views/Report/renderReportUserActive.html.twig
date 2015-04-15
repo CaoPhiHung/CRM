@@ -1,0 +1,26 @@
+<div class="widget">
+    <div class="widget-head">
+        <h4 class="heading">{{'User Active/Inactive' | trans}}</h4>
+    </div>
+    <div class="widget-body">
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Status', 'Percent'],
+                    {{stat | raw}}
+                ]);
+
+                var options = {
+                    title: '{{'Customer Statistic' | trans}}',
+                    is3D: true
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+            </script>
+            <div id="piechart"></div>
+        </div>
+    </div>

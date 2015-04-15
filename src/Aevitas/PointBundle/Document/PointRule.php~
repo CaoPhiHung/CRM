@@ -1,0 +1,545 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of PointRule
+ *
+ * @author apple
+ */
+
+namespace Aevitas\PointBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @MongoDB\Document()
+ */
+class PointRule {
+
+    /**
+     * @MongoDB\Id(strategy="increment")
+     */
+    protected $id;
+    
+    /**
+     * @MongoDB\String
+     */
+    protected $name;
+
+    /**
+     * @MongoDB\Int
+     */
+    protected $point;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $action;
+
+    const MALE = 1;
+    const FEMALE = 0;
+
+    /**
+     * @MongoDB\Int
+     */
+    protected $gender;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $twise;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $group;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $item;
+    
+    /**
+     * @MongoDB\Int
+     */
+    protected $sDayInMonth;
+    
+    /**
+     * @MongoDB\Int
+     */
+    protected $fDayInMonth;
+    
+    /**
+     * @MongoDB\String
+     */
+    protected $arrDayInWeek;
+    
+    /**
+     * @MongoDB\Int
+     */
+    protected $sHourInDay;
+    
+    /**
+     * @MongoDB\Int
+     */
+    protected $fHourInDay;
+    
+    /**
+     * @MongoDB\Int
+     */
+    protected $DayParity;
+    
+    /**
+     * @MongoDB\Int
+     */
+    protected $sDay;
+    
+    /**
+     * @MongoDB\Int
+     */
+    protected $fDay;
+    
+    
+
+    /**
+     * @MongoDB\String
+     */
+    protected $schema;
+
+    public static $pointSchema = array(
+        'action' => '_',
+        'gender' => '_',
+        'twise' => '_',
+        'group' => '_',
+        'item' => '_',
+        'interval-time' => '_',
+        'day-month' => '_',
+        'day-week' => '_',
+        'hour' => '_',
+        'parity' => '_'
+    );
+    
+    public function __construct() {
+        
+    }
+
+    /**
+     * Get id
+     *
+     * @return int_id $id
+     */
+    public function getId() {
+        return $this->id;
+    }
+    
+    /**
+     * Get name
+     *
+     * @return string $name
+     */
+    public function getName() {
+        return $this->name;
+    }
+    
+    /**
+     * Set action
+     *
+     * @param string $name
+     * @return \PointRule
+     */
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Set point
+     *
+     * @param int $point
+     * @return \PointRule
+     */
+    public function setPoint($point) {
+        $this->point = $point;
+        return $this;
+    }
+
+    /**
+     * Get point
+     *
+     * @return int $point
+     */
+    public function getPoint() {
+        return $this->point;
+    }
+    
+    /**
+     * Set sDayInMonth
+     *
+     * @param int $day
+     * @return \PointRule
+     */
+    public function setSDayInMonth($day) {
+        $this->sDayInMonth = $day;
+        return $this;
+    }
+
+    /**
+     * Get sDayInMonth
+     *
+     * @return int $day
+     */
+    public function getSDayInMonth() {
+        return $this->sDayInMonth;
+    }
+
+    /**
+     * Set action
+     *
+     * @param string $action
+     * @return \PointRule
+     */
+    public function setAction($action) {
+        $this->action = $action;
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return string $action
+     */
+    public function getAction() {
+        return $this->action;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param int $gender
+     * @return \PointRule
+     */
+    public function setGender($gender) {
+        $this->gender = $gender;
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return int $gender
+     */
+    public function getGender() {
+        return $this->gender;
+    }
+
+    /**
+     * Set twise
+     *
+     * @param string $twise
+     * @return \PointRule
+     */
+    public function setTwise($twise) {
+        $this->twise = $twise;
+        return $this;
+    }
+
+    /**
+     * Get twise
+     *
+     * @return string $twise
+     */
+    public function getTwise() {
+        return $this->twise;
+    }
+
+    /**
+     * Set group
+     *
+     * @param string $group
+     * @return \PointRule
+     */
+    public function setGroup($group) {
+        $this->group = $group;
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return string $group
+     */
+    public function getGroup() {
+        return $this->group;
+    }
+
+    /**
+     * Set item
+     *
+     * @param string $item
+     * @return \PointRule
+     */
+    public function setItem($item) {
+        $this->item = $item;
+        return $this;
+    }
+
+    /**
+     * Get item
+     *
+     * @return string $item
+     */
+    public function getItem() {
+        return $this->item;
+    }
+
+    /**
+     * @MongoDB\PostRemove
+     */
+    public function afterRemove() {
+        
+    }
+
+    /**
+     * Set fDayInMonth
+     *
+     * @param int $fDayInMonth
+     * @return \PointRule
+     */
+    public function setFDayInMonth($fDayInMonth)
+    {
+        $this->fDayInMonth = $fDayInMonth;
+        return $this;
+    }
+
+    /**
+     * Get fDayInMonth
+     *
+     * @return int $fDayInMonth
+     */
+    public function getFDayInMonth()
+    {
+        return $this->fDayInMonth;
+    }
+
+    /**
+     * Set arrDayInWeek
+     *
+     * @param string $arrDayInWeek
+     * @return \PointRule
+     */
+    public function setArrDayInWeek($arrDayInWeek)
+    {
+        $this->arrDayInWeek = $arrDayInWeek;
+        return $this;
+    }
+
+    /**
+     * Get arrDayInWeek
+     *
+     * @return string $arrDayInWeek
+     */
+    public function getArrDayInWeek()
+    {
+        return $this->arrDayInWeek;
+    }
+
+    /**
+     * Set sHourInDay
+     *
+     * @param int $sHourInDay
+     * @return \PointRule
+     */
+    public function setSHourInDay($sHourInDay)
+    {
+        $this->sHourInDay = $sHourInDay;
+        return $this;
+    }
+
+    /**
+     * Get sHourInDay
+     *
+     * @return int $sHourInDay
+     */
+    public function getSHourInDay()
+    {
+        return $this->sHourInDay;
+    }
+
+    /**
+     * Set fHourInDay
+     *
+     * @param int $fHourInDay
+     * @return \PointRule
+     */
+    public function setFHourInDay($fHourInDay)
+    {
+        $this->fHourInDay = $fHourInDay;
+        return $this;
+    }
+
+    /**
+     * Get fHourInDay
+     *
+     * @return int $fHourInDay
+     */
+    public function getFHourInDay()
+    {
+        return $this->fHourInDay;
+    }
+
+    /**
+     * Set DayParity
+     *
+     * @param int $DayParity
+     * @return \PointRule
+     */
+    public function setDayParity($DayParity)
+    {
+        $this->DayParity = $DayParity;
+        return $this;
+    }
+
+    /**
+     * Get DayParity
+     *
+     * @return int $DayParity
+     */
+    public function getDayParity()
+    {
+        return $this->DayParity;
+    }
+
+    /**
+     * Set sDay
+     *
+     * @param int $sDay
+     * @return \PointRule
+     */
+    public function setSDay($sDay)
+    {
+        $this->sDay = $sDay;
+        return $this;
+    }
+
+    /**
+     * Get sDay
+     *
+     * @return int $sDay
+     */
+    public function getSDay()
+    {
+        return $this->sDay;
+    }
+
+    /**
+     * Set fDay
+     *
+     * @param int $fDay
+     * @return \PointRule
+     */
+    public function setFDay($fDay)
+    {
+        $this->fDay = $fDay;
+        return $this;
+    }
+
+    /**
+     * Get fDay
+     *
+     * @return int $fDay
+     */
+    public function getFDay()
+    {
+        return $this->fDay;
+    }
+
+    /**
+     * Set schema
+     *
+     * @param string $schema
+     * @return \PointRule
+     */
+    public function setSchema($schema)
+    {
+        $this->schema = $schema;
+        return $this;
+    }
+    
+    /**
+     * Get schema
+     *
+     * @return string $schema
+     */
+    public function getSchema() {
+        return $this->schema;
+    }
+    
+    /**
+     * @todo Update Schema before save to database
+     * @MongoDB\PrePersist
+     * @MongoDB\PreUpdate
+     */
+    public function beforePersist() {
+        $schema = '';
+        $ii=1;
+        foreach (self::$pointSchema as $key => $value) {
+            switch ($key){
+                case 'interval-time':
+                    if (is_null($this->sDay) || is_null($this->fDay)){
+                        $schema .= $value;
+                    }else{
+                        $schema .= $this->sDay.':'.$this->fDay;
+                    }
+                    break;
+                case 'day-month':
+                    if (is_null($this->sDayInMonth) || is_null($this->fDayInMonth)){
+                        $schema .= $value;
+                    }else{
+                        $schema .= $this->sDayInMonth.':'.$this->fDayInMonth;
+                    }
+                    break;
+                case 'day-week':
+                    if (is_null($this->arrDayInWeek)){
+                        $schema .= $value;
+                    }else{
+                        $schema .= $this->arrDayInWeek;
+                    }
+                    break;
+                case 'hour':
+                    if (is_null($this->sHourInDay) || is_null($this->fHourInDay)){
+                        $schema .= $value;
+                    }else{
+                        $schema .= $this->sHourInDay.':'.$this->fHourInDay;
+                    }
+                    break;
+                case 'parity':
+                    if (is_null($this->DayParity)){
+                        $schema .= $value;
+                    }else{
+                        $schema .= $this->DayParity.'';
+                    }
+                    break;
+                default:
+                    if (is_null($this->$key)){
+                        $schema .= $value;
+                    }else{
+                        $schema .= $this->$key;
+                    }
+                    break;
+            }
+            
+            if ($ii++ < count(self::$pointSchema)){
+                $schema .= '&';
+            }
+        }
+        $this->schema = $schema;
+        
+        //exit($this->name.'|'.$this->schema);
+    }
+}

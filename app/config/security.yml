@@ -1,0 +1,63 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    encoders:
+            FOS\UserBundle\Model\UserInterface: md5
+
+    role_hierarchy:
+        ROLE_STAFF:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_STAFF, ROLE_POINT, ROLE_STORE, ROLE_GIFT, ROLE_REPORT]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_STAFF, ROLE_ADMIN, ROLE_REPORT, ROLE_STORE, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        #in_memory:
+        #    memory:
+        #        users:
+        #            jayesh.it: { password: "1234567890", roles: 'ROLE_ADMIN' }
+        fos_userbundle:
+            id: customer_code_provider
+        my_fos_facebook_provider:
+            id: my.facebook.user
+        chain_provider: 
+            chain:
+                providers: [fos_userbundle, my_fos_facebook_provider]
+    firewalls:
+        main:
+            pattern:    ^/.*
+            fos_facebook:
+                app_url: "http://apps.facebook.com/appName/"
+                server_url: "http://levis.crm/"
+                check_path: /login_facebook_check
+                default_target_path: /
+                provider: my_fos_facebook_provider
+                success_handler: facebook_authentication_handler
+            form_login:
+                provider: fos_userbundle
+                check_path: /login_check
+                login_path: /login
+                success_handler: login_success_handler
+                failure_handler: login_failure_handler
+            logout:
+                path:   /logout
+                target: /
+            anonymous: true
+            security: true
+            switch_user: true
+            remember_me:
+                key: PRcfnlkHXMvVPOnHJgSPlW
+                lifetime: 604800
+                path: /
+                domain: ~
+            switch_user: true
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/store/, role: ROLE_STAFF }

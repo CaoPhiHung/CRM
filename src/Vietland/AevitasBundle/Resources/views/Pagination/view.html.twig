@@ -1,0 +1,29 @@
+<div class="dataTables_paginate paging_full_numbers min-{{min}} current{{current}} pagination" id="tSortable_paginate">
+    <ul rel="{{app.request.baseurl}}sort=%sort%&amount=%amount%">
+    {% if current > 1 %}
+        <li><a class="first paginate_button" href="{{router}}page=1&amount={{amount}}" tabindex="0" id="tSortable_first">First</a></li>
+        <li><a class="previous paginate_button" href="{{router}}page={{current - 1}}&amount={{amount}}" tabindex="0" id="tSortable_previous">Previous</a></li>
+    {% else %}
+        <li class="disabled"><a class="first paginate_button" tabindex="0" id="tSortable_first">First</a></li>
+        <li class="disabled"><a class="previous paginate_button" tabindex="0" id="tSortable_previous">Previous</a></li>
+    {% endif %}
+{% if current - 1 >= min %}
+{% for p in range(min, current - 1) %}
+        <li><a href="{{router}}page={{p}}&amount={{amount}}" class="paginate_button" tabindex="0">{{p}}</a></li>
+{% endfor %}
+{% endif %}
+        <li><a class="paginate_active" tabindex="0">{{'Page' | trans}} {{current}}</a></li>
+{% if max >= current + 1 %}
+{% for p in range(current + 1, max) %}
+        <li><a href="{{router}}page={{p}}&amount={{amount}}" class="paginate_button" tabindex="0">{{p}}</a></li>
+{% endfor %}
+{% endif %}
+{% if max < total %}
+        <li><a href="{{router}}page={{current+1}}&amount={{amount}}" class="next paginate_button" tabindex="0" id="tSortable_next">Next</a></li>
+        <li><a href="{{router}}page={{total}}&amount={{amount}}" class="last paginate_button" tabindex="0" id="tSortable_last">Last</a></li>
+{% else %}
+        <li class="disabled"><a class="next paginate_button" tabindex="0" id="tSortable_next">Next</a></li>
+        <li class="disabled"><a class="last paginate_button" tabindex="0" id="tSortable_last">Last</a></li>
+{% endif %}
+        </ul>
+    </div>

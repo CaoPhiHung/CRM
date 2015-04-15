@@ -1,0 +1,155 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+        <title>{{'Become A Member' | trans}} - {{'Step 3' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>{{'Become A Member' | trans}}</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+<section id="form_reg" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                <ul class="steps">
+                    <li class="active step1"><span><span>1. {{'Create Password' | trans}}</span></span></li>
+                    <li class="active step2"><span><span>2. {{'Fill Basic Information' | trans}}</span></span></li>
+                    <li class="active step3"><span><span>3. {{'Extended Profile' | trans}}</span></span></li>
+                    <li class="step4"><span><span>4. {{'Opt In' | trans}}</span></span></li>
+                </ul>
+                <div class="info stepthr">
+                    <span class="title"><h3>3. {{'Extended Profile' | trans}}</h3></span>
+                    <div>
+                        <p>{{'Update your data to get more points and offer from TBF.' | trans}}</p>
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                        <form action="{{ path('levis_home_register_online_step3') }}" {{ form_enctype(form) }} method="POST" class="reg_step">
+                            <div class="row">{{ form_row(form.mari) }}{{ form_row(form.kids) }}
+                            </div>
+                            <div class="row">{{ form_row(form.ocpu) }}{{ form_row(form.inco) }}
+                            </div>
+                            {{ form_rest(form) }}
+                        </form>
+                        <div class="row aniv">
+                            <span>{{'Anniversary Date (you can add up to 5 dates)' | trans}}</span><a href="{{path('home_add_anniversary')}}" class="addmore">+</a>
+                                <div class="annies">
+                                {{ anniversaries |raw }}
+                                </div>
+                        </div>
+                        <span><a class="yellow_button submit3" href="#">{{'Next' | trans}}</a></span>
+                    </div>
+                </div>
+                <span class="points"><em>+10</em></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/template" id="sample">
+<select>
+    <option value="{{'Birthday' | trans}}">{{'Birthday' | trans}}</option>
+    <option value="{{'Wedding' | trans}}">{{'Wedding' | trans}}</option>
+    <option value="{{'Son\'s birthday' | trans}}">{{'Son\'s birthday' | trans}}</option>
+    <option value="{{'Daughter\'s birthday' | trans}}">{{'Daughter\'s birthday' | trans}}</option>
+</select>
+</script>
+</section>
+{{pointsConfig() | raw}}
+{% endblock %}
+{% block javascript %}
+<script>
+$(document).ready(function(){
+    $('select').select2();
+    $('a.submit3').on('click', function(e){
+        e.preventDefault();
+        $('form.reg_step').submit();
+    });
+    
+    function initAnniversary(el){
+        status = parseInt($('#reg_step_mari').val());
+        if(status > 1) var elDate = customDate = [{id: '{{'Birthday' | trans}}', text: '{{'Birthday' | trans}}'},{id: '{{'Wedding' | trans}}', text: '{{'Wedding' | trans}}'},{id: "{{'Son\'s birthday' | trans | raw}}", text: "{{'Son\'s birthday' | trans | raw}}"},{id: "{{'Daughter\'s birthday' | trans | raw}}", text: "{{'Daughter\'s birthday' | trans | raw}}"}];
+        else var elDate = customDate = [{id: '{{'Love Anniversary' | trans}}', text: '{{'Love Anniversary' | trans}}'},{id: "{{'Parent\'s Wedding Anniversary' | trans}}", text: "{{'Parent\'s Wedding Anniversary' | trans | raw}}"},{id: "{{'Mom\'s birthday' | trans | raw}}", text: "{{'Mom\'s birthday' | trans | raw}}"},{id: "{{'Dad\'s birthday' | trans | raw}}", text: "{{'Dad\'s birthday' | trans | raw}}"}];
+        if($(el).val() != "" && $(el).val() != '{{'Love Anniversary' | trans}}' && $(el).val() != "{{'Parent\'s Wedding Anniversary' | trans}}" && $(el).val() != "{{'Mom\'s birthday' | trans | raw}}" && $(el).val() != "{{'Dad\'s birthday' | trans | raw}}" && $(el).val() != '{{'Birthday' | trans}}' && $(el).val() != '{{'Wedding' | trans}}'  && $(el).val() !=  "{{'Son\'s birthday' | trans | raw}}" && $(el).val() != "{{'Daughter\'s birthday' | trans | raw}}"){
+            elDate.push({id: $(el).val(), text: $(el).val()});
+        }
+        elDate.push({id: '{{'Custom Date' | trans}}', text: '{{'Custom Anniversary date' | trans}}'});
+        $(el).select2({
+            placeholder: "Select report type",
+            allowClear: true,
+            data: elDate
+            });
+
+        $(el).on('change',function(e){
+        if(e.val == '{{'Custom Date' | trans}}') {$(el).removeClass('select2-offscreen');$(el).prev().hide()}
+        })
+        delete elDate;
+    }
+    $('#s2id_reg_step_mari').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.mari+' {{'points' | trans}}').attr('data-original-title','{{'Mariage'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('#s2id_reg_step_ocpu').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.ocpu+' {{'points' | trans}}').attr('data-original-title','{{'Occupation'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('#s2id_reg_step_kids').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.kids+' {{'points' | trans}}').attr('data-original-title','{{'Children'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('#s2id_reg_step_inco').attr('data-content', '{{'Earn more points by update this field to get' | trans}} '+points.inco+' {{'points' | trans}}').attr('data-original-title','{{'Income'|trans}}').hover(function(){$(this).popover('show')},function(){$(this).popover('hide')})
+    $('form.reg_step').change(function(){
+        url = $(this).attr('action');
+        $form = $(this);
+        $('.title h3').addClass('loading');
+        $.ajax({
+            url: url+'.json',
+            type:'POST',
+            data: $form.serialize(),
+            dataType: 'json',
+            success: function(data){
+                $('.title h3').removeClass('loading');
+                if(data.points) {
+                $badge = $('.content span.points:first').clone();
+                $('span.points').after($badge);
+                $badge.find('em').text('+'+data.points);
+                $badge.css({display: "block",opacity: 0}).animate({bottom: '500px',opacity: 1}, 5000, 'swing', function(){$(this).fadeOut('slow').remove()})
+                }
+            }
+        });
+    });
+    $('.annies form input.datetime').datepicker({format: "dd-mm-yyyy"})
+    $('.aniv a.addmore').on('click', function(e){
+        e.preventDefault();
+        url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function(data){
+                if(data.status) $('.annies').append(data.html);
+                else alert(data.html);
+                $('.annies form:last input.datetime').datepicker({format: "dd-mm-yyyy"})
+                el = $('.annies form:last input.anniname');
+                initAnniversary(el);
+            }
+        });
+    });
+    $.each($('.annies form input.anniname'), function(i, el){
+    initAnniversary(el);
+    });
+    $('.row.aniv').delegate('form', 'change', function(){
+        $form = $(this);
+        $('.title h3').addClass('loading');
+        $.ajax({
+            url: $form.attr('action'),
+            dataType: 'json',
+            data: $form.serialize(),
+            type: 'POST',
+            success: function(data){
+                $('.title h3').removeClass('loading');
+                if(data.points) {
+                $badge = $('.content span.points:first').clone();
+                $('span.points').after($badge);
+                $badge.find('em').text('+'+data.points);
+                $badge.css({display: "block",opacity: 0}).animate({bottom: '500px',opacity: 1}, 5000, 'swing', function(){$(this).animate({opacity:0},5000,'swing',function(){$(this).fadeOut().remove()})})
+                }
+            }
+        })
+    });
+});
+</script>
+{% endblock %}

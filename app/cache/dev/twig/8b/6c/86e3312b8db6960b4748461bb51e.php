@@ -1,0 +1,502 @@
+<?php
+
+/* AevitasLevisBundle:Static:term.vi.html.twig */
+class __TwigTemplate_8b6c86e3312b8db6960b4748461bb51e extends Vietland\AevitasBundle\Helper\AevitasTwigTemplate
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = $this->env->loadTemplate("AevitasLevisBundle:Front:root.html.twig");
+
+        $this->blocks = array(
+            'title' => array($this, 'block_title'),
+            'header' => array($this, 'block_header'),
+            'content' => array($this, 'block_content'),
+        );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "AevitasLevisBundle:Front:root.html.twig";
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 2
+    public function block_title($context, array $blocks = array())
+    {
+        // line 3
+        echo "<title>Star Club - Chính sách bảo mật</title>
+";
+    }
+
+    // line 5
+    public function block_header($context, array $blocks = array())
+    {
+        // line 6
+        echo "<!-- Le styles -->
+";
+        // line 7
+        if (isset($context['assetic']['debug']) && $context['assetic']['debug']) {
+            // asset "5013256_0"
+            $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('routing')->getPath("_assetic_5013256_0") : $this->env->getExtension('assets')->getAssetUrl("bundles/aevitaslevis/front/cpassets/compress_contact_us_bootstrap_1.css");
+            // line 13
+            echo "<link rel=\"stylesheet\" href=\"";
+            echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
+            echo "\" type=\"text/css\" media=\"screen\" />
+";
+            // asset "5013256_1"
+            $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('routing')->getPath("_assetic_5013256_1") : $this->env->getExtension('assets')->getAssetUrl("bundles/aevitaslevis/front/cpassets/compress_contact_us_bootstrap-responsive_2.css");
+            echo "<link rel=\"stylesheet\" href=\"";
+            echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
+            echo "\" type=\"text/css\" media=\"screen\" />
+";
+            // asset "5013256_2"
+            $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('routing')->getPath("_assetic_5013256_2") : $this->env->getExtension('assets')->getAssetUrl("bundles/aevitaslevis/front/cpassets/compress_contact_us_faq_3.css");
+            echo "<link rel=\"stylesheet\" href=\"";
+            echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
+            echo "\" type=\"text/css\" media=\"screen\" />
+";
+            // asset "5013256_3"
+            $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('routing')->getPath("_assetic_5013256_3") : $this->env->getExtension('assets')->getAssetUrl("bundles/aevitaslevis/front/cpassets/compress_contact_us_style_4.css");
+            echo "<link rel=\"stylesheet\" href=\"";
+            echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
+            echo "\" type=\"text/css\" media=\"screen\" />
+";
+        } else {
+            // asset "5013256"
+            $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('routing')->getPath("_assetic_5013256") : $this->env->getExtension('assets')->getAssetUrl("bundles/aevitaslevis/front/cpassets/compress_contact_us.css");
+            echo "<link rel=\"stylesheet\" href=\"";
+            echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
+            echo "\" type=\"text/css\" media=\"screen\" />
+";
+        }
+        unset($context["asset_url"]);
+    }
+
+    // line 16
+    public function block_content($context, array $blocks = array())
+    {
+        // line 17
+        echo "
+<!-- Carousel
+================================================== -->
+<div id=\"panel\" class=\"toppanel\">
+    <div class=\"shadow_wrapper\">
+        <div>
+            <div class=\"content\">
+                <h3>Điều khoản Sử dụng</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id=\"main\" class=\"clearfix\">
+    <div class=\"shadow_wrapper\">
+        <div>
+            <div class=\"content\">
+                <div class=\"fulltext\">
+                    <div class=\"WordSection1\"><p align=\"center\"><b><span>STARCLUBVN.COM: ĐIỀU KIỆN DỊCH VỤ</span></b></p><p align=\"center\"><b style=\"mso-bidi-font-weight:normal\"><span>Cập nhật 31 Tháng 7 năm 2013</span></b></p><p><span><span>Trang web starclubvn.com là một
+dịch vụ của Tập đoàn Thanh Bắc Fashion.</span></span><span> Các điều kiện của
+dịch vụ, cùng với các điều khoản và các
+điều kiện khác có thể xuất hiện trên các
+trang web từ thời gian để thời gian (gọi
+chung là \"Điều kiện\") thiết lập ra các
+điều khoản và điều kiện mà bạn có thể
+sử dụng và truy cập các trang web.</span></p><p><span><span>Bằng cách truy cập trang
+web, bạn ĐỒNG Ý VỚI NHỮNG ĐIỀU
+KIỆN.</span></span><span><span>NẾU BẠN KHÔNG ĐỒNG Ý VỚI NHỮNG
+ĐIỀU KIỆN (CÓ THỂ ĐƯỢC SỬA ĐỔI
+BỞI THANH BAC FASHION MÀ KHÔNG CẦN BÁO TRƯỚC), bạn
+không được phép truy cập hoặc SỬ DỤNG
+TRANG WEB.</span></span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>1. Sử dụng
+trang web và nội dung</span></b></p><p><span>1.1 Sử dụng trang web. <span>Bạn
+có thể truy cập và sử dụng trang web chỉ cho sử
+dụng cá nhân của bạn phù hợp với những
+điều kiện.</span><span>Bạn đồng
+ý không truy cập hoặc sử dụng trang web trong bất
+cứ cách nào đó là bị cấm bởi những điều
+kiện hoặc là nếu không trái pháp luật.</span> Chúng tôi
+có quyền, tùy theo quyết định của chúng tôi,
+để chấm dứt hoặc đình chỉ truy cập
+của bạn, và / hoặc sử dụng, các trang web, hoặc
+bất cứ phần nào trong đó, bất cứ lúc nào, có
+hoặc không có thông báo và vì lý do nào (hoặc không có
+lý do), và bạn đồng ý rằng (a) nếu ủy
+quyền để truy cập các trang web bị chấm dứt,
+bạn sẽ không sau đó truy cập, hoặc cố truy cập,
+các trang web, trực tiếp hoặc gián tiếp, và (b) nếu
+ủy quyền để truy cập các trang web bị
+đình chỉ, bạn sẽ không sau đó truy cập, hoặc
+cố truy cập, các trang web, trực tiếp hoặc gián
+tiếp, cho đến khi đình chỉ được lấy
+ra và chúng tôi cung cấp cho bạn thể hiện thông báo
+đó.</span></p><p><span>1.2 Sử dụng nội dung. Bạn có thể
+tạo một bản sao duy nhất và / hoặc in một bản
+sao của bất kỳ thông tin hiển thị, truyền
+đi trên các trang web (bao gồm, nhưng không giới hạn,
+Biểu trưng, &#8203;&#8203;nhãn hiệu hàng hoá, nhãn hiệu
+dịch vụ, thư mục, hướng dẫn, các bài
+báo, ý kiến, đánh giá, văn bản, hình ảnh,
+hình ảnh, minh họa, đoạn âm thanh, video, html, mã nguồn
+và mã đối tượng, phần mềm, dữ liệu,
+và như thế, gọi chung là \"Nội dung\") để
+sử dụng riêng của bạn.</span></p><p><span>1.3 Những hạn chế. Trừ khi
+được cho phép tại mục 1.1 và 1.2 ở trên, bạn
+đồng ý không, mà không được phép bằng
+văn bản của chúng tôi, (a) phân phối (bao gồm cả
+thông qua e-mail), hoặc cung cấp bản sao của bất
+kỳ nội dung cho bất cứ ai, (b ) tái xuất các nội
+dung trên Internet hoặc bất kỳ trang web mạng nội
+bộ hoặc mạng diện rộng hoặc kết hợp
+các nội dung trong bất kỳ cơ sở dữ liệu,
+tập tin, biên soạn, hoặc lưu trữ, (c) tái tạo,
+thích ứng, phân phối, thực hiện hoặc hiển
+thị nội dung bất kỳ, trong mỗi trường
+hợp ngoại trừ trong phạm vi cần thiết cho
+các mục đích hạn chế về xem tài liệu trên
+trang web, (d) thay đổi hoặc loại bỏ bất kỳ
+nhãn hiệu, bản quyền hoặc bất kỳ thông báo
+khác chứa trong bất kỳ nội dung, (e) lưu trữ
+hoặc giữ lại bất kỳ nội dung dưới
+mọi hình thức, (f) sử dụng cho bất cứ mục
+đích thương mại, (g) sử dụng bất kỳ
+thương hiệu của chúng tôi như MetaTags trên các
+trang web khác, (h) sử dụng trang web trong bất cứ cách
+nào đó là bất hợp pháp hoặc làm suy yếu hoạt
+động của trang web hoặc có sẵn hoặc sử
+dụng của nó bởi những người khác, và / hoặc
+(i ) hiển thị bất kỳ một phần của
+trang web trong khung hình (hoặc bất kỳ nội dung thông
+qua các liên kết trong-line). Bạn đồng ý không
+để dịch ngược, thiết kế đối
+chiếu hoặc tháo rời bất kỳ phần mềm
+hoặc các sản phẩm hoặc quá trình truy cập thông
+qua các trang web khác, và không để chèn các mã hoặc sản
+phẩm hay thao tác các nội dung trong bất kỳ cách nào có
+ảnh hưởng đến kinh nghiệm của người
+dùng. Bạn cũng đồng ý không sử dụng bất
+kỳ khai thác dữ liệu, thu thập thông web, robot,
+cancelbots, nhện, trojan, hoặc thu thập bất kỳ dữ
+liệu hay phương pháp khai thác có liên quan đến việc
+bạn sử dụng các trang web ngoại trừ công cụ
+tìm kiếm thông thường được sử dụng
+theo hướng dẫn chỉ đạo để tìm kiếm
+động cơ và có sẵn trên trang web.</span></p><p><span>1.4 Thông tin sản phẩm và màu sắc. <span>Chúng tôi đã thực hiện mọi nỗ lực
+để hiển thị một cách chính xác màu sắc của
+sản phẩm của chúng tôi xuất hiện trên các trang web.</span>
+Tuy nhiên, như các màu sắc thực tế bạn nhìn thấy
+sẽ phụ thuộc vào màn hình của bạn, chúng tôi
+không thể đảm bảo rằng màn hình hiển thị
+màn hình của bạn với bất kỳ màu nào sẽ là
+chính xác. Hầu hết các sản phẩm của Star Club
+hiển thị trên các trang web có sẵn trong các cửa hàng
+chọn Thanh Bắc Fashion trong Việt Nam và lựa chọn
+thị trường nước ngoài trong khi nguồn cung cấp
+cuối. Trong một số trường hợp, hàng hóa bày
+bán trên các trang web có thể không có sẵn trong các cửa hàng
+Thanh Bắc Fashion. Các giá được hiển thị trên
+các trang web được tính bằng đô la Mỹ và có
+giá trị và chỉ có hiệu lực tại Việt Nam.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>2. Đăng
+ký</span></b></p><p><span><span>Một số vùng của
+trang web có thể yêu cầu đăng ký.</span></span><span> Nếu bạn đăng
+ký hoặc cung cấp thông tin cho chúng tôi trong bất cứ
+cách nào, bạn đồng ý cung cấp chỉ, <span>những</span> thông tin đầy đủ và chính
+xác thực sự. Nếu chúng ta đưa ra một tên
+người dùng và / hoặc mật khẩu với bạn,
+bạn đồng ý để bảo vệ thông tin
+như vậy, trong số những thứ khác, giữ mật
+khẩu và các thông tin khác liên quan đến tài khoản của
+bạn bí mật. <span>Nếu, bất kể các
+nghĩa vụ nêu trên, bạn cho phép một bên khác sử dụng
+tài khoản của bạn, bạn sẽ chịu trách nhiệm
+cho tất cả các sử dụng các trang web của bên sử
+dụng tài khoản của bạn.</span></span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>3. Liên kết và
+thứ ba Giao dịch </span></b></p><p><span>3.1 Kết nối các website bên ngoài. <span>Chúng tôi có thể cung cấp liên kết đến
+các trang web khác và tài nguyên Internet được điều
+hành bởi các bên khác hơn Star Club.</span><span>Chúng
+tôi đã không kiểm soát các trang web và các nguồn lực hoặc
+chính sách bảo mật của họ.</span><span>Siêu
+liên kết như vậy được cung cấp cho bạn
+tham khảo.</span> Sự bao gồm các siêu liên kết đến
+các trang web đó không bao hàm bất kỳ tài trợ, liên kết
+hoặc chứng thực của các tài liệu trên các trang
+web hay với những hoạt động của họ.</span></p><p><span>3.2 Giao dịch của bên thứ ba. <span>Một số phần của trang web có thể
+hướng dẫn bạn đến một trang web của
+bên thứ ba.</span> Giao dịch hoặc thông tin liên lạc của
+bạn thông qua các trang web với bất kỳ bên nào khác
+hơn chúng tôi hoàn toàn chịu giữa bạn và bên thứ
+ba. <span>Xin vui lòng xem xét cẩn thận các chính sách
+và thực hành của bên thứ ba và chắc chắn rằng
+bạn cảm thấy thoải mái với những chính sách
+và thực tiễn trước khi bạn tham gia vào cuộc
+giao dịch nào.</span><span>Bất kỳ khiếu nại,
+mối quan tâm hoặc câu hỏi mà bạn có thể có liên
+quan đến vật liệu được cung cấp bởi
+bên thứ ba sẽ được chuyển trực tiếp
+cho bên thứ ba.</span></span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>4. Sở hữu
+trí tuệ</span></b></p><p><span>Trừ phần nội dung đó là trong phạm
+vi công cộng, tất cả các nội dung, cũng như
+việc lựa chọn và sắp xếp nội dung, thuộc
+sở hữu của (hoặc giấy phép) công ty Thanh Bắc
+Fashion, các chi nhánh hoặc các nhà cung cấp và được
+bảo vệ bởi bản quyền, hình thức
+thương mại, thương hiệu, cạnh tranh không
+lành mạnh và / hoặc các luật khác và có thể không
+được sử dụng, sao chép hoặc bắt
+chước toàn bộ hoặc một phần, trừ khi
+được quy định trong các điều kiện.
+Trừ khi có quy định rõ ràng trong các điều kiện,
+tất cả các quyền và các nội dung được bảo
+lưu của Tập đoàn Thanh Bắc Fashion.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>5. Sự
+bồi thường</span></b></p><p><span>Bạn đồng ý bồi thường
+và giữ vô hại Star Club và các chi nhánh, nhân viên, giám
+đốc, nhân viên, cổ đông, các nhà cung cấp thông
+tin, nhà cung cấp và người được cấp phép
+(gọi chung là \"Bảo Hiểm Bên\") từ và chống
+lại bất kỳ và tất cả các trách nhiệm pháp
+lý và chi phí, bao gồm, nhưng không giới hạn , lệ
+phí luật sư hợp lý, phát sinh do Bên Bồi thường
+đối với bất kỳ khiếu nại phát sinh (a)
+truy cập và / hoặc sử dụng các trang web, (b) hành vi
+vi phạm của bất kỳ các điều kiện của
+bạn hoặc bất kỳ người sử dụng
+tài khoản của bạn, và / hoặc (c) bất kỳ cáo
+buộc đó, nếu đúng, sẽ tạo thành một sự
+vi phạm của bất kỳ các điều kiện của
+bạn hoặc bất kỳ người sử dụng
+tài khoản của bạn.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>6. Lỗi đánh
+máy và hủy đơn đặt hàng</span></b></p><p><span>Trong trường hợp một sản phẩm
+Thanh Bắc Fashion là nhầm lẫn được liệt
+kê với một mức giá không chính xác, hoặc những
+thông tin không chính xác, Star Club sẽ có quyền từ chối
+hoặc hủy bỏ bất kỳ đơn đặt
+hàng cho các sản phẩm được liệt kê với
+mức giá không chính xác. Ngoài ra, Star Club có quyền bất
+cứ lúc nào sau khi nhận được đơn đặt
+hàng từ chối hoặc hủy bỏ đặt hàng của
+bạn vì lý do nào, có hoặc không theo thứ tự
+đã được xác nhận và thẻ tín dụng của
+bạn bị tính phí. Nếu thẻ tín dụng của bạn
+đã được tính phí cho việc mua và đặt hàng
+của bạn bị hủy bỏ, Star Club sẽ cấp
+một khoản tín dụng vào tài khoản thẻ tín dụng
+của bạn trong số tiền phí.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>7. Không bảo
+đảm</span></b></p><p><span><span>Trang web được cung
+cấp trên \"như là\", \"NẾU CÓ\" cơ sở.</span></span><span> NỘI DUNG TẢI XUỐNG
+HOẶC CÓ ĐƯỢC QUA VIỆC SỬ DỤNG TRANG WEB
+ĐƯỢC LÀM THUỘC QUYỀN CỦA RIÊNG BẠN VÀ RỦI
+RO. CHÚNG TÔI VÀ NHỮNG NHÀ CUNG CẤP CỦA CHÚNG TÔI TỪ CHỐI
+BẤT KỲ VÀ MỌI BẢO ĐẢM VÀ ĐẠI DIỆN,
+DÙ NGỤ Ý, nói miệng hay viết, BAO GỒM NHƯNG
+KHÔNG HẠN CHẾ MỌI VÀ TẤT CẢ CÁC BẢO ĐẢM
+VỀ PHẨM, chăm sóc hợp lý, Tương thích,
+an ninh, chất lượng, HẠN CÓ SẴN, HOÀN THIỆN,
+ĐÁNG TIN CẬY, CHÍNH XÁC, VÀ / HOẶC PHÙ HỢP CHO MỘT
+MỤC ĐÍCH CỤ THỂ (đã hoặc chưa CHÚNG TÔI
+VÀ / HOẶC BẤT CỨ NHÀ CUNG CẤP CỦA CHÚNG TÔI BIẾT,
+CÓ LÝ DO ĐỂ BIẾT, ĐÃ ĐƯỢC TƯ
+VẤN, hay nói cách khác TRONG THỰC TẾ BIẾT BẤT CỨ
+MỤC ĐÍCH ĐÓ), trong mỗi trường hợp
+ĐỐI VỚI CÁC TRANG WEB (BAO GỒM NHƯNG KHÔNG GIỚI
+HẠN, tất cả nội dung). <span>Hơn nữa,
+chúng TUYỆT ĐỐI TỪ CHỐI BẤT KỲ VÀ TẤT
+CẢ NHỮNG BẢO HÀNH DỊCH VỤ VÀ / HOẶC KHÔNG
+VI PHẠM ĐỐI VỚI CÁC TRANG WEB (BAO GỒM NHƯNG
+KHÔNG GIỚI HẠN, tất cả nội dung).</span> Chúng
+tôi và các nhà cung cấp của chúng tôi không đại diện
+hoặc đảm bảo rằng thông tin trên trang web này là
+chính xác, đầy đủ, <span>hoặc</span> hiện
+tại. <span>Chúng tôi không chịu trách nhiệm in ấn
+hay các lỗi khác, không chính xác hoặc thiếu sót.</span> Giá
+cả và thông tin sẵn có, giới thiệu sản phẩm
+và chương trình khuyến mãi có thể thay đổi mà
+không cần thông báo, và chúng tôi có quyền thay đổi hoặc
+cập nhật thông tin bất cứ lúc nào. Ngoài ra, chúng tôi
+không khẳng định những vật liệu hoặc nội
+dung có sẵn thông qua các trang web phù hợp hoặc có sẵn
+để sử dụng bên ngoài Việt Nam và truy cập
+vào chúng từ vùng lãnh thổ nơi mà nội dung của họ
+là bất hợp pháp đều bị cấm. <span>Một số luật không cho phép bảo đảm
+ngụ ý được loại trừ hoặc sửa
+đổi, vì vậy không phải tất cả những hạn
+chế trên có thể áp dụng cho bạn.</span> Trang web
+được kiểm soát, điều hành và quản
+lý bởi chúng tôi từ văn phòng của chúng tôi tại
+Việt Nam.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>8. Giới hạn
+trách nhiệm</span></b></p><p><span>Trừ trường hợp bị pháp luật
+cấm, TRONG BẤT CỨ TRƯỜNG HỢP STAR CLUB,
+chi nhánh, VÀ / HOẶC NHỮNG NHÀ CUNG CẤP KHÔNG CHỊU
+TRÁCH NHIỆM CHO (A) bất kỳ thiệt hại BẤT KỲ
+BẢN CHẤT NÀO TỪ, HOẶC LIÊN QUAN ĐẾN, MẤT,
+TRÌ HOÃN HOẶC KHÔNG THỂ SỬ DỤNG TRANG WEB (BAO GỒM
+NHƯNG KHÔNG HẠN CHẾ MỌI NỘI DUNG), MẤT NỘI
+DUNG LẤY ĐƯỢC TRANG WEB, và / hoặc (B) bất kỳ,
+HẬU QUẢ, ĐẶC BIỆT, NGẪU KHÓ KHĂN TIẾP
+NÀO BAO GỒM CẢ, NHƯNG KHÔNG GIỚI HẠN, THIỆT
+HẠI VỀ LỢI NHUẬN PHÁT SINH BÊN NGOÀI HOẶC BÊN
+TRONG BẤT CỨ CÁCH NÀO LIÊN QUAN ĐẾN NHỮNG ĐIỀU
+KIỆN VÀ / HOĂC PHÁT SINH BÊN NGOÀI VIỆC SỬ DỤNG
+HAY THI HÀNH TRANG WEB (BAO GỒM NHƯNG KHÔNG HẠN CHẾ MỌI
+NỘI DUNG), trong mỗi (A) và (B) TRÊN DÙ LÀ DỰA TRONG HỢP
+ĐỒNG , SƠ SUẤT, TRÁCH NHIỆM PHÁP LÝ NGHIÊM
+NGẶT HOẶC MẶT KHÁC VÀ CHO DÙ STAR CLUB, chi nhánh, VÀ /
+HOẶC NHỮNG NHÀ CUNG CẤP ĐÃ ĐƯỢC KHUYÊN VỀ
+KHẢ NĂNG THIỆT HẠI NHƯ VẬY. TRONG TẤT CẢ
+SỰ KIỆN, STAR CLUB CỦA TRÁCH NHIỆM TỔNG CHO
+KIỆN PHÁT SINH BÊN NGOÀI HOẶC BÊN TRONG BẤT CỨ CÁCH NÀO
+LIÊN QUAN ĐẾN NHỮNG ĐIỀU KIỆN VÀ / HOẶC
+VIỆC SỬ DỤNG HAY THI HÀNH TRANG WEB (BAO GỒM NHƯNG
+KHÔNG HẠN CHẾ MỌI NỘI DUNG) DÙ LÀ DỰA TRÊN HỢP
+ĐỒNG, NGHIÊM NGẶT TRÁCH NHIỆM HOẶC SẼ TNHH
+9. Điều kiện bổ sung và Sửa đổi Điều
+kiện</span></p><p><span><span>CHÚNG TÔI CÓ THÊM ĐIỀU KIỆN
+BỔ SUNG phối việc sử dụng TRANG WEB bằng
+cách gửi bài ĐIỀU ĐÓ TRÊN TRANG WEB THỜI GIAN TỪ-ĐẾN-THỜI
+GIAN.</span></span><span><span>Ngoài ra, chúng tôi có thể sửa đổi các
+điều kiện bất cứ lúc nào.</span><span>Khi chúng tôi làm, chúng tôi cũng sẽ xem xét lại
+\"cuối cùng cập nhật\" ngày ở trên cùng của
+các điều kiện.</span><span>Bạn có trách nhiệm
+thường xuyên xem xét các điều kiện hiện tại.</span><span>Phiên bản hiện tại hầu hết các
+điều kiện có thể được xem xét bằng
+cách nhấp vào \"Điều khoản sử dụng\"
+siêu văn bản liên kết nằm ở dưới cùng của
+trang web của chúng tôi.</span><span>Bạn tiếp tục
+sử dụng trang web sau khi chúng tôi đăng bài bất kỳ
+điều kiện sửa đổi chấp nhận của
+bạn với bất kỳ điều khoản sửa
+đổi như vậy.</span> Nếu bạn phản đối
+bất kỳ các Điều kiện hoặc bất kỳ
+thay đổi tiếp <span>theo</span>, bạn có thể
+không sử dụng trang web.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>10. Sửa đổi
+các trang web</span></b></p><p><span>Để rõ ràng hơn nữa, (a) chúng tôi có
+thể sửa đổi, đình chỉ, đình chỉ và
+/ hoặc hạn chế việc sử dụng toàn bộ
+hoặc bất kỳ phần nào của trang web bao gồm
+cả sự sẵn có của bất kỳ dữ liệu
+hay các thông tin khác trên trang web bất cứ lúc nào vì lý
+do nào mà không cần báo hoặc trách nhiệm pháp lý, và
+(b) chúng tôi có quyền, có hoặc không có thông báo cho bạn,
+để thay đổi bất kỳ dịch vụ
+được cung cấp trên trang web bao gồm, nhưng
+không giới hạn, giờ hoạt động, cấu
+trúc menu, thủ tục truy cập, các lệnh phần mềm,
+tài liệu , nhà cung cấp và / hoặc các dịch vụ
+khác.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>11. Luật điều
+chỉnh và quyền tài phán</span></b></p><p><span>Trang web được lưu trữ trên máy
+chủ đặt tại Việt Nam và được dự
+định để được xem bởi người
+dân của Việt Nam. <span>Các điều kiện
+được điều chỉnh bởi pháp luật của
+Nhà nước thành phố Hồ Chí Minh, Việt Nam, trừ
+trường hợp mâu thuẫn với các quy định của
+pháp luật.</span> Trong trường hợp bạn muốn
+để bắt đầu bất kỳ phù hợp với
+Star Club phát sinh từ hoặc liên quan đến các trang
+web (bao gồm, nhưng không giới hạn, nội dung của
+trang web) và / hoặc các điều kiện, bạn đồng
+ý khởi kiện như vậy trong các tòa án liên bang ngồi
+tại thành phố Hồ Chí Minh, Việt Nam trừ khi không
+liên bang quyền xét xử tồn tại, trong trường
+hợp này bạn đồng ý khởi kiện như
+vậy trong các tòa án bang ngồi tại thành phố Hồ
+Chí Minh, Việt Nam. Thêm nữa, bạn đồng ý rằng
+chúng tôi có thể khởi kiện chống lại bạn
+phát sinh từ hoặc liên quan đến trang web (bao gồm,
+nhưng không giới hạn, nội dung của trang web) và /
+hoặc các điều kiện tại tòa án như vậy
+và bạn khước từ tất cả các quyền mà bạn
+có thể có hoặc có sau này có phát sinh cuộc thi thẩm
+quyền hoặc địa điểm trong tòa án như vậy.</span></p><p><b style=\"mso-bidi-font-weight:
+normal\"><span>12. Điều
+khoản khác</span></b></p><p><span>Các điều kiện bao gồm, nhưng
+không giới hạn, và bất kỳ điều khoản
+và điều kiện khác có thể xuất hiện trên các
+trang web từ thời gian để thời gian có sự hiểu
+biết đầy đủ liên quan đến sử dụng
+và truy cập các trang web của bạn có và thay thế cho mọi
+thỏa thuận, điều khoản, điều kiện
+và hiểu <span>biết ,</span> cả bằng
+văn bản và bằng miệng, liên quan đến sử
+dụng và truy cập các trang web với. Nếu bất kỳ
+phần nào của các điều kiện bị coi là không hợp
+lệ hoặc không thể thi hành, các phần không hợp lệ
+hoặc không thể thi hành được sửa đổi
+theo quy định của pháp luật hiện hành gần nhất
+có thể để phản ánh mục đích ban đầu
+của những điều khoản áp dụng, và phần
+còn lại của những điều kiện sẽ
+được duy trì hiệu lực và hiệu quả. Một
+phiên bản in của các Điều khoản sử dụng
+và bất kỳ thông báo cho bạn dưới dạng
+điện tử sẽ được chấp nhận
+trong thủ tục tố tụng tư pháp hoặc hành
+chính dựa trên hoặc liên quan đến các điều kiện
+với cùng mức độ và tuân theo các điều kiện
+tương tự như tài liệu kinh doanh khác và hồ
+sơ ban đầu tạo ra và duy trì ở dạng in. <span>Sự thất bại của Star Club đòi hỏi
+hoặc buộc thực hiện chặt chẽ của bạn
+đối với bất kỳ điều khoản của
+các điều kiện này sẽ không được coi là sự
+từ bỏ bất kỳ điều khoản hay quyền.</span><span>Sử dụng các trang web được cho
+phép ở bất cứ quyền hạn nào không có hiệu lực
+cho tất cả các quy định của các điều kiện.</span>
+Chúng tôi có thể thông báo cho bạn liên quan đến trang
+web và / hoặc các điều kiện bằng cách gửi
+e-mail đến địa chỉ e-mail được biết
+đến cuối cùng của bạn, và bất kỳ thông
+báo đó sẽ được coi là cho và nhận được
+vào ngày nó được gửi đi. Bạn đồng
+ý rằng bất kỳ nguyên nhân của hành động
+mà bạn có thể mong muốn mang lại phát sinh từ hoặc
+liên quan đến các điều kiện và / hoặc trang
+web phải bắt đầu trong vòng một (1) năm sau
+khi nguyên nhân của hành động phát sinh, nếu không,
+nguyên nhân hành động như vậy sẽ là vĩnh viễn
+bị cấm. Bạn không thể sử dụng trang web hoặc
+xuất khẩu nội dung <span>vi</span> phạm của
+Việt Nam. <span>Xuất khẩu và các quy định
+pháp luật.</span><span>Nếu bạn truy cập
+vào trang web từ một địa điểm bên ngoài Việt
+Nam, bạn có trách nhiệm tuân thủ tất cả luật
+pháp địa phương.</span></span></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+";
+    }
+
+    public function getTemplateName()
+    {
+        return "AevitasLevisBundle:Static:term.vi.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  85 => 17,  82 => 16,  48 => 13,  44 => 7,  41 => 6,  38 => 5,  33 => 3,  30 => 2,);
+    }
+}

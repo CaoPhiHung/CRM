@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--services>
+        <service id="vietland_user.registration.form.type" class="Vietland\UserBundle\Form\Type\RegistrationFormType">
+            <tag name="form.type" alias="vietland_user_registration" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
+        <service id="vietland_user.profile.form.type" class="Vietland\UserBundle\Form\Type\ProfileFormType">
+            <tag name="form.type" alias="vietland_user_profile" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
+        <service id="vietland_user.form.handler.registration" class="Vietland\UserBundle\Form\Handler\RegistrationFormHandler" scope="request" public="false">
+            <argument type="service" id="fos_user.registration.form" />
+            <argument type="service" id="request" />
+            <argument type="service" id="fos_user.user_manager" />
+            <argument type="service" id="fos_user.mailer" />
+            <argument type="service" id="doctrine.odm.mongodb.document_manager"/>
+            <argument type="service" id="translator"/>
+        </service>
+    </services-->
+</container>

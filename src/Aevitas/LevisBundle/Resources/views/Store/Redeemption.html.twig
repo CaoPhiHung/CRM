@@ -1,0 +1,145 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+{% block import %}
+<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/css/Point2VndCSS.css') }}" type="text/css" media="print" />
+{% endblock %}
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>users</li>
+    <li class="divider"></li>
+    <li>search</li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable">
+    <tr>
+        <th>Code</th>
+        <th>Store</th>
+        <th>Customer</th>
+        <th>C.Code</th>
+        <th>Baserate</th>
+        <th>Point</th>
+        <th>VND</th>
+        <th>Time</th>
+        <th>Action</th>
+    </tr>
+        {% for item in history %}
+    <tr>
+        <td>
+            {% if item.auth is null or item.auth != true %}
+                <div class="label label-warning">not Active</div><br/>
+            {% endif %}
+            {{ item.getHash}}
+        </td>
+        <td>
+        {% if item.getStore %}
+                {{ item.getStore.getName }}
+        {% endif %}
+        </td>
+        <td>
+        {% if item.getUser is not null %}
+                {{ item.getUser.getName }}
+        {% endif %}
+        </td>
+        <td>
+        {% if item.getUser is not null %}
+            {{ item.getUser.getCCode }}
+        {% endif %}
+        </td>
+        <td>
+            {% if item.getPoint is not null and item.getPoint > 0 %}
+                {{ item.getVnd/item.getPoint }}
+            {% endif %}
+        </td>
+        <td>{{ item.getPoint }}</td>
+        <td>{{ item.getVnd }}</td>
+        <td>{{ item.getTime|date('h:i:s d/m/Y') }}</td>
+        {% if item.auth is null or item.auth != true %}
+            <td><a href="javascript:deleteRedeem({{ item.getId }})">Delete</a></td>
+        {% else %}
+            <td><a href="javascript:printRedeem({{ item.getId }})">Print</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+<div class="modal fade" id="myModal" style="color:#000">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" style="color:#000">Redeemption Point to VND</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/aevitaslevis/js/print.js') }}"></script>
+    <script>
+        function printRedeem(id){
+            $('.loading-bar').show();
+            $.ajax({
+                url: '{{ path('backend_staff_redeemption_print') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {rid:id},
+                success: function(response){
+                    $('.loading-bar').hide();
+                    var cts = '<div id="vauth" style="text-align:right"><button class="btn btn-success" onclick="DoPrint()">Print</button></div>';
+                    cts += '<div id="printable"><p style="text-align:left" id="hashcode">Code: '+response.hash+'</p>';
+                    cts += '<p style="text-align:left">Time: '+response.time+'</p>';
+                    cts += '<p style="font-size:20px;text-align:center;padding-bottom:20px">Point Receipt</p>';
+                    cts += '<table align="center" class="dynamicTable table table-striped table-bordered table-condensed dataTable" aria-describedby="DataTables_Table_1_info">';
+                    cts += '<tr><th>Store</th><td>'+response.store+'</td></tr>';
+                    cts += '<tr><th>Customer</th><td>'+response.name+'</td></tr>';
+                    cts += '<tr><th>C.Code</th><td>'+response.ccode+'</td></tr>';
+                    cts += '<tr><th>Point to convert</th><td>'+response.point+'</td></tr>';
+                    cts += '<tr><th>Current baserate</th><td>'+response.baserate+'</td></tr>';
+                    cts += '<tr><th>VND</th><td>'+response.vnd+'</td></tr>';
+                    cts += '</table><div>';
+                    $('#myModal .modal-body').html(cts);
+                    $('#myModal').modal("show");
+                }
+            });
+        }
+        
+        function deleteRedeem(id){
+            if (!confirm("Are you sure ?")){
+                return;
+            }
+            $('.loading-bar').show();
+            $.ajax({
+                url: '{{ path('backend_staff_redeemption_delete') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {rid:id},
+                success: function(response){
+                    $('.loading-bar').hide();
+                    if (typeof(response.error) != 'undefined' || typeof(response.msg) == 'undefined' || response.msg != 'ok'){
+                        alert(response.error);
+                        return;
+                    }
+                    location.reload();
+                }
+            });
+        }
+        
+        function DoPrint(){
+            $("#printable").printElement({
+                overrideElementCSS:[
+                   '{{ asset('bundles/aevitaslevis/css/Point2VndCSS.css') }}',
+                   { href:'{{ asset('bundles/aevitaslevis/css/Point2VndCSS.css') }}',media:'print'}
+                ]
+            });
+        }
+    </script>
+{% endblock %}

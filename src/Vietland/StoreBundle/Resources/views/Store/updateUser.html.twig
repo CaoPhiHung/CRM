@@ -1,0 +1,119 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> {{'Store' | trans}}</a></li>
+    <li class="divider"></li>
+    <li>{{ 'User'|trans }}</li>
+    <li class="divider"></li>
+    <li>{{ 'Sign Up'|trans }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+<div class="alert alert-faded">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+</div>
+                {% endfor %}
+<form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST" autocomplete="off">
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="hidden">
+                {{form_label(form.username)}}
+                {{form_widget(form.username)}}
+                </div>
+                <div>
+                {{form_label(form.email)}}
+                {{form_widget(form.email)}}<a href="{{path('staff_checking_email')}}" data-type="email" class="search btn">{{'Check'| trans}}</a>
+                    </div>
+                    <div>
+                {{form_label(form.cellphone)}}
+                {{form_widget(form.cellphone)}}<a href="{{path('staff_checking_cellphone')}}" data-type="cellphone" class="search btn">{{'Check'| trans}}</a>
+                        </div>
+                        <label>{{'User\'s language' | trans}}</label>
+                {{form_widget(form.lang)}}
+            {{ form_rest(form) }}
+                    </div>
+                </div>
+                <div class="separator line bottom"></div>
+                <div class="form-actions" style="margin: 0;">
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+                </div>
+            </form>
+
+            <!-- Modal -->
+            <div id="searchemail" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <strong id="myModalLabel" style="color:#000">{{'Searching...' | trans}}</strong>
+                </div>
+                <div class="modal-body" style="color:#000">
+                    <i>Loading...</i>
+                    <ul>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </div>
+{% endblock %}
+
+{% block javascript %}
+            <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+            <script>
+                $(document).ready(function() {
+                    $('#fos_user_profile_form_lang').select2({data: [{id: 'en', text: 'English'}, {id: 'vi', text: 'Tiếng Việt'}], placeholder: 'Select Default Language'})
+                    $('.modal-body ul').delegate('.user', 'click', function() {
+                        data = JSON.parse($(this).attr('data'));
+                        //console.log(data);
+                        $.each(data, function(key, val) {
+                            if (typeof val == 'string')
+                                $('#fos_user_profile_form_' + key).val(val);
+                            else if (typeof val == 'number') {
+                                $('#fos_user_profile_form_sex option[value="' + val + '"]').attr('selected', 'selected');
+                                $('#fos_user_profile_form_sex').val(val);
+                            }
+                        })
+                        $('#searchemail').modal('hide');
+                    })
+                    $('#fos_user_profile_form_email').on('keyup', function() {
+                        $('#fos_user_profile_form_username').val($(this).val())
+                    })
+                    $('form.form-horizontal').on('change',function(){$('#fos_user_profile_form_username').val($('#fos_user_profile_form_email').val())})
+                    $('a.search').on('click', function(e) {
+                        e.preventDefault();
+                        href = $(this).attr('href');
+                        $('#searchemail').modal();
+                        $('#searchemail i').text('Loading...');
+                        $('#searchemail ul').html('');
+                        $.ajax({
+                            url: href + '/' + $('#fos_user_profile_form_' + $(this).attr('data-type')).val(),
+                            dataType: 'json',
+                            success: function(data) {
+                                $('#searchemail i').text('');
+                                if (data.count) {
+                                    $.each(data.users, function(i, item) {
+                                        spandata = '';
+                                        if (item.firstname != null)
+                                            spandata += item.firstname + ' ';
+                                        if (item.lastname != null)
+                                            spandata += item.lastname + ' - ';
+                                        if (item.cellphone != null)
+                                            spandata += item.cellphone + ' - ';
+                                        spandata += item.email;
+                                        if (item.Code == null)
+                                            $('.modal-body ul').append("<li><span>" + spandata + "<span><a class='user btn' data='" + JSON.stringify(item) + "'>Use this</a></li>");
+                                        else
+                                            $('.modal-body ul').append("<li><span>" + spandata + "<span><a class='btn'>Already map to ERP System</a></li>");
+                                    })
+                                } else {
+                                    $('#searchemail i').text('Can not find users match your creteria');
+                                }
+                            }
+                        })
+                    });
+                });
+                </script>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'Star Club - FAQ' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_contact_us.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/faq.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+
+<!-- Carousel
+================================================== -->
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>FAQ</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id="main" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <div id="faq-image"></div>
+                <div id="faq-content">
+
+                    <!-- PROGRAM OVERVIEW -->
+                    <div class="faq-box">
+                        <div class="faq-section">TỔNG QUAN CHƯƠNG TRÌNH</div>
+                        <div class="faq-question">
+                            <div class="q-left">STARCLUB LÀ GÌ?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('1-1', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-1-1">'Starclub' là chương trình khách hàng thân thiết chỉ dành cho khách hàng của TBF. Thành viên của Starclub sẽ nhận được rất nhiều ưu đãi cũng như <a href="http://www.starclubvn.com/reward" target="blank">những phần quà hấp dẫn.</a></div>
+
+                        <div class="faq-question">
+                            <div class="q-left">LÀM SAO ĐỂ THAM GIA?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('1-2', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-1-2">Khi mua sắm với hóa đơn trị giá 1,000,000 VND trở lên tại cửa hàng Levi's® gần nhất, bạn sẽ được mời đăng ký làm thành viên Starclub tại cửa hàng. Sau 1 phút bạn sẽ nhận được tin nhắn xác nhận đã trở thành thành viên Starclub, và sau 10 ngày bạn sẽ nhận được thẻ thành viên Starclub. Ngoài ra, bạn cũng có thể đăng ký tại trang chủ của Starclub bằng email hoặc tài khoản Facebook, rồi hoàn tất việc đăng ký tại cửa hàng Levi's® gần nhất theo email hướng dẫn.</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">STARCLUB HOẠT ĐỘNG NHƯ THẾ NÀO?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('1-3', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-1-3">Bạn sẽ tích lũy được điểm thưởng khi mua sắm tại cửa hàng Levi's® dựa trên giá trị hóa đơn và loại thẻ thành viên của bạn khi đó. Nếu quên Thẻ thành viên, bạn có thể cung cấp số điện thoại di động mà bạn dùng đăng ký Starclub cho nhân viên cửa hàng. Định kỳ bạn sẽ nhận được email và tin nhắn tổng kết số điểm bạn đã tích lũy được để đổi lấy <a href="http://www.starclubvn.com/reward" target="blank">những phần quà hấp dẫn</a> cùng những thông tin ưu đãi chỉ dành riêng cho thành viên Starclub.</div>
+                    </div>
+                    <!-- POINTS -->
+                    <div class="faq-box">
+                        <div class="faq-section">ĐIỂM THƯỞNG</div>
+                        <div class="faq-question">
+                            <div class="q-left">LÀM SAO ĐỂ TÍCH ĐIỂM?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-1', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-1">Tùy thuộc vào hạng thành viên của bạn, khi mua sắm bạn sẽ tích lũy được điểm thưởng dựa trên giá trị mua hàng của bạn như sau: 
+                            Khi tích lũy đủ điểm bạn sẽ tự động được nâng thứ hạng thành viên lên. Ngoài ra bạn cũng có thể điền đầy đủ thông tin của mình trong trang cá nhân, hoặc giói thiệu bạn bè để được thêm điểm thưởng.
+                        </div>
+
+                        <div class="faq-question">
+                            <div class="q-left">TÔI THEO DÕI ĐIỂM THƯỞNG ĐƯỢC TÍCH LŨY NHƯ THẾ NÀO?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-2', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-2">Ngay sau khi thanh toán bạn sẽ nhận được tin nhắn thông báo số điểm bạn vừa tích lũy được và số điểm bạn đang có trong tài khoản. Ngoài ra bất cứ khi nào bạn cũng có thể gửi tin nhắn cú pháp [CUPHAP] đến số #### để kiểm tra tài khoản hoặc đăng nhập vào trang chủ www.starclubvn.com.</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">ĐIỂM THƯỞNG CÓ HẾT HẠN KHÔNG?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-3', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-3">Có, điểm thưởng không sử dụng sẽ hết hạn trong vòng 2 năm kể từ ngày tích lũy. Do đó bạn đừng quên đổi điểm lấy quà nhé! Starclub sẽ gửi tin nhắn hoặc email nhắc nhở trước khi điểm thưởng của bạn hết hạn.</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">WHAT IS THE VALIDITY OF ACCUMULATED LOYALTY POINTS?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-4', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-4">answer 3</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">TÔI KHÔNG THẤY ĐIỂM THƯỞNG CẬP NHẬT TRONG TÀI KHOẢN CỦA MÌNH?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-5', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-5">Điểm thưởng của bạn thường sẽ được cập nhật trong vòng 24 giờ sau khi thanh toán, và chậm nhất là 5 ngày. Nếu bạn nghĩ có sai sót xảy ra, vui lòng liên hệ đường dây chăm sóc khách hàng: (+84) 937 200 501.</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">ĐIỂM THƯỞNG ĐƯỢC TÍNH NHƯ THẾ NÀO KHI MUA SẢN PHẨM GIẢM GIÁ HOẶC DÙNG PHIẾU QUÀ TẶNG?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-6', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-6">Khi mua các sản phẩm giảm giá, bạn không được tính điểm dựa trên giá nguyên, mà sẽ dựa trên giá đã giảm. Ví dụ, bạn mua một áo sơ mi đang được giảm giá từ 3,000,000 VND còn 1,500,000 VND, thì số điểm bạn tích được (theo hạng Silver) là 150 điểm (10,000 VND/điểm). Tương tự nếu bạn dùng phiếu quà tặng. Nói ngắn gọn, số điểm thưởng bạn tích lũy sẽ được tính dựa trên số tiền bạn thực trả.</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">NẾU TÔI THAY ĐỔI SỐ ĐIỆN THOẠI THÌ SAO?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-7', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-7">Khi bạn thay đổi số điện thoại, vui lòng liên hệ đường dây chăm sóc khách hàng: (+84) 937 200 501, Starclub sẽ yêu cầu bạn cung cấp thông tin xác thực và cập nhật ngay số mới cho bạn.</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">TÔI CÓ ĐƯỢC CHUYỂN ĐIỂM CHO THÀNH VIÊN KHÁC KHÔNG?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('2-8', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-2-8">Không, bạn không được chuyển điểm của mình cho thành viên khác.</div>
+                    </div>
+                    <!-- REWARDS REDEMPTION -->
+                    <div class="faq-box">
+                        <div class="faq-section">QUY ĐỔI QUÀ TẶNG</div>
+                        <div class="faq-question">
+                            <div class="q-left">TÔI ĐỔI ĐIỂM LẤY QUÀ NHƯ THẾ NÀO?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('3-1', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-3-1">Khi muốn đổi điểm lấy quà, bạn đăng nhập vào trang chủ www.starclubvn.com. Bạn vào phần "Quà tặng" và click chọn "Thêm vào giỏ" phần quà mình thích rồi click vào hình giỏ hàng góc trên phải để hoàn tất. Sau đó bạn có thể đến cửa hàng để nhận quà hoặc yêu cầu giao đến tận nơi.
+                        </div>
+
+                        <div class="faq-question">
+                            <div class="q-left">TÔI CÓ THỂ ĐỔI ĐIỂM THƯỞNG LẤY NHỮNG SẢN PHẨM GIẢM GIÁ KO</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('3-3', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-3-3">Bạn chỉ có thể đổi những phần quà có trong danh sách quà tặng của Starclub</div>
+
+                        <div class="faq-question">
+                            <div class="q-left">TÔI SẼ LÀM GÌ NẾU MUỐN DỪNG LÀM THÀNH VIÊN STARCLUB?</div>
+                            <div class="q-arrow"><span class="arrow-close" onclick="showAnswer('3-4', this)"></span></div>
+                        </div>
+                        <div class="faq-answer" id="answer-3-4">Bạn chỉ cần liên hệ đường dây chăm sóc khách hàng (+84) 937 200 501 để được hướng dẫn thêm.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block javascript %}
+$(document).ready(function() {
+$('.faq-question').on('click', function() {
+$(this).next().show()
+})
+});
+{% endblock %}

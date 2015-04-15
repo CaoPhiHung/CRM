@@ -1,0 +1,10 @@
+Vietland\AdsBundle\Document\Post:
+    properties:
+        content:
+            - MaxLength: 500
+            - MinLength: { limit: 50, message: "Ít nhất nội dung của bạn phải có {{ limit }} ký tự." }
+        titlePost:
+            - MinLength: { limit: 15, message: "Tiêu đề của mẫu tin phải ít nhất {{ limit }} ký tự."}
+            - NotBlank: ~
+        adress:
+            - NotBlank: ~

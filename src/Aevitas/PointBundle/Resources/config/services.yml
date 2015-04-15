@@ -1,0 +1,9 @@
+services: 
+    point.rule:
+      class: Aevitas\PointBundle\Services\PointRuleService
+      arguments:  ["@doctrine.odm.mongodb.document_manager", @service_container]            
+    user.event.points:
+        class: Aevitas\PointBundle\EventListener\EarnPointListener
+        arguments: [@service_container, "@doctrine.odm.mongodb.document_manager","@point.rule","@sms_sender","@mailer","@templating","@translator"]
+        tags:    
+            - { name: kernel.event_listener, event: user.earn.point, method: onEarnPointEvent }

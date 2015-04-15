@@ -1,0 +1,13 @@
+@page {
+    size:105mm 148mm;
+}
+@media print{
+    th {
+        background: #dddddd;
+        text-align:center;font-weight:bold;
+    }
+    table, th, td {
+        border:1px solid #ccc;
+        page-break-after:always;
+    }
+}

@@ -1,0 +1,63 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+<title>{{'Login to Loyalty Program' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>{{'Login to Loyalty Program' | trans}}</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+<style type="text/css">
+        .stepone .form-row + .form-row{float:none}
+    </style>
+    <section id="form_reg" class="clearfix">
+        <div class="shadow_wrapper">
+            <div>
+                <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                    <ul class="steps">
+                        <li class="active step1"></li>
+                    </ul>
+                    <div class="info stepone">
+                        <span class="title"><h3>{{'Login'|trans}}</h3></span>
+                        <div style="width:30%">
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-faded alert-error">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage | trans}}
+                                </div>
+                {% endfor %}
+                                <form action="{{ path("fos_user_security_check", {'locate': 'homepage'}) }}" method="POST">
+                                    <fieldset>
+                                        <label for="_username">{{'Your Email' | trans}}</label>
+                                        <input type="text" name="_username" class="input-block-level" value="{{ last_username }}" placeholder="User name" />
+                                    </fieldset>
+                                    <fieldset>
+                                        <label for="signin_pass">{{'Password' | trans}}</label>
+                                        <input type="password" class="input-block-level" name="_password" id="signin_pass" placeholder="Password" />
+                                    </fieldset>
+                                    <fieldset>
+                                        <a href="{{path('levis_home_forget_password')}}" title="Recover your password">{{'Forgotten your password?' | trans}}</a>
+                                        <br/>
+                                        <input type="checkbox" id="signin_remember" name="signin_remember" style="float:left"/>
+                                        <label for="signin_remember" style="margin-left:20px">{{'Remember me' | trans}}</label>
+                                    </fieldset>
+                                    <div><input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                        <input type="submit" id="signin_submit" name="signin_submit" value="Login" class="yellow_button" />
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}

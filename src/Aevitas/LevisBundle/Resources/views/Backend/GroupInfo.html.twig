@@ -1,0 +1,98 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}    
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/vietlanduser/js/select2/select2.css') }}" rel="stylesheet">
+
+    <!-- select2 js -->
+    <script src="{{ asset('bundles/vietlanduser/js/select2/select2.js') }}"></script>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="{{ asset('backend') }}"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+	<li><a href="{{ asset('backend/user/group/list') }}">Group</a></li>
+        <li class="divider"></li>
+        <li>Info</li>
+    </ul>
+{% endblock %}
+    
+{% block content %}
+    <div class="block full-block">
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            <div class="separator line bottom"></div>
+            <div class="control-group">
+                <label class="control-label">Name: <strong>{{ group.name }}</strong></label>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Admin: <strong>{{ group.admin.username }}</strong></label>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Roles 
+                    <strong>
+                    {% for role in group.roles %}
+                        {{role}}, 
+                    {% endfor %}
+                    </strong>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Users in group:
+                    <strong>
+                    {% for user in group.users %}
+                        {{user.username}}, 
+                    {% endfor %}
+                    </strong>
+                </label>
+            </div>
+
+            <div class="separator line bottom"></div>
+
+            <form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST">
+            <div class="control-group">
+                <label class="control-label">Add user to group</label>
+                <div class="controls">
+                    <input class="select2-offscreen" tabindex="-1" id="choose_user" name="choose_user" style="width:220px" type="hidden">
+                </div>
+            </div>
+
+            {{form_rest(form)}}
+            <div class="form-actions" style="margin: 0;">
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Add</button>
+            </div>
+            </form>
+
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+      $(document).ready(function() {
+        $("#choose_user").select2({
+            minimumInputLength: 2,
+            ajax: {
+                url: "{{ path('backend_user_search',{"_format":'json'}) }}",
+                dataType: 'jsonp',
+                data: function(term, page){
+                     return {
+                        q: term
+                     };
+                },
+                results: function (data, page) {
+                    console.log(data);
+                    return {results: data};
+                }
+            }
+        });
+      });
+    </script>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'User Dashboard' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_activitty.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/select2.css'
+    '@AevitasLevisBundle/Resources/public/front/css/datepicker.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward.css'
+    '@AevitasLevisBundle/Resources/public/front/css/account.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+
+<div id="breadcrums">
+    <ul>
+        <li onclick="void(0);" class="br-home"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_user_dashboard')}}">{{'Customer Account' | trans}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_user_activity')}}">{{'Point History' | trans}}</a></li>
+        <li class="br-arrow2"></li>
+    </ul>
+</div>
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id="userdash" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <div class="info">
+                    <ul class="topnav">
+                        <li><a href="{{path('levis_user_dashboard')}}">{{'Dashboard' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_profile')}}">{{'Profile' | trans}}</a></li>
+                        <li class="active"><a href="{{path('levis_user_activity')}}">{{'Point History' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_shopping')}}">{{'Shopping Hitory' | trans}}</a></li>
+                    </ul>
+                    <section>
+                        <div class="stats clearfix">
+                            <h3>{{'Point History' | trans}}</h3>
+                            <span>{{'Point Balance' | trans}}:</span><strong>{{user.getPoint}}</strong>
+                            <span>{{'Star Club ID' | trans}}:</span><strong>{{user.getCCode}}</strong>
+                            <span>{{'Current Level' | trans}}:</span><strong>{{user.getLevel | trans}}</strong>
+                            <span>{{'Level Expired Date' | trans}}:</span><strong>{{user.getLevelExpiredDate | date("d/m/Y")}}</strong>
+                            <span>{{'Download History' | trans}}:</span><strong><a href="{{path('cpanel_statement')}}">link</a></strong>
+                        </div>
+                        <div class="table yellow">
+                            <div>
+                                <h3>{{'Account Activity' | trans}}</h3>
+                                <span></span>
+                            </div>
+                            <div class="body static">
+                                <div class="logs">
+                                    <table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-gift" aria-describedby="DataTables_Table_0_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 15%;">Date</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 30%;">Activity</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 15%;">Qualify Point</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 15%;">Bonus</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 15%;">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody aria-live="polite" aria-relevant="all">
+                                            {% for log in logs %}
+                                                <tr>
+                                                    <td class="center item-name">{{log.getCreated | date("d/m/Y")}}</td>
+                                                    <td class="item-image" style="width:20%;">{{log.getAction | trans}}</td>
+                                                    <td class="center">{% if log.getAction == 'buyitem' %} {{ log.getSchema[0].bpoint }} {% endif %}</td>
+                                                    <td class="center">{% if log.getSchema[0].bpoint is defined %}{{log.getPoint - log.getSchema[0].bpoint }}{% endif %}</td>
+                                                    <td class="center item-price" colspan="2">{{log.getPoint}}</td> 
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {{pagination | raw}}
+                                    </div>
+                                </div>
+                                <div class="bottom"><div><div></div></div></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block javascript %}
+    $('#table-activity').dataTable({"bFilter": false,"bLengthChange": false,"bInfo":false,"bPaginate": false});
+{% endblock %}

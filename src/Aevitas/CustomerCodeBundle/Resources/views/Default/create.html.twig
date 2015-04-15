@@ -1,0 +1,72 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}    
+    
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+	<li><a href="{{ path('backend_customer_code_list') }}">Customer Code</a></li>
+        <li class="divider"></li>
+        <li>Create</li>
+    </ul>
+{% endblock %}
+    
+{% block content %}
+    <form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST">
+    <div class="block full-block">
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            <div class="separator line bottom"></div>
+            <div class="control-group">
+                <label class="control-label">Store</label>
+                <div class="controls">
+                    {{ form_widget(form.store) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Prefix</label>
+                <div class="controls">
+                    {{ form_widget(form.prefix) }}
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Start number</label>
+                <div class="controls">
+                    {{ form_widget(form.start) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">End number</label>
+                <div class="controls">
+                    {{ form_widget(form.end) }}
+                </div>
+            </div>
+
+            {{form_rest(form)}}
+
+            <div class="form-actions" style="margin: 0;">
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Create</button>
+            </div>
+
+    </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function(){
+        $('#aevitas_customer_code_select').select2();
+    })
+</script>
+{% endblock %}

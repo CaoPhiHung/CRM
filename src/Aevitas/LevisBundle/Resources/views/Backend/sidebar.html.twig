@@ -1,0 +1,140 @@
+{% block sidebar %}
+{% set routearray = app.request.get('_route') | split('_') %}
+<div id="menu" class="hidden-phone">
+    {{ render_esi(controller("AevitasLevisBundle:Backend:renderTopSidebar"))}}
+    <div id="search">
+        <input type="text" placeholder="Quick search ..." />
+        <button class="glyphicons search"><i></i></button>
+    </div>
+
+    <ul>
+        <li class="glyphicons home"><a href="{{path('backend_index')}}" class="color-3"><i></i><span>Dashboard</span></a></li>
+        {#<li class="glyphicons adjust_alt"><a href="ui.html?lang=en" class="color-1"><i></i><span>UI Elements</span></a></li>
+        <li class="glyphicons charts"><a href="charts.html?lang=en" class="color-2"><i></i><span>Charts</span></a></li>
+        
+        <li class="hasSubmenu active">
+            <a data-toggle="collapse" class="glyphicons show_thumbnails_with_lines color-4" href="#menu_profile"><i></i><span>Profile</span></a>
+            <ul class="collapse in" id="menu_profile">
+                <li><a href="{{ path('fos_user_profile_edit') }}"><span>Edit Profile</span></a></li>
+            </ul>
+        </li>#}
+        <li class="hasSubmenu active">
+
+            <a data-toggle="collapse" class="glyphicons sort color-10" href="#menu_edit_template"><i></i><span>Email - SMS</span></a>
+
+            <ul class="collapse in" id="menu_edit_template">
+               {#<li><a href="{{ path('backend_edit_template', {'type': 'mail', 'action': 'signup'}) }}"><span>Mail Template</span></a></li>
+                <li><a href="{{ path('backend_edit_template', {'type': 'sms', 'action': 'signup'}) }}"><span>SMS Template</span></a></li>#}
+                <li><a href="{{ path('backend_create_process') }}"><span>List Process</span></a></li>
+                 <li><a href="{{ path('backend_list_template') }}"><span>List Template</span></a></li>
+                  <li><a href="{{ path('backend_create_template', {'type': 'mail'}) }}"><span>Create Mail Template</span></a></li>
+                <li><a href="{{ path('backend_create_template', {'type': 'sms'}) }}"><span>Create SMS Template</span></a></li>
+                <li><a href="{{ path('backend_list_template_rule') }}"><span>Rules Management</span></a></li>
+            </ul>
+        </li>
+{% if is_granted('ROLE_ADMIN') %}
+        <li class="hasSubmenu active">
+            <a data-toggle="collapse" class="glyphicons sort color-7" href="#menu_manage_users"><i></i><span>Users</span></a>
+            <ul class="collapse  {% if 'list' in routearray %} in {% endif %}" id="menu_manage_users">
+                <li><a href="{{ path('backend_import_user') }}"><span>Import Users</span></a></li>
+                <li><a href="{{ path('backend_group_list') }}"><span>Groups Manager</span></a></li>
+                <li><a href="{{path('backend_user_list')}}"><span>{{'User Management' | trans}}</span></a></li>
+                <li><a href="{{ path('backend_staff_list') }}">{{ 'Staff Management' | trans }}</a></li>
+                <li><a href="{{path('backend_customer_code_list')}}">{{'Customer Code' | trans}}</a></li>
+                
+            </ul>
+        </li>
+{% endif %}
+{% if is_granted('ROLE_STAFF') %}
+                <li class="hasSubmenu active"><a data-toggle="collapse" href="#config" class="glyphicons cogwheel color-6"><i></i><span>{{'Store Management' | trans}}</span></a>
+            <ul class="collapse {% if 'store' in routearray or 'staff' in routearray %} in {% endif %}" id="config">
+                <li><a href="{{path('store_search_user')}}">{{'ERP Tracking' | trans}}</a></li>
+                <li><a href="{{path('store_staff_order')}}">{{"Redemption Order" | trans}}</a></li>
+                <li><a href="{{path('backend_staff_point2vnd')}}">{{"Redeem Points" | trans}}</a></li>
+                <li><a href="{{path('backend_staff_redeemption')}}">{{"Redem Gift" | trans}}</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{path('admin_check_posbill')}}">{{"Check POS Bill" | trans}}</a></li>
+                {% endif %}
+            </ul>
+        </li>
+{% endif %}
+{% if is_granted('ROLE_POINT') %}
+        <li class="hasSubmenu active">
+            <a data-toggle="collapse" class="glyphicons sort color-5" href="#menu_manage_point_rule"><i></i><span>Point Rule</span></a>
+            <ul class="collapse {% if 'rules' in routearray %} in {% endif %}" id="menu_manage_point_rule">
+                <li><a href="{{ path('backend_point_rules_list') }}"><span>List Rules</span></a></li>
+                <li><a href="{{ path('backend_point_rules_addnew') }}"><span>Add Rule</span></a></li>
+            </ul>
+        </li>
+{% endif %}
+        <!--li class="hasSubmenu active">
+            <a data-toggle="collapse" class="glyphicons sort color-3" href="#item"><i></i><span>Items</span></a>
+            <ul class="collapse in" id="item">
+                <li><a href="{{ path('backend_item_list') }}"><span>{{'List' | trans}}</span></a></li>
+                <li><a href="{{ path('backend_item_import') }}"><span>{{'Import' | trans}}</span></a></li>
+            </ul>
+        </li-->
+{% if is_granted('ROLE_GIFT') %}
+        <li class="hasSubmenu active">
+            <a data-toggle="collapse" class="glyphicons show_thumbnails_with_lines color-grey" href="#gift"><i></i><span>{{ 'Rewards'|trans}}</span></a>
+            <ul class="collapse {% if 'gift' in routearray %} in {% endif %}" id="gift">
+                <li><a href="{{ path('backend_gift_list') }}"><span>{{'Gift Manage' | trans}}</span></a></li>
+                <li><a href="{{ path('backend_gift_category_list') }}"><span>{{'Category Manage' | trans}}</span></a></li>
+                <li><a href="{{path('backend_gift_import')}}">{{'Import Rewards' | trans}}</a></li>
+                <li><a href="{{path('backend_cart_list')}}">{{"Redemption Order" | trans}}</a></li>
+            </ul>
+        </li>
+{% endif %}
+{% if is_granted('ROLE_STORE') %}
+        <li class="hasSubmenu active">
+            <a data-toggle="collapse" class="glyphicons show_thumbnails_with_lines color-darkgray" href="#store"><i></i><span>{{ 'Store'|trans}}</span></a>
+            <ul class="collapse {% if 'store' in routearray %} in {% endif %}" id="store">
+                <li><a href="{{ path('backend_store_list') }}"><span>{{'List' | trans}}</span></a></li>
+                <li><a href="{{ path('backend_store_create') }}"><span>{{'Create store' | trans}}</span></a></li>
+                <li><a href="{{ path('backend_store_adduser_forstore')}}"><span>{{'New Store Staff' | trans}}</span></a></li>
+                <li><a href="{{ path('backend_store_adduser') }}"><span>{{'Assign Store staff' | trans}}</span></a></li>
+                <li><a href="{{ path('backend_store_removeuser') }}"><span>{{'Remove user' | trans}}</span></a></li>  
+                <li><a href="{{path('store_import')}}">{{'Import Store' | trans}}</a></li>          
+                <li><a href="{{path('staff_billjob_list')}}">{{'Automation Process' | trans}}</a></li>                      
+            </ul>
+        </li>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+        <li class="hasSubmenu active"><a data-toggle="collapse" href="#configuration" class="glyphicons cogwheel color-6"><i></i><span>{{'Configuration' | trans}}</span></a>
+            <ul class="collapse {% if 'config' in routearray %} in {% endif %}" id="configuration">
+                <li><a href="{{path('config_environment')}}">{{'Envinronment Setting' | trans}}</a></li>
+                <li><a href="{{path('config_loyalty')}}">{{'Loyalty Setting' | trans}}</a></li>
+                <li><a href="{{path('config_mailer')}}">{{'Mailer Setting' | trans}}</a></li>
+    <li onclick="window.open('http://' + window.location.hostname + ':1234', '_blank');" style="cursor:pointer"><a>{{'Repair Database' | trans}}</a></li>
+            </ul>
+        </li>
+{% endif %}
+{% if is_granted('ROLE_REPORT') %}
+        <li class="hasSubmenu active"><a data-toggle="collapse" href="#report" class="glyphicons cogwheel color-10"><i></i><span>{{'Report' | trans}}</span></a>
+            <ul class="collapse {% if 'report' in routearray %} in {% endif %}" id="report">
+                <li><a href="{{path('form_download_report_account')}}">{{'Purchase Report' | trans}}</a></li>
+                <!--li><a href="{{path('customer_report_download')}}">{{'Registration Report' | trans}}</a></li-->
+                <li><a href="{{ path('backend_report_newmember') }}">{{'New Member Report' | trans}}</a></li>
+                <li><a href="{{ path('backend_report_birthday') }}">{{'Birthday Report' | trans}}</a></li>
+                <li><a href="{{ path('backend_report_anniversary') }}">{{'Anniversary Report' | trans}}</a></li>
+                <!--li><a href="{{path('customer_report_download')}}">{{'Download User Report' | trans}}</a></li-->
+                <li><a href="{{path('backend_report_notshopped')}}">{{'User not Shopped' | trans}}</a></li>
+                <li><a href="{{path('backend_report_redeemption')}}">{{'Redeemption Report' | trans}}</a></li>
+            </ul>
+        </li>
+{% endif %}
+        <!--
+        <li class="glyphicons coins"><a href="finances.html?lang=en" class="color-8"><i></i><span>Finances</span></a></li>
+        <li class="hasSubmenu">
+                <a data-toggle="collapse" class="glyphicons shopping_cart color-9" href="#menu_ecommerce"><i></i><span>Online Shop</span></a>
+                <ul class="collapse" id="menu_ecommerce">
+                        <li><a href="products.html?lang=en"><span>Products</span></a></li>
+                        <li><a href="product_edit.html?lang=en"><span>Add product</span></a></li>
+                </ul>
+        </li>
+        <li class="glyphicons picture"><a href="gallery.html?lang=en" class="color-11"><i></i><span>Photo Gallery</span></a></li>
+        <li class="glyphicons adress_book"><a href="bookings.html?lang=en" class="color-12"><i></i><span>Bookings</span></a></li>
+        -->
+    </ul>
+</div>
+{% endblock %}

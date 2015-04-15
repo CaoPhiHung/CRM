@@ -1,0 +1,12 @@
+{% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+<form action="{{path('home_save_anniversary')}}" method="post" class="addanni">
+    <div class="form-row">
+    {{form_widget(form.name,{'attr': {'placeholder' : 'Anniversary name' | trans}})}}
+    {{form_errors(form.name)}}
+    </div>
+    <div class="form-row">
+    {{form_widget(form.date,{'attr': {'placeholder' : 'mm/dd/yyyy'}})}}
+    {{form_errors(form.date)}}
+    </div>
+        {{form_rest(form)}}
+</form>

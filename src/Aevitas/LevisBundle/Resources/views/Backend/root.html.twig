@@ -1,0 +1,215 @@
+{% spaceless %}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+<head>
+        {% block head %}
+	<title>Loyalty Program - Backend</title>
+        {% endblock %}
+	
+	<!-- Meta -->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+	<!-- Bootstrap -->
+        {% stylesheets output='bundles/aevitaslevis/bootstrap/css/bst_cp.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/bootstrap/css/bootstrap.min.css'
+
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+        {% stylesheets output='bundles/aevitaslevis/bootstrap/extend/jasny-bootstrap/css/jasny_cp.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/jasny-bootstrap/css/jasny-bootstrap.min.css'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/jasny-bootstrap/css/jasny-bootstrap-responsive.min.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+	
+	<!-- Bootstrap Extended -->
+        
+        {% stylesheets output='bundles/aevitaslevis/bootstrap/extend/bootstrap-wysihtml5/css/bootstrap-wysi_cp.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-wysihtml5/css/bootstrap-wysihtml5-0.0.2.css'
+
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/theme/css/style.min.css') }}" />
+	<!-- JQueryUI v1.9.2 -->
+        {% stylesheets output='bundles/aevitaslevis/theme/scripts/jquery-ui-1.9.2.custom/css/smoothness/jui.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-ui-1.9.2.custom/css/smoothness/jquery-ui-1.9.2.custom.min.css'
+
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+	
+	<!-- Glyphicons -->
+	<link rel="stylesheet" href="{{asset('bundles/aevitaslevis/theme/css/glyphicons.css')}}" />
+	
+	<!-- Bootstrap Extended -->
+        {% stylesheets output='bundles/aevitaslevis/bootstrap/extend/bootstrap-select/bootstrap-select-cp.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-select/bootstrap-select.css'
+
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+        {% stylesheets output='bundles/aevitaslevis/bootstrap/extend/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons-cp.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css'
+
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+	
+	<!-- Uniform -->
+        {% stylesheets output='bundles/aevitaslevis/theme/scripts/pixelmatrix-uniform/css/uniform.default.cp.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/pixelmatrix-uniform/css/uniform.default.css'
+
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+	
+	<!-- Modernizr -->
+	<script src="{{ asset('bundles/aevitaslevis/theme/scripts/modernizr.custom.76094.js') }}"></script>
+	
+	<!-- MiniColors -->
+        {% stylesheets output='bundles/aevitaslevis/theme/scripts/jquery-miniColors/miniColors.css' filter='yui_css'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-miniColors/jquery.miniColors.css'
+
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+        {% endstylesheets %}
+	
+	<!-- Google Analytics -->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-36057737-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+	
+	<!-- LESS 2 CSS -->
+	<script src="{{ asset('bundles/aevitaslevis/theme/scripts/less-1.3.3.min.js') }}"></script>
+	
+	
+	<!--[if IE]><script type="text/javascript" src="{{ asset('bundles/aevitaslevis/theme/scripts/excanvas/excanvas.js') }}"></script><![endif]-->
+	<!--[if lt IE 8]><script type="text/javascript" src="{{ asset('bundles/aevitaslevis/theme/scripts/json2.js') }}"></script><![endif]-->
+
+        {% block import %}
+        {% endblock %}
+</head>
+<body class="{{app.request.get('_route') | replace({'_':' '})}}">
+	
+	<!-- Start Content -->
+	<div class="container">
+	<div id="wrapper">
+
+            <!-- sidebar start -->
+            {% include "AevitasLevisBundle:Backend:sidebar.html.twig" %}
+            <!-- sidebar end -->
+
+            <div id="content" class="color-4">
+                <!-- Menu Toggle on mobile -->
+                        <button type="button" class="btn btn-navbar main">
+                                <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                        </button>
+                        <a href="#themer" data-toggle="collapse" class="btn btn-primary btn-icon glyphicons eyedropper"><i></i> Themer</a>
+                        <div class="relativeWrap pull-right">
+                        <a href="#" data-toggle="dropdown"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/en.png') }}" alt="en" /></a>
+                <ul class="dropdown-menu pull-right">
+                        <li class="active"><a href="?page=index&amp;lang=en" title="English"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/en.png') }}" alt="English"> English</a></li>
+                        <li><a href="?page=index&amp;lang=ro" title="Romanian"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/ro.png') }}" alt="Romanian"> Romanian</a></li>
+                        <li><a href="?page=index&amp;lang=it" title="Italian"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/it.png') }}" alt="Italian"> Italian</a></li>
+                        <li><a href="?page=index&amp;lang=fr" title="French"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/fr.png') }}" alt="French"> French</a></li>
+                        <li><a href="?page=index&amp;lang=pl" title="Polish"><img src="{{ asset('bundles/aevitaslevis/theme/images/lang/pl.png') }}" alt="Polish"> Polish</a></li>
+                </ul>
+                </div>
+		<div class="relativeWrap">
+			<div id="themer" class="collapse">
+				<div class="wrapper">
+					<span class="close2">&times; close</span>
+					<h4>Themer <span>color</span></h4>
+					<ul>
+						<li>Primary Color: <input type="text" data-type="minicolors" data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left" id="themer-primary-cp" /><div class="clearfix"></div></li>
+						<li>Page: <select id="themer-theme" class="pull-right"></select><div class="clearfix"></div></li>
+						<li>
+							<span class="link" id="themer-custom-reset">reset page</span>
+							<span class="pull-right"><label>advanced <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>
+						</li>
+					</ul>
+					<div id="themer-getcode" class="hide">
+						<div class="separator"></div>
+						<button class="btn btn-primary btn-small pull-right btn-icon glyphicons download" id="themer-getcode-less"><i></i>Get LESS</button>
+						<button class="btn btn-inverse btn-small pull-right btn-icon glyphicons download" id="themer-getcode-css"><i></i>Get CSS</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+                <div class="separator"></div>
+
+                {% block breadcrumb %}
+                
+                {% endblock %}
+
+                <div class="separator"></div>
+
+            <!-- content start -->
+            {% block content %}
+
+            {% endblock %}
+            <!-- content end -->
+            </div>
+
+	</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>
+	var themerPrimaryColor = '#029ec6';
+	var themerSelectedTheme = '0';	</script>
+        {% block extendjs %}
+	{% javascripts output='js/backend_compress.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-miniColors/jquery.miniColors.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery.cookie.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/themer.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery.sparkline.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery.ba-resize.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/pixelmatrix-uniform/jquery.uniform.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/DataTables/media/js/jquery.dataTables.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/js/bootstrap.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-select/bootstrap-select.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/jasny-bootstrap/js/jasny-bootstrap.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/jasny-bootstrap/js/bootstrap-fileupload.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootbox.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js'
+            '@AevitasLevisBundle/Resources/public/js/select2.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/load.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+            <script type="text/javascript">
+                backend_user_search = '{{path('backend_user_search')}}';
+            </script>
+	{% block javascript %}
+
+        {% endblock %}
+
+</body>
+</html>
+{% endspaceless %}

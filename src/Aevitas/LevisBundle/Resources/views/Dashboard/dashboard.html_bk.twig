@@ -1,0 +1,163 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'User Dashboard' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_dashboard.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/select2.css'
+    '@AevitasLevisBundle/Resources/public/front/css/datepicker.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward_detail.css'
+    '@AevitasLevisBundle/Resources/public/front/css/account.css'
+    '@AevitasLevisBundle/Resources/public/front/css/clock.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+
+<div id="breadcrums">
+    <ul>
+        <li onclick="void(0);" class="br-home"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_user_dashboard')}}">{{'Customer Account' | trans}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="javascript:void(0);">Profile</a></li>
+        <li class="br-arrow2"></li></ul>
+</div>
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id="userdash" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <div class="info">
+                    <ul class="topnav">
+                        <li class="active"><a href="{{path('levis_user_dashboard')}}">{{'Dashboard' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_profile')}}">{{'Profile' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_activity')}}">{{'Point History' | trans}}</a></li>
+                        <li><a href="{{path('levis_user_shopping')}}">{{'Shopping Hitory' | trans}}</a></li>
+                    </ul>
+                    <section>
+                        <div class="table yellow">
+                            <div>
+                                <h3>{{'Card ID' | trans }}: {{user.getCCode}}</h3>
+                                <span>{{'Point Balance'| trans}}: {{user.getPoint}} - {{'Tier' | trans}}: {{user.getLevel}}</span>
+                            </div>
+                            <div class="body static">
+                                {% if nextlevel > 0 %}
+                                <strong>{% trans with {'%point%' : nextlevel} %}Hello! You need %point% purchase point to upgrade to the next level{% endtrans %}</strong>
+                                {% elseif nextlevel == 0 %}
+                                <strong>{{'You need at least 100 purchase points to be an official Star Club member! Make a purchase at any Levis store near you!' | trans}}</strong>
+                                {% else %}
+                                <strong>{{'You are on top of the world' | trans}}</strong>
+                                {% endif %}
+                                <div>
+                                    <div class="bar">
+                                        <div class="points" style="width:{{user.getQualifyPoint*100/5000}}%"></div>
+                                    </div>
+                                        <span>0</span><span>1000</span><span>2000</span><span>3000</span><span class="postend">4000</span><span>5000</span>
+                                </div>
+                            </div>
+                            <div class="bottom"><div><div></div></div></div>
+                        </div>
+                        <div class="nextgrade">
+                            {% for clock in clocks %}
+                                <div class="clockitem">
+                                    {% if user.getPoint < clock.getPoint %}
+                                    <h3 class="avro">{% trans with {'%points%': (clock.getPoint - user.getPoint), '%gift%': clock.getName} %}Get %points% points to redeem %gift%{% endtrans %}</h3>
+                                    <div class="gift">
+                                        <input class="knob" data-angleOffset=-90 data-angleArc=180 data-max={{clock.getPoint}} data-fgColor="#1185b8" data-bgColor="#211f20" data-width="214" value="{{user.getPoint}}" data-thickness=".1" data-linecap=round>
+                                        <em class="led"></em>
+                                        <em class="min">0</em>
+                                        <em class="max">{{clock.getPoint}}</em>
+                                    </div>
+                                    {% else %}
+                                    <h3 class="avro">{% trans with {'%gift%': clock.getName} %}You can redeem %gift% right now{% endtrans %}</h3>
+                                    <div class="clock">
+                                        <input class="knob" data-angleOffset=-90 data-angleArc=180 data-max={{clock.getPoint}} data-fgColor="#1185b8" data-bgColor="#211f20" data-width="214" value="{{clock.getPoint}}" data-thickness=".1" data-linecap=round>
+                                        <em class="led"></em>
+                                        <em class="min">0</em>
+                                        <em class="max">{{clock.getPoint}}</em>
+                                    </div>
+                                    <h4 class="avro">You are almost there</h4>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            </div>
+                            <div class="row">
+                                <div class="table gray">
+                                    <div>
+                                        <h3>{{'Your Profile' | trans}}</h3>
+                                    </div>
+                                    <div class="body">
+                                        <label>{{'Email' | trans}}:</label><strong>{{user.getEmail}}</strong>
+                                        <label>{{'Mobile' | trans}}:</label><strong>{{user.getCellphone}}</strong>
+                                        <label>{{'Firstname' | trans}}:</label><strong>{{user.getFirstname}}</strong>
+                                        <label>{{'Lastname' | trans}}:</label><strong>{{user.getLastname}}</strong>
+                                        <label>{{'Address' | trans}}:</label><strong>{{user.getAddress1}}</strong>
+                                    </div>
+                                    <div class="bottom"><div><div></div></div></div>
+                                </div>
+                                <div class="table gray wishlist">
+                                    <div>
+                                        <h3>Your Wishlist</h3>
+                                    </div>
+                                    <div class="body">
+                                        <ul class="wishlist">
+                                        {% for gift in wishlist %}
+                                                <li><img src="{{asset(gift.getThumbnail(75,75))}}" width="75" height="75"/></li>
+                                        {% endfor %}
+                                                </ul>
+                                                <div class="floatbt"><button class="yellow_button">View Your Wishlist</button></div>
+                                            </div>
+                                            <div class="bottom"><div><div></div></div></div>
+                                        </div>
+                                        <div class="table gray">
+                                            <div>
+                                                <h3>Star Club</h3>
+                                            </div>
+                                            <div class="body">
+                                                <label>{{'Earned Point' | trans}}:</label><strong>{{user.getPoint}}</strong>
+                                                <label>{{'Level Rank' | trans}}:</label><strong>{{user.getQualifyPoint}}</strong>
+                                                <label>{{'Your tier' | trans}}:</label><strong>{{user.getLevel}}</strong>
+                                                <div class="floatbt"><button class="yellow_button">Edit Profile</button></div>
+                                            </div>
+                                            <div class="bottom"><div><div></div></div></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+{% endblock %}
+{% block javascript %}
+            $(".knob").knob({
+                min: 0,
+                readOnly: true,
+                change: function(value) {
+                    max = this.$.data('max');
+                    var dimen = getHeigtDegree(value, max);
+                    this.$.parents('.clock').find('.led').css({top: ((112 - dimen.h - 18)) + 'px', left: ((dimen.w + 33)) + 'px'})
+                },
+                release: function(value) {
+                    //console.log(this.$.attr('value'));
+                    console.log("release : " + value);
+                },
+                cancel: function() {
+                },
+                draw: function() {
+                    max = this.$.data('max');
+                    var dimen = getHeigtDegree(parseInt(this.cv), max);
+                    this.$.parents('.clock').find('.led').css({top: ((112 - dimen.h - 18)) + 'px', left: ((dimen.w + 33)) + 'px'})
+                }
+            });
+{% endblock %}

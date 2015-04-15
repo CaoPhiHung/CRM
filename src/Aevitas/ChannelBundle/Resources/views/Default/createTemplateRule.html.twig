@@ -1,0 +1,106 @@
+{% extends "AevitasChannelBundle:eLRTE:root.html.twig" %}
+
+{% block import %}    
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/bundles/aevitaslevis/theme/scripts/jquery-ui-1.9.2.custom/css/smoothness/jui_jquery-ui-1.9.2.custom.min_1.css" type="text/css" media="screen">
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="#">Template</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Rule</a></li>
+        <li class="divider"></li>
+	<li>Create</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-faded">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {#{% form_theme form 'form_table_layout.html.twig' %}#}
+    <form id="submit_create_template" action="" method="POST">
+        {{ form_rest(form) }}
+        {% set content = '' %}
+        
+        <div class="separator"></div>
+        <div style="text-align: right">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $('select.option-type').parent().each(function(i){
+        $(this).addClass('wrap_option_type');
+    });
+    $('.time-for-auto').css({
+        'width':$('input#aevitas_edit_template_rule_templateRuleName').width()
+    });
+     $('input.check_birthday').parent().each(function(i){
+        $(this).addClass('wrap_option_type');
+    });
+
+    $('#aevitas_edit_template_rule_filter-timer1_date_year').hide();
+    $('#aevitas_edit_template_rule_filter-timer1_date_year').val(new Date().getFullYear());
+    var timertype = {{timertype|json_encode|raw}};
+
+    function ontimertypechange(val,clear_error_message){
+
+        if(!val)
+        {
+            $('.time-for-auto').each(function(){
+                $(this).css({'display':'none'});
+            });
+        }
+        else{
+            var timeid_will_appear ='aevitas_edit_template_rule_filter-timer'+val;
+            $('#'+timeid_will_appear).css({'display':'block'});
+            for(i=0;i<timertype.length;i++)
+            {
+                var index_will_disappear = timertype[i];
+                if(index_will_disappear!=val)
+                {
+                    var timeid_will_disappear ='aevitas_edit_template_rule_filter-timer'+index_will_disappear;
+                $('#'+timeid_will_disappear).css({'display':'none'});
+                }
+                
+            }
+
+            //toggle date chosen 
+            if($('select#aevitas_edit_template_rule_filter-timer1_date_year').attr('disabled'))
+            {
+                    $('#'+timeid_will_appear).find('select').each(function(){
+                        $(this).removeAttr('disabled');
+                    });
+            }
+        }
+        
+        if(clear_error_message)
+            $('.time-for-auto').parent().find('ul').remove();
+    }
+
+    
+    var current_time_type = $('#aevitas_edit_template_rule_timertype').val();
+    // /**set default field for time delay**/
+    if(current_time_type!=='')
+        ontimertypechange(current_time_type,false);
+    </script>
+    <style>
+    .wrap_option_type {
+        position:absolute;
+        margin-left:235px;
+    }
+    </style>
+
+{% endblock %}
+
+
+
+

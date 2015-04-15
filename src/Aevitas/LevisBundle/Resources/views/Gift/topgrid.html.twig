@@ -1,0 +1,9 @@
+<div id="top-options">
+    <div id="product-count">{{app.session.get('totalitem'~app.session.get('currentcat'))}} products</div>
+    <div id="perpage">
+        <form action="" method="GET" id="grid">
+            <label>{{'Show' |trans}}</label>{{form_widget(form.amount)}}
+            <label>{{'Sort by' | trans}}</label>{{form_widget(form.sort)}}
+        </form>
+    </div>
+</div>

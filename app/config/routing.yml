@@ -1,0 +1,82 @@
+aevitas_customer_code:
+    resource: "@AevitasCustomerCodeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+proxy_request:
+    path:   /_proxy
+    host:     "127.0.0.1"
+_welcome:
+    pattern:  /
+    defaults: { _controller: AevitasLevisBundle:Home:index }
+
+#YZSupervisorBundle:
+#    resource: "@YZSupervisorBundle/Resources/config/routing.xml"
+#    prefix: /backend/supervisor
+    
+
+upload_vietland:
+    resource: "@VietlandElfinderBundle/Controller/"
+    type:     annotation
+    prefix:   /
+_security_check:
+    pattern:  /login_facebook_check
+_security_logout:
+    pattern:  /logout
+aevitas_levis:
+    resource: "@AevitasLevisBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+aevitas_point:
+    resource: "@AevitasPointBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+aevitas_store:
+    resource: "@VietlandStoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+aevitas_config:
+    resource: "@AevitasConfigBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+aevitas_channel:
+    resource: "@AevitasChannelBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+aevitas_point:
+    resource: "@AevitasPointBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+VietlandUserBundle:
+    resource: "@VietlandUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+_facebook_secured:
+    pattern: /secured/
+    defaults: { _controller: AcmeDemoBundle:Welcome:index }
+#fos_google_login:
+ #   resource: "@FOSGoogleBundle/Resources/config/routing.xml"
+    
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile

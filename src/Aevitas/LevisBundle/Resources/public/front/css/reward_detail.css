@@ -1,0 +1,214 @@
+#product-image{
+    float:left;
+    width:360px;
+}
+.product-quantity>span{float:left}
+#product-detail{
+    float:right;
+    padding-left:20px;
+    width: 580px
+}
+
+#product-image .large-image{
+    float:none;
+    height:500px;
+}
+
+/* Logo thumbnail
+-------------------------------------------------- */
+.list-thumbnail{position:relative;background-color:#fff;height:155px}
+.list-thumbnail>div{width:410px;margin:0 auto;position:relative;}
+#logo_thumbnail { width:360px}
+.jcarousel-prev,.jcarousel-next{cursor:pointer;position:absolute;margin-top:65px;top:0;width:19px;height:19px;text-indent:-99999px;float:left;background:url("../img/sprite.png") no-repeat scroll left -19px transparent}
+.jcarousel-prev:hover{background-position:left -0px;}
+.jcarousel-next{float:right;background-position:right -38px;right:0;top:0;}
+.jcarousel-next:hover{background-position:right -57px;}
+#logo_thumbnail li {width:100px;height:130px;}
+#logo_thumbnail li a{display:block;margin-top:3px;margin-left:15px;}
+#logo_thumbnail li { float: left; list-style: none; }
+.lt-ie9 #logo_thumbnail img {
+    filter: gray;
+    /* Element must "hasLayout"! */
+    zoom: 1;
+}
+.lt-ie9 #logo_thumbnail img:hover {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);
+    /* Element must "hasLayout"! */
+    zoom: 1;
+}
+
+#product-detail .product-title{
+    font-size:25px;
+    font-weight: bold;
+    margin-bottom:50px;
+}
+
+#product-detail .product-description{
+    color:#555;
+    font-size:16px;
+}
+
+#product-detail .product-description a{
+    font-size:16px;
+    text-decoration: underline;
+}
+
+#product-detail .product-info{
+    float:none;
+    width:100%;
+    margin:20px 0;
+    border-top:1px solid #333;
+    border-bottom:1px solid #333;
+    height:60px;
+    line-height: 60px;
+    font-size:16px;
+}
+
+.product-info .product-point{
+    float:left;
+    width:50%;
+    text-align:left;
+    color:#f23705;
+    font-size:25px;
+    font-style:italic;
+    font-weight:600;
+}
+
+.product-info .product-availability{
+    float:left;
+    width:49%;
+    text-align:right;
+}
+
+.product-info .product-availability span{
+    color:#ede518;
+}
+
+#product-detail .product-quantity input[type="text"]{
+    margin-left:10px;
+    width:60px;
+}
+
+#product-detail .product-action{
+    float:none;
+    overflow:hidden;
+}
+
+#bt-add-wishlist{
+    float:left;
+    width:50%;
+    text-align:left;
+}
+
+#bt-add-wishlist div{
+    background:#ea590a;
+    height:30px;
+    line-height:30px;
+    list-style:none;
+    width:120px;
+    color:#fff;
+    padding:0 10px 0 0;
+}
+
+#bt-add-wishlist #icon-wish{
+    float:left;
+    background:#ea590a url('../img/glyphicons-halflings-white.png') -90px 8px no-repeat;
+    width:20px;
+}
+
+#bt-add-wishlist div:hover{
+    cursor:pointer;
+    color:#faf338;
+}
+
+
+#bt-add-bag{
+    float:left;
+    width:49%;
+    text-align:right;
+}
+
+#bt-add-bag > div{
+    background:#fbf439;
+    height:30px;
+    line-height:30px;
+    list-style:none;
+    width:auto;
+    color:#000;
+    padding-right:10px;
+    float:right;
+}
+
+#bt-add-bag #icon-bag{
+    float:right;
+    background:#fbf439 url('../img/glyphicons-halflings.png') -90px -17px no-repeat;
+    width:20px;
+}
+
+#bt-add-bag > div:hover{
+    cursor:pointer;
+    color:#ea590a;
+}
+
+.product-tab {
+    width:100%;
+    height:74px;
+}
+
+.product-tab .pr-tab-item{
+    margin-top:20px;
+    float:left;
+    height:55px;
+    line-height:55px;
+    color:#555;
+    font-weight:bold;
+    font-size:16px;
+    padding:0 20px;
+    list-style: none;
+    cursor:pointer;
+}
+
+.product-tab .active, .product-tab .pr-tab-item:hover{
+    background:#fff;
+}
+
+.tab-show{
+    float:none;
+    background:#fff;
+    border-top:1px solid #f1f1f1;
+    text-align:left;
+    padding:10px;
+}
+
+.tab-show #tab-review{
+    float:none;
+}
+.product-quantity{text-align:right;padding-right:5px}
+.giftinfo{overflow:hidden;min-height: 560px}
+
+.pikachoose{width:680px;position:relative;margin:0 auto}
+.pika-thumbs{width:100px;margin:0 1px}
+.pika-thumbs li{overflow:hidden;float:left;list-style-type:none;cursor:pointer;width:100px;height:55px}
+.pika-thumbs li .clip{position:relative;height:100%;text-align:center;vertical-align:middle;overflow:hidden}
+.pika-stage,.pika-textnav{width:100%}
+#detail .pika-stage,#detail .pika-textnav,#detail .pika-stage .caption{width:460px}
+#detail .pika-stage{float:left;height:320px}
+#detail .caption{left:0;border:none}
+.tour_info h1 + div{padding-left:25px}
+.room{clear:both;overflow:hidden;border-top:1px solid #dedede;margin-top:15px}
+.pika-stage>a, .pika-stage>a img{width:360px;height:430px;display:block}
+.jcarousel-skin-pika{top:0;float:left;clear:right}
+.jcarousel-skin-pika .jcarousel-container-vertical{width:100px;height:230px;overflow:hidden}
+.jcarousel-skin-pika .jcarousel-clip-vertical{width:100px;height:230px}
+.jcarousel-skin-pika .jcarousel-item-vertical:first-child{margin-top:0}
+.pika-stage{position:relative;background:#fafafa;text-align:center;height:430px}
+.pika-stage .caption{background:rgba(0,0,0,0.75);bottom:0;color:#FAFAFA;font-size:11px;left:1px;position:absolute;text-align:left;width:100%}
+.pika-stage .caption p{font-size:16px;padding:0 10px}
+.pika-imgnav a{position:absolute;text-indent:-5000px;display:block;z-index:3}
+.pika-textnav{overflow:hidden;bottom:10px;position:absolute;margin:10px 0 0}
+.pika-textnav a{position:absolute;display:block}
+.pika-tooltip{font-size:12px;position:absolute;color:#FFF;background-color:rgba(0,0,0,0.7);border:3px solid #000;padding:3px}
+.pika-counter{display:none}
+.jcarousel-container{width:360px;overflow:hidden}
+#detail .jcarousel-container{margin-left:15px}
+.pika-loader{background:url(../img/loading.gif) 3px 3px no-repeat #000;background-color:rgba(0,0,0,0.9);color:#FFF;width:60px;font-size:11px;text-align:right;position:absolute;top:15px;right:15px;padding:5px 3px}

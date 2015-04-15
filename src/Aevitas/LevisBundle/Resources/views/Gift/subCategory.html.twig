@@ -1,0 +1,136 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'Gift Store' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_dashboard.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/select2.css'
+    '@AevitasLevisBundle/Resources/public/front/css/datepicker.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward_detail.css'
+    '@AevitasLevisBundle/Resources/public/front/css/account.css'
+    '@AevitasLevisBundle/Resources/public/front/css/clock.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id="main" class="clearfix">
+    <!-- breadsrums -->
+    <div id="breadcrums">
+        <li class="br-home" onclick="void(0);"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_gift_category',{'topcat': topcat})}}" title="{{topcat}}">{{topcat}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_gift_subcategory',{'topcat': topcat, 'catslug': category.getSlug, 'catid': category.getId})}}" title="{{category.getName}}">{{category.getName}}</a></li>
+        <li class="br-arrow2"></li>
+    </div>
+    <div class="shadow_wrapper">
+        <div>
+            <!-- Shopcart
+            ================================================== -->
+            {{ render_esi(controller('AevitasLevisBundle:Checkout:renderSumCart'))}}
+            <!-- /.Shopcart -->
+            <div class="content">
+                <div>
+                    <!-- navigation sidebar -->
+                    <div id="navigation-sidebar">
+                        {{ render_esi(controller("AevitasLevisBundle:Gift:renderSideBar", {'topcat': topcat, 'catid': category.getId})) }}
+
+                        {{ render_esi(controller("AevitasLevisBundle:Gift:renderTags", {'topcat': topcat, 'catid': category.getId})) }}
+                            <div class="shop-now amodule">
+                                <div class="module-content">
+                                    <div class="shop-now-img">
+                                        <img src="/images/shopnow.jpg"/>
+                                    </div>
+                                </div>
+                                <div class="bt-shopnow">SHOP NOW</div>
+                            </div>
+                        </div>
+                        <!-- main content -->
+                        <div id="main-content">
+                            <div id="promotion-banner">
+                                <img src="/images/discount-50.jpg" width="712"/>
+                            </div>
+                            {{ render_esi(controller('AevitasLevisBundle:Gift:renderTopGrid')) }}
+                            <div id="list-product">
+                                <ul class="arow">
+                                {% for item in gifts %}
+                                        <li class="item">
+                                            <div class="item-img"><a href="{{path('levis_gift_detail', {'slug': item.getSlug, 'topcat': item.getCat, 'category': item.getCategory.getSlug~'-'~item.getCatid, '_format': 'html'})}}" title="{{item.getName}}"><img src="{{asset(item.getThumbnail(200,242))}}" width="200" alt="{{item.getName}}"/></a></div>
+                                            <div class="item-name">{{item.getName}}</div>
+                                            <div class="item-point">{{item.getPoint}} {{'points' | trans}}</div>
+                                            <div class="item-add"><a href="{{path('checkout_add_gift', {'id': item.getId})}}" title="{{'Add to Bag' | trans}}" class="">{{'Add to Bag' | trans}}</a></div>
+                                        </li>
+                                {% endfor %}
+                                    </ul>
+                                </div>
+                        {{ render_esi(controller("AevitasLevisBundle:Gift:renderPagination",{'current': app.request.get('page'), 'total': total,'path': app.request.baseurl})) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+{% endblock %}
+{% block jslib %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+{% javascripts output='js/front_compress_category.js' filter='yui_js' 
+        '@AevitasLevisBundle/Resources/public/front/js/bootstrap-transition.js'
+        '@AevitasLevisBundle/Resources/public/front/js/bootstrap-modal.js'
+        '@AevitasLevisBundle/Resources/public/front/js/bootstrap-dropdown.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-tooltip.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-affix.js'
+        '@AevitasLevisBundle/Resources/public/front/js/select2.js'
+        '@AevitasLevisBundle/Resources/public/front/js/bootstrap-carousel.js'
+        '@AevitasLevisBundle/Resources/public/front/js/bootstrap-grayscale.js'
+        '@AevitasLevisBundle/Resources/public/front/js/bootstrap-holder.js'
+        '@AevitasLevisBundle/Resources/public/front/js/jquery.jcarousel.min.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% endblock %}
+{% block javascript %}
+            $(document).ready(function() {
+                $('#shopcart').affix({offset: 120})
+                $('.submenu').hide();
+                $('.{{topcat | replace(' ','_') | replace('&','_') | lower}}').after($('.submenu').html());
+                $('select').select2({showSearchInput: false})
+                $('#sort').on('change', function() {
+                });
+                $('#amount').on('change', function(e) {
+                    var queryHref = $('#tSortable_paginate ul').attr('rel');
+                    queryHref = queryHref.replace('%amount%', e.val);
+                    if (typeof $('#sort').val() != 'undefined') {
+                        queryHref = queryHref.replace('%sort%', $('#sort').val());
+                        window.location = queryHref;
+                    }
+                });
+                $('.item-add a').on('click', function(e) {
+                    that = this;
+                    e.preventDefault();
+                    $.ajax({
+                        url: $(this).attr('href'),
+                        dataType: 'json',
+                        success: function(data) {
+                            if (!data.status) {
+                                $('#shopcart span strong').text(data.count);
+                            }
+                            $(that).tooltip({title: data.error, delay: {show: 200,hide: 3000}});
+                            $(that).tooltip('show');
+                            setTimeout(function() {
+                                $(that).tooltip('destroy')
+                            }, 1000);
+                        }
+                    })
+                })
+            });
+{% endblock %}

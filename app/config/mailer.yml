@@ -1,0 +1,5 @@
+parameters:
+    mtransport: smtp
+    mhost: mail.thanbacgroup.com
+    muser: crm@thanbacgroup.com
+    mpassword: crm@1234

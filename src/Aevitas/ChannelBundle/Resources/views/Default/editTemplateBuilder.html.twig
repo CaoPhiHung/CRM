@@ -1,0 +1,82 @@
+{% extends "AevitasChannelBundle:eLRTE:root.html.twig" %}
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+	<li>Edit template</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <form class="form-horizontal" action="" method="POST">
+    <div class="block full-block">
+        <div class="block_content">
+            <div class="control-group row-fluid">
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="separator line bottom"></div>
+
+            <div class="control-group row-fluid">
+                <label class="control-label">Choose <strong>{{ type }}</strong> action</strong></label>
+                <div class="controls">
+                    <select name="action" id="action" onchange="window.location = $(this).val();">
+                        <option value="">-- Choose an action</option>
+                        {% for act in actions %}
+                           {% if act == action %}
+                                <option selected="selected" value="{{ path('backend_edit_template', {'type': type, 'action': act}) }}" onclick="window.location = '{{ path('backend_edit_template', {'type': type, 'action': act}) }}';">{{ act | trans }}</option>
+                           {% else %}
+                                <option value="{{ path('backend_edit_template', {'type': type, 'action': act}) }}" onclick="window.location = '{{ path('backend_edit_template', {'type': type, 'action': act}) }}';">{{ act | trans }}</option>
+                           {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="separator line bottom"></div>
+
+            {% if action != null %}
+                {% if type=='sms' %}
+                    <div class="control-group row-fluid">
+                        <label class="control-label">Edit <strong>{{ type }}</strong> template for <strong>{{ action }}</strong></label>
+                        <div class="controls">
+                            <textarea id="template-content" name="template-content" class="wysihtml5 span12" rows="5">{{ content }}</textarea>
+                        </div>
+                    </div
+
+                {% else %}
+                    <div class="control-group row-fluid">
+                        <label class="control-label">Edit <strong>{{ type }}</strong> template for <strong>{{ action }}</strong></label>
+                        <div class="controls">
+                        {% include "AevitasChannelBundle:eLRTE:elrte.html.twig" %}
+                        </div>
+                    </div
+
+                    <div class="separator line bottom"></div>
+                {% endif %}
+                    <div class="form-actions" style="margin: 0;">
+                            <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save changes</button>
+                    </div>
+            {% endif %}
+
+        </div>
+    </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    
+{% endblock %}

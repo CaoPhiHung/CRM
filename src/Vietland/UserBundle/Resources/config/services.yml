@@ -1,0 +1,36 @@
+services:
+    my.facebook.user:
+        class: Vietland\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
+    login_failure_handler:
+        class: Vietland\UserBundle\Service\LoginFailureHandler   
+        arguments: ["@router","@session"]
+    facebook_authentication_handler:
+        class: Vietland\UserBundle\Security\User\Handler\FacebookAuthenticationHandler
+        arguments: ["@router","@point.rule"]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+    vietland_user.registration.form.type:
+        class: Vietland\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vietland_user_registration }
+
+    vietland_user.profile.form.type:
+        class: Vietland\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%, "@translator", "@security.context"]
+        tags:
+            - { name: form.type, alias: vietland_user_profile }
+            
+    vietland_user.form.handler.registration:
+        class: Vietland\UserBundle\Form\Handler\RegistrationFormHandler
+        arguments: ["@fos_user.registration.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@doctrine.odm.mongodb.document_manager", "@translator"]
+        scope: request
+        public: false
+
+    customer_code_provider:
+        class: Vietland\UserBundle\Security\CustomerCodeProvider
+        arguments: ["@fos_user.user_manager"]

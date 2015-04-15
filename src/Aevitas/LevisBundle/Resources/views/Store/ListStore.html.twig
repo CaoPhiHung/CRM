@@ -1,0 +1,82 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>Store</li>
+    <li class="divider"></li>
+    <li>List</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+<div>
+    <form action="" method="POST">
+        {{form_rest(form)}}
+            <input type="submit" class="btn btn-danger" value="Search"/>
+    </form>
+</div>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">{{ 'Name'|trans }}</th>         
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Address'|trans}}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Alias'|trans }}</th>
+            <!--th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'City'|trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'District'|trans }}</th-->
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">{{ 'Action'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {% for item in store %}
+            <tr class="{{ cycle(['odd', 'even'], loop.index)}} gradeA remove_item_{{ item.id }}">
+                <td class="center item-name"><a href="{{ path('backend_point_rules_list',{storeId:item.oldId}) }}">{{ item.name }}</a></td>
+                <td>{{item.getAddress}}</td>
+                <td>{{item.getAlias}}</td>
+                <!--td class="city">{{item.getCity}}</td>
+                <td class="district">{{item.getDistrict}}</td-->
+                <td class="center item-price" colspan="2">
+                        <a href="{{ path('backend_store_Edit', {'id':item.id}) }}">{{ 'Edit'|trans }}</a> 
+                        | <a rel="{{ item.id }} "class="delete-item-store" href="{{ path('backend_store_delete', {'id':item.id}) }}">{{ 'Delete'|trans }}</a> 
+                        | <a href="{{ path('backend_point_rules_list',{storeId:item.oldId}) }}">PointRules</a>
+                    
+                </td>
+            </tr>
+           {% endfor %}
+        </tbody></table>
+    {{pagination | raw}}
+    <div id="open-form-delete" style="display: none;" title="!Important">
+        Are you sure want to delete this item ?
+    </div>
+<script type="text/template" id="citydata">
+    {% for city in cities %}
+        <option id="city-{{city.getMap}}">{{city.getName}}</option>
+    {% endfor %}
+    </script>
+<script type="text/template" id="districtdata">
+    {% for district in districts %}
+        <option id="district-{{district.getId}}">{{district.getName}}</option>
+    {% endfor %}
+    </script>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+           var backend_store_delete = '{{ path('backend_store_delete') }}';
+           $('td.city').each(function(){
+           city = parseInt($(this).text());
+           $(this).html('<select>'+$('#citydata').html()+'</select>');
+           $(this).find('select option#city-'+city).attr('selected', 'selected');
+           });
+           $('td.district').each(function(){
+           district = parseInt($(this).text());
+           console.log(district);
+           $(this).html('<select>'+$('#districtdata').html()+'</select>');
+           $(this).find('select option#district-'+district).attr('selected', 'selected');
+           });
+        </script>
+        <script src="{{ asset('bundles/aevitaslevis/js/store.js') }}"></script>
+{% endblock %}

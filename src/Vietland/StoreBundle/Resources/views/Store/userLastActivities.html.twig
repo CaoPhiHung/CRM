@@ -1,0 +1,49 @@
+<div class="span4">
+    <div class="widget widget-3">
+        <div class="widget-head">
+            <h4 class="heading"><span class="glyphicons coins"><i></i></span>{{'Total Point' | trans}}</h4>
+        </div>
+        <div class="widget-body large">
+            {{user.getPoint }}
+        </div>
+    </div>
+</div>
+<div class="span4">
+    <div class="widget widget-3">
+        <div class="widget-head">
+            <h4 class="heading"><span class="glyphicons user_add"><i></i></span>{{'Card No' | trans}}</h4>
+        </div>
+        <div class="widget-body large">
+            {{user.getCCode}}
+        </div>
+    </div>
+</div>
+<div class="span4">
+    <div class="widget widget-3">
+        <div class="widget-head">
+            <h4 class="heading"><span class="glyphicons user_remove"><i></i></span>{{'Level' | trans}}</h4>
+        </div>
+        <div class="widget-body large cancellations">
+            {{user.getLevel}} 
+            <span>
+                <span>{{'Expired at' | trans}}</span>
+                <span>{{user.getLevelExpiredDate | date("d/m/Y")}}</span>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="span4">
+    <div class="widget widget-3">
+        <div class="widget-head">
+            <h4 class="heading"><span class="glyphicons user_remove"><i></i></span>{{'Last Shopping' | trans}}</h4>
+        </div>
+        <div class="widget-body cancellations">
+            {% for log in user.getLastLogs %}
+            <span class="separator">
+                <span>{{'Shopping at' | trans}}: {{log.getCreated | date("d/m/Y")}}</span>
+                <span> --- {{'Get' | trans}}: {{log.getPoint}}p</span>
+            </span>
+            {% endfor %}
+        </div>
+    </div>
+</div>

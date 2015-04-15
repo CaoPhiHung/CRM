@@ -1,0 +1,149 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'TBF Star Club - Membership Tier' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_member_tier.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/membership_tier.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<!-- Carousel
+================================================== -->
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>{{'Membership Tiers' | trans}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="main" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <img src="images/head-image.jpg" width="960">
+                <div id="headline">
+                    {{'membership_tiers_top' | trans }}
+                    </div>
+                    <img src="images/tier-image.jpg" width="960">  
+                    <div class="column-box">
+                        <div class="column-left height-2">
+                            <li class="column-title background-1">{{'Accumulated_level' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-4 height-0">1 Mil–4 Mil {{'VND' | trans}}</li>
+                            <li class="column-child background-4 height-0">4.01 Mil–10 Mil {{'VND' | trans}}</li>
+                            <li class="column-child background-4 height-0">>10.01 {{'VND' | trans}}</li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left">
+                            <li class="column-title background-1">{{'Purchase points' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-1">
+                            <li class="column-title background-2">{{'Earn points for every purchase at TBF stores' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-3 height-1">100,000{{'VND' | trans}} = 3000 pt</li>
+                            <li class="column-child background-3 height-1">100,000{{'VND' | trans}} = 5000 pt</li>
+                            <li class="column-child background-3 height-1">100,000{{'VND' | trans}} = 7000 pt</li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-1">
+                            <li class="column-title background-2">{{'Earn double points for every Purchase during Birthday Month' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-4 height-0">x2</li>
+                            <li class="column-child background-4 height-0">x3</li>
+                            <li class="column-child background-4 height-0">x4</li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-2">
+                            <li class="column-title background-2">{{'Your personal triple points day-earn triple points when shopping at the booked days' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-4 height-0">2 {{'days/year' | trans}}</li>
+                            <li class="column-child background-4 height-0">3 {{'days/year' | trans}}</li>
+                            <li class="column-child background-4 height-0">5 {{'days/year' | trans}}</li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left">
+                            <li class="column-title background-1">{{'Bonus points' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-1">
+                            <li class="column-title background-2">{{'Fill in extended profile online' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-3 height-0"></li>
+                            <li class="column-child background-3 height-0">{{'Up to 200,000 pt' | trans}}</li>
+                            <li class="column-child background-3 height-0"></li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-1">
+                            <li class="column-title background-2">{{'Sign up with Facebook account' |trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-4 height-0"></li>
+                            <li class="column-child background-4 height-0">50,000 {{'pt' |trans}}</li>
+                            <li class="column-child background-4 height-0"></li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-1">
+                            <li class="column-title background-2">{{'Refer a friend to become member' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-3 height-0">50,000 {{'pt' | trans}}</li>
+                            <li class="column-child background-3 height-0">75,000 {{'pt' | trans}}</li>
+                            <li class="column-child background-3 height-0">100,000 {{'pt' | trans}}</li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-2">
+                            <li class="column-title background-2">{{'Shop at Levi’s during Monday & Tuesday every week' | trans}}</li>
+                        </div>
+                        <div class="column-right">
+                            <li class="column-child background-4 height-0">{{'Extra 25,000 pt' | trans}}</li>
+                            <li class="column-child background-4 height-0">{{'Extra 50,000 pt' | trans}}</li>
+                            <li class="column-child background-4 height-0">{{'Extra 75,000 pt' | trans}}</li>
+                        </div>
+                    </div>
+                    <div class="column-box">
+                        <div class="column-left height-1">
+
+                        </div>
+                        <div class="column-right">
+
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}

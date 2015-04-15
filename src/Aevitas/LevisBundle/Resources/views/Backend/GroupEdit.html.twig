@@ -1,0 +1,88 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}    
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/vietlanduser/js/select2/select2.css') }}" rel="stylesheet">
+
+    <!-- select2 js -->
+    <script src="{{ asset('bundles/vietlanduser/js/select2/select2.js') }}"></script>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="{{ asset('backend') }}"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+	<li><a href="{{ asset('backend/user/group/list') }}">Group</a></li>
+        <li class="divider"></li>
+        <li>Edit</li>
+    </ul>
+{% endblock %}
+    
+{% block content %}
+    <form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST">
+    <div class="block full-block">
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            <div class="separator line bottom"></div>
+            <div class="control-group">
+                <label class="control-label">Group name</label>
+                <div class="controls">
+                    {{ form_widget(form.name, {'attr': {}}) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Choose group admin</label>
+                <div class="controls">
+                    <input class="select2-offscreen" tabindex="-1" id="vietland_user_group_admin" name="vietland_user_group_admin" style="width:220px" type="hidden" value="{{ admin_id }}">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Choose roles</label>
+                <div class="controls">
+                    {{ form_widget(form.roles, {'attr': {}}) }}
+                </div>
+            </div>
+
+            {{form_rest(form)}}
+
+            <div class="form-actions" style="margin: 0;">
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save changes</button>
+            </div>
+
+    </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+      $(document).ready(function() {
+        $("#vietland_user_group_admin").select2({
+            minimumInputLength: 2,
+            ajax: {
+                url: "{{ path('backend_user_search',{"_format":'json'}) }}",
+                dataType: 'jsonp',
+                data: function(term, page){
+                     return {
+                        q: term
+                     };
+                },
+                results: function (data, page) {
+                    console.log(data);
+                    return {results: data};
+                }
+            },
+            initSelection : function (element, callback) {
+                var data = {id: {{ admin_id }}, text: '{{ admin_name }}'};
+                callback(data);
+            }
+        });
+      });
+    </script>
+{% endblock %}

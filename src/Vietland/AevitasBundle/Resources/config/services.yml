@@ -1,0 +1,11 @@
+parameters:
+    database.manager.class: Vietland\AevitasBundle\Services\DatabaseManager
+#    aevitas.exception.class: Vietland\AevitasBundle\Controller\ExceptionController
+    
+services:
+    sms_sender:
+      class: Vietland\AevitasBundle\Services\SMSSender
+      arguments:  [%smsclient%, %smspassword%]
+    database_manager:
+        class: %database.manager.class%
+        arguments: [@doctrine.odm.mongodb.document_manager, @security.context]

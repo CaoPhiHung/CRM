@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="fos_yahoo.api" class="%fos_yahoo.api.class%">
+            <argument type="collection">
+                <argument key="client_id">%fos_yahoo.client_id%</argument>
+                <argument key="client_secret">%fos_yahoo.client_secret%</argument>
+                <argument key="redirect_uri">%fos_yahoo.redirect_uri%</argument>
+            </argument>
+            <argument type="service" id="session" />
+        </service>
+
+        <service id="fos_yahoo.helper" class="%fos_yahoo.helper.class%">
+            <argument type="service" id="templating" />
+            <argument type="service" id="fos_yahoo.api" />
+            <tag name="templating.helper" alias="yahoo" />
+        </service>
+
+        <service id="fos_yahoo.twig" class="%fos_yahoo.twig.class%">
+            <argument type="service" id="service_container" />
+            <tag name="twig.extension" />
+        </service>
+
+    </services>
+</container>

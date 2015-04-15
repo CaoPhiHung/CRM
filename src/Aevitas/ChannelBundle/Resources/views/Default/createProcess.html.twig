@@ -1,0 +1,405 @@
+{% extends "AevitasChannelBundle:eLRTE:root.html.twig" %}
+
+{% block import %}
+    <!-- select2 css -->
+    <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/bundles/aevitaslevis/theme/scripts/jquery-ui-1.9.2.custom/css/smoothness/jui_jquery-ui-1.9.2.custom.min_1.css" type="text/css" media="screen">
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="#">EMAIL - SMS</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Process</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+<form>
+<input id="create-process" type="button" value="Create Process" class="btn btn-primary">
+</form>
+
+    <table aria-describedby="DataTables_Table_0_info" id="DataTables_Table_0" class="process_table dynamicTable table table-striped table-bordered table-condensed dataTable">
+        <th width="10px">#ID</th>
+        <th>Type</th>
+        <th>Template</th>
+        <th>Rule</th>
+        <th>Mode</th>
+        <th>Status</th>
+        <th>Action</th>
+        <th>Delete</th>
+
+        {% for process in processes %}
+            <tr id="process_{{ process._id }}">
+                <td>{{ process.id }}</td>
+
+                <td>
+                    <select style="width:80px" disabled="disabled">
+                        <option
+                            value="1"
+                            {% if (process.type == 1) %}
+                                selected
+                            {% endif %}
+                        >Email</option>
+                        <option value="2"
+                            {% if (process.type == 2) %}
+                                selected
+                            {% endif %}
+                        >SMS</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select style="width:180px" disabled="disabled">
+                        {% for template in templates %}
+                            <option
+                                value="{{ template._id }}"
+                                {% if (process.template._id == template._id) %}
+                                    selected
+                                {% endif %}
+                                >{{ template.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <select style="width:150px" disabled="disabled">
+                        {% for rule in rules %}
+                            <option
+                                value="{{ rule._id }}"
+                                {% if (process.rule._id == rule._id) %}
+                                    selected
+                                {% endif %}
+                                >{{ rule.templateRuleName }}
+                            </option>
+                         {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <select style="width:130px" disabled="disabled">
+                        <option value="1"
+                            {% if (process.mode == 1) %}
+                                    selected
+                            {% endif %}
+                        >Manually</option>
+                        <option value="2"
+                            {% if (process.mode == 2) %}
+                                    selected
+                            {% endif %}
+                        >Automatically</option>
+                    </select>
+                </td>
+
+                {% if (process.status == 1) %}
+                    <td><p class="process_status">Running</p></td>
+                    <td><button onclick="process_stop(this, {{ process._id }})">Stop</button></td>
+                    <td><button class="process_delete" onclick="process_delete(this, {{ process._id }})" disabled="disabled">Delete</button></td>
+                {% else %}
+                    <td><p class="process_status">Stopped</p></td>
+                    <td>
+                        <button
+                            class="process_action"
+                            onclick="process_start(this, {{ process._id }})">
+                            Start
+                        </button>
+                    </td>
+                    <td>
+                        <button
+                            class="process_delete"
+                            onclick="process_delete(this, {{ process._id }})">
+                            Delete
+                        </button>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+    </table>
+    <script>var number_process = {{ number_process }} ;</script>
+
+    <table>
+        <tbody id="new-process" style="display:none">
+            <tr id="row_{ id }">
+                <td>{ id }</td>
+
+                <td>
+                    <select onchange="change_type(this, { id })" class="process_type" style="width:80px" >
+                        <option value="1">Email</option>
+                        <option value="2">SMS</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select class="process_template" style="width:180px">
+                        {% for template in templates %}
+                            <option
+                                value="{{ template._id }}"
+                                class="{{ template.type }}"
+                                selected>{{ template.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <select onchange="change_rule(this, { id })" class="process_rule" style="width:150px">
+                        {% for rule in rules %}
+                            <option
+                                value="{{ rule._id }}"
+                                mode="{{ rule.type }}"
+                                selected>{{ rule.templateRuleName }}
+                            </option>
+                         {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <select class="process_mode" style="width:130px" disabled="disabled">
+                        <option value="1" selected>Manually</option>
+                        <option value="2">Automatically</option>
+                    </select>
+                </td>
+
+        <td><p class="process_status" style="display:none"></p></td>
+        <td>
+            <button
+                    class="process_action"
+                    disabled="disabled"
+                    style="display:none">Start</button>
+            </td>
+            <td>
+                <button class="process_delete"
+                        onclick="process_save(this, { id })">
+                        Save
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    <table>
+
+    <style>
+        .process button {
+            margin-top:-13px;
+        }
+        .process td {
+            padding: 0px;
+            padding-top: 8px;
+            text-align: center;
+        }
+    </style>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+    </script>
+
+    <script>
+        window.render = function(template, data) {
+            var html, index, match, pattern, result, var_;
+            html = $("#" + template).html();
+            pattern = /\{[\sa-z0-9_\.\$]+\}/g;
+            result = "";
+            index = 0;
+            var_ = void 0;
+            while (match = pattern.exec(html)) {
+                var_ = match[0].substring(1, match[0].length - 1).trim();
+                result += html.substring(index, match.index);
+                eval("result+=data." + var_);
+                index = pattern.lastIndex;
+            }
+            result += html.substring(index, html.length);
+            return result;
+        };
+
+        window.process_save = function(element, row_id) {
+            $(element).fadeOut();
+            $(element).replaceWith('<img class="loading" style="margin-top:-12px" src="/img/loader.gif" />');
+            $(element).fadeIn();
+
+            var process_info = {};
+
+            var tr = $('#row_' + row_id);
+
+            var process_info = {
+                type     : tr.find('.process_type').val(),
+                template : tr.find('.process_template').val(),
+                mode     : tr.find('.process_mode').val(),
+                rule     : tr.find('.process_rule').val()
+            };
+
+            $.ajax({
+                url: "/backend/template/process/save",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(process_info),
+                success : function(data) {
+                    var tr = $('#row_' + row_id)
+                        .attr('id', 'process_' + data.id);
+
+                    tr.find('.process_status')
+                      .text('Stopped')
+                      .show();
+
+                    tr.find('.process_action')
+                      .text('Start')
+                      .attr('onclick', 'process_start(this,'+ data.id +')')
+                      .attr('class', 'process_start')
+                      .removeAttr('disabled')
+                      .removeAttr('style')
+                      .show();
+
+                    tr.find('.loading')
+                      .replaceWith('<button class="process_delete" onclick="process_delete(this, '+ data.id +')">Delete</button>')
+                      .show();
+
+                    tr.find('select')
+                      .attr('disabled', 'disabled');
+
+                }
+            });
+        };
+
+        window.loading = function(element) {
+            $(element).fadeOut();
+            $(element).replaceWith('<img class="loading" style="margin-top:-12px" src="/img/loader.gif" />');
+            $(element).fadeIn();
+        };
+
+        window.process_delete = function(element, id) {
+
+            loading(element);
+
+            $.ajax({
+                url: "/backend/template/process/delete/" + id,
+                type: "POST",
+                dataType: 'json',
+                success : function(data) {
+                    $('#process_' + id).hide();
+                }
+            });
+        };
+
+        window.process_start =  function(element, id) {
+
+            loading(element);
+
+            $.ajax({
+                url: "/backend/template/process/start/" + id,
+                type: "POST",
+                dataType: "json",
+                success : function(data) {
+                    var tr = $('#process_' + id);
+
+                    tr.find('.loading')
+                      .replaceWith('<button class="process_stop" onclick="process_stop(this,'+ id +')">Stop</button>')
+                      .show();
+
+                    tr.find('.process_status')
+                      .text('Running')
+                      .show();
+
+                    tr.find('.process_delete')
+                      .attr('disabled', 'disabled');
+
+                }
+            });
+        };
+
+        window.process_stop = function(element, id) {
+
+            loading(element);
+
+            $.ajax({
+                url: "/backend/template/process/stop/" + id,
+                type: "POST",
+                dataType: "json",
+                success : function(data) {
+                    var tr = $('#process_' + id);
+
+                    tr.find('.loading')
+                      .replaceWith('<button onclick="process_start(this,'+ id +')">Start</button>')
+                      .show();
+
+                    tr.find('.process_status')
+                      .text('Stopped')
+                      .show();
+
+                    tr.find('.process_delete')
+                      .removeAttr('disabled');
+                }
+            });
+        };
+
+        window.change_rule = function (element, id) {
+            var mode = $(element).find(":selected").attr('mode');
+            var select = $('#row_' + id).find('.process_mode');
+
+            if (mode == 1) {
+                select.attr('disabled', 'disabled');
+                console.log('disable');
+            } else {
+                select.removeAttr('disabled');
+                console.log('enable');
+            }
+
+            select.val(mode);
+
+        };
+
+        window.change_type = function (element, id) {
+
+            var template = $('#row_' + id).find('.process_template');
+            var mode = $(element).find(":selected").val();
+            var template = $('#row_' + id).find('.process_template');
+
+            var sms = template.find('.sms').length;
+            var email = template.find('.mail').length;
+
+            template.find('option').hide().removeAttr('selected');
+            var html = template.html();
+            template.html("");
+
+            setTimeout(function() {
+                template.html(html);
+
+                if (mode == 1) {
+
+                    if (email == 0) {
+                        alert('Email template does not exist. Please create first !');
+                        window.location.href = '/backend/template/list';
+                        return;
+                    }
+
+                    template.find('.mail').show();
+                    template.find('option.mail:first').attr('selected','selected');
+
+                } else {
+
+                    if (sms == 0) {
+                        alert('SMS template does not exist. Please create first !');
+                        window.location.href = '/backend/template/list';
+                        return;
+                    }
+
+                    template.find('.sms').show();
+                    template.find('option.sms:first').attr('selected','selected');
+                }
+            }, 100);
+        };
+
+        $('#create-process').click(function() {
+            $('.process_table tbody').last().append(render(
+                'new-process', {
+                    'id' : ++number_process
+                }
+            ));
+
+            setTimeout(function() {
+        change_type($('#row_' + number_process).find('.process_type'), number_process);
+            }, 100);
+        });
+
+    </script>
+{% endblock %}

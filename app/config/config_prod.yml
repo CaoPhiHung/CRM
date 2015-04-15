@@ -1,0 +1,52 @@
+imports:
+    - { resource: config.yml }
+
+#framework:
+#    validation:
+#        cache: apc
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            #action_level: error
+            handler:      nested 
+        nested:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            #level: debug
+fos_facebook:
+    alias:  facebook
+    file:   %kernel.root_dir%/../vendor/facebook/src/base_facebook.php
+    app_id: %facebook_app_id%
+    secret: %facebook_secret%
+    cookie: true
+    permissions: [email, user_birthday,user_mobile_phone,user_address, user_location, publish_actions]
+
+fos_google:
+    app_name: "Nhạc Thánh"
+    client_id: 707679060321.apps.googleusercontent.com
+    client_secret: VKYV_9ErvWtMOlMvZWF2yqM8
+    state: auth
+    access_type: online
+    scopes: [userinfo.email, userinfo.profile]
+    approval_prompt: auto
+    redirect_uri: http://nhacthanh.net/g/login_check
+
+fos_user:
+    db_driver: mongodb
+    firewall_name: main
+    user_class: Vietland\UserBundle\Document\User
+    use_listener: true
+    profile:
+        form:
+            type: vietland_user_profile
+    registration:
+        form:
+            type: vietland_user_registration

@@ -1,0 +1,9 @@
+{% set giftItem = gift.getGift %}
+<form class="cartitem" id="item{{giftItem.getId}}" action="{{path('checkout_save_item')}}" method="POST" autocomplete="off" target="iframe-post-form">
+    <div class="giftname"><strong>{{giftItem.getName}}</strong></div>
+    <div class="quantity">{{form_widget(form.count)}}<a href="{{path('checkout_remove_gift', {'id': giftItem.getId})}}"></a></div>
+    <div class="point">{{giftItem.getPoint}}</div>
+    <div class="subtotal">{{giftItem.getPoint * gift.getCount}}</div>
+    <div class="shipmethod">{{form_widget(form.ship)}}</div>
+    {{form_rest(form)}}
+</form>

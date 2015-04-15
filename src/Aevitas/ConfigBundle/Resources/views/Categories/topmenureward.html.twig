@@ -1,0 +1,5 @@
+<ul class="dropdown-menu">
+    {% for cat in categories %}
+    <li><a href="{{path('levis_gift_category',{'topcat': cat})}}" title="{{cat | trans}}">{{cat | trans}}</a></li>
+    {% endfor %}
+</ul>

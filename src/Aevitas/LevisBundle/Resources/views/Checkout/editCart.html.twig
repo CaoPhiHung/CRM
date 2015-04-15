@@ -1,0 +1,158 @@
+{# empty Twig template #}
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block import %}
+<style>
+        #s2id_cart_sid .select2-choice{min-width: 160px}
+        .tab-content input[type="radio"]{
+            float: left;
+            margin-right: 10px;
+        }
+        #confirmcode label+input{border:1px solid #ff00ff}
+    </style>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+        <li class="divider"></li>
+        <li>Cart</li>
+        <li class="divider"></li>
+        <li>Editing Cart</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="alert alert-faded">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+    </div>
+                {% endfor %}
+    <div class="widget widget-2 widget-tabs widget-tabs-2 border-bottom-none">
+        <div class="widget-head">
+            <ul>
+                <li class="active"><a class="" href="#general-info" data-toggle="tab"><i></i>General Infomation</a></li>
+                <li class=""><a class="" href="#settings" data-toggle="tab"><i></i>Items</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div id="general-info" class="tab-pane active">
+            {% if is_granted('ROLE_ADMIN') %}
+                <label>{{'Confirmation Code' | trans}}</label><strong>{{ cart.getHash }}</strong>
+                <form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST">
+                    <input type="hidden" id="cart_store"/>
+            {{ form_rest(form) }}
+                    <div class="form-actions" style="margin: 0;">
+                        <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+                    </div>
+                </form>
+                {% else %}
+                <label>{{'Status' | trans}}</label><strong>{{cart.getStatusLabel | trans}}</strong>
+                <label>{{'User' | trans}}</label><strong>{{cart.getUser.getName}}</strong>
+                <label>{{'User\'s Cellphone' | trans}}</label><strong>{{cart.getUser.getCellphone}}</strong>
+                <label>{{'Created at' | trans}}</label><strong>{{cart.getCreated | date('d/m/Y')}}</strong>
+                {% endif %}
+            </div>
+            <div id="settings" class="tab-pane">
+                {% if cart.getRedeem == false %}<a href="{{path('redeem_confirm_sms', {'id': cart.getId})}}" class="confirm btn">{{'Confirm Redeem Code'| trans}}</a>{% endif %}
+                <div class="cartitem"><div class="giftname">{{'Item' | trans}}</div><div class="quantity">{{'Quantity' | trans}}</div><div class="point">{{'Points' | trans}}</div><div class="subtotal">{{'Subtotal' | trans}}</div><div class="shipmethod">{{'Shipping Method' | trans}}</div></div>
+                {{giftform | raw}}
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div id="confirm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <strong id="myModalLabel" style="color:#000">{{'Confirm' | trans}}</strong>
+                    </div>
+                    <div class="modal-body" style="color:#000">
+                        <i>Checking...</i>
+                        <form id="confirmcode" action="{{path('checking_redeem_code', {'id': cart.getId})}}" method="GET">
+                            <label>{{'Ask customer for redemption code which was sent to their cellphone' | trans}}</label>
+                            <input type="text" name="code"/>
+                            <input type="submit" value="Submit"/>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    </div>
+                </div>
+{% endblock %}
+
+        {% block extendjs %}
+	{% javascripts output='js/backend_gift_edit_compress.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery-miniColors/jquery.miniColors.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/jquery.cookie.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/themer.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/pixelmatrix-uniform/jquery.uniform.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/js/bootstrap.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-select/bootstrap-select.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js'
+            '@AevitasLevisBundle/Resources/public/bootstrap/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js'
+            '@AevitasLevisBundle/Resources/public/js/select2.js'
+            '@AevitasLevisBundle/Resources/public/theme/scripts/load.js'
+        %}
+                <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+{% block javascript %}
+                <link href="{{ asset('bundles/aevitaslevis/css/select2.css') }}" rel="stylesheet">
+                <script src="{{ asset('bundles/aevitaslevis/js/select2.js') }}"></script>
+                <script src="{{ asset('bundles/aevitaslevis/front/js/tag-it.min.js') }}"></script>
+                <script>
+                    $(document).ready(function() {
+                        $('a.confirm').click(function(e) {
+                            e.preventDefault();
+                            $('#confirm').modal();
+                            $.ajax({
+                                url: $(this).attr('href'),
+                                dataType: 'json',
+                                success: function(data) {
+                                    $('#confirm .modal-body i').text('Code has been sent to customer\'s cellphone');
+                                }
+                            })
+                        })
+                        $('form#confirmcode').on('submit', function(e) {
+                            e.preventDefault();
+                            url = $(this).attr('action');
+                            data = $(this).serialize();
+                            $.ajax({
+                                url: url,
+                                data: data,
+                                type: 'POST',
+                                dataTye: 'json',
+                                success: function(data) {
+                                    if (data.status)
+                                        $('#confirm .modal-body i').removeClass('alert-danger').addClass('alert').text(data.message)
+                                    else $('#confirm .modal-body i').addClass('alert-danger').text(data.message)
+                                }
+                            })
+                        })
+                        $("#cart_store").select2({
+                            placeholder: '{{cart.getStore.getName}}',
+                            minimumInputLength: 2,
+                            ajax: {
+                                url: "{{ path('backend_store_search',{"_format":'json'}) }}",
+                                dataType: 'jsonp',
+                                data: function(term, page) {
+                                    return {
+                                        q: term
+                                    };
+                                },
+                                results: function(data, page) {
+                                    //console.log(data);
+                                    return {results: data};
+                                }
+                            },
+                            multiple: false
+                        });
+                        $('#cart_store').on("change", function(e) {
+                            $('#cart_sid').val(e.val)
+                        })
+                    });
+                    </script>
+{% endblock %}

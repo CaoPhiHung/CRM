@@ -1,0 +1,29 @@
+services:
+    loyalty:
+      class: Aevitas\LevisBundle\Services\LoyaltyConfig
+      arguments:  [%actions%, %locale%, %smsactions%, %secret%, %smsclient%, %smspassword%, %baserate%]
+      
+      
+    user.event:
+        class: Aevitas\LevisBundle\EventListener\UserEventListener
+        arguments: ["@mailer", "@doctrine", "@security.context", "@templating"]
+        tags:
+            - { name: kernel.event_listener, event: levis_bundle.user.event, method: onMethod }
+
+    admin.logger:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: [app]
+        calls:
+             - [pushHandler, ["@admin.logger_handler"]]
+    admin.logger_handler:
+        class: Monolog\Handler\StreamHandler       
+        arguments: [%kernel.logs_dir%/%kernel.environment%.admin.log, 200]
+    #excel_engine:
+        #class: Aevitas\LevisBundle\Services\ExcelEngine
+        #arguments: ["@xls.load_xls5", "@admin.logger", "@mailer","@sms_sender", "@templating"]
+        
+    my_doctrine_listener:
+        class:   Aevitas\LevisBundle\EventListener\DoctrineMongoDBListener
+        # ...
+        tags:
+            -  { name: doctrine_mongodb.odm.event_listener, event: prePersist, method: prePersist }

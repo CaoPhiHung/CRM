@@ -1,0 +1,47 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> {{'Store' | trans}}</a></li>
+    <li class="divider"></li>
+    <li>{{'User' | trans}}</li>
+    <li class="divider"></li>
+    <li>{{'Results' | trans}}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 140px;" aria-sort="ascending" aria-label="Rendering eng.: activate to sort column descending">{{ 'Name'|trans }}</th>         
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 91px;" aria-label="Eng. vers.: activate to sort column ascending">{{ 'Date'|trans}}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 101px;" aria-label="CSS grade: activate to sort column ascending">{{ 'Store'|trans }}</th>
+            <th>{{'Customer Code' | trans}}</th>
+            <th>{{'Amount' | trans}}</th>
+            <th>{{'Action' | trans}}</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {% for user in users %}
+            <tr class="gradeA">
+                <td class="center item-name">{{ user.getAccountsName }}</td>
+                <td class="center item-price">{{ user.getBilldate }}</td> 
+                <td class="center item-price">{{ user.getStore }}</td> 
+                <td>{{user.getCCode}}</td>
+                <td>{{user.getAmount}}</td>
+                <td><a class="btn btn-action" target="_blank" href="{{ path('store_shopping_action', {'ledgerid': user.getLedgerID,'billno': user.getBillIdNo})}}">{{'Accumulate Point' | trans}}</a><br/><a class="btn btn-action" href="{{ path('store_update_user', {'ledgerid' :user.getLedgerID, 'billno': user.getBillIdNo}) }}">{{'Sign Up' | trans}}</a></td>
+                </tr>
+           {% endfor %}
+            </tbody></table>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('button.action').live('click', function(){
+            window.open($(this).prev().val(), '_blank');
+        });
+    });
+        </script>
+{% endblock %}

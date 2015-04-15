@@ -1,0 +1,42 @@
+{
+    "name":         "jms/i18n-routing-bundle",
+    "description":  "This bundle allows you to create i18n routes.",
+    "keywords":     ["translation","multilanguage","routing"],
+    "homepage": "http://jmsyst.com/bundles/JMSI18nRoutingBundle",       
+    "type":         "symfony-bundle",
+    "license":      "Apache2",
+    "authors": [
+        {
+            "name":   "Johannes M. Schmitt",
+            "email":  "schmittjoh@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/framework-bundle": ">=2.1,<2.3-dev",
+        "jms/translation-bundle": ">=1.0,<2.0-dev"
+    },
+    "require-dev": {
+        "symfony/css-selector": "*",
+        "symfony/http-kernel": "*",
+        "symfony/validator": "*",
+        "symfony/browser-kit": "*",
+        "symfony/finder": "*",
+        "symfony/form": "*",
+        "symfony/yaml": "*",
+        "symfony/process": "*",
+        "symfony/class-loader": "*",
+        "symfony/twig-bundle": "*",
+        "sensio/framework-extra-bundle": "*",
+        "jms/di-extra-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "JMS\\I18nRoutingBundle": "" }
+    },
+    "target-dir": "JMS/I18nRoutingBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1-dev"
+        }
+    }
+}

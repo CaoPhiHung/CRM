@@ -1,0 +1,185 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'Gift Store' | trans}}</title>
+{% endblock %}
+{% block header %}
+<meta property="og:site_name" content="Star Club"/>
+{% if app.user != null %}
+<meta property="og:url" content="{{path('levis_gift_detail', {'slug': gift.getSlug, 'topcat': gift.getCat, 'category': gift.getCategory.getSlug~'-'~gift.getCatid, '_format': 'html', 'ref': app.user.getId})}}"/>
+{% else %}
+<meta property="og:url" content="{{path('levis_gift_detail', {'slug': gift.getSlug, 'topcat': gift.getCat, 'category': gift.getCategory.getSlug~'-'~gift.getCatid, '_format': 'html'})}}"/>
+{% endif %}
+<meta property="og:type" content="gift"/>
+<meta property="og:title" content="{{gift.getName}} - Star Club" /> 
+<meta property="og:image" content="{{asset(gift.getThumbnail(155,155))}}{{gift.getCreated.getTimestamp}}" />
+<meta property="og:description" content="{{gift.getExcerpt | raw}}" />
+<meta name="description" content="{{gift.getDescription | raw}}" />
+<meta name="keywords" content="{{gift.getTags}}"/>
+<meta property="og:site_name" content="www.StarClubvn.com" />
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_dashboard.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/select2.css'
+    '@AevitasLevisBundle/Resources/public/front/css/datepicker.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward.css'
+    '@AevitasLevisBundle/Resources/public/front/css/reward_detail.css'
+    '@AevitasLevisBundle/Resources/public/front/css/account.css'
+    '@AevitasLevisBundle/Resources/public/front/css/clock.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+
+<!-- Registration Content
+================================================== -->
+<!-- Wrap of all the registration block. -->
+<section id="main" class="clearfix">
+    <!-- breadsrums -->
+    <div id="breadcrums">
+        <li class="br-home" onclick="void(0);"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_gift_category',{'topcat': 'Reward'})}}" title="{{'Reward' | trans}}">{{'Reward' | trans}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_gift_category',{'topcat': topcat})}}" title="{{topcat | trans}}">{{topcat | trans}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_gift_subcategory',{'topcat': topcat, 'catid': gift.getCategory.getId, 'catslug': gift.getCategory.getSlug})}}" title="{{topcat | trans}} {{gift.getCategory.getName | trans}}">{{gift.getCategory.getName | trans}}</a></li>
+        <li class="br-arrow2"></li>
+        <li class="br-arrow"></li>
+        <li class="br-normal"><a href="{{path('levis_gift_detail', {'slug': gift.getSlug, 'topcat': gift.getCat, 'category': gift.getCategory.getSlug~'-'~gift.getCatid, '_format': 'html'})}}" title="{{gift.getName}}">{{gift.getName}}</a></li>
+        <li class="br-arrow2"></li>
+    </div>
+    <div class="shadow_wrapper">
+        <div>
+            {{ render_esi(controller('AevitasLevisBundle:Checkout:renderSumCart'))}}
+            <div class="content">
+
+                <div class="giftinfo">
+                    <!-- product image -->
+                    <div id="product-image">
+                        <div class="list-thumbnail">
+                            <div>
+                                <div id="logo_thumbnail">
+                                    <ul>
+                                            {% for image in gift.getImagesUrlArray %}
+                                            <li><a href="#" title="Levi's"><img src="{{asset(image)}}" alt="Levi's" /></a></li>
+                                            {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- product detail -->
+                                <div id="product-detail">
+                                    <div class="product-title">{{gift.getName}}</div>
+                                    <div class="product-description">
+                                {{gift.getExcerpt | raw}}
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-point">{% trans with {'%points%': gift.getPoint} %}%points% points{% endtrans %}</div>
+                                            <div class="product-availability">{{'Availability'| trans}}: <span>In stock</span></div>
+                                        </div>
+                                        <div class="product-quantity clearfix">
+                                            <span><fb:like href="{{app.request.baseurl}}" send="true" layout="button_count" width="450" show_faces="false"></fb:like></span>
+                                            <span class='st_twitter_hcount' displayText='Tweet'></span>
+                                            <span class='st_email_hcount' displayText='Email'></span>
+                                            <span class='st_googleplus_hcount' displayText='Google +'></span>
+                                        </div>
+                                        <div class="product-action">
+                                            <div id="bt-add-wishlist">
+                                                <div id="icon-wish"></div>
+                                                <div>{{'I want this !' | trans}}</div>
+                                            </div>
+                                            <div id="bt-add-bag">
+                                                <div><a href="{{path('checkout_add_gift', {'id': gift.getId})}}">{{'Add to Bag' |trans}}</a></div>
+                                                <div id="icon-bag"></div>
+                                            </div>
+                                        </div>
+                                        <div class="product-tab">
+                                            <li class="pr-tab-item" onclick="switch_tag(this, 'tab-description')">{{'Product Description' | trans}}</li>
+                                            <li class="pr-tab-item active" onclick="switch_tag(this, 'tab-review')">{{'Reviews' |trans}}</li>
+                                        </div>
+                                        <div class="tab-show">
+                                            <div class="tab-child" id="tab-description" style="display: none;">
+                                    {{gift.getDescription | raw}}
+                                                </div>
+                                                <div class="tab-child" id="tab-review">
+                                                    <div class="fb-comments" data-href="{{app.request.baseurl}}" data-width="560" data-num-posts="4"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+                    <script>
+            function switch_tag(obj, id) {
+                $('.pr-tab-item').removeClass('active');
+                $(obj).addClass('active');
+                $('.tab-child').hide();
+                $('#' + id).show();
+            }
+                        </script>
+{% endblock %}
+
+    {% block jslib %}
+                        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    {% javascripts output='js/front_compress_gift.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-transition.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-modal.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-dropdown.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-tooltip.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-carousel.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-grayscale.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-holder.js'
+            '@AevitasLevisBundle/Resources/public/front/js/jquery.jcarousel.min.js'
+            '@AevitasLevisBundle/Resources/public/front/js/jquery.pikachoose.min.js'
+        %}
+                        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+{% block javascript %}
+            $('#bt-add-bag a').on('click', function(e) {
+                that = this;
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('href'),
+                    dataType: 'json',
+                    success: function(data) {
+                        if (!data.status) {
+                            $('#shopcart span strong').text(data.count);
+                        }
+                        $(that).tooltip({title: data.error, delay: {show: 200,hide: 3000}});
+                        $(that).tooltip('show');
+                        setTimeout(function(){$(that).tooltip('hide');$(that).tooltip('destroy');},1000);
+                    }
+                })
+            })
+            $('#logo_thumbnail ul').PikaChoose({carousel: true});
+            $('#bt-add-wishlist').click(function() {
+                $.ajax({
+                    url: '{{ path('levis_gift_addwishlist', {gid:gift.getId}) }}',
+                    type: "POST",
+                    dataType: "json",
+                    success: function(response) {
+                        //console.log(response);
+                        if (typeof(response.error) != 'undefined') {
+                            //failed, gift not exists.
+                            if (response.error == 'exists') {
+                                alert('this gift already exists in your wish list!');
+                            }
+                            return;
+                        }
+                        if (typeof(response.result) != 'undefined' && response.result == true) {
+                            alert('this gift was added to your wish list!');
+                        }
+                    }
+                });
+            });
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> {{'Store' | trans}}</a></li>
+    <li class="divider"></li>
+    <li>{{'User' | trans}}</li>
+    <li class="divider"></li>
+    <li>{{'Results' | trans}}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+<form action="" method="POST">
+    {{form_rest(form)}}
+        <input type="submit" value="Search" type="btn" />
+</form>
+<table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 140px;" aria-sort="ascending" aria-label="Rendering eng.: activate to sort column descending">{{ 'Name'|trans }}</th>         
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 91px;" aria-label="Eng. vers.: activate to sort column ascending">{{ 'Date'|trans}}</th>
+            <th>{{ 'Amount' | trans }}</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 101px;" aria-label="CSS grade: activate to sort column ascending">{{ 'Store'|trans }}</th>
+            <th>{{'Customer Code' | trans}}</th>
+            <th>{{'Action' | trans}}</th>
+        </tr>
+    </thead>
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        {% for result in results %}
+            <tr class="gradeA">
+                <td class="center item-name">{{ result['PartyName'] }}</td>
+                <td>{{ result['BillDate'] }}</td>
+                <td class="center item-price">{{ result['GrossAmount'] }}</td> 
+                <td class="center item-price">{{ result['StoreName'] }}</td> 
+                <td>{{result['PartyID']}}</td>
+                <td><a class="btn btn-action" target="_blank" href="{{ path('check_bill', {'ledgerid': result['Ledgerid'],'billno': result['BillIdNo']})}}">{{'Accumulate Point' | trans}}</a><br/></td>
+                </tr>
+           {% endfor %}
+            </tbody></table>
+{% endblock %}
+{% block javascript %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#form_start').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#form_end').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#form_end').datepicker("option", "maxDate", new Date());
+});
+    </script>
+{% endblock %}

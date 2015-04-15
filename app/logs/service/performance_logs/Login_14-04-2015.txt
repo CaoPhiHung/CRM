@@ -1,0 +1,9 @@
+Login Time -> 754 ms
+Login Time -> 698 ms
+Login Time -> 736 ms
+Login Time -> 725 ms
+Login Time -> 621 ms
+Login Time -> 636 ms
+Login Time -> 698 ms
+Login Time -> 720 ms
+Login Time -> 776 ms

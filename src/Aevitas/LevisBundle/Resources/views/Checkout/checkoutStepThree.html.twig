@@ -1,0 +1,142 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+<title>{{'Checkout' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>{{'Check-out' | trans}}</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+<style type="text/css">
+    </style>
+    <section id="form_reg" class="clearfix">
+        <div class="shadow_wrapper">
+            <div>
+                <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                    <ul class="steps">
+                        <li class="active step1"><span><span><a href="{{path('checkout_step_one')}}">1. {{'Confirm your cart' | trans}}</a></span></span></li>
+                        <li class="active step2"><span><span><a href="{{path('checkout_step_two')}}">2. {{'Choose store to pick up' | trans}}</a></span></span></li>
+                        <li class="active step3"><span><span><a href="{{path('checkout_step_three')}}">3. {{'Shipping Address' | trans}}</a></span></span></li>
+                    </ul>
+                    <div class="info stepone">
+                        <span class="title"><h3>3. {{'Shipping Address' | trans}}</h3></span>
+                        <div>
+                            <p>{{'Check all your selected items again before you go any further.'| trans}}</p>
+                            
+                                <div class="row">
+                                <div class="form-row">
+                                    <label for="reg_step_city">City</label>
+                                    <div class="form-field"><input type="text" id="reg_step_city" name="reg_step[city]" /></div>
+                                </div>
+                                <div>
+                                    <label for="reg_step_district">District</label>
+                                    <input type="text" id="reg_step_district" name="reg_step[district]" />
+                                    <select id="district" class="alldist"></select>
+                                </div>
+                                </div>
+                            <div class="row">
+                                <div class="form-row results">
+                                    
+                                </div>
+                            </div>
+                            <form>
+                                {{form_rest(form)}}
+                                <span><a class="yellow_button submit3" href="{{path('checkout_step_two')}}">{{'Continue' | trans}}</a></span>
+                            </form>
+                                </div>
+                            </div>
+                        </div>
+                        <iframe id="iframe-post-form" name="iframe-post-form" style="display:none"></iframe>
+                    </div>
+                </div>
+            </section>
+{% endblock %}
+    {% block jslib %}
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    {% javascripts output='js/front_compress_checkout.js' filter='yui_js' 
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-transition.js'
+            '@AevitasLevisBundle/Resources/public/front/js/jquery.uniform.min.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-modal.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-dropdown.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-carousel.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-grayscale.js'
+            '@AevitasLevisBundle/Resources/public/front/js/select2.js'
+            '@AevitasLevisBundle/Resources/public/front/js/bootstrap-holder.js'
+            '@AevitasLevisBundle/Resources/public/front/js/iframe.js'
+        %}
+                <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+{% block javascript %}
+    $(document).ready(function(){
+                        var query = '{{path('home_search_district')}}', querystore = '{{path('checkout_query_store')}}';
+                        $('#reg_step_city').attr('type', 'hidden');
+                        $('#reg_step_district').attr('type', 'hidden');
+                        $('#reg_step_city').after('<select id="city">' + $('#citydata').html() + '</select>');
+                        $('#district').html($('#districtdata').html());
+                        $('select#city').select2();
+                        $('select#district').select2();
+                        $('select#district').on('change', function() {
+                            dist = $(this).val();
+                            $.ajax({
+                                url: querystore+'/'+$('select#city').val()+'/'+$('select#district').val(),
+                                dataType: 'json',
+                                type: 'GET',
+                                success: function(data){
+                                    if(data.length){
+                                        $('.results').html('');
+                                        $.each(data, function(i, item){
+                                            $('.results').append('<div class="row"><input type="radio" name="store" value="'+item.id+'"/>'+ item.name + ' - '+ item.address+'</div>');
+                                        })
+                                        $('.results input').uniform();
+                                        $('.results input').each(function(){
+                                            $(this).change(function(){
+                                                $('#form_store').val($('input[name="store"]:checked').val());
+                                            })
+                                        });
+                                    }
+                                    
+                                }
+                            })
+                        });
+
+                        function doSelectCity(obj, CallBack) {
+                            city = $('#reg_step_city').val();
+                            $('select#city').find("option[value=" + city + "]").attr('selected', 'selected');
+                            $.ajax({
+                                url: query + '/' + $('#reg_step_city').val(),
+                                dataType: 'json',
+                                success: function(data) {
+                                    $('#city').select2("destroy").select2();
+                                    $('#district').select2("destroy");
+                                    $('#district').html(data.html).select2();
+                                    if (typeof(CallBack) != 'undefined') {
+                                        window.setTimeout(function() {
+                                            CallBack();
+                                        }, 500);
+                                    }
+                                }
+                            });
+                        }
+                        $('select#city').on('change', function() {
+                            city = $(this).val();
+                            $('.title h3').addClass('loading');
+                            $('#reg_step_city').val(city);
+                            $.ajax({
+                                url: query + '/' + $(this).val() + '.json',
+                                dataType: 'json',
+                                success: function(data) {
+                                    $('.title h3').removeClass('loading');
+                                    $('#district').select2("destroy");
+                                    $('#district').html(data.html).select2();
+                                    $('#reg_step_district').val($('#district option:first').val())
+                                }
+                            });
+                        })
+    });
+{% endblock %}

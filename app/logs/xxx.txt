@@ -1,0 +1,125 @@
+
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 32232905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 32532905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 32632905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 33362905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 33872905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 446, max: 48000000
+--billno: 47302905997801 --ccode: 8315001412 --cellphone: 0903231595
+Caught exception: current batch size is too large: 444, max: 48000000
+--billno: 47402905997801 --ccode: 8315001407 --cellphone: 0906366604
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 34052905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 34152905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 446, max: 48000000
+--billno: 47782905997801 --ccode: 8315001412 --cellphone: 0903231595
+Caught exception: current batch size is too large: 444, max: 48000000
+--billno: 47802905997801 --ccode: 8315001407 --cellphone: 0906366604
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: current batch size is too large: 444, max: 48000000
+--billno: 51142905497901 --ccode: 8315001407 --cellphone: 0906366604
+Caught exception: current batch size is too large: 444, max: 48000000
+--billno: 51272905497901 --ccode: 8315001407 --cellphone: 0906366604
+Caught exception: current batch size is too large: 445, max: 48000000
+--billno: 34842905897701 --ccode: 8315000686 --cellphone: 016986211449
+Caught exception: current batch size is too large: 444, max: 48000000
+--billno: 49672905997801 --ccode: 8315001407 --cellphone: 0906366604
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727
+Caught exception: Duplicate cellphone
+--billno: 10012906406401 --ccode: 8315000646 --cellphone: 0908788727

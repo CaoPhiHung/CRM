@@ -1,0 +1,60 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+	<li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+	<li class="divider"></li>
+        <li><a href="#">Programs</a></li>
+        <li class="divider"></li>
+	<li>List Programs</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-faded">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ flashMessage }}
+                </div>
+            <div class="separator line bottom"></div>
+            {% endfor %}
+    <div class="control-group">
+        <a href="{{ path('backend_program_addnew') }}"><span class="btn btn-large color-7">Add new Program</span></a>
+    </div>
+    <div class="separator"></div>
+    <table aria-describedby="DataTables_Table_0_info" id="DataTables_Table_0" class="dynamicTable table table-striped table-bordered table-condensed dataTable">
+            <thead>
+                <tr role="row" style="color:#0F0">
+
+                    <th aria-label="Rendering eng.: activate to sort column descending" aria-sort="ascending" style="width: 40px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting_asc">ID</th>
+
+                    <th aria-label="Browser: activate to sort column ascending" style="width: 200px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">Name</th>
+
+                    <th aria-label="Browser: activate to sort column ascending" style="width: 100px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">Start Date</th>
+
+                    <th aria-label="Platform(s): activate to sort column ascending" style="width: 100px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">End Date</th>
+                    
+            </thead>
+
+            <tbody aria-relevant="all" aria-live="polite" role="alert">
+                {% for program in programs %}
+                    <tr class="gradeA odd">
+                        <td class="  sorting_1">{{ program.id }}</td>
+                        <td class=" ">{{ program.name }}</td>
+                        <td class=" ">{{ program.startDate }}</td>
+                        <td class=" ">{{ program.endDate }}</td>
+                        <td>
+                            <a href="{{ path('backend_program_clone',{'id':program.id}) }}" class="glyphicons no-js create"><i></i>Clone</a>
+                            <br/><a href="{{ path('backend_program_edit',{'id':program.id}) }}" class="glyphicons no-js edit"><i></i>Edit</a>
+                            <br/><a href="javascript:if(confirm('Are you sure want to delete this Rule?')){window.location='{{ path('backend_program_delete',{'id':program.id}) }}'}" class="glyphicons no-js delete"><i></i>delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascript %}
+    
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> BACKEND</a></li>
+    <li class="divider"></li>
+    <li>Group List</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+<div class="alert alert-faded">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+</div>
+<div class="separator line bottom"></div>
+                {% endfor %}
+<div class="control-group">
+    <a href="{{ path('backend_group_addnew') }}"><span class="btn btn-large color-4">Add new group</span></a>
+</div>
+<div class="separator"></div>
+<table aria-describedby="DataTables_Table_0_info" id="DataTables_Table_0" class="dynamicTable table table-striped table-bordered table-condensed dataTable">
+    <thead>
+        <tr role="row" style="color:#0F0">
+            <th aria-label="Rendering eng.: activate to sort column descending" aria-sort="ascending" style="width: 60px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting_asc">ID</th>
+            <th aria-label="Browser: activate to sort column ascending" style="width: 300px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">Name</th>
+            <th aria-label="Platform(s): activate to sort column ascending" style="width: 100px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">Admin</th>
+            <th aria-label="Eng. vers.: activate to sort column ascending" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">ROLES</th>
+            <th aria-label="Rendering eng.: activate to sort column descending" aria-sort="ascending" style="width: 60px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting_asc"></th>
+    </thead>
+
+    <tbody aria-relevant="all" aria-live="polite" role="alert">
+                {% for group in groups %}
+            <tr class="gradeA odd">
+                <td class="  sorting_1">{{ group.id }}</td>
+                <td class=" "><a href="{{ asset('backend/user/group/info/') }}{{group.id}}">{{ group.name }}</a></td>
+                <td class=" ">{{ group.admin }}</td>
+                <td class="center ">
+                            {% for role in group.roles %}
+                                {{ role }}; 
+                            {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ asset('backend/user/group/edit/') }}{{group.id}}" class="glyphicons no-js edit"><i></i>Edit</a>
+                        <br/><a href="javascript:if(confirm('Are you sure want to delete this Group?')){window.location='{{ asset('backend/user/group/delete/') }}{{group.id}}'}" class="glyphicons no-js delete"><i></i>delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'Star Club - Store Location' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_store.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+    '@AevitasLevisBundle/Resources/public/front/css/store_location.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<!-- Carousel
+================================================== -->
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>{{'Brands' | trans}}</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+<section id="main" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <!--  -->
+                <div id="panel-left">
+                    <div class="text-title"><span rel="apparel">{{'Apparel' | trans}}</span><i></i></div>
+                    <div class="text-title"><span rel="footwear">{{'Footwear' | trans}}</span><i></i></div>
+                    <div class="text-title"><span rel="eyewear">{{'Eyewear' | trans}}</span><i></i></div>
+                    <div class="text-title"><span rel="watches">{{'Watches' | trans}}</span><i></i></div>
+                    <div class="text-title"><span rel="fragnance">{{'Fragrance' | trans}}</span><i></i></div>
+                </div>
+                <div id="panel-right">
+                    <div id="apparel" class="show"><h2>{{'Apparel' | trans}}</h2>
+                        <div class="list"><img src="{{asset('images/logo/levis.png')}}" alt="levis"/></div>
+                    </div>
+                    <div id="footwear"><h2>{{'Footwear' | trans}}</h2>
+                        <div class="list"><img src="{{asset('images/logo/birkenstock.jpg')}}" alt="birkenstock"/></div>
+                    </div>
+                    <div id="eyewear"><h2>{{'Eyewear' | trans}}</h2>
+                        <div class="list"><img src="{{asset('images/logo/cartier.png')}}" alt="cartier"/>
+                            <img src="{{asset('images/logo/eyewear.png')}}" alt="eyewear"/>
+                            <img src="{{asset('images/logo/silhouette.png')}}" alt="silhoutte"/>
+                            <img src="{{asset('images/logo/tagheuer.png')}}" alt="tagheure"/>
+                            <img src="{{asset('images/logo/davidyurman.png')}}" alt="tagheure"/>
+                            <img src="{{asset('images/logo/judithleiber.png')}}" alt="tagheure"/></div>
+                    </div>
+                    <div id="watches"><h2>{{'Watches' | trans}}</h2>
+                        <div class="list"><img src="{{asset('images/logo/armani.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/dkny.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/marc.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/diesel.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/fossil.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/addidas.png')}}" alt="birkenstock"/>
+                        </div>
+                    </div>
+                    <div id="fragnance"><h2>{{'Fragrance' | trans}}</h2>
+                        <div class="list"><img src="{{asset('images/logo/caron.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/range.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/dsquared.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/ferre.png')}}" alt="birkenstock"/>
+                            <img src="{{asset('images/logo/aigner.png')}}" alt="birkenstock"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block javascript %}
+    $('.text-title span').on('click', function(){rel = $(this).attr('rel');$('.show').removeClass('show');$('#'+rel).addClass('show')})
+{% endblock %}

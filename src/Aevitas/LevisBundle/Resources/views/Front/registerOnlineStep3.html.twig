@@ -1,0 +1,50 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+        {% block title %}
+        <title>{{'Become A Member' | trans}} - {{'Step 4' | trans}}</title>
+        {% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>{{'Become A Member' | trans}}</h3>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+<section id="form_reg" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content" style="background:url('{{asset('/images/credit.jpg')}}') no-repeat scroll bottom right #fff">
+                <ul class="steps">
+                    <li class="active step1"><span><span>1. {{'Create Account' | trans}}</span></span></li>
+                    <li class="active step2"><span><span>2. {{'Update Your Information' | trans}}</span></span></li>
+                    <li class="active step4"><span><span>3. {{'Opt In' | trans}}</span></span></li>
+                </ul>
+                <div class="info stepfour">
+                    <span class="title"><h3>3. {{'Opt In' | trans}}</h3></span>
+                    <div>
+                        <p>{{'You can choose to receive our inform via Email' | trans}}</p>
+                        {% form_theme form "AevitasLevisBundle::Front/form.html.twig" %}
+                        <form action="{{ path('levis_home_register_online_step4') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                            {{form_widget(form.nlt)}}
+                                {{form_label(form.nlt)}}
+                            {{form_rest(form)}}
+                                <p>{{'Every month you will get a newsletter to keep you informed Starclub\'s latest new, exclusive offer and your account summary.' | trans}}</p>
+                                <div class="row"><a class="fb-share" href="#" onclick="shareFacebook();">Share Facebook</a></div>
+                                <input type="submit" class="yellow_button" value="{{'Finish' | trans}}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+{% block javascript %}
+$(document).ready(function(){
+    $('#form_nlt').uniform();
+});
+{% endblock %}

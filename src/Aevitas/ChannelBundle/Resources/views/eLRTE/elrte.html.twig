@@ -1,0 +1,179 @@
+{% block import %}
+    <!-- jQuery and UI -->
+        <!-- jQuery and UI -->
+	{#<script src="{{ asset('bundles/aevitaslevis/el_extra/js/jquery-1.6.1.min.js') }}" type="text/javascript" charset="utf-8"></script>#}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="{{ asset('bundles/aevitaslevis/el_extra/js/jquery-ui-1.8.13.custom.min.js') }}" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/el_extra/css/smoothness/jquery-ui-1.8.13.custom.css') }}" type="text/css" media="screen" title="no title" charset="utf-8">
+    <!-- CSS for widgets -->
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/ellib/css/elcommon.css') }}" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/ellib/css/elcolorpicker.css') }}" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/ellib/css/eldialogform.css') }}" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/ellib/css/elpaddinginput.css') }}" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/ellib/css/elselect.css') }}" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/elrte/css/elrte.css') }}" type="text/css" media="screen" charset="utf-8">
+
+	<!-- Common JS and widgets -->
+	<script src="{{ asset('bundles/aevitaslevis/ellib/js/eli18n.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/ellib/js/eldialogform.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/ellib/js/jquery.elcolorpicker.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/ellib/js/jquery.elborderselect.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/ellib/js/jquery.elpaddinginput.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/ellib/js/jquery.elselect.js') }}" type="text/javascript" charset="utf-8"></script>
+
+	<!-- elRTE core -->
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.options.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.utils.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.DOM.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.selection.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.w3cRange.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.ui.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.history.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/elRTE.filter.js') }}" type="text/javascript" charset="utf-8"></script>
+
+	<!-- elRTE languages -->
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/i18n/elrte.en.js') }}" type="text/javascript" charset="utf-8"></script>
+
+	<!-- elRTE buttons -->
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/anchor.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/blockquote.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/copy.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/css.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/div.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/docstructure.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/elfinder.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/fontname.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/fontsize.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/forecolor.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/formatblock.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/fullscreen.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/horizontalrule.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/image.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/flash.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/indent.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/justifyleft.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/link.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/nbsp.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/outdent.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/pasteformattext.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/pastetext.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/save.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/stopfloat.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/table.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tablerm.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tbcellprops.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tbcellsmerge.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tbcellsplit.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tbcollbefore.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tbcolrm.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tbrowbefore.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/tbrowrm.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/unlink.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/undo.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/direction.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/smiley.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/pagebreak.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elrte/js/ui/about.js') }}" type="text/javascript" charset="utf-8"></script>
+
+	<!-- elFinder -->
+	<link rel="stylesheet" href="{{ asset('bundles/aevitaslevis/elfinder/css/elfinder.css') }}" type="text/css" media="screen" charset="utf-8">
+	<script src="{{ asset('bundles/aevitaslevis/elfinder/js/elFinder.js') }}"               type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elfinder/js/elFinder.view.js') }}"          type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elfinder/js/elFinder.ui.js') }}"            type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elfinder/js/elFinder.quickLook.js') }}"     type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elfinder/js/elFinder.eventsManager.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ asset('bundles/aevitaslevis/elfinder/js/i18n/elfinder.vi.js') }}" type="text/javascript" charset="utf-8"></script>
+        
+        <style>
+            .el-paddinginput > *{width:40px;}
+            input[type="text"]{width:40px;height:18px;padding:0px}
+            select{height:18px;padding:0px}
+            legend{width:50px;}
+        </style>
+{% endblock %}
+
+{% block content %}
+<!-- <div  style="color:#333;">
+    <div id="template-content">
+        <textarea name="template-content" class="span12">{{ content | raw }}</textarea>
+    </div>
+</div> -->
+{% endblock %}
+
+{% block javascript %}
+<script>
+    elRTE.prototype.options.panels.custom = [
+            'bold', 'italic', 'underline', 'forecolor',
+            'fontsize', 'formatblock', 'insertorderedlist', 'insertunorderedlist', 'docstructure'
+    ];
+    elRTE.prototype.options.toolbars.custom = ['custom', 'eol', 'undoredo', 'alignment', 'eol', 'links', 'images'];
+            $('#elFinder a').hover(
+                    function () {
+                            $('#elFinder a').animate({
+                                    'background-position' : '0 -45px'
+                            }, 300);
+                    },
+                    function () {
+                            $('#elFinder a').delay(400).animate({
+                                    'background-position' : '0 0'
+                            }, 300);
+                    }
+            );
+
+    $('#elFinder a').delay(800).animate({'background-position' : '0 0'}, 300);
+    var opts = {
+    absoluteURLs: false,
+    cssClass : 'el-rte',
+    lang     : 'en',
+    height   : 300,
+    toolbar  : 'maxi',
+    cssfiles : ['{{ asset('bundles/aevitaslevis/elrte/css/elrte-inner.css') }}', '{{ asset('bundles/aevitaslevis/elrte/css/inner-example.css') }}'],
+            // elfinder
+            fmOpen   : function(callback) {
+                    $('<div id="myelfinder"></div>').elfinder({
+                            url : '{{ path('backend_elfinder_connection') }}',
+                            lang : 'en',
+                            dialog : { width : 900,height: 600, modal : true, title : 'Files' }, // open in dialog
+                            closeOnEditorCallback : true, // close elFinder after file select
+                            editorCallback : callback // pass callback to editor
+                    });
+            },
+            // example of user replacement
+            // restricts edit of blocks like <!-- BEGIN MY_BLOCK -->anything<!-- END MY_BLOCK -->
+            replace : [ function(html) {
+                    var self = this;
+                    return html.replace(/(<!--\s*BEGIN\s*([^>]+)\s*-->([\s\S]*?)<!--\s*END\s*(\2)\s*-->)/gi, function(t, a, b, c, d) {
+
+                            if (b == d) {
+                                    //self.rte.log([b, d]);
+                                    var id = 'MYTAG'+Math.random().toString().substring(2);
+                                    self.scripts[id] = t;
+                                    return '<img id="'+id+'" src="'+self.url+'pixel.gif" class="elrte-protected elrte-MYTAG">';
+                            }
+                            return html;
+                    });
+            }],
+            restore : [ function(html) {
+                    var self = this;
+                    return html.replace(this.serviceClassRegExp, function(t, n, a) {
+                            a = self.parseAttrs(a);
+                            if (a["class"]['elrte-MYTAG']) {
+                                    return self.scripts[a.id] + "\n" || '';
+                            }
+                            return t;
+                    });
+            }]
+    };
+
+    function strip(html){
+        var tmp = document.createElement("DIV");
+        tmp.innerHTML = html;
+        return tmp.textContent||tmp.innerText;
+    }
+    // create elRTE
+{#    var rte = $('#template-content').elrte(opts);#}
+{#    $('#template-content').elrte('val',strip('{{ content | raw }}'));#}
+    
+</script>
+{% endblock %}

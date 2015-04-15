@@ -1,0 +1,96 @@
+{% extends "AevitasLevisBundle:Front:root.html.twig" %}
+{% block title %}
+<title>{{'Star Club - Contact User' | trans}}</title>
+{% endblock %}
+{% block header %}
+<!-- Le styles -->
+{% stylesheets output='bundles/aevitaslevis/front/cpassets/compress_contact_us.css' filter='yui_css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap.css'
+    '@AevitasLevisBundle/Resources/public/front/css/bootstrap-responsive.css'
+    '@AevitasLevisBundle/Resources/public/front/css/contact_us.css'
+    '@AevitasLevisBundle/Resources/public/front/css/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+{% endstylesheets %}
+{% endblock %}
+{% block content %}
+<div id="panel" class="toppanel">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <h3>Contact Us</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="main" class="clearfix">
+    <div class="shadow_wrapper">
+        <div>
+            <div class="content">
+                <!--  -->
+                <div id="panel-left">
+                    <form action="" method="post">
+                        Please fill out this form, we will contact as you soon as possible.
+                        <div class="box-input">
+                            <label>Name</label>
+                            <input type="text" name="name" id="name" placeholder="Aevitas Solution" />
+                        </div>
+                        <div class="box-input">
+                            <label>Phone Number</label>
+                            <input type="text" name="name" id="name" placeholder="0912345678" />
+                        </div>
+                        <div class="box-input">
+                            <label>Email</label>
+                            <input type="text" name="name" id="name" placeholder="contact@aevitas.cu" />
+                        </div>
+                        <div class="box-input">
+                            <label>Subject</label>
+                            <input type="text" name="name" id="name" placeholder="Feadback on Reward" />
+                        </div>
+                        <div class="box-input">
+                            <label>Content</label>
+                            <textarea name="name" id="name" placeholder="Feadback on Reward"></textarea>
+                        </div>
+                        <div class="box-input">
+                            <input type="submit" value="Send" />
+                        </div>
+                    </form>
+                </div>
+                <div id="panel-right">
+                    <div id="map" style="width:490px;height:490px"></div>
+                    <div class="store-info">
+                        <li>
+                            <div class="info-type">Address</div>
+                            <div class="info-value">Thanh Bac Fasion Branch, 3rd floor, COPAC building, 12 Ton Dan street, Ward 13, District 4, Ho Chi Minh City, Viet Nam</div>
+                        </li>
+                        <li>
+                            <div class="info-type">Phone</div>
+                            <div class="info-value">+84 3 941 5001 Ext. 105</div>
+                        </li>
+                        <li>
+                            <div class="info-type">Email</div>
+                            <div class="info-value">contact.levis@thanhbacgroup.com</div>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+{% endblock %}
+{% block javascript %}
+var myOptions = {
+    zoom: 18,
+    mapTypeId: google.maps.MapTypeId.ROADMAP};
+var newmap = new google.maps.Map(document.getElementById('map'),myOptions);
+newmap.setCenter(new google.maps.LatLng(10.7623161,106.70776419999993));
+var markerOpts = {
+    position: new google.maps.LatLng(10.7623161,106.70776419999993),
+    map: newmap,
+    animation: google.maps.Animation.DROP,
+    draggable: false
+};
+var urMarker = new google.maps.Marker(markerOpts);
+                
+{% endblock %}

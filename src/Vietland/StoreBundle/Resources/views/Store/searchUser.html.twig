@@ -1,0 +1,66 @@
+{% extends "AevitasLevisBundle:Backend:root.html.twig" %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a class="glyphicons home" href="/backend"><i></i> {{'Store' | trans}}</a></li>
+    <li class="divider"></li>
+    <li>{{ 'User'|trans }}</li>
+    <li class="divider"></li>
+    <li>{{ 'Search'|trans }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+<div class="alert alert-faded">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+</div>
+                {% endfor %}
+<form class="form-horizontal" action="" {{ form_enctype(form) }} method="POST">
+    <div class="row-fluid">
+        <div class="span9">
+            <div>{{form_label(form.name)}}{{form_widget(form.name)}}</div>
+            <div>{{form_label(form.cCode)}}{{form_widget(form.cCode)}}</div>
+            <div>{{form_label(form.cellphone)}}{{form_widget(form.cellphone)}}</div>
+            <div class="extend">
+                <label><input type="checkbox" id="today" checked="checked"/>Search Today</label>
+                <div style="display:none">{{form_label(form.start)}}{{form_widget(form.start)}}</div>
+                <div style="display:none">{{form_label(form.end)}}{{form_widget(form.end)}}</div>
+            </div>
+            {{ form_rest(form) }}
+        </div>
+    </div>
+    <div class="separator line bottom"></div>
+    <div class="form-actions" style="margin: 0;">
+        <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>Save</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+        $('#form_start').on("keydown", processKeyEvents);
+        $('#form_end').on("keypress", processKeyEvents);
+        $('#today').on('change',function(){
+            checked = $(this).attr('checked');
+            if(checked == 'checked'){
+                $('.extend div').hide();
+            } else {
+                $('.extend div').show();
+                $('#form_start').val('');
+            }
+        })
+        function processKeyEvents(event) {
+            event.preventDefault();
+        }
+        $('#form_end').datepicker({dateFormat: "yy-mm-dd", maxDate: new Date()}).on('keydown', function(e) {
+            e.preventDefault();
+        });
+        $('#form_start').datepicker({dateFormat: "yy-mm-dd", maxDate: new Date(), onSelect: function(date, e) {
+                $('#form_end').datepicker("option", "minDate", new Date(date));
+            }});
+    });
+    </script>
+{% endblock %}
