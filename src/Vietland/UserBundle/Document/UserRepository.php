@@ -213,8 +213,9 @@ class UserRepository extends DocumentRepository {
             $builder->field('mari')->equals((int) $data['mari']);
         }
 
-        if(!empty($data['status'])){
-            $builder->field('status')->equals((int) $data['status']);
+        if(!empty($data['status']) || $data['status'] === '0'){
+            $status = ($data['status'] == '1') ? true : false;
+            $builder->field('enabled')->equals($status);
         }
 
         if(!empty($data['fjoiningdate']) && !empty($data['tjoiningdate'])){

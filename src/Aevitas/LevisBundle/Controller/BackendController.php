@@ -208,7 +208,7 @@ class BackendController extends Controller {
         $page = $request->get('page') ? $request->get('page') : 1;
         $users = $repo->getUsers($page, $limit);
         $export = $this->get('router')->generate('backend_user_exportseeking');
-        $pagination = new Pagination($page, $repo->getCount(), $this->get('router')->generate('backend_user_list'), $limit);
+        $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
 
         $import = $this->createFormBuilder()->add('file', 'file')->getForm();
         return new Response($this->renderView('AevitasLevisBundle:Backend:userSearch.html.twig', array(
