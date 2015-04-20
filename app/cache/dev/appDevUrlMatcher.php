@@ -133,14 +133,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/backend')) {
-            // backend_user_list
-            if ($pathinfo === '/backend/user/list') {
-                return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::listUserAction',  '_route' => 'backend_user_list',);
-            }
+            if (0 === strpos($pathinfo, '/backend/user')) {
+                // backend_user_list
+                if ($pathinfo === '/backend/user/list') {
+                    return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::listUserAction',  '_route' => 'backend_user_list',);
+                }
 
-            // backend_user_advancedsearch
-            if ($pathinfo === '/backend/user/advancedsearch') {
-                return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::advancedSearchUserAction',  '_route' => 'backend_user_advancedsearch',);
+                // backend_user_advancedsearch
+                if ($pathinfo === '/backend/user/advancedsearch') {
+                    return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::advancedSearchUserAction',  '_route' => 'backend_user_advancedsearch',);
+                }
+
             }
 
             // backend_staff_list

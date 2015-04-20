@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Vietland\UserBundle\Document;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
@@ -148,6 +149,17 @@ class UserRepository extends DocumentRepository {
         ;
     }
 
+        //function check first bill => registration store
+    public function checkUserData($id){
+               //  $users = $this->createQueryBuilder("VietlandUserBundle:User")
+               //  ->field('id')->equals((int) $id);
+               // $logs= $users->getQuery()->execute();
+         $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            $user= $dm->getRepository('VietlandUserBundle:User')->find($id);
+                var_dump($user);
+            die();
+    }
+
     public function advancedSeekUsers($data) {
         $builder = $this->createQueryBuilder();
         $builder->field('enabled')->equals(true)->field('posId')->exists(true)->field('CCode')->exists(true);
@@ -218,6 +230,39 @@ class UserRepository extends DocumentRepository {
             $builder->field('enabled')->equals($status);
         }
 
+        
+
+        if(!empty($data['registration_store'])){
+            //$this->checkUserData("8315000939");
+            $dm = $data['dm']->getManager();
+            $mongo = new \MongoClient();
+            $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+
+            $col_log = $mongo->$db->aevitaslog;
+            // $js = "function() {
+            //     return this.uid == '174992';
+            // }";
+            $aevitagslog = $col_log->find()->sort(array('user.$id' => 1, "created" => 1));
+
+            $str_uid = '';
+            $uid_before = '';
+            foreach ($aevitagslog as $doc) {
+                if($doc['user']['$id'] !== $uid_before){
+                    if(isset($doc['schema']['0'])){
+                        $t = $doc['schema']['0'];
+                        $branch_name = $t['BranchName'];
+                        if(stristr($branch_name, $data['registration_store']) !== false){
+                            $str_uid .= $doc['user']['$id'].',';
+                        }
+                    }                    
+                }
+                $uid_before = $doc['user']['$id'];
+            }
+            //echo $str_uid;
+            $builder->field('_id')->in(explode(',', $str_uid));
+
+        }
+
         if(!empty($data['fjoiningdate']) && !empty($data['tjoiningdate'])){
             $builder->field('join')->gte(new \DateTime($data['fjoiningdate']));
             $builder->field('join')->lte(new \DateTime($data['tjoiningdate']));
@@ -243,6 +288,8 @@ class UserRepository extends DocumentRepository {
                         ->execute();
         ;
     }
+
+
 
     public function advancedSeekUsers_bk($data) {
         $builder = $this->createQueryBuilder();

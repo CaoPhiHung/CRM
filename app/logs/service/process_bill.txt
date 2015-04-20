@@ -59,3 +59,208 @@
 ----------- START LOAD QUEUE ----------
  --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=114465 --billidno=84352923527201 --env=prod 
  --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103699 --billidno=116702905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=105392 --billidno=117382909222601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103022 --billidno=116712905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121912 --billidno=24572921222001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108940 --billidno=110642906699001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108289 --billidno=84362923527201 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102327 --billidno=116742905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=99197 --billidno=63112904306201 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121921 --billidno=15232926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102327 --billidno=8062924928601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121925 --billidno=84372923527201 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=106306 --billidno=32122904596801 --env=prod 
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103944 --billidno=116772905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=83528 --billidno=79282905619501 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104999 --billidno=110682906699001 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121951 --billidno=27482904496701 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=117334 --billidno=117462909222601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102870 --billidno=116812905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121955 --billidno=86262903695801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=111542 --billidno=7952929836801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102553 --billidno=116842905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=110951 --billidno=18432924331801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=105147 --billidno=1102932240801 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=73494 --billidno=71932905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102977 --billidno=116852905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108250 --billidno=116862905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=87278 --billidno=84412923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102748 --billidno=62312905997801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103103 --billidno=116872905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121971 --billidno=15282926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=119506 --billidno=36002904297201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121951 --billidno=117502909222601 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121974 --billidno=116892905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=109492 --billidno=32142904596801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=115320 --billidno=110742906699001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103837 --billidno=116902905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103164 --billidno=18472924331801 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121994 --billidno=79332905619501 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121988 --billidno=15302926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121991 --billidno=30572925530801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=105392 --billidno=117542909222601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121990 --billidno=84442923527201 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=105147 --billidno=1182932240801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121988 --billidno=15312926032001 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102914 --billidno=71982905497901 --env=prod 
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108365 --billidno=116952905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=114259 --billidno=1202932240801 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122013 --billidno=30582925530801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=105182 --billidno=36042904297201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108114 --billidno=63192904306201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104212 --billidno=116982905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102977 --billidno=12422925028701 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=118674 --billidno=63212904306201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103168 --billidno=72062905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=116914 --billidno=7972929836801 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103902 --billidno=18182906406401 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=114173 --billidno=12442925028701 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102720 --billidno=117002905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=111114 --billidno=2912928935301 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=113234 --billidno=18502924331801 --env=prod 
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103666 --billidno=117012905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103842 --billidno=117022905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122047 --billidno=84502923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=101948 --billidno=24642921222001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122042 --billidno=18512924331801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=119506 --billidno=36072904297201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121205 --billidno=117032905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104465 --billidno=117042905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122060 --billidno=84522923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=110483 --billidno=18522924331801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104008 --billidno=2932928935301 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=100129 --billidno=63252904306201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=111732 --billidno=30622925530801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108246 --billidno=117052905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104129 --billidno=117062905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122070 --billidno=79452905619501 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=109070 --billidno=97192903996101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122076 --billidno=117072905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=120799 --billidno=84552923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=99281 --billidno=84582923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=115740 --billidno=9132925230201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=119779 --billidno=9142925230201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103879 --billidno=86392903695801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104458 --billidno=18192906406401 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122046 --billidno=8152924928601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122099 --billidno=84612923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=120773 --billidno=72122905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=109250 --billidno=9152925230201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=110658 --billidno=30662925530801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122096 --billidno=30672925530801 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=32512 --billidno=7552928835201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=110451 --billidno=72132905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=112791 --billidno=72142905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103501 --billidno=117102905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=111085 --billidno=12482925028701 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121951 --billidno=117692909222601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104714 --billidno=117112905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102365 --billidno=117122905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=120773 --billidno=72152905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108029 --billidno=84732923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103896 --billidno=117132905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104138 --billidno=15502926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104944 --billidno=15522926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122119 --billidno=84712923527201 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=112607 --billidno=18552924331801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=117296 --billidno=19282925330501 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=101405 --billidno=97252903996101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108627 --billidno=84742923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=91115 --billidno=84752923527201 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122111 --billidno=8192924928601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=111143 --billidno=7572928835201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102344 --billidno=117142905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=101985 --billidno=117152905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121663 --billidno=18202906406401 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=102173 --billidno=72182905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122139 --billidno=79502905619501 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=90816 --billidno=110952906699001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=100661 --billidno=110962906699001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=103789 --billidno=110982906699001 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122153 --billidno=72202905497901 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108119 --billidno=117172905798101 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=113458 --billidno=32182904596801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=115939 --billidno=28012926332101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=93694 --billidno=36132904297201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=115394 --billidno=15572926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108581 --billidno=15582926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122165 --billidno=30712925530801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=121545 --billidno=30732925530801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=110944 --billidno=8232924928601 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122159 --billidno=18212906406401 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=122155 --billidno=79522905619501 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=91153 --billidno=84832923527201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=108251 --billidno=117182905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=112607 --billidno=18572924331801 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=119112 --billidno=9202925230201 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=111169 --billidno=15592926032001 --env=prod 
+ --> php /var/www/html/levis-crm/cmd/../app/console crm:processbill --ledgerid=104199 --billidno=117192905798101 --env=prod 
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------
+----------- START LOAD QUEUE ----------

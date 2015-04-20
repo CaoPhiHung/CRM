@@ -193,7 +193,13 @@ class BackendController extends Controller {
                         ->getForm();
 
         $form_tier = $this->createFormBuilder()
-                        ->add('tier', 'choice', array('required' => false, 'label' => "Customers, whose tiers are just...",'empty_value' => 'Upgraded/Downgraded', 'choices' => array('1'=>'Upgraded', '2'=>'Downgraded')))
+                        ->add('tier', 'choice', array('required' => false, 'label' => "Customers, whose tiers are just...",'empty_value' => 'Upgrade/Downgrade', 'choices' => array('1'=>'Upgrade', '2'=>'Downgrade')))
+                        ->getForm();
+        $form_from_tier = $this->createFormBuilder()
+                        ->add('from_tier', 'choice', array('required' => false, 'label' => false, 'empty_value' => 'Tier', 'choices' => User::getLevelOptions($this->get('translator'))))
+                        ->getForm();
+        $form_to_tier = $this->createFormBuilder()
+                        ->add('to_tier', 'choice', array('required' => false, 'label' => false, 'empty_value' => 'Tier', 'choices' => User::getLevelOptions($this->get('translator'))))
                         ->getForm();
 
         $form_point = $this->createFormBuilder()
@@ -218,6 +224,8 @@ class BackendController extends Controller {
                     'form_status' => $form_status->createView(),
                     'form_bill' => $form_bill->createView(),
                     'form_tier' => $form_tier->createView(),
+                    'form_from_tier' => $form_from_tier->createView(),
+                    'form_to_tier' => $form_to_tier->createView(),
                     'form_point' => $form_point->createView(),
                     'form_bonuspoint' => $form_bonuspoint->createView(),
                     'import' => $import->createView(),
@@ -311,10 +319,18 @@ class BackendController extends Controller {
         $form_bill->bind($request);
                         
         $form_tier = $this->createFormBuilder()
-                        ->add('tier', 'choice', array('required' => false, 'label' => "Customers, whose tiers are just...", 'empty_value' => 'Upgraded/Downgraded','choices' => array('1'=>'Upgraded', '2'=>'Downgraded')))
+                        ->add('tier', 'choice', array('required' => false, 'label' => "Customers, whose tiers are just...", 'empty_value' => 'Upgrade/Downgrade','choices' => array('1'=>'Upgrade', '2'=>'Downgrade')))
                         ->getForm();
         $form_tier->bind($request);
-                        
+        $form_from_tier = $this->createFormBuilder()
+                        ->add('from_tier', 'choice', array('required' => false, 'label' => false, 'empty_value' => 'Tier', 'choices' => User::getLevelOptions($this->get('translator'))))
+                        ->getForm();
+        $form_from_tier->bind($request);
+        $form_to_tier = $this->createFormBuilder()
+                        ->add('to_tier', 'choice', array('required' => false, 'label' => false, 'empty_value' => 'Tier', 'choices' => User::getLevelOptions($this->get('translator'))))
+                        ->getForm();
+        $form_to_tier->bind($request);
+
         $form_point = $this->createFormBuilder()
                         ->add('point', 'choice', array('required' => false, 'empty_value' => 'Redeemed/Balance', 'choices' => array('1'=>'Redeemed', '2'=>'Balance')))
                         ->getForm();
@@ -330,7 +346,7 @@ class BackendController extends Controller {
         $data = $request->get('form');        
         
         $data['page'] = $page;
-        $data['amount'] = $limit;
+        $data['amount'] = $limit;$data['dm'] = $this->get('doctrine_mongodb');
         $users = $repo->advancedSeekUsers($data);
         $export = $this->get('router')->generate('backend_user_exportseeking');
         $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
@@ -342,6 +358,8 @@ class BackendController extends Controller {
                     'form_status' => $form_status->createView(),
                     'form_bill' => $form_bill->createView(),
                     'form_tier' => $form_tier->createView(),
+                    'form_from_tier' => $form_from_tier->createView(),
+                    'form_to_tier' => $form_to_tier->createView(),
                     'form_point' => $form_point->createView(),
                     'form_bonuspoint' => $form_bonuspoint->createView(),
                     'import' => $import->createView(),

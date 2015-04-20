@@ -5147,3 +5147,69 @@ array (
   'command' => 'findAll',
 )
 ================
+2015-04-17 14:49:36
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"bill":52962911904801
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-17 14:49:47
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"bill":"52962911904801"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================

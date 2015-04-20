@@ -29,9 +29,9 @@
                 <div style="width:60%; float:left;">
                     <label for="form_cellphone">Cellphone</label>
                 </div>
-                <div style="width:25%; float:left">
+                <!--<div style="width:25%; float:left">
                     <input type="checkbox" name="form[empty_cellphone]" id="empty_cellphone" style="float:left; width:20%" /><label for="empty_cellphone">Empty</label>
-                </div>
+                </div>-->
                 <input type="text" id="form_cellphone" name="form[cellphone]" value="{% if data.cellphone is defined %} {{-data.cellphone-}} {% endif %}">
             </div>
             <div>
@@ -126,11 +126,13 @@
             
             <div style="float:left;width:25%;">
                 <label for="form_ftier" style="float:left;width:30%;">From</label>
-                <input type="text" id="form_ftier" name="form[ftier]" placeholder="Value" style="width:40%" value="{% if data.ftier is defined %} {{-data.ftier-}} {% endif %}">
+                {# <input type="text" id="form_ftier" name="form[ftier]" placeholder="Value" style="width:40%" value="{% if data.ftier is defined %} {{-data.ftier-}} {% endif %}"> #}
+                {{form_rest(form_from_tier)}}
             </div>
             <div style="float:left;width:25%;">
                 <label for="form_ttier" style="float:left;width:30%;">To</label>
-                <input type="text" id="form_ttier" name="form[ttier]" placeholder="Value" style="width:40%" value="{% if data.ttier is defined %} {{-data.ttier-}} {% endif %}">
+                {# <input type="text" id="form_ttier" name="form[ttier]" placeholder="Value" style="width:40%" value="{% if data.ttier is defined %} {{-data.ttier-}} {% endif %}"> #}
+                {{form_rest(form_to_tier)}}
             </div>
             <div style="float:left;width:50%;">
                 <label for="form_tier_lastdays" style="float:left;width:35%;">Within the last</label>
@@ -172,7 +174,7 @@
             <input type="text" id="fjoiningdate" name="form[fjoiningdate]" style="width:61%" value="{% if data.fjoiningdate is defined %} {{-data.fjoiningdate-}} {% endif %}">
         </div>
         <div class="date_picker">
-            <label for="tjoiningdate" style="float:left;width:15%;padding-top:3px;">From</label>
+            <label for="tjoiningdate" style="float:left;width:15%;padding-top:3px;">To</label>
             <input type="text" id="tjoiningdate" name="form[tjoiningdate]" style="width:60%" value="{% if data.tjoiningdate is defined %} {{-data.tjoiningdate-}} {% endif %}">
         </div>        
     </div>
@@ -186,7 +188,7 @@
             <input type="text" id="fexpireddate" name="form[fexpireddate]" style="width:61%" value="{% if data.fexpireddate is defined %} {{-data.fexpireddate-}} {% endif %}">
         </div>
         <div class="date_picker">
-            <label for="texpireddate" style="float:left;width:15%;padding-top:3px;">From</label>
+            <label for="texpireddate" style="float:left;width:15%;padding-top:3px;">To</label>
             <input type="text" id="texpireddate" name="form[texpireddate]" style="width:60%" value="{% if data.texpireddate is defined %} {{-data.texpireddate-}} {% endif %}">
         </div>        
     </div>
@@ -314,6 +316,11 @@
             buttonImageOnly: true,
             buttonImage: '{{ asset('bundles/aevitaslevis/images/datepicker.png')}}'
         });
+        // jQuery("#form_mari option").prop('disabled', false);
+        // jQuery("#form_mari").prop('required', false);
+
+        jQuery("#form_from_tier").css('width','50%');
+        jQuery("#form_to_tier").css('width','50%');
 
         jQuery("#table-list-store_wrapper .row-fluid>div:first-child").attr('class','span5');
         jQuery("#table-list-store_wrapper .row-fluid>div:nth-child(2)").attr('class','span7');
