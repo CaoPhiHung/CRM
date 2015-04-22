@@ -2348,3 +2348,410 @@ Saving duplicated phone to crm
 04/20/2015 07:26:45: new search bill command start at 04/20/2015, end at 04/20/2015
 10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
 10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 09:26:47: new search bill command start at 04/20/2015, end at 04/20/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 11:26:48: new search bill command start at 04/20/2015, end at 04/20/2015
+63302904306201 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 01:26:49: new search bill command start at 04/20/2015, end at 04/20/2015
+63302904306201 is transfered successful !
+18592924331801 is transfered successful !
+117202905798101 is transfered successful !
+117212905798101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+90032905798101 is ignored. Account ID = 8315001002 is duplicated cellphone
+91152905798101 is ignored. Account ID = 8315001002 is duplicated cellphone
+93712905798101 is ignored. Account ID = 8315001002 is duplicated cellphone
+95952905798101 is ignored. Account ID = 8315001002 is duplicated cellphone
+8812926032001 is ignored. Account ID = 8315005978 is duplicated cellphone
+8412925028701 is ignored. Account ID = 8315005978 is duplicated cellphone
+105272905798101 is ignored. Account ID = 8315006123 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 03:30:49: new search bill command start at 04/20/2015, end at 04/20/2015
+63302904306201 is transfered successful !
+12532925028701 is transfered successful !
+18592924331801 is transfered successful !
+117202905798101 is transfered successful !
+117212905798101 is transfered successful !
+117242905798101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 05:30:50: new search bill command start at 04/20/2015, end at 04/20/2015
+111042906699001 is transfered successful !
+63302904306201 is transfered successful !
+117202905798101 is transfered successful !
+117212905798101 is transfered successful !
+117242905798101 is transfered successful !
+117272905798101 is transfered successful !
+12532925028701 is transfered successful !
+18592924331801 is transfered successful !
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 07:30:51: new search bill command start at 04/20/2015, end at 04/20/2015
+111042906699001 is transfered successful !
+79552905619501 is transfered successful !
+12532925028701 is transfered successful !
+9212925230201 is transfered successful !
+63302904306201 is transfered successful !
+18592924331801 is transfered successful !
+18602924331801 is transfered successful !
+117202905798101 is transfered successful !
+117212905798101 is transfered successful !
+117242905798101 is transfered successful !
+117272905798101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 09:30:51: new search bill command start at 04/20/2015, end at 04/20/2015
+72252905497901 is transfered successful !
+9212925230201 is transfered successful !
+86482903695801 is transfered successful !
+12532925028701 is transfered successful !
+18592924331801 is transfered successful !
+18602924331801 is transfered successful !
+63302904306201 is transfered successful !
+117202905798101 is transfered successful !
+117212905798101 is transfered successful !
+117242905798101 is transfered successful !
+117272905798101 is transfered successful !
+15622926032001 is transfered successful !
+79552905619501 is transfered successful !
+111042906699001 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/20/2015 11:30:52: new search bill command start at 04/20/2015, end at 04/20/2015
+8072903897101 is transfered successful !
+12532925028701 is transfered successful !
+15622926032001 is transfered successful !
+86482903695801 is transfered successful !
+9212925230201 is transfered successful !
+111042906699001 is transfered successful !
+79552905619501 is transfered successful !
+63302904306201 is transfered successful !
+72252905497901 is transfered successful !
+18592924331801 is transfered successful !
+18602924331801 is transfered successful !
+117202905798101 is transfered successful !
+117212905798101 is transfered successful !
+117242905798101 is transfered successful !
+117272905798101 is transfered successful !
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+88412903506001 is ignored. Account ID = 8315002559 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 01:30:53: new search bill command start at 04/20/2015, end at 04/21/2015
+18592924331801 is transfered successful !
+18602924331801 is transfered successful !
+72252905497901 is transfered successful !
+63302904306201 is transfered successful !
+117202905798101 is transfered successful !
+117212905798101 is transfered successful !
+117242905798101 is transfered successful !
+117272905798101 is transfered successful !
+86482903695801 is transfered successful !
+9212925230201 is transfered successful !
+111042906699001 is transfered successful !
+8072903897101 is transfered successful !
+15622926032001 is transfered successful !
+12532925028701 is transfered successful !
+79552905619501 is transfered successful !
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 03:30:54: new search bill command start at 04/21/2015, end at 04/21/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 05:30:55: new search bill command start at 04/21/2015, end at 04/21/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 07:30:56: new search bill command start at 04/21/2015, end at 04/21/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 09:30:57: new search bill command start at 04/21/2015, end at 04/21/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 11:30:58: new search bill command start at 04/21/2015, end at 04/21/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 01:30:59: new search bill command start at 04/21/2015, end at 04/21/2015
+117302905798101 is transfered successful !
+63372904306201 is transfered successful !
+97332903996101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 03:31:00: new search bill command start at 04/21/2015, end at 04/21/2015
+97332903996101 is transfered successful !
+117302905798101 is transfered successful !
+63372904306201 is transfered successful !
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 05:31:01: new search bill command start at 04/21/2015, end at 04/21/2015
+18232906406401 is transfered successful !
+97332903996101 is transfered successful !
+79602905619501 is transfered successful !
+63372904306201 is transfered successful !
+18612924331801 is transfered successful !
+117302905798101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 07:31:02: new search bill command start at 04/21/2015, end at 04/21/2015
+18232906406401 is transfered successful !
+79602905619501 is transfered successful !
+117302905798101 is transfered successful !
+18612924331801 is transfered successful !
+24732921222001 is transfered successful !
+63372904306201 is transfered successful !
+97332903996101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 09:31:03: new search bill command start at 04/21/2015, end at 04/21/2015
+62562905997801 is transfered successful !
+63372904306201 is transfered successful !
+79602905619501 is transfered successful !
+18232906406401 is transfered successful !
+18612924331801 is transfered successful !
+24732921222001 is transfered successful !
+117302905798101 is transfered successful !
+117342905798101 is transfered successful !
+117352905798101 is transfered successful !
+117362905798101 is transfered successful !
+84942923527201 is transfered successful !
+97332903996101 is transfered successful !
+97372903996101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/21/2015 11:31:04: new search bill command start at 04/21/2015, end at 04/21/2015
+63372904306201 is transfered successful !
+79602905619501 is transfered successful !
+24732921222001 is transfered successful !
+18612924331801 is transfered successful !
+62562905997801 is transfered successful !
+18232906406401 is transfered successful !
+117302905798101 is transfered successful !
+117342905798101 is transfered successful !
+117352905798101 is transfered successful !
+117362905798101 is transfered successful !
+84942923527201 is transfered successful !
+97332903996101 is transfered successful !
+97372903996101 is transfered successful !
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/22/2015 01:31:06: new search bill command start at 04/21/2015, end at 04/22/2015
+97332903996101 is transfered successful !
+97372903996101 is transfered successful !
+62562905997801 is transfered successful !
+79602905619501 is transfered successful !
+117302905798101 is transfered successful !
+117342905798101 is transfered successful !
+117352905798101 is transfered successful !
+117362905798101 is transfered successful !
+63372904306201 is transfered successful !
+18612924331801 is transfered successful !
+24732921222001 is transfered successful !
+18232906406401 is transfered successful !
+84942923527201 is transfered successful !
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/22/2015 03:31:07: new search bill command start at 04/22/2015, end at 04/22/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/22/2015 05:31:08: new search bill command start at 04/22/2015, end at 04/22/2015
+10022906406401 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone
+
+
+ ----------------------------- 
+
+
+Start scanning ERP data
+Comparing phone number in duplicated list
+Saving duplicated phone to crm
+04/22/2015 07:31:09: new search bill command start at 04/22/2015, end at 04/22/2015
+82972906699001 is ignored. Account ID = 8315002559 is duplicated cellphone
+10012906406401 is ignored. Account ID = 8315000646 is duplicated cellphone

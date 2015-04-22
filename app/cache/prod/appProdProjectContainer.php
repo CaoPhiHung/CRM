@@ -374,7 +374,7 @@ class appProdProjectContainer extends Container
     }
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once '/var/www/html/levis-crm/app/cache/prod/jms_diextra/doctrine/EntityManager_550bc75c8b894.php';
+        require_once '/var/www/html/levis-crm/app/cache/prod/jms_diextra/doctrine/EntityManager_5536882cd3b73.php';
         $a = $this->get('annotation_reader');
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_1888762fa85767e72fa8a1c5c6147bce');
@@ -403,7 +403,7 @@ class appProdProjectContainer extends Container
         $h->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
         $i = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $h);
         $this->get('doctrine.orm.default_manager_configurator')->configure($i);
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager550bc75c8b894_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($i, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5536882cd3b73_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($i, $this);
     }
     protected function getDoctrine_Orm_DefaultManagerConfiguratorService()
     {
@@ -1082,7 +1082,7 @@ class appProdProjectContainer extends Container
         $t->setRememberMeServices($r);
         $u = new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($d, $h, $i, $q, 'main', $this->get('login_success_handler'), $this->get('login_failure_handler'), array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $e);
         $u->setRememberMeServices($r);
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($p, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($d, array(0 => $b, 1 => $c, 2 => new \Symfony\Component\Security\Core\User\ChainUserProvider(array(0 => $b, 1 => $c))), 'main', $a, $e), 2 => $s, 3 => $t, 4 => $u, 5 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($d, $r, $h, $a, $e), 6 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($d, '550bc75c56155', $a), 7 => new \Symfony\Component\Security\Http\Firewall\AccessListener($d, $j, $p, $h, $a), 8 => new \Symfony\Component\Security\Http\Firewall\SwitchUserListener($d, $b, $this->get('security.user_checker'), 'main', $j, $a, '_switch_user', 'ROLE_ALLOWED_TO_SWITCH', $e)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($d, $this->get('security.authentication.trust_resolver'), $q, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($g, $q, '/login', false), NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($p, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($d, array(0 => $b, 1 => $c, 2 => new \Symfony\Component\Security\Core\User\ChainUserProvider(array(0 => $b, 1 => $c))), 'main', $a, $e), 2 => $s, 3 => $t, 4 => $u, 5 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($d, $r, $h, $a, $e), 6 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($d, '5536882cb6e63', $a), 7 => new \Symfony\Component\Security\Http\Firewall\AccessListener($d, $j, $p, $h, $a), 8 => new \Symfony\Component\Security\Http\Firewall\SwitchUserListener($d, $b, $this->get('security.user_checker'), 'main', $j, $a, '_switch_user', 'ROLE_ALLOWED_TO_SWITCH', $e)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($d, $this->get('security.authentication.trust_resolver'), $q, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($g, $q, '/login', false), NULL, NULL, $a));
     }
     protected function getSecurity_Rememberme_ResponseListenerService()
     {
@@ -1785,7 +1785,7 @@ class appProdProjectContainer extends Container
     protected function getSecurity_Authentication_ManagerService()
     {
         $a = $this->get('security.user_checker');
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \FOS\FacebookBundle\Security\Authentication\Provider\FacebookProvider('main', $this->get('fos_facebook.api'), $this->get('my.facebook.user'), $a, false), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('customer_code_provider'), $a, 'main', $this->get('security.encoder_factory'), true), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'PRcfnlkHXMvVPOnHJgSPlW', 'main'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('550bc75c56155')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \FOS\FacebookBundle\Security\Authentication\Provider\FacebookProvider('main', $this->get('fos_facebook.api'), $this->get('my.facebook.user'), $a, false), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('customer_code_provider'), $a, 'main', $this->get('security.encoder_factory'), true), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'PRcfnlkHXMvVPOnHJgSPlW', 'main'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5536882cb6e63')), true);
         $instance->setEventDispatcher($this->get('event_dispatcher'));
         return $instance;
     }
@@ -2448,8 +2448,8 @@ class appProdProjectContainer extends Container
             'jms_di_extra.doctrine_integration' => true,
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => '/var/www/html/levis-crm/app/cache/prod/jms_diextra/doctrine/EntityManager_550bc75c8b894.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager550bc75c8b894_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => '/var/www/html/levis-crm/app/cache/prod/jms_diextra/doctrine/EntityManager_5536882cd3b73.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5536882cd3b73_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
             ),
             'security.access.method_interceptor.class' => 'JMS\\SecurityExtraBundle\\Security\\Authorization\\Interception\\MethodSecurityInterceptor',

@@ -48,6 +48,15 @@ class BackendController extends \Aevitas\LevisBundle\Controller\BackendControlle
         return $invocation->proceed();
     }
 
+    public function listAdvancedSearchAction()
+    {
+        $ref = new \ReflectionMethod('Aevitas\\LevisBundle\\Controller\\BackendController', 'listAdvancedSearchAction');
+        $interceptors = $this->__CGInterception__loader->loadInterceptors($ref, $this, array());
+        $invocation = new \CG\Proxy\MethodInvocation($ref, $this, array(), $interceptors);
+
+        return $invocation->proceed();
+    }
+
     public function indexAction()
     {
         $ref = new \ReflectionMethod('Aevitas\\LevisBundle\\Controller\\BackendController', 'indexAction');
@@ -96,6 +105,15 @@ class BackendController extends \Aevitas\LevisBundle\Controller\BackendControlle
     public function cartListAction()
     {
         $ref = new \ReflectionMethod('Aevitas\\LevisBundle\\Controller\\BackendController', 'cartListAction');
+        $interceptors = $this->__CGInterception__loader->loadInterceptors($ref, $this, array());
+        $invocation = new \CG\Proxy\MethodInvocation($ref, $this, array(), $interceptors);
+
+        return $invocation->proceed();
+    }
+
+    public function advancedSearchUserAction()
+    {
+        $ref = new \ReflectionMethod('Aevitas\\LevisBundle\\Controller\\BackendController', 'advancedSearchUserAction');
         $interceptors = $this->__CGInterception__loader->loadInterceptors($ref, $this, array());
         $invocation = new \CG\Proxy\MethodInvocation($ref, $this, array(), $interceptors);
 

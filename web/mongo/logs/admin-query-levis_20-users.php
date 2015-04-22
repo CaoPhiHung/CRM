@@ -6922,3 +6922,929 @@ array (
   'command' => 'findAll',
 )
 ================
+2015-04-20 13:44:21
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"trdate":{$exists:true}
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 14:57:58
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315007621"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 15:43:57
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"trdate":{$exists:true}
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 15:44:03
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315007621"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 18:39:14
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001419"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 18:50:41
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315004607"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 19:05:28
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001413"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 22:43:47
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+http://90.0.0.5/mongo/index.php?action=admin.index
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 22:44:00
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315004607"
+
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 22:44:33
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"trdate.date"
+
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 22:57:29
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001419"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-20 22:59:08
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001395"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 14:18:18
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001419"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 14:20:38
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001404"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 14:40:27
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001402"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 15:04:02
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001391"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 15:04:17
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315000903"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 15:12:09
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315000903"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 15:16:51
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001391"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 19:04:46
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315001391"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 21:30:55
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315000831"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 21:33:58
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315000036"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 21:35:12
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315005748"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 21:35:42
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315000831"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 21:36:25
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315005007"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 22:15:40
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315007313"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 22:28:41
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315000831"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-21 22:47:40
+array (
+  'db' => 'levis_20',
+  'collection' => 'users',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"CCode":"8315005330"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================

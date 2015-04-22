@@ -230,18 +230,35 @@ class UserRepository extends DocumentRepository {
             $builder->field('enabled')->equals($status);
         }
 
-        
+        if(!empty($data['triple_point_dates'])){
+            $filter_tr_date = new \DateTime($data['triple_point_dates']);
+            $day = date("j", strtotime($data['triple_point_dates']));
+            $month = date("n", strtotime($data['triple_point_dates']));
+            $year = date("Y", strtotime($data['triple_point_dates']));
+            $function = 'function(){
+                var rt = false;
+                if(typeof this.trdate != "undefined"){
+                    
+                    var arr = this.trdate;
+                    for(var i = 0; i < arr.length; i++){
+                        var obj = arr[i];
+                        var d = obj.date;
+                        if(d.getDate() == '.($day+1).' &&  d.getMonth() == '.($month-1).' && d.getFullYear() == '.$year.'){
+                            rt = true;
+                        }
+                    }
+                }
+                return rt;
+            }';            
+            $builder->field('trdate')->exists(true)
+                    ->where($function);
+        }
 
         if(!empty($data['registration_store'])){
-            //$this->checkUserData("8315000939");
             $dm = $data['dm']->getManager();
             $mongo = new \MongoClient();
             $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
-
             $col_log = $mongo->$db->aevitaslog;
-            // $js = "function() {
-            //     return this.uid == '174992';
-            // }";
             $aevitagslog = $col_log->find()->sort(array('user.$id' => 1, "created" => 1));
 
             $str_uid = '';
@@ -258,9 +275,116 @@ class UserRepository extends DocumentRepository {
                 }
                 $uid_before = $doc['user']['$id'];
             }
-            //echo $str_uid;
+            
             $builder->field('_id')->in(explode(',', $str_uid));
 
+        }
+
+        if(!empty($data['bill'])){
+            if($data['bill'] == '1'){
+                $start = $data['fbill'];
+                $end = $data['tbill'];
+                $number_day = $data['lastdays'];
+                $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+                $day = date("j", strtotime($lastdate));
+                $month = date("n", strtotime($lastdate));
+                $year = date("Y", strtotime($lastdate));
+                
+                $function = 'function(){
+                                var rt = false;
+                                var d = this.created;
+                                if(typeof this.totalPayment != "undefined"){
+                                    if(d.getDate() >= '.($day+1).' &&  d.getMonth() >= '.($month-1).' && d.getFullYear() >= '.$year.'){
+                                        rt = true;
+                                    }
+                                }
+                                return rt;
+                            }';
+                $dm = $data['dm']->getManager();
+                $mongo = new \MongoClient();
+                $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+                $col_log = $mongo->$db->aevitaslog;
+                $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+                
+                $str_uid = '';
+                $uid_before = '';
+                $bill_count = 1;
+                if(!empty($aevitagslog)){
+                    $index = 0;
+                    $length_arr = count($aevitagslog);
+                    foreach ($aevitagslog as $doc) {
+                        $index++;
+                        if($doc['user']['$id'] !== $uid_before){
+                            if($bill_count >= $start && $bill_count <= $end){
+                                if($index == $length_arr){
+                                    $str_uid .= $doc['user']['$id'].',';
+                                }else if( $uid_before != ''){
+                                    $str_uid .= $uid_before.',';
+                                }   
+                            }                                                  
+                            $bill_count = 1;
+                        }else{
+                            $bill_count++;
+                        }
+                        $uid_before = $doc['user']['$id'];
+                    }
+                }
+                $builder->field('_id')->in(explode(',', $str_uid));
+
+            }else if($data['bill'] == '2'){
+                $start = $data['fbill'];
+                $end = $data['tbill'];
+                $number_day = $data['lastdays'];
+                $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+                $day = date("j", strtotime($lastdate));
+                $month = date("n", strtotime($lastdate));
+                $year = date("Y", strtotime($lastdate));
+                
+                $function = 'function(){
+                                var rt = false;
+                                var d = this.created;
+                                if(typeof this.totalPayment != "undefined"){
+                                    if(d.getDate() >= '.($day+1).' &&  d.getMonth() >= '.($month-1).' && d.getFullYear() >= '.$year.'){
+                                        rt = true;
+                                    }
+                                }
+                                return rt;
+                            }';
+                $dm = $data['dm']->getManager();
+                $mongo = new \MongoClient();
+                $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+                $col_log = $mongo->$db->aevitaslog;
+                $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+                
+                $str_uid = '';
+                $uid_before = '';                
+                if(!empty($aevitagslog)){
+                    foreach ($aevitagslog as $doc) {
+                        $first_arr = $doc;
+                        break;
+                    }
+                    $totalPayment = $first_arr['totalPayment'];
+                    $index = 0;
+                    $length_arr = count($aevitagslog);
+                    foreach ($aevitagslog as $doc) {
+                        $index++;
+                        if($doc['user']['$id'] !== $uid_before){
+                            if($totalPayment >= $start && $totalPayment <= $end){
+                                if($index == $length_arr){
+                                    $str_uid .= $doc['user']['$id'].',';
+                                }else if( $uid_before != ''){
+                                    $str_uid .= $uid_before.',';
+                                }   
+                            }                                                  
+                            $totalPayment = $doc['totalPayment'];
+                        }else{
+                            $totalPayment .= $doc['totalPayment'];
+                        }
+                        $uid_before = $doc['user']['$id'];
+                    }
+                }
+                $builder->field('_id')->in(explode(',', $str_uid));
+            }
         }
 
         if(!empty($data['fjoiningdate']) && !empty($data['tjoiningdate'])){

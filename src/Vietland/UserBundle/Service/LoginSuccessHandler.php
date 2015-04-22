@@ -57,8 +57,8 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface {
         } elseif ($this->security->isGranted('ROLE_ADMIN')) {
             $response = new RedirectResponse($this->router->generate('backend_index', array('_locale' => $locale)));
             $topsidebar = $this->router->generate('backend_render_topsidebar', array('_locale' => $locale), true);
-            $streamSidebar = fopen($topsidebar, 'r', false, $context);
-            fclose($streamSidebar);
+           //$streamSidebar = fopen($topsidebar, 'r', false, $context);
+            //fclose($streamSidebar);
         } elseif ($this->security->isGranted('ROLE_STAFF')) {
             $url = $this->router->generate('store_search_user', array('_locale' => $locale));
             $topsidebar = $this->router->generate('backend_render_topsidebar', array('_locale' => $locale), true);

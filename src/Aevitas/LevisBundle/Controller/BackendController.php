@@ -181,7 +181,7 @@ class BackendController extends Controller {
                         ->getForm();
 
         $form_marital = $this->createFormBuilder()
-                        ->add('mari', 'choice', array('empty_value' => 'Marital status', 'label' => 'Marital status', 'choices' => User::getMarriageStatus($this->get('translator'))))
+                        ->add('mari', 'choice', array('required' => false, 'empty_value' => 'Marital status', 'label' => 'Marital status', 'choices' => User::getMarriageStatus($this->get('translator'))))
                         ->getForm();
 
         $form_status = $this->createFormBuilder()
@@ -304,7 +304,7 @@ class BackendController extends Controller {
         $form_gender->bind($request);
                         
         $form_marital = $this->createFormBuilder()
-                        ->add('mari', 'choice', array('empty_value' => 'Marital status', 'label' => 'Marital status', 'choices' => User::getMarriageStatus($this->get('translator'))))
+                        ->add('mari', 'choice', array('required' => false, 'empty_value' => 'Marital status', 'label' => 'Marital status', 'choices' => User::getMarriageStatus($this->get('translator'))))
                         ->getForm();
         $form_marital->bind($request);
                         
@@ -346,7 +346,8 @@ class BackendController extends Controller {
         $data = $request->get('form');        
         
         $data['page'] = $page;
-        $data['amount'] = $limit;$data['dm'] = $this->get('doctrine_mongodb');
+        $data['amount'] = $limit;
+        $data['dm'] = $this->get('doctrine_mongodb');
         $users = $repo->advancedSeekUsers($data);
         $export = $this->get('router')->generate('backend_user_exportseeking');
         $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
