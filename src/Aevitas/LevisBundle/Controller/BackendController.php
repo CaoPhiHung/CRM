@@ -163,21 +163,13 @@ class BackendController extends Controller {
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $repo = $dm->getRepository('VietlandUserBundle:User');
         $request = $this->getRequest();
-        // $form = $this->createFormBuilder()
-        //         ->add('level', 'choice', array('required' => false, 'empty_value' => 'Choose an Level', 'choices' => User::getLevelOptions($this->get('translator'))))
-        //         ->add('CCode', 'text', array('required' => false))
-        //         ->add('name', 'text', array('required' => false))
-        //         ->add('cellphone', 'text', array('required' => false))
-        //         ->add('email', 'text', array('required' => false))
-        //         ->add('spoint', 'text', array('required' => false, 'label' => 'from point'))
-        //         ->add('fpoint', 'text', array('required' => false, 'label' => 'to point'))
-        //         ->getForm();
+        
         $form_level = $this->createFormBuilder()
                         ->add('level', 'choice', array('required' => false, 'empty_value' => 'Choose an Level', 'choices' => User::getLevelOptions($this->get('translator'))))
                         ->getForm();
         
         $form_gender = $this->createFormBuilder()
-                        ->add('sex', 'choice', array('required' => false, 'label' => 'Gender', 'empty_value' => false, 'choices' => User::getSexOptions($this->get('translator')),'data' => '2'))
+                        ->add('sex', 'choice', array('required' => false, 'label' => 'Gender', 'empty_value' => 'Çhoose Gender', 'choices' => User::getSexOptions($this->get('translator'))))
                         ->getForm();
 
         $form_marital = $this->createFormBuilder()
@@ -215,7 +207,6 @@ class BackendController extends Controller {
         $users = $repo->getUsers($page, $limit);
         $export = $this->get('router')->generate('backend_user_exportseeking');
         $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
-
         $import = $this->createFormBuilder()->add('file', 'file')->getForm();
         return new Response($this->renderView('AevitasLevisBundle:Backend:userSearch.html.twig', array(
                     'users' => $users, 'pagination' => $pagination->getView($this), 'form_level' => $form_level->createView(),
@@ -299,7 +290,7 @@ class BackendController extends Controller {
         $form_level->bind($request);
 
         $form_gender = $this->createFormBuilder()
-                        ->add('sex', 'choice', array('required' => false, 'label' => 'Gender', 'empty_value' => false, 'choices' => User::getSexOptions($this->get('translator')),'data' => '2'))
+                        ->add('sex', 'choice', array('required' => false, 'label' => 'Gender', 'empty_value' => 'Çhoose Gender', 'choices' => User::getSexOptions($this->get('translator'))))
                         ->getForm();
         $form_gender->bind($request);
                         
@@ -349,7 +340,7 @@ class BackendController extends Controller {
         $data['amount'] = $limit;
         $data['dm'] = $this->get('doctrine_mongodb');
         $users = $repo->advancedSeekUsers($data);
-        $export = $this->get('router')->generate('backend_user_exportseeking');
+        $export = $this->get('router')->generate('backend_user_exportadvancedseeking',$data);
         $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
         $import = $this->createFormBuilder()->add('file', 'file')->getForm();
         return new Response($this->renderView('AevitasLevisBundle:Backend:userSearch.html.twig', array(

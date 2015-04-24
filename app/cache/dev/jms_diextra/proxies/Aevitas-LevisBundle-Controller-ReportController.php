@@ -66,6 +66,15 @@ class ReportController extends \Aevitas\LevisBundle\Controller\ReportController
         return $invocation->proceed();
     }
 
+    public function exportAdvancedSearchAction()
+    {
+        $ref = new \ReflectionMethod('Aevitas\\LevisBundle\\Controller\\ReportController', 'exportAdvancedSearchAction');
+        $interceptors = $this->__CGInterception__loader->loadInterceptors($ref, $this, array());
+        $invocation = new \CG\Proxy\MethodInvocation($ref, $this, array(), $interceptors);
+
+        return $invocation->proceed();
+    }
+
     public function birthdayReportAction()
     {
         $ref = new \ReflectionMethod('Aevitas\\LevisBundle\\Controller\\ReportController', 'birthdayReportAction');

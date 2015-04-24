@@ -341,6 +341,143 @@ class ReportController extends Controller {
     }
 
     /**
+     * @Route("/backend/user/exportadvancedseeking", name="backend_user_exportadvancedseeking")
+     * @Secure(roles="ROLE_ADMIN")
+     */
+    public function exportAdvancedSearchAction() {
+        $c=set_time_limit(10000);
+        function castutf8($str)
+        {
+            return utf8_encode(utf8_decode($str));
+        }
+        \PHPExcel_Settings::setZipClass(\PHPExcel_Settings::ZIPARCHIVE);
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $repo = $dm->getRepository('VietlandUserBundle:User');
+        $request = $this->getRequest();
+        $data = $request->query->all();
+        $data['export'] = true;
+        $data['dm'] = $this->get('doctrine_mongodb');
+        $users = $repo->advancedSeekUsers($data);
+
+        $excelService = $this->get('xls.service_xls5');
+        $excelService->excelObj->getProperties()->setCreator("Vietland JSC")
+                ->setLastModifiedBy("Vietland JSC")
+                ->setTitle("Vietland JSC exports report for Levis")
+                ->setSubject("Customer Report")
+                ->setDescription("This document helps marketing operator make decission accordingly on users statistic.")
+                ->setKeywords("office 2005 openxml php")
+                ->setCategory("Test result file");
+        $styleArray = array(
+            'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => 'ff0000')
+            )
+        );
+        $index = 1;
+        $store = array();
+        // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A1', 'Member Detail Report Report')->getStyle('A1')->applyFromArray($styleArray);
+        // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A2', 'GeneRated  On ' . date('d/m/Y H:i:s'))->getStyle('A2')->applyFromArray($styleArray);
+
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index), 'Email Address')->getStyle('A' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('B' . ($index), 'First Name')->getStyle('B' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index), 'Middle Name')->getStyle('C' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index), 'Last Name')->getStyle('D' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('E' . ($index), 'Username')->getStyle('E' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index), 'Status')->getStyle('F' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index), 'Reason')->getStyle('G' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index), 'Disabled Date')->getStyle('H' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index), 'Sex')->getStyle('I' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('J' . ($index), 'Birthday')->getStyle('J' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('K' . ($index), 'Marial status')->getStyle('K' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('L' . ($index), 'Registered Code')->getStyle('L' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('M' . ($index), 'CCode')->getStyle('M' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('N' . ($index), 'Cellphone')->getStyle('N' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('O' . ($index), 'Address')->getStyle('O' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('P' . ($index), 'District')->getStyle('P' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Q' . ($index), 'City')->getStyle('Q' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index), 'Joining date')->getStyle('R' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index), 'Registered Store')->getStyle('S' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index), 'Total Bills')->getStyle('T' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index), 'Total Payment')->getStyle('U' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index), 'Total Point')->getStyle('V' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index), 'Total Redeemed point')->getStyle('W' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index), 'Total Extra Point')->getStyle('X' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index), 'Expiration Days')->getStyle('Y' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Z' . ($index), 'Current Level')->getStyle('Z' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index), 'Next Level')->getStyle('AA' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index), 'Point to next Level')->getStyle('AB' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index), 'Last buy')->getStyle('AC' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index), 'Last 30 days bills No')->getStyle('AD' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index), 'Days From Deactivated')->getStyle('AE' . ($index))->applyFromArray($styleArray);
+
+        $cities = array();
+        $districts = array();
+        foreach ($users as $user) {
+            $cCode = $user->getCCode();
+
+            $email= (string)$user->getEmail();
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index + 1), $email);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('B' . ($index + 1), castutf8($user->getFirstname()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 1), castutf8($user->getMiddlename()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 1), castutf8($user->getLastname()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('E' . ($index + 1), castutf8($user->getUsername()));
+
+             $status = 'Disabled';
+            if($user->isEnabled() == true){
+                $status = 'Enabled';
+            }
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index + 1), $status);
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), castutf8($user->getReason()));            
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), castutf8($user->getDisableDate()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index + 1), $user->getSexLabel());
+            if (is_object($user->getDob()))
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('J' . ($index + 1), $user->getDob()->format('Y-m-d'));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('K' . ($index + 1), $user->getMarriageLabel());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('L' . ($index + 1), $user->getRegcode());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('M' . ($index + 1), (string)$cCode);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('N' . ($index + 1), $user->getCellphone());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('O' . ($index + 1), $user->getAddress1());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('P' . ($index + 1), $user->getDistrict());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Q' . ($index + 1), $user->getCity());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index + 1), $user->getJoined());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $repo->getRegisteredStore($data,$user->getId()));
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $user->getTotalBill());
+            $qfpoint =$user->getQualifyPoint();
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $qfpoint);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1), $user->getTotalRedeemPoint());
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index + 1), $user->getTotalExtraPoint());
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index + 1), $user->getExpriationsDay());
+            $level = $user->getLevel();
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Z' . ($index + 1), $level);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index + 1), $user->getNextLevel());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index + 1), $user->pointToNextLevel());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index + 1), $user->getLastbuy()->format('Y-m-d'));
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $user->getLast30DayBillNo());
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index + 1), $user->getDaysFromDeactive());
+
+            $index++;
+            
+        }
+        // die();
+        $excelService->excelObj->getActiveSheet()->setTitle('User List Filter');
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $excelService->excelObj->setActiveSheetIndex(0);
+
+        //create the response
+        $response = $excelService->getResponse();
+        $response->headers->set('Content-Type', 'application/ms-excel; charset=utf-8');
+        $response->headers->set('Content-Disposition', 'attachment; filename="member-detail-' . time() . '.xls"');
+        // If you are using a https connection, you have to set those two headers and use sendHeaders() for compatibility with IE <9
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Cache-Control', 'maxage=1');
+        $response->sendHeaders();
+
+        return $response;
+    }
+
+
+    /**
      * @Route("/backend/user/exportseeking", name="backend_user_exportseeking")
      * @Secure(roles="ROLE_ADMIN")
      */

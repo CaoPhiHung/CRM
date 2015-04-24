@@ -41,7 +41,7 @@
                 <li><a href="{{path('backend_user_list')}}"><span>{{'User Management' | trans}}</span></a></li>
                 <li><a href="{{ path('backend_staff_list') }}">{{ 'Staff Management' | trans }}</a></li>
                 <li><a href="{{path('backend_customer_code_list')}}">{{'Customer Code' | trans}}</a></li>
-                
+                <li><a href="{{path('backend_user_advancedsearch')}}">{{'Advanced Search' | trans}}</a></li>
             </ul>
         </li>
 {% endif %}
@@ -105,7 +105,8 @@
                 <li><a href="{{path('config_environment')}}">{{'Envinronment Setting' | trans}}</a></li>
                 <li><a href="{{path('config_loyalty')}}">{{'Loyalty Setting' | trans}}</a></li>
                 <li><a href="{{path('config_mailer')}}">{{'Mailer Setting' | trans}}</a></li>
-    <li onclick="window.open('http://' + window.location.hostname + ':1234', '_blank');" style="cursor:pointer"><a>{{'Repair Database' | trans}}</a></li>
+    <li onclick="window.open('http://' + '90.0.0.5:1234', '_blank');" 
+style="cursor:pointer"><a>{{'Repair Database' | trans}}</a></li>
             </ul>
         </li>
 {% endif %}

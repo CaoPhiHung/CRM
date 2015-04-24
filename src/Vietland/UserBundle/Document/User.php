@@ -638,6 +638,24 @@ class User extends BaseUser implements Logger {
             return 'Silver';
     }
 
+    public function getNextLevel(){
+        if($this->getLevel() == 'Silver'){
+            return 'Gold';
+        }elseif ($this->getLevel() == 'Gold') {
+            return 'Platinium';
+        }
+        return 'Platinium';
+    }
+
+    public function pointToNextLevel(){
+        if($this->point < 4000000){
+            return 4000000 - $this->point;
+        }elseif (4000000 <= $this->point && $this->point < 10000000) {
+            return 10000000 - $this->point;
+        }
+        return 0;
+    }
+
     public function getCurrentLevel() {
         return $this->level;
     }

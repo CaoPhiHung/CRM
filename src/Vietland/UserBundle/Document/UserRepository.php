@@ -149,15 +149,24 @@ class UserRepository extends DocumentRepository {
         ;
     }
 
-        //function check first bill => registration store
-    public function checkUserData($id){
-               //  $users = $this->createQueryBuilder("VietlandUserBundle:User")
-               //  ->field('id')->equals((int) $id);
-               // $logs= $users->getQuery()->execute();
-         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            $user= $dm->getRepository('VietlandUserBundle:User')->find($id);
-                var_dump($user);
-            die();
+    public function getRegisteredStore($data,$id){
+        $dm = $data['dm']->getManager();
+            $mongo = new \MongoClient();
+            $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+            $col_log = $mongo->$db->aevitaslog;
+            $aevitagslog = $col_log->find()->sort(array('user.$id' => 1, "created" => 1));
+
+            foreach ($aevitagslog as $doc) {
+                if($doc['user']['$id'] == $id){
+                    if(isset($doc['schema']['0'])){
+                        $t = $doc['schema']['0'];
+                        $branch_name = $t['BranchName'];
+                        return $branch_name;
+                    }
+            }
+        }
+            return "No Store";
+
     }
 
     public function advancedSeekUsers($data) {
@@ -209,27 +218,33 @@ class UserRepository extends DocumentRepository {
                 }")->sort('dob', 'asc');
         }
 
+        //sex
         if(!empty($data['sex'])){
             $builder->field('sex')->equals((int) $data['sex']);
         }
 
+        //City
         if (!empty($data['city'])){
             $builder->field('city')->equals(new \MongoRegex('/.*' . $data['city'] . '.*/i'));
         }
 
+        //district
         if (!empty($data['district'])){
             $builder->field('district')->equals(new \MongoRegex('/.*' . $data['district'] . '.*/i'));
         }
 
+        //married
         if(!empty($data['mari'])){
             $builder->field('mari')->equals((int) $data['mari']);
         }
 
+        //status
         if(!empty($data['status']) || $data['status'] === '0'){
             $status = ($data['status'] == '1') ? true : false;
             $builder->field('enabled')->equals($status);
         }
 
+        //triple day
         if(!empty($data['triple_point_dates'])){
             $filter_tr_date = new \DateTime($data['triple_point_dates']);
             $day = date("j", strtotime($data['triple_point_dates']));
@@ -253,7 +268,7 @@ class UserRepository extends DocumentRepository {
             $builder->field('trdate')->exists(true)
                     ->where($function);
         }
-
+        //Registration store
         if(!empty($data['registration_store'])){
             $dm = $data['dm']->getManager();
             $mongo = new \MongoClient();
@@ -279,7 +294,7 @@ class UserRepository extends DocumentRepository {
             $builder->field('_id')->in(explode(',', $str_uid));
 
         }
-
+        //Bill search
         if(!empty($data['bill'])){
             if($data['bill'] == '1'){
                 $start = $data['fbill'];
@@ -294,8 +309,16 @@ class UserRepository extends DocumentRepository {
                                 var rt = false;
                                 var d = this.created;
                                 if(typeof this.totalPayment != "undefined"){
-                                    if(d.getDate() >= '.($day+1).' &&  d.getMonth() >= '.($month-1).' && d.getFullYear() >= '.$year.'){
+                                    if(d.getFullYear() > '.$year.'){
                                         rt = true;
+                                    }
+                                    if(d.getFullYear() == '.$year.'){
+                                        if(d.getDate() >= '.($day+1).' &&  d.getMonth() == '.($month-1).'){
+                                            rt = true;
+                                        }
+                                        if(d.getMonth() > '.($month-1).'){
+                                            rt = true;
+                                        }
                                     }
                                 }
                                 return rt;
@@ -316,15 +339,21 @@ class UserRepository extends DocumentRepository {
                         $index++;
                         if($doc['user']['$id'] !== $uid_before){
                             if($bill_count >= $start && $bill_count <= $end){
-                                if($index == $length_arr){
-                                    $str_uid .= $doc['user']['$id'].',';
-                                }else if( $uid_before != ''){
+                                if( $uid_before != ''){
                                     $str_uid .= $uid_before.',';
                                 }   
                             }                                                  
                             $bill_count = 1;
+                            if($index == $length_arr){
+                                if($bill_count >= $start && $bill_count <= $end){
+                                    $str_uid .= $doc['user']['$id'].',';
+                                }
+                            }
                         }else{
                             $bill_count++;
+                            if($index == $length_arr && $bill_count >= $start && $bill_count <= $end){
+                                $str_uid .= $uid_before.',';
+                            }
                         }
                         $uid_before = $doc['user']['$id'];
                     }
@@ -332,8 +361,8 @@ class UserRepository extends DocumentRepository {
                 $builder->field('_id')->in(explode(',', $str_uid));
 
             }else if($data['bill'] == '2'){
-                $start = $data['fbill'];
-                $end = $data['tbill'];
+                $start = (int)$data['fbill'];
+                $end = (int)$data['tbill'];
                 $number_day = $data['lastdays'];
                 $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
                 $day = date("j", strtotime($lastdate));
@@ -344,9 +373,18 @@ class UserRepository extends DocumentRepository {
                                 var rt = false;
                                 var d = this.created;
                                 if(typeof this.totalPayment != "undefined"){
-                                    if(d.getDate() >= '.($day+1).' &&  d.getMonth() >= '.($month-1).' && d.getFullYear() >= '.$year.'){
+                                    if(d.getFullYear() > '.$year.'){
                                         rt = true;
                                     }
+                                    if(d.getFullYear() == '.$year.'){
+                                        if(d.getDate() >= '.($day+1).' &&  d.getMonth() == '.($month-1).'){
+                                            rt = true;
+                                        }
+                                        if(d.getMonth() > '.($month-1).'){
+                                            rt = true;
+                                        }
+                                    }
+                                    
                                 }
                                 return rt;
                             }';
@@ -358,27 +396,29 @@ class UserRepository extends DocumentRepository {
                 
                 $str_uid = '';
                 $uid_before = '';                
-                if(!empty($aevitagslog)){
-                    foreach ($aevitagslog as $doc) {
-                        $first_arr = $doc;
-                        break;
-                    }
-                    $totalPayment = $first_arr['totalPayment'];
+                if(!empty($aevitagslog)){                    
+                    $totalPayment = 0;
                     $index = 0;
                     $length_arr = count($aevitagslog);
                     foreach ($aevitagslog as $doc) {
                         $index++;
                         if($doc['user']['$id'] !== $uid_before){
                             if($totalPayment >= $start && $totalPayment <= $end){
-                                if($index == $length_arr){
-                                    $str_uid .= $doc['user']['$id'].',';
-                                }else if( $uid_before != ''){
+                                if( $uid_before != ''){
                                     $str_uid .= $uid_before.',';
                                 }   
                             }                                                  
                             $totalPayment = $doc['totalPayment'];
+                            if($index == $length_arr){
+                                if($totalPayment >= $start && $totalPayment <= $end){
+                                    $str_uid .= $doc['user']['$id'].',';
+                                }
+                            }
                         }else{
-                            $totalPayment .= $doc['totalPayment'];
+                            $totalPayment = $totalPayment + $doc['totalPayment'];
+                            if($index == $length_arr && $totalPayment >= $start && $totalPayment <= $end){
+                                $str_uid .= $uid_before.',';
+                            }
                         }
                         $uid_before = $doc['user']['$id'];
                     }
@@ -387,6 +427,67 @@ class UserRepository extends DocumentRepository {
             }
         }
 
+        //Point
+        if (!empty($data['point'])) {
+            //Point Redeem
+            if($data['point'] == '1'){
+                $start = (int)$data['fpoint'];
+                $end = (int)$data['tpoint'];
+
+                $number_day = $data['p_lastdays'];
+                $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+                $date = new \DateTime($lastdate. ' 23:59:59');
+                
+                $dm = $data['dm']->getManager();
+                $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
+                                ->field('created')->gte($date)->sort('time', 'desc')->getQuery()->execute();
+                $str_uid = '';
+                $uid_before = '';
+                if(!empty($redeems)){                    
+                    $index = 0;
+                    $length_arr = count($redeems);
+                    $total_redeemed_point = 0;
+
+                    foreach ($redeems as $obj) {
+                        if (!is_object($obj->getStore()) || !is_object($obj->getUser())) {
+                            continue;
+                        }
+                        
+                        $index++;
+                        if($obj->getUser()->getID() !== $uid_before){
+                            if($total_redeemed_point >= $start && $total_redeemed_point <= $end){
+                                if( $uid_before != ''){
+                                    $str_uid .= $uid_before.',';
+                                }  
+                            }                                                  
+                            $total_redeemed_point = $obj->getPoint();
+                            if($index == $length_arr){
+                                if($total_redeemed_point >= $start && $total_redeemed_point <= $end){
+                                    $str_uid .= $obj->getUser()->getID().',';
+                                }
+                            }
+                        }else{
+                            $total_redeemed_point = $total_redeemed_point + $obj->getPoint();
+                            if($index == $length_arr && $total_redeemed_point >= $start && $total_redeemed_point <= $end){
+                                $str_uid .= $uid_before.',';
+                            }
+                        }
+                        $uid_before = $obj->getUser()->getID();   
+                    }
+                }
+                if($str_uid != ''){
+                    $builder->field('_id')->in(explode(',', $str_uid));
+                }
+            }
+            //Point Balance
+            if($data['point']== '2'){
+                $builder->field('point')->gt((int) $data['fpoint'] + 1);
+                $builder->field('point')->lt((int) $data['tpoint'] - 1);
+                $builder->field('point')->sort('desc');
+            }
+        }
+
+        //Joining day
         if(!empty($data['fjoiningdate']) && !empty($data['tjoiningdate'])){
             $builder->field('join')->gte(new \DateTime($data['fjoiningdate']));
             $builder->field('join')->lte(new \DateTime($data['tjoiningdate']));
