@@ -57,7 +57,7 @@
             <div class="modal-body">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary" id="bt-process">Convert</button>
             </div>
           </div><!-- /.modal-content -->
@@ -147,8 +147,8 @@
             }
             $('#myModal #bt-process').attr({'disable':'disable'});
             $('#myModal .modal-body #v-status').show();
-	    var rs = p*baserate;
-	     $.ajax({
+            var rs = p*baserate;
+            $.ajax({
                 url: '{{ path('backend_staff_redeemption_process') }}',
                 dataType: 'json',
                 type: 'post',

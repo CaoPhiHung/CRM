@@ -1,7 +1,5 @@
 <?php
-
 namespace Aevitas\LevisBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,9 +21,7 @@ use Aevitas\LevisBundle\Document\GiftMeta;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Vietland\UserBundle\Document\UserLog;
-
 class BackendController extends Controller {
-
     /**
      * @Route("/backend", name="backend_index")
      * @Secure(roles="ROLE_STAFF,ROLE_POINT, ROLE_GIFT,ROLE_STORE")
@@ -58,28 +54,22 @@ class BackendController extends Controller {
 //        return $response;      
         return array();
     }
-
     public function profileAction() {
         $user = $this->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-
         $form = $this->get('fos_user.profile.form');
         $formHandler = $this->get('fos_user.profile.form.handler');
-
         $process = $formHandler->process($user);
         if ($process) {
             $this->setFlash('fos_user_success', 'profile.flash.updated');
-
             return new RedirectResponse($this->getRedirectionUrl($user));
         }
-
         return array(
             'form' => $form->createView()
         );
     }
-
     /**
      * @Route("/edit/user/{id}", name="backend_edit_user")
      */
@@ -102,20 +92,17 @@ class BackendController extends Controller {
                         ->add('phone')
                         ->add('currentLevel', 'choice', array('choices' => User::getLevelOptions($translator), 'label' => $translator->trans('Current Level')))
                         ->add('roles', 'choice', array('choices' => User::getRoleOptions($this->get('translator')), 'multiple' => true))->getForm();
-
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
             if ($form->isValid()) {
                 /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
                 $userManager = $this->get('fos_user.user_manager');
-
                 $userManager->updateUser($user);
             } else {
                 var_dump(($form->getErrorsAsString()));
                 exit;
             }
         }
-
         return new Response($this->renderView(
                         'AevitasLevisBundle:Backend:profile.html.twig', array(
                     'form' => $form->createView(),
@@ -123,7 +110,6 @@ class BackendController extends Controller {
                         )
         ));
     }
-
     /**
      * @Route("/backend/user/list", name="backend_user_list")
      * @Secure(roles="ROLE_ADMIN")
@@ -146,7 +132,6 @@ class BackendController extends Controller {
         $users = $repo->getUsers($page, $limit);
         $export = $this->get('router')->generate('backend_user_exportseeking');
         $pagination = new Pagination($page, $repo->getCount(), $this->get('router')->generate('backend_user_list'), $limit);
-
         $import = $this->createFormBuilder()->add('file', 'file')->getForm();
         return new Response($this->renderView('AevitasLevisBundle:Backend:userList.html.twig', array(
                     'users' => $users, 'pagination' => $pagination->getView($this), 'form' => $form->createView(),
@@ -154,7 +139,6 @@ class BackendController extends Controller {
                     'exporturl' => $export
         )));
     }
-
     /**
      * @Route("/backend/user/advancedsearch", name="backend_user_advancedsearch")
      * @Secure(roles="ROLE_ADMIN")
@@ -171,19 +155,15 @@ class BackendController extends Controller {
         $form_gender = $this->createFormBuilder()
                         ->add('sex', 'choice', array('required' => false, 'label' => 'Gender', 'empty_value' => 'Çhoose Gender', 'choices' => User::getSexOptions($this->get('translator'))))
                         ->getForm();
-
         $form_marital = $this->createFormBuilder()
                         ->add('mari', 'choice', array('required' => false, 'empty_value' => 'Marital status', 'label' => 'Marital status', 'choices' => User::getMarriageStatus($this->get('translator'))))
                         ->getForm();
-
         $form_status = $this->createFormBuilder()
                         ->add('status', 'choice', array('required' => false, 'empty_value' => 'Enabled/Disabled', 'choices' => array('1'=>'Enabled', '0'=>'Disabled')))
                         ->getForm();
-
         $form_bill = $this->createFormBuilder()
                         ->add('bill', 'choice', array('required' => false, 'label' => "Bill's Information within", 'empty_value' => 'Bill Count/Value', 'choices' => array('1'=>'Bill Count', '2'=>'Value')))
                         ->getForm();
-
         $form_tier = $this->createFormBuilder()
                         ->add('tier', 'choice', array('required' => false, 'label' => "Customers, whose tiers are just...",'empty_value' => 'Upgrade/Downgrade', 'choices' => array('1'=>'Upgrade', '2'=>'Downgrade')))
                         ->getForm();
@@ -193,11 +173,9 @@ class BackendController extends Controller {
         $form_to_tier = $this->createFormBuilder()
                         ->add('to_tier', 'choice', array('required' => false, 'label' => false, 'empty_value' => 'Tier', 'choices' => User::getLevelOptions($this->get('translator'))))
                         ->getForm();
-
         $form_point = $this->createFormBuilder()
                         ->add('point', 'choice', array('required' => false, 'empty_value' => 'Redeemed/Balance', 'choices' => array('1'=>'Redeemed', '2'=>'Balance')))
                         ->getForm();
-
         $form_bonuspoint = $this->createFormBuilder()
                         ->add('bonuspoint', 'choice', array('required' => false, 'empty_value' => 'Give extra points', 'label' => 'Bonus Point', 'choices' => array('1'=>'Add Up To', '2'=>'Top Up')))
                         ->getForm();
@@ -223,7 +201,6 @@ class BackendController extends Controller {
                     'exporturl' => $export
         )));
     }
-
     /**
      * @Route("/backend/staff/list", name="backend_staff_list")
      * @Secure(roles="ROLE_ADMIN")
@@ -240,7 +217,6 @@ class BackendController extends Controller {
                     'users' => $users, 'pagination' => $pagination->getView($this)
         )));
     }
-
     /**
      * @Route("/backend/user/seeking", name="backend_user_seeking")
      * @Secure(roles="ROLE_ADMIN")
@@ -275,11 +251,85 @@ class BackendController extends Controller {
         )));
     }
 
+            /**
+     * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
+     * @param  string $method The API method to call, e.g. 'lists/list'
+     * @param  array  $args   An array of arguments to pass to the method. Will be json-encoded for you.
+     * @return array          Associative array of json decoded API response.
+     */
+    public function call($method, $args=array(), $timeout = 10)
+    {
+        return $this->makeRequest($method, $args, $timeout);
+    }
+
+    /**
+     * Performs the underlying HTTP request. Not very exciting
+     * @param  string $method The API method to be called
+     * @param  array  $args   Assoc array of parameters to be passed
+     * @return array          Assoc array of decoded result
+     */
+    private function makeRequest($method, $args=array(), $timeout = 10)
+    {      
+        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        list(, $datacentre) = explode('-', $args['apikey']);
+        $this->api_endpoint = str_replace('<dc>', $datacentre, 'https://<dc>.api.mailchimp.com/2.0');
+        $url = $this->api_endpoint.'/'.$method.'.json';
+
+        if (function_exists('curl_init') && function_exists('curl_setopt')){
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');       
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($args));
+            $result = curl_exec($ch);
+            curl_close($ch);
+        } else {
+            $json_data = json_encode($args);
+            $result    = file_get_contents($url, null, stream_context_create(array(
+                'http' => array(
+                    'protocol_version' => 1.1,
+                    'user_agent'       => 'PHP-MCAPI/2.0',
+                    'method'           => 'POST',
+                    'header'           => "Content-type: application/json\r\n".
+                                          "Connection: close\r\n" .
+                                          "Content-length: " . strlen($json_data) . "\r\n",
+                    'content'          => $json_data,
+                ),
+            )));
+        }
+
+        return $result ? json_decode($result, true) : false;
+    }
+
+    public function addSubToList(){
+                $result = $this->call('lists/subscribe', array(
+                'id'                => 'bd09c6bd62',
+                'email'             => array('email'=>'caophihung8392@gmail.com'),
+                'merge_vars'        => array('FNAME'=>'Phi', 'LNAME'=>'Hung'),
+                'double_optin'      => false,
+                'update_existing'   => true,
+                'replace_interests' => false,
+                'send_welcome'      => true,
+            ));
+        var_dump($result);
+     die();
+    }
+
+
     /**
      * @Route("/backend/user/advancedseeking", name="backend_user_advancedseeking")
      * @Secure(roles="ROLE_ADMIN")
      */
     public function listAdvancedSearchAction() {
+
+        //test Mailchimp api add subcriseber to list
+        //$this->addSubToList();
+
+
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $repo = $dm->getRepository('VietlandUserBundle:User');
         $request = $this->getRequest();
@@ -288,7 +338,6 @@ class BackendController extends Controller {
                         ->add('level', 'choice', array('required' => false, 'empty_value' => 'Choose an Level', 'choices' => User::getLevelOptions($this->get('translator'))))
                         ->getForm();
         $form_level->bind($request);
-
         $form_gender = $this->createFormBuilder()
                         ->add('sex', 'choice', array('required' => false, 'label' => 'Gender', 'empty_value' => 'Çhoose Gender', 'choices' => User::getSexOptions($this->get('translator'))))
                         ->getForm();
@@ -321,7 +370,6 @@ class BackendController extends Controller {
                         ->add('to_tier', 'choice', array('required' => false, 'label' => false, 'empty_value' => 'Tier', 'choices' => User::getLevelOptions($this->get('translator'))))
                         ->getForm();
         $form_to_tier->bind($request);
-
         $form_point = $this->createFormBuilder()
                         ->add('point', 'choice', array('required' => false, 'empty_value' => 'Redeemed/Balance', 'choices' => array('1'=>'Redeemed', '2'=>'Balance')))
                         ->getForm();
@@ -358,7 +406,6 @@ class BackendController extends Controller {
                     'exporturl' => $export
         )));
     }
-
     /**
      * @Route("/backend/user/confirmsms/{id}.{_format}", name="backend_confirm_sms", defaults={"_format"="json"})
      * @Secure(roles="ROLE_ADMIN, ROLE_STAFF")
@@ -380,7 +427,6 @@ class BackendController extends Controller {
         $sms->send();
         return new Response(json_encode(array('status' => true, 'regcode' => $user->getRegcode())));
     }
-
     /**
      * @Route("/_proxy/render/topsidebar", name="backend_render_topsidebar")
      */
@@ -404,7 +450,6 @@ class BackendController extends Controller {
         $response->setETag(md5($response->getContent()));
         return $response;
     }
-
     /**
      * @Route("/backend/cart/list", name="backend_cart_list")
      * @Secure(roles="ROLE_ADMIN, ROLE_GIFT")
@@ -421,7 +466,6 @@ class BackendController extends Controller {
                     'items' => $items, 'pagination' => $pagination->getView($this)
         )));
     }
-
     /**
      * @Route("/staff/list/cart/list", name="store_staff_order")
      * @Secure(roles="ROLE_ADMIN, ROLE_STAFF")
@@ -439,7 +483,6 @@ class BackendController extends Controller {
                     'items' => $items, 'pagination' => $pagination->getView($this)
         )));
     }
-
     /**
      * @Route("/backend/edit/cart/{id}", name="backend_cart_edit")
      * @Secure(roles="ROLE_ADMIN, ROLE_GIFT, ROLE_STAFF")
@@ -464,7 +507,6 @@ class BackendController extends Controller {
         }
         return array('form' => $form->createView(), 'cart' => $cart, 'giftform' => $giftForm);
     }
-
     /**
      * @Route("/_proxy/selected/gift")
      */
@@ -473,7 +515,6 @@ class BackendController extends Controller {
         $form = $this->createForm($fType, $gift);
         return $this->renderView('AevitasLevisBundle:Checkout:renderSelectedGift.html.twig', array('form' => $form->createView(), 'gift' => $gift));
     }
-
     /**
      * @Route("/delete/user/{id}", name="admin_delete_user")
      */
@@ -485,7 +526,6 @@ class BackendController extends Controller {
         $dm->flush();
         return new RedirectResponse($this->get('router')->generate('backend_user_list'));
     }
-
     /**
      * @Route("/check/posbill", name="admin_check_posbill")
      * @Secure(roles="ROLE_ADMIN")
@@ -519,8 +559,6 @@ class BackendController extends Controller {
                 //Quuery to filter bill
                 $qb = $dm->createQueryBuilder('VietlandAevitasBundle:Log')
                                 ->field('action')->equals(UserLog::BUYITEM);
-
-
                 $map = 'function(){
                     emit(this.md5,{count: 1});
                 }';
@@ -560,7 +598,6 @@ order by store.branchID ,Bill.BillDate";
         }
         return array('form' => $form->createView(), 'results' => $results);
     }
-
     /**
      * @Route("/check/bill/{ledgerid}/{billno}", name="check_bill")
      * @Secure(roles="ROLE_ADMIN")
@@ -595,7 +632,6 @@ LEFT OUTER JOIN MstAttribute A8 ON A8.ID = MstItem.AttribID8
 LEFT OUTER JOIN MstAttribute A9 ON A9.ID = MstItem.AttribID9  
 LEFT OUTER JOIN MstAttribute A10 ON A10.ID = MstItem.AttribID10 
 LEFT OUTER JOIN POSMstCamp ON POSMstCamp.ID = BI.GPTransFix2
-
 Where ISNULL(B.DOACase,0)=0 And ISNULL(B.Passed,0)=0 and B.VoucherType in (14,15,16,17,8,10,11,129,214) and B.BillIdNo = $billno and B.AccountsCVID = $ledgerid 
 Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BETWEEN CAST(FLOOR(CAST(GETDATE() AS FLOAT)) AS DATETIME) AND DATEADD(DAY, 1, CAST(FLOOR(CAST(GETDATE() AS FLOAT)) AS DATETIME))
 //            var_dump($string0);exit;
@@ -609,7 +645,6 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BET
         //$this->get('session')->getFlashBag()->clear();
         if (count($results)) {
             $sample = end($results);
-
             $storeinfo = array('aName' => $sample['AccountsName'], 'bName' => $sample['BranchName'], 'Amount' => $sample['Amount'], 'itemNumber' => count($results), 'bDate' => new \DateTime($sample['BillDate']));
             $iteminfo = array();
             array_map(function($item)use(&$iteminfo) {
@@ -625,7 +660,6 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BET
             return new Response($this->renderView('VietlandStoreBundle:Store:shoppingAction.html.twig', $response));
         }
     }
-
     /**
      * @Route("/multiply/newpoints", name="multiply_new_points")
      * @Template()
@@ -645,7 +679,6 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BET
         }
         exit('Finished');
     }
-
     /**
      * @Route("/import", name="user_import")
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -659,5 +692,4 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BET
         // $excelEngine->importToObject($data['file'], $this->get('fos_user.user_manager'), '\Vietland\\UserBundle\\Document\\User');
         return new \Symfony\Component\HttpFoundation\RedirectResponse($this->generateUrl('backend_user_list'));
     }
-
 }

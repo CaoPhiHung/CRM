@@ -225,6 +225,9 @@
 
     <!--<input type="submit" class="btn btn-action" value="Search"/>-->
 </form>
+
+<div class="loading-bar" style="display:none;"><img src="{{ asset('bundles/aevitaslevis/images/ajax-loader.gif')}}"></div>
+
 <table class="dynamicTable table table-striped table-bordered table-condensed dataTable" id="table-list-store" aria-describedby="DataTables_Table_0_info">
     <thead>
         <tr role="row">
@@ -248,8 +251,14 @@
             <td class="center item-name">{{ user.getEmail }}</td>
             <td class="center item-name">{{ user.getPoint }}</td>
             <td class="center item-name">{{ user.getCCode }}</td>
-            <td>{{user.getLevel}}</td>
-            <td>Enabled</td>
+            <td>{{ user.getLevel }}</td>
+            <td>
+                {% if (user.isEnabled == 1) %}
+                    <a href="javascript:showCvPopup({{ user.getId }})" class="enabled">Enabled</a>
+                {% else %}
+                    <a href="#" class="disabled">Disabled</a>
+                {% endif %}
+            </td>
             <td class="center item-price" colspan="2">
                 <a rel="{{ user.getId }}" href="{{ path('backend_report_userstatement', {'id':user.getId}) }}" title="download user statement">{{ 'Download'|trans }}</a> | 
                 <a rel="{{ user.getId }}" href="{{ path('backend_edit_user', {'id':user.getId}) }}">{{ 'Edit'|trans }}</a> | 
@@ -270,6 +279,26 @@
 <div id="open-form-delete" style="display: none;" title="!Important">
     Are you sure want to delete this item ?
 </div>
+
+<div class="modal fade" id="myModal" style="color:#000">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" style="color:#000">Disabled User</h4>
+        </div>
+        <div class="modal-body">
+            <label for="comment">Reason Disabled User</label>
+            <textarea id="comment" style="border: 1px solid !important; width: 85%; height: 20%;"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="bt-process">Save Changes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>          
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {% endblock %}
 
 {% block javascript %}
@@ -323,7 +352,7 @@
         jQuery("#table-list-store_wrapper .row-fluid>div:first-child").attr('class','span5');
         jQuery("#table-list-store_wrapper .row-fluid>div:nth-child(2)").attr('class','span7');
 
-        jQuery("#table-list-store_filter label").append('<input type="button" id="btn_enabled" name="btn_enabled" value="Enabled All" class="button-status" /> <input type="button" id="btn_disabled" name="btn_disabled" value="Disabled All" class="button-status" />');
+        jQuery("#table-list-store_filter label").append('<input type="button" id="enabled_all" name="enabled_all" value="Enabled All" class="button-status" /> <input type="button" id="disabled_all" name="disabled_all" value="Disabled All" class="button-status" />');
         
         jQuery("#checkall").click(function(){
             if(this.checked) {
@@ -336,7 +365,50 @@
                 });         
             }
         });
+
+        jQuery("#disabled_all").click(function(){
+            var uid = '';
+            $('.check-row').each(function() {
+                if(this.checked == true){
+                    uid += $(this).attr("value") + ',';
+                }
+            });
+            if(uid == ''){
+                alert('Please first make the selection from the list');
+                return false;
+            }
+            var cts = '<input type="hidden" id="uid" value="'+uid+'">';
+            $('#myModal .modal-body').append(cts);
+            $('#myModal').modal("show");
+        });
     });
+
+    function showCvPopup(uid){
+        //$('.loading-bar').show();
+        var cts = '<input type="hidden" id="uid" value="'+uid+'">';
+        $('#myModal .modal-body').append(cts);
+        $('#myModal').modal("show");
+
+        // $.ajax({
+        //     url: '{{ path('backend_staff_redeemption_info') }}',
+        //     dataType: 'json',
+        //     type: 'post',
+        //     data: {userid:uid},
+        //     success: function(response){
+        //         $('.loading-bar').hide();
+        //         console.log(response);
+        //         if (typeof(response.error)!='undefined'){
+        //             alert(response.error);
+        //             return;
+        //         }
+                
+        //         var cts = '<input type="hidden" id="uid" value="'+uid+'">';
+        //         $('#myModal .modal-body').html(cts);
+        //         $('#myModal').modal("show");
+        //     }
+        // });
+    }
+
 
 </script>
 <script src="{{ asset('bundles/aevitaslevis/js/store.js') }}"></script>

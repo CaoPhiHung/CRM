@@ -149,6 +149,55 @@ class UserRepository extends DocumentRepository {
         ;
     }
 
+
+    //get Total Bill
+    public function getTotalBill($data,$number_day,$id){
+
+        $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+        $day = date("j", strtotime($lastdate));
+        $month = date("n", strtotime($lastdate));
+        $year = date("Y", strtotime($lastdate));
+        
+        $function = 'function(){
+                        var rt = false;
+                        var d = this.created;
+                        if(typeof this.totalPayment != "undefined"){
+                            if(d.getFullYear() > '.$year.'){
+                                rt = true;
+                            }
+                            if(d.getFullYear() == '.$year.'){
+                                if(d.getDate() >= '.($day+1).' &&  d.getMonth() == '.($month-1).'){
+                                    rt = true;
+                                }
+                                if(d.getMonth() > '.($month-1).'){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';
+        $dm = $data['dm']->getManager();
+        $mongo = new \MongoClient();
+        $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+        $col_log = $mongo->$db->aevitaslog;
+        $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+        $bill_count = 1;
+        if(!empty($aevitagslog)){
+            $index = 0;
+            $length_arr = count($aevitagslog);
+            foreach ($aevitagslog as $doc) {
+                $index++;
+                if($doc['user']['$id'] == $id){
+                    $bill_count++;
+                }
+                
+            }
+            return $bill_count;
+        }     
+        return 0;
+    }
+
+    // get Store Name
     public function getRegisteredStore($data,$id){
         $dm = $data['dm']->getManager();
             $mongo = new \MongoClient();
@@ -169,6 +218,35 @@ class UserRepository extends DocumentRepository {
 
     }
 
+    //get total redeem poin
+    public function getTotalRedeemPoint($data,$id){
+        $dm = $data['dm']->getManager();
+        $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
+                    ->field('created')->sort('time', 'desc')->getQuery()->execute();
+        $total_redeemed_point = 0;
+        if(!empty($redeems)){                    
+                    $index = 0;
+                    $length_arr = count($redeems);
+                    
+
+                    foreach ($redeems as $obj) {
+                        if (!is_object($obj->getUser())) {
+                            continue;
+                        }
+                        
+                        $index++;
+                        if($obj->getUser()->getID() == $id){
+                            $total_redeemed_point = $total_redeemed_point + $obj->getPoint();
+                            //if($index == $length_arr){
+                            //}
+                        }
+
+                    }
+                    return $total_redeemed_point;
+                }
+        return 0;
+    }
+    // Advance Search
     public function advancedSeekUsers($data) {
         $builder = $this->createQueryBuilder();
         $builder->field('enabled')->equals(true)->field('posId')->exists(true)->field('CCode')->exists(true);
@@ -449,7 +527,7 @@ class UserRepository extends DocumentRepository {
                     $total_redeemed_point = 0;
 
                     foreach ($redeems as $obj) {
-                        if (!is_object($obj->getStore()) || !is_object($obj->getUser())) {
+                        if (!is_object($obj->getUser())) {
                             continue;
                         }
                         

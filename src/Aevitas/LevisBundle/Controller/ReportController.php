@@ -428,7 +428,7 @@ class ReportController extends Controller {
             }
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index + 1), $status);
             //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), castutf8($user->getReason()));            
-            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), castutf8($user->getDisableDate()));
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), castutf8($user->getDisableDate()->format('Y-m-d')));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index + 1), $user->getSexLabel());
             if (is_object($user->getDob()))
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('J' . ($index + 1), $user->getDob()->format('Y-m-d'));
@@ -441,19 +441,19 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Q' . ($index + 1), $user->getCity());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index + 1), $user->getJoined());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $repo->getRegisteredStore($data,$user->getId()));
-            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $user->getTotalBill());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $repo->getTotalBill($data,1000,$user->getId()));
             $qfpoint =$user->getQualifyPoint();
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $qfpoint);
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());
-            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1), $user->getTotalRedeemPoint());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $repo->getTotalRedeemPoint($data,$user->getId()));
             //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index + 1), $user->getTotalExtraPoint());
-            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index + 1), $user->getExpriationsDay());
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index + 1), $user->getExpriationsDay()->format('Y-m-d'));
             $level = $user->getLevel();
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Z' . ($index + 1), $level);
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index + 1), $user->getNextLevel());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index + 1), $user->pointToNextLevel());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index + 1), $user->getLastbuy()->format('Y-m-d'));
-            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $user->getLast30DayBillNo());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $repo->getTotalBill($data,30,$user->getId()));
             //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index + 1), $user->getDaysFromDeactive());
 
             $index++;
