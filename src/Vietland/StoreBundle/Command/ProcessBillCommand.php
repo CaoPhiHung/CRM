@@ -175,7 +175,7 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                return;
             }
             $data = json_decode($job->getData(), true);
-            $user = $dm->getRepository('VietlandUserBundle:User')->findOneBy(array('CCode' => $data['PartyID']));
+            $user = $dm->getRepository('VietlandUserBundle:User')->findOneBy(array('CCode' => $data['PartyID'], 'status' => true));
             $userManager = $this->getContainer()->get('fos_user.user_manager');
             
             if (!is_object($user)) {

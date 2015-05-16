@@ -296,7 +296,7 @@ class StoreController extends Controller {
         $page = 1;
         $form->bind($request);
         $data = $form->getData();
-        $users = $repo->seekUsers($data);
+        $users = $repo->seekRedeemUsers($data);
         $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
         return array(
             'users' => $users,
@@ -339,7 +339,7 @@ class StoreController extends Controller {
      * @Template()
      */
     public function RedeemptionProcessAction(Request $request) {
-	$userid = $request->get('userid');
+        $userid = $request->get('userid');
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $staff = $this->get('security.context')->getToken()->getUser();
         $store = $dm->getRepository('AevitasLevisBundle:Store')->findOneBy(array('oldId' => $staff->getStoreId()));
@@ -366,10 +366,12 @@ class StoreController extends Controller {
                 ->setUser($user)
         ;
         $dm->persist($cvObj);
-        $dm->flush();	
+        $dm->flush();
+
         #send SMS
         $phoneNo = $user->getCellphone();
         $authcode = $cvObj->getHash();
+        
         $msg = $this->renderView(":sms:redeemProcess.html.twig", array('authcode' => $authcode));
         $this->get('sms_sender')
                 ->setPhone($phoneNo)

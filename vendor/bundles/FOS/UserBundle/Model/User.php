@@ -116,7 +116,7 @@ abstract class User implements UserInterface, GroupableInterface
      * @var boolean
      */
     protected $credentialsExpired;
-    
+
     /**
      * @var \DateTime
      */
@@ -189,7 +189,6 @@ abstract class User implements UserInterface, GroupableInterface
             $this->locked,
             $this->credentialsExpired,
             $this->enabled,
-            $this->receiveBonusDobPoint,
             $this->id
         ) = $data;
     }

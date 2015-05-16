@@ -41,9 +41,27 @@ class LoadJobsCommand extends ContainerAwareCommand
                 ->sort('_id', 'asc')
                 ->getQuery()
                 ->execute();
+        // find user status is disabled
+        $users = $dm->getRepository('VietlandUserBundle:User')->findBy(array('status' => false));
+        $list_userid = array();
+        // var_dump("here");
+        // die();
+        if(!empty($users)){
+            foreach ($users as $user) {
+                $list_userid[] = $user->getCCode();
+            }
+        }
+
+        //end find disabled
+
         foreach ($jobs as $job)
         {
             $data = json_decode($job->getData(), true);
+
+            if(!empty($list_userid) && in_array($data['PartyID'], $list_userid)){
+                $this->logger('process_bill', '----------->CCode = '.$data['PartyID'].' . This user is disabled! <----------');
+                continue;
+            }
 
             $cmd = 'php ' . $path . 'app/console crm:processbill '
                     . '--ledgerid=' . $data['ledgerID'].' '

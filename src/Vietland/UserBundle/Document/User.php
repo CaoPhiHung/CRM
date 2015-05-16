@@ -87,6 +87,18 @@ class User extends BaseUser implements Logger {
 
     /**
      *
+     * @MongoDB\Boolean
+     */
+    protected $status;
+
+    /**
+    *
+    * @MongoDB\String
+    */
+    protected $reason;
+
+    /**
+     *
      * @MongoDB\String
      */
     protected $address1;
@@ -2027,6 +2039,27 @@ class User extends BaseUser implements Logger {
             'top_3websites' => $this->getAns1(), 'communication_tool' => implode(' | ', $this->getAns2()),
             'favorite_brand' => implode(' | ', $this->getAns3()), 'total_jeans' => $this->getAns4(),
             'jeans_year' => $this->getAns5(), 'top_jeans_brand' => $this->getAns6(), 'favorite_fit_jean' => $this->getAns7(), 'city' => false, 'district' => false, 'percent_fulfill' => 0);
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($boolean)
+    {
+        $this->status = (Boolean) $boolean;
+
+        return $this;
+    }
+
+    public function setReason($reason) {
+        $this->reason = $reason;
+        return $this;
+    }
+
+    public function getReason() {
+        return $this->reason;
     }
 
     private function generateReadableRandomString($length = 12) {

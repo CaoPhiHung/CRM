@@ -67,6 +67,22 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $hydratedData['enabled'] = $return;
         }
 
+        /** @Field(type="boolean") */
+        if (isset($data['status'])) {
+            $value = $data['status'];
+            $return = (bool) $value;
+            $this->class->reflFields['status']->setValue($document, $return);
+            $hydratedData['status'] = $return;
+        }
+
+        /** @Field(type="string") */
+        if (isset($data['reason'])) {
+            $value = $data['reason'];
+            $return = (string) $value;
+            $this->class->reflFields['reason']->setValue($document, $return);
+            $hydratedData['reason'] = $return;
+        }
+
         /** @Field(type="string") */
         if (isset($data['salt'])) {
             $value = $data['salt'];

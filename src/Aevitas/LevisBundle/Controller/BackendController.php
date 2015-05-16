@@ -305,18 +305,21 @@ class BackendController extends Controller {
         return $result ? json_decode($result, true) : false;
     }
 
-    public function addSubToList(){
+    public function addSubToList($email,$fname,$mname,$lname,$username,$status,$reason){
+                $listID = '2fa4c3d639'; //list enable
+                if($status == false){
+                    $listID = '6ed8a62e36'; // list disable
+                }
                 $result = $this->call('lists/subscribe', array(
-                'id'                => 'bd09c6bd62',
-                'email'             => array('email'=>'caophihung8392@gmail.com'),
-                'merge_vars'        => array('FNAME'=>'Phi', 'LNAME'=>'Hung'),
+                'id'                => $listID,
+                'email'             => array('email'=>$email),
+                'merge_vars'        => array('EMAIL'=> $email, 'FNAME'=>$fname, 'MNAME'=> $mname  ,'LNAME'=> $lname,
+                                            'UNAME'=> $username,'STATUS'=>$status,'REASON'=>$reason),
                 'double_optin'      => false,
                 'update_existing'   => true,
                 'replace_interests' => false,
-                'send_welcome'      => true,
+                'send_welcome'      => false,
             ));
-        var_dump($result);
-     die();
     }
 
 
@@ -325,9 +328,6 @@ class BackendController extends Controller {
      * @Secure(roles="ROLE_ADMIN")
      */
     public function listAdvancedSearchAction() {
-
-        //test Mailchimp api add subcriseber to list
-        //$this->addSubToList();
 
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
@@ -526,6 +526,74 @@ class BackendController extends Controller {
         $dm->flush();
         return new RedirectResponse($this->get('router')->generate('backend_user_list'));
     }
+
+    /**
+     * @Route("/deleteadvanced/user/{id}", name="admin_deleteadvanced_user")
+     */
+    public function deleteAdvancedUserAction($id) {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $id);
+        $user->setEnabled(false);
+        $dm->persist($user);
+        $dm->flush();
+        return new RedirectResponse($this->get('router')->generate('backend_user_advancedsearch'));
+    }
+
+    /**
+     * @Route("/backend/user/status-disabled", name="backend_user_status_disabled")
+     * 
+     */
+    public function StatusDisabledAction() {
+        $request  = $this->getRequest();
+        $userid = $request->get('userid');
+        $reason = $request->get('reason');
+        $status = $request->get('status');
+        if($status == 'true'){
+            $status = true;
+        }else{
+            $status = false;
+        }
+
+        $uid = null;
+        $arr_userid = explode(',', $userid);
+        if(count($arr_userid) === 1){
+            $uid = $arr_userid[0];
+        }
+        
+        if(!empty($uid)){
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $uid);
+            $user->setStatus($status);
+            $user->setReason($reason);
+            // Mailchimp api add subcriseber to list
+            $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+                                $user->getLastname(),$user->getUsername(),$user->getStatus(),
+                                $user->getReason());
+            $dm->persist($user);
+            $dm->flush();
+        }else{
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            for($i = 0; $i < count($arr_userid); $i++){
+                if(!empty($arr_userid[$i])){
+                    $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $arr_userid[$i]);
+                    $user->setStatus($status);
+                    $user->setReason($reason);
+                    // Mailchimp api add subcriseber to list
+                    $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+                                        $user->getLastname(),$user->getUsername(),$user->getStatus(),
+                                        $user->getReason());
+                    $dm->persist($user);
+                    $dm->flush();
+                }               
+            }
+        }
+        
+        exit(json_encode(array(
+            'result' => true,
+            'content' => 'CONTENT'
+        )));
+    }
+
     /**
      * @Route("/check/posbill", name="admin_check_posbill")
      * @Secure(roles="ROLE_ADMIN")

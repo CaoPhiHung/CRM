@@ -149,6 +149,49 @@ class UserRepository extends DocumentRepository {
         ;
     }
 
+    public function seekRedeemUsers($data) {
+        $builder = $this->createQueryBuilder();
+        $builder->field('enabled')->equals(true)->field('posId')->exists(true)->field('CCode')->exists(true);
+        if (isset($data['name'])) {
+            $builder->addOr($builder->expr()->field('firstname')->equals(new \MongoRegex('/' . $data['name'] . '/i')));
+            $builder->addOr($builder->expr()->field('lastname')->equals(new \MongoRegex('/' . $data['name'] . '/i')));
+        }
+        $builder->where("function() { return this.roles.length == 0; }");
+        if (isset($data['cellphone']))
+            $builder->field('cellphone')->equals(new \MongoRegex('/^' . $data['cellphone'] . '/'));
+        if (isset($data['CCode']) && $data['CCode'])
+            $builder->field('CCode')->equals(new \MongoRegex('/^' . $data['CCode'] . '/'));
+        if (isset($data['email']) && $data['email'])
+            $builder->field('email')->equals($data['email']);
+        if (isset($data['level']) && $data['level'])
+            $builder->field('level')->equals((int) $data['level']);
+        if (isset($data['fpoint']) && isset($data['spoint'])) {
+            $builder->field('point')->lt((int) $data['fpoint'] + 1);
+            $builder->field('point')->gt((int) $data['spoint'] - 1);
+            $builder->field('point')->sort('desc');
+        }
+        $builder->field('status')->equals(true);
+        if (!isset($data['export'])) {
+            if (isset($data['amount']))
+                $limit = $data['amount'];
+            else
+                $limit = 25;
+            if (isset($data['page']))
+                $page = $data['page'];
+            else
+                $page = 1;
+
+            $builder->limit((int) $limit)
+                    ->skip(((int) $page - 1) * (int) $limit)->sort('id', 'desc');
+        }
+        $countQuery = clone($builder);
+        $this->count = $countQuery->count()->getQuery()->execute();
+        return $builder
+                        ->getQuery()
+                        ->execute();
+        ;
+    }
+
 
     //get Total Bill
     public function getTotalBill($data,$number_day,$id){
@@ -319,7 +362,7 @@ class UserRepository extends DocumentRepository {
         //status
         if(!empty($data['status']) || $data['status'] === '0'){
             $status = ($data['status'] == '1') ? true : false;
-            $builder->field('enabled')->equals($status);
+            $builder->field('status')->equals($status);
         }
 
         //triple day

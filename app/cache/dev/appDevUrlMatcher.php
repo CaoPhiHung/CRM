@@ -122,6 +122,121 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // backend_index
+        if ($pathinfo === '/backend') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::indexAction',  '_route' => 'backend_index',);
+        }
+
+        // backend_edit_user
+        if (0 === strpos($pathinfo, '/edit/user') && preg_match('#^/edit/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_edit_user')), array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::editUserAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/backend')) {
+            if (0 === strpos($pathinfo, '/backend/user')) {
+                // backend_user_list
+                if ($pathinfo === '/backend/user/list') {
+                    return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::listUserAction',  '_route' => 'backend_user_list',);
+                }
+
+                // backend_user_advancedsearch
+                if ($pathinfo === '/backend/user/advancedsearch') {
+                    return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::advancedSearchUserAction',  '_route' => 'backend_user_advancedsearch',);
+                }
+
+            }
+
+            // backend_staff_list
+            if ($pathinfo === '/backend/staff/list') {
+                return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::staffManagerAction',  '_route' => 'backend_staff_list',);
+            }
+
+            if (0 === strpos($pathinfo, '/backend/user')) {
+                // backend_user_seeking
+                if ($pathinfo === '/backend/user/seeking') {
+                    return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::listSearchAction',  '_route' => 'backend_user_seeking',);
+                }
+
+                // backend_user_advancedseeking
+                if ($pathinfo === '/backend/user/advancedseeking') {
+                    return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::listAdvancedSearchAction',  '_route' => 'backend_user_advancedseeking',);
+                }
+
+                // backend_confirm_sms
+                if (0 === strpos($pathinfo, '/backend/user/confirmsms') && preg_match('#^/backend/user/confirmsms/(?P<id>[^/\\.]++)(?:\\.(?P<_format>[^/]++))?$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_confirm_sms')), array (  '_format' => 'json',  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::resendRegCodeAction',));
+                }
+
+            }
+
+        }
+
+        // backend_render_topsidebar
+        if ($pathinfo === '/_proxy/render/topsidebar') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::renderTopSidebarAction',  '_route' => 'backend_render_topsidebar',);
+        }
+
+        // backend_cart_list
+        if ($pathinfo === '/backend/cart/list') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::cartListAction',  '_route' => 'backend_cart_list',);
+        }
+
+        // store_staff_order
+        if ($pathinfo === '/staff/list/cart/list') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::cartListStoreStaffAction',  '_route' => 'store_staff_order',);
+        }
+
+        // backend_cart_edit
+        if (0 === strpos($pathinfo, '/backend/edit/cart') && preg_match('#^/backend/edit/cart/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_cart_edit')), array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::editCartAction',));
+        }
+
+        // aevitas_levis_backend_renderselectedgift
+        if ($pathinfo === '/_proxy/selected/gift') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::renderSelectedGiftAction',  '_route' => 'aevitas_levis_backend_renderselectedgift',);
+        }
+
+        if (0 === strpos($pathinfo, '/delete')) {
+            // admin_delete_user
+            if (0 === strpos($pathinfo, '/delete/user') && preg_match('#^/delete/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_delete_user')), array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::deleteUserAction',));
+            }
+
+            // admin_deleteadvanced_user
+            if (0 === strpos($pathinfo, '/deleteadvanced/user') && preg_match('#^/deleteadvanced/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_deleteadvanced_user')), array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::deleteAdvancedUserAction',));
+            }
+
+        }
+
+        // backend_user_status_disabled
+        if ($pathinfo === '/backend/user/status-disabled') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::StatusDisabledAction',  '_route' => 'backend_user_status_disabled',);
+        }
+
+        if (0 === strpos($pathinfo, '/check')) {
+            // admin_check_posbill
+            if ($pathinfo === '/check/posbill') {
+                return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::checkPosBillAction',  '_route' => 'admin_check_posbill',);
+            }
+
+            // check_bill
+            if (0 === strpos($pathinfo, '/check/bill') && preg_match('#^/check/bill/(?P<ledgerid>[^/]++)/(?P<billno>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'check_bill')), array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::checkBillAction',));
+            }
+
+        }
+
+        // multiply_new_points
+        if ($pathinfo === '/multiply/newpoints') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::multiplyNewPointsAction',  '_route' => 'multiply_new_points',);
+        }
+
+        // user_import
+        if ($pathinfo === '/import') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::userImportAction',  '_route' => 'user_import',);
+        }
+
         if (0 === strpos($pathinfo, '/checkout/step')) {
             // checkout_step_one
             if ($pathinfo === '/checkout/stepone') {

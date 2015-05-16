@@ -253,16 +253,16 @@
             <td class="center item-name">{{ user.getCCode }}</td>
             <td>{{ user.getLevel }}</td>
             <td>
-                {% if (user.isEnabled == 1) %}
-                    <a href="javascript:showCvPopup({{ user.getId }})" class="enabled">Enabled</a>
+                {% if (user.getStatus == true) %}
+                    <a href="javascript:showStatusPopup({{ user.getId }}, 0)" class="enabled">Enabled</a>
                 {% else %}
-                    <a href="#" class="disabled">Disabled</a>
+                    <a rel="{{ user.getId }}" href="javascript:showStatusPopup({{ user.getId }},1)" class="disabled">Disabled</a>
                 {% endif %}
             </td>
             <td class="center item-price" colspan="2">
                 <a rel="{{ user.getId }}" href="{{ path('backend_report_userstatement', {'id':user.getId}) }}" title="download user statement">{{ 'Download'|trans }}</a> | 
                 <a rel="{{ user.getId }}" href="{{ path('backend_edit_user', {'id':user.getId}) }}">{{ 'Edit'|trans }}</a> | 
-                <a rel="{{ user.getId }}" href="{{ path('admin_delete_user', {'id':user.getId}) }}">{{ 'Delete' | trans }}</a>
+                <a rel="{{ user.getId }}" href="{{ path('admin_deleteadvanced_user', {'id':user.getId}) }}">{{ 'Delete' | trans }}</a>
             </td>
         </tr>
            {% endfor %}
@@ -285,11 +285,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" style="color:#000">Disabled User</h4>
+          <h4 class="modal-title" id="modal-title" style="color:#000">Disabled User</h4>
         </div>
         <div class="modal-body">
-            <label for="comment">Reason Disabled User</label>
-            <textarea id="comment" style="border: 1px solid !important; width: 85%; height: 20%;"></textarea>
+            <label for="comment" id="comment">Reason Disabled User</label>
+            <textarea id="reason" style="border: 1px solid !important; width: 85%; height: 20%;" required ></textarea>
+            <input type="hidden" name="status" id="status" value="">
+            <span id="user_id"></span>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="bt-process">Save Changes</button>
@@ -377,36 +379,82 @@
                 alert('Please first make the selection from the list');
                 return false;
             }
+
+            $('#modal-title').html('Disabled User');
+            $('#comment').html('Reason Disabled User');
+            $('#status').val('false');
+            
             var cts = '<input type="hidden" id="uid" value="'+uid+'">';
-            $('#myModal .modal-body').append(cts);
+            $('#user_id').html(cts);
             $('#myModal').modal("show");
         });
+
+        jQuery("#enabled_all").click(function(){
+            var uid = '';
+            $('.check-row').each(function() {
+                if(this.checked == true){
+                    uid += $(this).attr("value") + ',';
+                }
+            });
+            if(uid == ''){
+                alert('Please first make the selection from the list');
+                return false;
+            }
+
+            $('#modal-title').html('Enabled User');
+            $('#comment').html('Reason Enabled User');
+            $('#status').val('true');
+            
+            var cts = '<input type="hidden" id="uid" value="'+uid+'">';
+            $('#user_id').html(cts);
+            $('#myModal').modal("show");
+        });
+
+        jQuery("#bt-process").click(function(){
+            var uid = $("#uid").val();
+            var reason_disabled = $("#reason").val();
+            var status_user = $("#status").val();
+
+            if(reason_disabled == ''){
+                alert("Please enter data for reason field!");
+                return false;
+            }
+
+            $.ajax({
+                url: '{{ path('backend_user_status_disabled') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {userid:uid, reason:reason_disabled, status:status_user},
+                success: function(response){
+                    $('.loading-bar').hide();
+                    console.log(response);
+                    if (typeof(response.error)!='undefined'){
+                        alert(response.error);
+                        return;
+                    }
+                    
+                    alert('Updated successfull!');
+                    location.reload();
+                }
+            });
+        });
+
     });
 
-    function showCvPopup(uid){
+    function showStatusPopup(uid, status){
         //$('.loading-bar').show();
+        if(status === 1){
+            $('#modal-title').html('Enabled User');
+            $('#comment').html('Reason Enabled User');
+            $('#status').val('true');
+        }else{
+            $('#modal-title').html('Disabled User');
+            $('#comment').html('Reason Disabled User');
+            $('#status').val('false');
+        }
         var cts = '<input type="hidden" id="uid" value="'+uid+'">';
-        $('#myModal .modal-body').append(cts);
+        $('#user_id').html(cts);
         $('#myModal').modal("show");
-
-        // $.ajax({
-        //     url: '{{ path('backend_staff_redeemption_info') }}',
-        //     dataType: 'json',
-        //     type: 'post',
-        //     data: {userid:uid},
-        //     success: function(response){
-        //         $('.loading-bar').hide();
-        //         console.log(response);
-        //         if (typeof(response.error)!='undefined'){
-        //             alert(response.error);
-        //             return;
-        //         }
-                
-        //         var cts = '<input type="hidden" id="uid" value="'+uid+'">';
-        //         $('#myModal .modal-body').html(cts);
-        //         $('#myModal').modal("show");
-        //     }
-        // });
     }
 
 
