@@ -422,12 +422,14 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 1), castutf8($user->getLastname()));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('E' . ($index + 1), castutf8($user->getUsername()));
 
-             $status = 'Disabled';
-            if($user->isEnabled() == true){
-                $status = 'Enabled';
+            $status = "Enabled";
+            if($user->getStatus() == FALSE){
+                $status = "Disabled";
             }
+
+
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index + 1), $status);
-            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), castutf8($user->getReason()));            
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), castutf8($user->getReason()));            
             //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), castutf8($user->getDisableDate()->format('Y-m-d')));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index + 1), $user->getSexLabel());
             if (is_object($user->getDob()))
@@ -441,7 +443,7 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Q' . ($index + 1), $user->getCity());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index + 1), $user->getJoined());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $repo->getRegisteredStore($data,$user->getId()));
-            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $repo->getTotalBill($data,1000,$user->getId()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $repo->getTotalBill($data,"",$user->getId()));
             $qfpoint =$user->getQualifyPoint();
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $qfpoint);
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());

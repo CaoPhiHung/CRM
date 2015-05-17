@@ -204,12 +204,12 @@ class UserRepository extends DocumentRepository {
         $function = 'function(){
                         var rt = false;
                         var d = this.created;
-                        if(typeof this.totalPayment != "undefined"){
+                        if( this.action == "buyitem"){
                             if(d.getFullYear() > '.$year.'){
                                 rt = true;
                             }
                             if(d.getFullYear() == '.$year.'){
-                                if(d.getDate() >= '.($day+1).' &&  d.getMonth() == '.($month-1).'){
+                                if(d.getDate() >= '.($day).' &&  d.getMonth() == '.($month-1).'){
                                     rt = true;
                                 }
                                 if(d.getMonth() > '.($month-1).'){
@@ -224,7 +224,7 @@ class UserRepository extends DocumentRepository {
         $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
         $col_log = $mongo->$db->aevitaslog;
         $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
-        $bill_count = 1;
+        $bill_count = 0;
         if(!empty($aevitagslog)){
             $index = 0;
             $length_arr = count($aevitagslog);
