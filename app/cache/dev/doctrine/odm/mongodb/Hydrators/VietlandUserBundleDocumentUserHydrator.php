@@ -75,6 +75,14 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $hydratedData['status'] = $return;
         }
 
+        /** @Field(type="date") */
+        if (isset($data['disabledDate'])) {
+            $value = $data['disabledDate'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['disabledDate']->setValue($document, clone $return);
+            $hydratedData['disabledDate'] = $return;
+        }
+
         /** @Field(type="string") */
         if (isset($data['reason'])) {
             $value = $data['reason'];

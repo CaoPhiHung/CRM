@@ -297,7 +297,8 @@ class UserRepository extends DocumentRepository {
             $builder->addOr($builder->expr()->field('firstname')->equals(new \MongoRegex('/' . $data['name'] . '/i')));
             $builder->addOr($builder->expr()->field('lastname')->equals(new \MongoRegex('/' . $data['name'] . '/i')));
         }
-        $builder->where("function() { return this.roles.length == 0; }");
+        $builder->where("function() { return this.roles.length == 0; }");        
+
         if (!empty($data['cellphone']))
             $builder->field('cellphone')->equals(new \MongoRegex('/^' . $data['cellphone'] . '/'));
         if (!empty($data['CCode']) && $data['CCode'])
@@ -612,6 +613,11 @@ class UserRepository extends DocumentRepository {
         if(!empty($data['fjoiningdate']) && !empty($data['tjoiningdate'])){
             $builder->field('join')->gte(new \DateTime($data['fjoiningdate']));
             $builder->field('join')->lte(new \DateTime($data['tjoiningdate']));
+        }
+
+        //field user_id
+        if(!empty($data['list_uid'])){
+            $builder->field('_id')->in(explode(',', $data['list_uid']));
         }        
 
         if (!isset($data['export'])) {

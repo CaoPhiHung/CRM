@@ -92,6 +92,12 @@ class User extends BaseUser implements Logger {
     protected $status;
 
     /**
+     *
+     * @MongoDB\Date
+     */
+    protected $disabledDate;
+
+    /**
     *
     * @MongoDB\String
     */
@@ -2051,6 +2057,26 @@ class User extends BaseUser implements Logger {
         $this->status = (Boolean) $boolean;
 
         return $this;
+    }
+
+    /**
+     * Set disabledDate
+     *
+     * @param date $disabledDate
+     */
+    public function setDisabledDate() {
+         $this->disabledDate = new \DateTime(date('Y-m-d'));
+        
+        return $this;
+    }
+
+    /**
+     * Get disabledDate
+     *
+     * @return date $disabledDate
+     */
+    public function getDisabledDate() {
+        return $this->disabledDate;
     }
 
     public function setReason($reason) {

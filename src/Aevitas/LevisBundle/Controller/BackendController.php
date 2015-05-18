@@ -565,10 +565,12 @@ class BackendController extends Controller {
             $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $uid);
             $user->setStatus($status);
             $user->setReason($reason);
+            $user->setDisabledDate($status);
+
             // Mailchimp api add subcriseber to list
-            $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
-                                $user->getLastname(),$user->getUsername(),$user->getStatus(),
-                                $user->getReason());
+            // $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+            //                     $user->getLastname(),$user->getUsername(),$user->getStatus(),
+            //                     $user->getReason());
             $dm->persist($user);
             $dm->flush();
         }else{
@@ -578,10 +580,12 @@ class BackendController extends Controller {
                     $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $arr_userid[$i]);
                     $user->setStatus($status);
                     $user->setReason($reason);
+                    $user->setDisabledDate($status);
+                    
                     // Mailchimp api add subcriseber to list
-                    $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
-                                        $user->getLastname(),$user->getUsername(),$user->getStatus(),
-                                        $user->getReason());
+                    // $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+                    //                     $user->getLastname(),$user->getUsername(),$user->getStatus(),
+                    //                     $user->getReason());
                     $dm->persist($user);
                     $dm->flush();
                 }               
