@@ -429,8 +429,14 @@ class ReportController extends Controller {
 
 
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index + 1), $status);
-            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), castutf8($user->getReason()));            
-            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), $user->getDisabledDate()->format('Y-m-d'));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), castutf8($user->getReason()));
+
+            if($user->getStatus() == FALSE){
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), $user->getModifyStatusDate()->format('Y-m-d'));
+            }else{
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), '');
+            }            
+            
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index + 1), $user->getSexLabel());
             if (is_object($user->getDob()))
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('J' . ($index + 1), $user->getDob()->format('Y-m-d'));
@@ -458,9 +464,9 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $repo->getTotalBill($data,30,$user->getId()));
             $now = new \DateTime(date('Y-m-d'));
 
-            $disabledDate =  $user->getDisabledDate()->format('Y-m-d');
+            $disabledDate =  $user->getModifyStatusDate()->format('Y-m-d');
             // (int) ((dt2.getTime() - dt1.getTime()) / (1000 * 60 * 60 * 24));
-            $datediff= (int) (($now->format('Y-m-d') - $disabledDate) / (1000 * 60 * 60 *24));
+            $datediff=  (strtotime($now->format('Y-m-d')) - strtotime($disabledDate))/(60*60*24);
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index + 1), $datediff);
 
             $index++;
