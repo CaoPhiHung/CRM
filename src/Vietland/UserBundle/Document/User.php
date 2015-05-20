@@ -66,6 +66,11 @@ class User extends BaseUser implements Logger {
     protected $bonusexpired;
 
     /**
+     * @MongoDB\Collection
+     */
+    protected $bonusPoint = array();
+
+    /**
      * @MongoDB\String
      */
     protected $posId;
@@ -95,7 +100,7 @@ class User extends BaseUser implements Logger {
      *
      * @MongoDB\Date
      */
-    protected $disabledDate;
+    protected $modifyStatusDate;
 
     /**
     *
@@ -489,6 +494,8 @@ class User extends BaseUser implements Logger {
         $this->join = new \DateTime(date('Y-m-d'));
         $this->CCode = 'notyet_' . $this->generateReadableRandomString(10);
         $this->cellphone = 'notyet_' . $this->generateReadableRandomString(10);
+        $this->status = true;
+        $this->modifyStatusDate = new \DateTime(date('Y-m-d'));
     }
 
     public function getJoined() {
@@ -578,6 +585,15 @@ class User extends BaseUser implements Logger {
 
     public function getNewroles() {
         return $this->newroles;
+    }
+
+    public function setBonusPoint(array $points) {
+        $this->bonusPoint = $points;
+        return $this;
+    }
+
+    public function getBonusPoint() {
+        return $this->bonusPoint;
     }
 
     public function getRef() {
@@ -2060,23 +2076,23 @@ class User extends BaseUser implements Logger {
     }
 
     /**
-     * Set disabledDate
+     * Set ModifyStatusDate
      *
-     * @param date $disabledDate
+     * @param date $modifyStatusDate
      */
-    public function setDisabledDate() {
-         $this->disabledDate = new \DateTime(date('Y-m-d'));
+    public function setModifyStatusDate() {
+         $this->modifyStatusDate = new \DateTime(date('Y-m-d'));
         
         return $this;
     }
 
     /**
-     * Get disabledDate
+     * Get modifyStatusDate
      *
-     * @return date $disabledDate
+     * @return date $modifyStatusDate
      */
-    public function getDisabledDate() {
-        return $this->disabledDate;
+    public function getModifyStatusDate() {
+        return $this->modifyStatusDate;
     }
 
     public function setReason($reason) {

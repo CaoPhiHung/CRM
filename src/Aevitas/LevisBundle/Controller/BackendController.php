@@ -565,7 +565,7 @@ class BackendController extends Controller {
             $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $uid);
             $user->setStatus($status);
             $user->setReason($reason);
-            $user->setDisabledDate($status);
+            $user->setModifyStatusDate();
 
             // Mailchimp api add subcriseber to list
             // $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
@@ -580,14 +580,93 @@ class BackendController extends Controller {
                     $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $arr_userid[$i]);
                     $user->setStatus($status);
                     $user->setReason($reason);
-                    $user->setDisabledDate($status);
-                    
+                    $user->setModifyStatusDate();
+
                     // Mailchimp api add subcriseber to list
                     // $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
                     //                     $user->getLastname(),$user->getUsername(),$user->getStatus(),
                     //                     $user->getReason());
                     $dm->persist($user);
                     $dm->flush();
+                }               
+            }
+        }
+        
+        exit(json_encode(array(
+            'result' => true,
+            'content' => 'CONTENT'
+        )));
+    }
+
+    /**
+     * @Route("/backend/user/addpoints", name="backend_user_addpoints")
+     * 
+     */
+    public function AddPointsAction() {
+        $request  = $this->getRequest();
+        $userid = $request->get('userid');
+        $type_bonus = $request->get('type_bonus');
+        $amount_points = $request->get('amount_points');
+        $expired_date = $request->get('expired_date');
+
+        $uid = null;
+        $arr_userid = explode(',', $userid);
+        if(count($arr_userid) === 1){
+            $uid = $arr_userid[0];
+        }
+        
+        if(!empty($uid)){
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $uid);
+            $bonuspoint = $user->getBonusPoint();exit(json_encode($bonuspoint));
+            $now = new \DateTime(date('Y-m-d'));
+            $bonuspoint = array(
+                            "type"=>$type_bonus,
+                            "amount_points"=>$amount_points,
+                            "start_date"=> $now->format('Y-m-d'),
+                            "expired_date"=>$expired_date->format('Y-m-d')
+                        );
+            $user->setBonusPoint(array($bonuspoint));
+            
+
+            
+            $dm->persist($user);
+            $dm->flush();
+
+            exit(json_encode(array(
+                'result' => true,
+                'content' => 'CONTENT'
+            )));
+        }else{
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            for($i = 0; $i < count($arr_userid); $i++){
+                if(!empty($arr_userid[$i])){
+                    $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $arr_userid[$i]);
+                    $bonuspoint = $user->getBonusPoint();
+
+                    
+                    $dm->persist($user);
+                    $dm->flush();
+
+                    $bonuspoint = $user->getBonusPoint();exit(json_encode($bonuspoint));
+            $now = new \DateTime(date('Y-m-d'));
+            $bonuspoint = array(
+                            "type"=>$type_bonus,
+                            "amount_points"=>$amount_points,
+                            "start_date"=> $now->format('Y-m-d'),
+                            "expired_date"=>$expired_date->format('Y-m-d')
+                        );
+            $user->setBonusPoint(array($bonuspoint));
+            
+
+            
+            $dm->persist($user);
+            $dm->flush();
+
+            exit(json_encode(array(
+                'result' => true,
+                'content' => 'CONTENT'
+            )));
                 }               
             }
         }

@@ -199,13 +199,13 @@
         {{form_rest(form_bonuspoint)}}
         <div style="float:left;width:60%;margin-top:26px;">
             <div style="float:left;width:35%;margin-right:20px;">
-                <input type="text" id="form_amountpoint" name="form[amountpoint]" placeholder="Amount of points" style="width:90%;" value="{% if data.amountpoint is defined %} {{-data.amountpoint-}} {% endif %}">
+                <input type="text" id="amount_points" name="form[amountpoint]" placeholder="Amount of points" style="width:90%;" value="{% if data.amountpoint is defined %} {{-data.amountpoint-}} {% endif %}">
             </div>
             <div class="date_picker" style="float:left;width:40%;margin-right:20px;">
                 <input type="text" id="expired_date" name="form[expired_date]" placeholder="Expired Date" style="width:75%;"  value="{% if data.expired_date is defined %} {{-data.expired_date-}} {% endif %}">
             </div>
             <div style="float:left;width:15%;">
-                <input type="button" class="btn btn-action" value="Add points" style="width:135px;"/>
+                <input type="button" id="add_points" class="btn btn-action" value="Add points" style="width:135px;"/>
             </div>
         </div>
     </div>
@@ -456,6 +456,41 @@
             }
             //alert(href);return false;
             jQuery("#export_user").attr('href', href);
+        });
+
+        jQuery("#add_points").click(function(){
+            var typebonus = jQuery("#form_bonuspoint").val();
+            var amountpoints = jQuery("#amount_points").val();
+            var expireddate = jQuery("#expired_date").val();
+
+            var uid = '';
+            $('.check-row').each(function() {
+                if(this.checked == true){
+                    uid += $(this).attr("value") + ',';
+                }
+            });
+            if(uid == ''){
+                alert('Please first make the selection from the list');
+                return false;
+            }
+
+            $.ajax({
+                url: '{{ path('backend_user_addpoints') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {userid:uid, type_bonus:typebonus, amount_points:amountpoints, expired_date:expireddate},
+                success: function(response){
+                    $('.loading-bar').hide();
+                    console.log(response);
+                    if (typeof(response.error)!='undefined'){
+                        alert(response.error);
+                        return;
+                    }
+                    
+                    alert('Updated successfull!');
+                    location.reload();
+                }
+            });
         });
 
     });
