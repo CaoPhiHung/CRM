@@ -607,7 +607,7 @@ class BackendController extends Controller {
         $userid = $request->get('userid');
         $type_bonus = $request->get('type_bonus');
         $amount_points = $request->get('amount_points');
-        $expired_date = $request->get('expired_date');
+        $expired_date = new \DateTime($request->get('expired_date'));
 
         $uid = null;
         $arr_userid = explode(',', $userid);
@@ -618,25 +618,20 @@ class BackendController extends Controller {
         if(!empty($uid)){
             $dm = $this->get('doctrine.odm.mongodb.document_manager');
             $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $uid);
-            $bonuspoint = $user->getBonusPoint();exit(json_encode($bonuspoint));
+            $bonuspoint = $user->getBonusPoint();
+
             $now = new \DateTime(date('Y-m-d'));
-            $bonuspoint = array(
+            $bonuspoint[] = array(
                             "type"=>$type_bonus,
                             "amount_points"=>$amount_points,
                             "start_date"=> $now->format('Y-m-d'),
                             "expired_date"=>$expired_date->format('Y-m-d')
                         );
-            $user->setBonusPoint(array($bonuspoint));
-            
-
+            $user->setBonusPoint($bonuspoint);
             
             $dm->persist($user);
             $dm->flush();
 
-            exit(json_encode(array(
-                'result' => true,
-                'content' => 'CONTENT'
-            )));
         }else{
             $dm = $this->get('doctrine.odm.mongodb.document_manager');
             for($i = 0; $i < count($arr_userid); $i++){
@@ -648,25 +643,22 @@ class BackendController extends Controller {
                     $dm->persist($user);
                     $dm->flush();
 
-                    $bonuspoint = $user->getBonusPoint();exit(json_encode($bonuspoint));
-            $now = new \DateTime(date('Y-m-d'));
-            $bonuspoint = array(
-                            "type"=>$type_bonus,
-                            "amount_points"=>$amount_points,
-                            "start_date"=> $now->format('Y-m-d'),
-                            "expired_date"=>$expired_date->format('Y-m-d')
-                        );
-            $user->setBonusPoint(array($bonuspoint));
-            
+                    $bonuspoint = $user->getBonusPoint();
+                    $now = new \DateTime(date('Y-m-d'));
 
-            
-            $dm->persist($user);
-            $dm->flush();
+                    $bonuspoint[] = array(
+                                    "type" => $type_bonus,
+                                    "amount_points"=>$amount_points,
+                                    "start_date" => $now->format('Y-m-d'),
+                                    "expired_date" => $expired_date->format('Y-m-d')
+                                );
+                    $user->setBonusPoint($bonuspoint);
+                    
 
-            exit(json_encode(array(
-                'result' => true,
-                'content' => 'CONTENT'
-            )));
+                    
+                    $dm->persist($user);
+                    $dm->flush();
+
                 }               
             }
         }

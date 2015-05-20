@@ -681,11 +681,11 @@ class User extends BaseUser implements Logger {
         return 'Platinium';
     }
 
-    public function pointToNextLevel(){
-        if($this->point < 4000000){
-            return 4000000 - $this->point;
-        }elseif (4000000 <= $this->point && $this->point < 10000000) {
-            return 10000000 - $this->point;
+    public function pointToNextLevel($point){
+        if($point < 4000000){
+            return 4000000 - $point;
+        }elseif (4000000 <= $point && $point < 10000000) {
+            return 10000000 - $point;
         }
         return 0;
     }

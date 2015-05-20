@@ -422,20 +422,25 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 1), castutf8($user->getLastname()));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('E' . ($index + 1), castutf8($user->getUsername()));
 
-            $status = "Enabled";
-            if($user->getStatus() == FALSE){
-                $status = "Disabled";
+            $now = new \DateTime(date('Y-m-d'));
+
+            $disabledDate =  $user->getModifyStatusDate()->format('Y-m-d');
+            // (int) ((dt2.getTime() - dt1.getTime()) / (1000 * 60 * 60 * 24));
+            $datediff=  (strtotime($now->format('Y-m-d')) - strtotime($disabledDate))/(60*60*24);
+
+            $reason = castutf8($user->getReason());
+            $status = "Disabled";
+            if($user->getStatus() == TRUE){
+                $status = "Enabled";
+                $datediff= '';
+                $reason='';
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), '');
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), '');
             }
 
 
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index + 1), $status);
-            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), castutf8($user->getReason()));
-
-            if($user->getStatus() == FALSE){
-                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), $user->getModifyStatusDate()->format('Y-m-d'));
-            }else{
-                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), '');
-            }            
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), $reason);          
             
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index + 1), $user->getSexLabel());
             if (is_object($user->getDob()))
@@ -450,8 +455,7 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index + 1), $user->getJoined());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $repo->getRegisteredStore($data,$user->getId()));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $repo->getTotalBill($data,"",$user->getId()));
-            $qfpoint =$user->getQualifyPoint();
-            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $qfpoint);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $repo->getTotalPayment($data,"",$user->getId()));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $repo->getTotalRedeemPoint($data,$user->getId()));
             //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index + 1), $user->getTotalExtraPoint());
@@ -459,14 +463,10 @@ class ReportController extends Controller {
             $level = $user->getLevel();
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Z' . ($index + 1), $level);
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index + 1), $user->getNextLevel());
-            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index + 1), $user->pointToNextLevel());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index + 1), $user->pointToNextLevel($repo->getTotalPayment($data,"",$user->getId())));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index + 1), $user->getLastbuy()->format('Y-m-d'));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $repo->getTotalBill($data,30,$user->getId()));
-            $now = new \DateTime(date('Y-m-d'));
 
-            $disabledDate =  $user->getModifyStatusDate()->format('Y-m-d');
-            // (int) ((dt2.getTime() - dt1.getTime()) / (1000 * 60 * 60 * 24));
-            $datediff=  (strtotime($now->format('Y-m-d')) - strtotime($disabledDate))/(60*60*24);
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index + 1), $datediff);
 
             $index++;

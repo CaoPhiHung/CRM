@@ -462,7 +462,7 @@
             var typebonus = jQuery("#form_bonuspoint").val();
             var amountpoints = jQuery("#amount_points").val();
             var expireddate = jQuery("#expired_date").val();
-
+            
             var uid = '';
             $('.check-row').each(function() {
                 if(this.checked == true){
@@ -487,6 +487,7 @@
                         return;
                     }
                     
+
                     alert('Updated successfull!');
                     location.reload();
                 }

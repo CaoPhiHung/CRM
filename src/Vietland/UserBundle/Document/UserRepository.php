@@ -289,6 +289,52 @@ class UserRepository extends DocumentRepository {
                 }
         return 0;
     }
+
+    //get Total Payment
+    public function getTotalPayment($data,$number_day,$id){
+        $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+        $day = date("j", strtotime($lastdate));
+        $month = date("n", strtotime($lastdate));
+        $year = date("Y", strtotime($lastdate));
+        
+        $function = 'function(){
+                        var rt = false;
+                        var d = this.created;
+                        if( this.action == "buyitem"){
+                            if(d.getFullYear() > '.$year.'){
+                                rt = true;
+                            }
+                            if(d.getFullYear() == '.$year.'){
+                                if(d.getDate() >= '.($day).' &&  d.getMonth() == '.($month-1).'){
+                                    rt = true;
+                                }
+                                if(d.getMonth() > '.($month-1).'){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';
+        $dm = $data['dm']->getManager();
+        $mongo = new \MongoClient();
+        $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+        $col_log = $mongo->$db->aevitaslog;
+        $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+        $totalPayemnt = 0;
+        if(!empty($aevitagslog)){
+            $index = 0;
+            $length_arr = count($aevitagslog);
+            foreach ($aevitagslog as $doc) {
+                //$totalPayment = $doc['totalPayment'];
+                if($doc['user']['$id'] == $id){
+                    $totalPayemnt = $totalPayemnt + $doc['totalPayment'];
+                }
+                
+            }
+            //return $totalPayemnt;
+        }     
+        return $totalPayemnt;
+    }
     // Advance Search
     public function advancedSeekUsers($data) {
         $builder = $this->createQueryBuilder();
