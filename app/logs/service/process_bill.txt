@@ -315,4 +315,16 @@
 ----------- START LOAD QUEUE ----------
 ----------- START LOAD QUEUE ----------
 ----------- START LOAD QUEUE ----------
+
 ----------- START LOAD QUEUE ----------
+----------->CCode = 8315005748 . This user is disabled! <----------
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm-dev/cmd/../app/console crm:processbill --ledgerid=107482 --billidno=97372903996111 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm-dev/cmd/../app/console crm:processbill --ledgerid=122235 --billidno=97372903996111 --env=prod 
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm-dev/cmd/../app/console crm:processbill --ledgerid=122235 --billidno=97372903996111 --env=prod 
+----------- START LOAD QUEUE ----------
+----------->CCode = 8315003969 . This user is disabled! <----------
+----------- START LOAD QUEUE ----------
+ --> php /var/www/html/levis-crm-dev/cmd/../app/console crm:processbill --ledgerid=107482 --billidno=97372903996101 --env=prod 

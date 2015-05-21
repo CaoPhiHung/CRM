@@ -76,11 +76,11 @@ class FOSUserBundleDocumentUserHydrator implements HydratorInterface
         }
 
         /** @Field(type="date") */
-        if (isset($data['disabledDate'])) {
-            $value = $data['disabledDate'];
+        if (isset($data['modifyStatusDate'])) {
+            $value = $data['modifyStatusDate'];
             if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
-            $this->class->reflFields['disabledDate']->setValue($document, clone $return);
-            $hydratedData['disabledDate'] = $return;
+            $this->class->reflFields['modifyStatusDate']->setValue($document, clone $return);
+            $hydratedData['modifyStatusDate'] = $return;
         }
 
         /** @Field(type="string") */

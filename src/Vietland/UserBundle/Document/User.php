@@ -71,6 +71,12 @@ class User extends BaseUser implements Logger {
     protected $bonusPoint = array();
 
     /**
+     *
+     * @MongoDB\Int
+     */
+    protected $totalExtraPoint;
+
+    /**
      * @MongoDB\String
      */
     protected $posId;
@@ -485,10 +491,12 @@ class User extends BaseUser implements Logger {
         parent::__construct();
         $this->staff = new ArrayCollection();
         $this->anni = new ArrayCollection();
+        $this->bonusPoint = new ArrayCollection();
         $this->wishlist = array();
         $this->nlt = true;
         $this->qlf = 0;
         $this->point = 0;
+        $this->totalExtraPoint = 0;
         $this->level = self::SILVER;
         $this->kp = 0;
         $this->join = new \DateTime(date('Y-m-d'));
@@ -782,6 +790,15 @@ class User extends BaseUser implements Logger {
 
     public function setPoint($point) {
         $this->point = (int) $point;
+        return $this;
+    }
+
+    public function getTotalExtraPoint() {
+        return $this->totalExtraPoint;
+    }
+
+    public function setTotalExtraPoint($point) {
+        $this->totalExtraPoint = (int) $point;
         return $this;
     }
 

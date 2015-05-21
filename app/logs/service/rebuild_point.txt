@@ -11194,3 +11194,12 @@ Calculate points
 Final point 132900
 Start transaction
 Traction successfully !
+
+ --------------------------- 
+
+Start buy item
+Redeem point 
+Calculate points
+Final point 132900
+Start transaction
+Traction successfully !

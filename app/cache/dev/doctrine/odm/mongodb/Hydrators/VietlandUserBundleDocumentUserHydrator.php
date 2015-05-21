@@ -76,11 +76,11 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
         }
 
         /** @Field(type="date") */
-        if (isset($data['disabledDate'])) {
-            $value = $data['disabledDate'];
+        if (isset($data['modifyStatusDate'])) {
+            $value = $data['modifyStatusDate'];
             if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
-            $this->class->reflFields['disabledDate']->setValue($document, clone $return);
-            $hydratedData['disabledDate'] = $return;
+            $this->class->reflFields['modifyStatusDate']->setValue($document, clone $return);
+            $hydratedData['modifyStatusDate'] = $return;
         }
 
         /** @Field(type="string") */
@@ -177,6 +177,14 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $return = (int) $value;
             $this->class->reflFields['point']->setValue($document, $return);
             $hydratedData['point'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['totalExtraPoint'])) {
+            $value = $data['totalExtraPoint'];
+            $return = (int) $value;
+            $this->class->reflFields['totalExtraPoint']->setValue($document, $return);
+            $hydratedData['totalExtraPoint'] = $return;
         }
 
         /** @Field(type="int") */
@@ -657,6 +665,14 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $return = $value;
             $this->class->reflFields['newroles']->setValue($document, $return);
             $hydratedData['newroles'] = $return;
+        }
+
+        /** @Field(type="collection") */
+        if (isset($data['bonusPoint'])) {
+            $value = $data['bonusPoint'];
+            $return = $value;
+            $this->class->reflFields['bonusPoint']->setValue($document, $return);
+            $hydratedData['bonusPoint'] = $return;
         }
 
         /** @Many */

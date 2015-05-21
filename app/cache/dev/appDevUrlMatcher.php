@@ -209,9 +209,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // backend_user_status_disabled
-        if ($pathinfo === '/backend/user/status-disabled') {
-            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::StatusDisabledAction',  '_route' => 'backend_user_status_disabled',);
+        if (0 === strpos($pathinfo, '/backend/user')) {
+            // backend_user_status_disabled
+            if ($pathinfo === '/backend/user/status-disabled') {
+                return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::StatusDisabledAction',  '_route' => 'backend_user_status_disabled',);
+            }
+
+            // backend_user_addpoints
+            if ($pathinfo === '/backend/user/addpoints') {
+                return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::AddPointsAction',  '_route' => 'backend_user_addpoints',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/check')) {

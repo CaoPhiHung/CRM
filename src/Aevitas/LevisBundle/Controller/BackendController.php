@@ -606,7 +606,7 @@ class BackendController extends Controller {
         $request  = $this->getRequest();
         $userid = $request->get('userid');
         $type_bonus = $request->get('type_bonus');
-        $amount_points = $request->get('amount_points');
+        $amount_point = $request->get('amount_points');
         $expired_date = new \DateTime($request->get('expired_date'));
 
         $uid = null;
@@ -622,10 +622,11 @@ class BackendController extends Controller {
 
             $now = new \DateTime(date('Y-m-d'));
             $bonuspoint[] = array(
-                            "type"=>$type_bonus,
-                            "amount_points"=>$amount_points,
-                            "start_date"=> $now->format('Y-m-d'),
-                            "expired_date"=>$expired_date->format('Y-m-d')
+                            "type" => $type_bonus,
+                            "amount_point" => $amount_point,
+                            "start_date" => $now->format('Y-m-d'),
+                            "expired_date" => $expired_date->format('Y-m-d'),
+                            "extra_point" => 0
                         );
             $user->setBonusPoint($bonuspoint);
             
@@ -648,9 +649,10 @@ class BackendController extends Controller {
 
                     $bonuspoint[] = array(
                                     "type" => $type_bonus,
-                                    "amount_points"=>$amount_points,
+                                    "amount_point"=>$amount_point,
                                     "start_date" => $now->format('Y-m-d'),
-                                    "expired_date" => $expired_date->format('Y-m-d')
+                                    "expired_date" => $expired_date->format('Y-m-d'),
+                                    "extra_point" => 0
                                 );
                     $user->setBonusPoint($bonuspoint);
                     
