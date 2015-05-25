@@ -305,10 +305,10 @@ class BackendController extends Controller {
         return $result ? json_decode($result, true) : false;
     }
 
-    public function addSubToList($email,$fname,$mname,$lname,$username,$status,$reason){
-                $listID = '2fa4c3d639'; //list enable
+    public function addSubToDisableEnableList($email,$fname,$mname,$lname,$username,$status,$reason){
+                $listID = 'ad11aeda1e'; //list enable
                 if($status == false){
-                    $listID = '6ed8a62e36'; // list disable
+                    $listID = 'eb01b9b503'; // list disable
                 }
                 $result = $this->call('lists/subscribe', array(
                 'id'                => $listID,
@@ -567,9 +567,9 @@ class BackendController extends Controller {
                     $user->setModifyStatusDate();
 
                     // Mailchimp api add subcriseber to list
-                    // $this->addSubToList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
-                    //                     $user->getLastname(),$user->getUsername(),$user->getStatus(),
-                    //                     $user->getReason());
+                    $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+                                        $user->getLastname(),$user->getUsername(),$user->getStatus(),
+                                        $user->getReason());
                     $dm->persist($user);
                     $dm->flush();
                 }               
@@ -587,161 +587,161 @@ class BackendController extends Controller {
      * 
      */
     public function AddPointsAction() {
-        // $request  = $this->getRequest();
-        // $userid = $request->get('userid');
-        // $type_bonus = $request->get('type_bonus');
-        // $amount_point = $request->get('amount_points');
-        // $expired_date = new \DateTime($request->get('expired_date'));
+        $request  = $this->getRequest();
+        $userid = $request->get('userid');
+        $type_bonus = $request->get('type_bonus');
+        $amount_point = $request->get('amount_points');
+        $expired_date = new \DateTime($request->get('expired_date'));
 
-        // $uid = null;
-        // $arr_userid = explode(',', $userid);
+        $uid = null;
+        $arr_userid = explode(',', $userid);
         
-        // if(!empty($arr_userid)){
+        if(!empty($arr_userid)){
 
-        //     $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        //     for($i = 0; $i < count($arr_userid); $i++){
-        //         if(!empty($arr_userid[$i])){
-        //             $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $arr_userid[$i]);
-        //             $current_BonusPoint = $user->getBonusPoint();
-        //             $current_Point = $user->getPoint();
-        //             $current_TotalExtraPoint = $user->getTotalExtraPoint();
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            for($i = 0; $i < count($arr_userid); $i++){
+                if(!empty($arr_userid[$i])){
+                    $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $arr_userid[$i]);
+                    $current_BonusPoint = $user->getBonusPoint();
+                    $current_Point = $user->getPoint();
+                    $current_TotalExtraPoint = $user->getTotalExtraPoint();
 
-        //             $now = new \DateTime(date('Y-m-d'));                    
+                    $now = new \DateTime(date('Y-m-d'));                    
 
-        //             if($type_bonus === "2"){
-        //                 $extra_point = $amount_point;
-        //                 $new_BonusPoint = array(
-        //                                 "type" => (int)$type_bonus,
-        //                                 "amount_point" => (int) $amount_point,
-        //                                 "start_date" => $now->format('Y-m-d'),
-        //                                 "expired_date" => $expired_date->format('Y-m-d'),
-        //                                 "extra_point" => (int) $extra_point
-        //                             );
-        //                 //exit(json_encode(array('aaaa'=>"Will be OK")));
-        //                 if(empty($current_BonusPoint)){
-        //                     $new_TotalExtraPoint = $current_TotalExtraPoint + $extra_point;
-        //                     $new_Point = $current_Point + $extra_point;                            
-        //                     $current_BonusPoint[] = $new_BonusPoint;
+                    if($type_bonus === "2"){
+                        $extra_point = $amount_point;
+                        $new_BonusPoint = array(
+                                        "type" => (int)$type_bonus,
+                                        "amount_point" => (int) $amount_point,
+                                        "start_date" => $now->format('Y-m-d'),
+                                        "expired_date" => $expired_date->format('Y-m-d'),
+                                        "extra_point" => (int) $extra_point
+                                    );
+                        //exit(json_encode(array('aaaa'=>"Will be OK")));
+                        if(empty($current_BonusPoint)){
+                            $new_TotalExtraPoint = $current_TotalExtraPoint + $extra_point;
+                            $new_Point = $current_Point + $extra_point;                            
+                            $current_BonusPoint[] = $new_BonusPoint;
 
-        //                     $user->setBonusPoint($current_BonusPoint);
-        //                     $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
-        //                     $user->setPoint((int) $new_Point);
-        //                 }else{
-        //                     //var_dump($current_BonusPoint);exit(json_encode(array('aaaa'=>"Will be OK")));
-        //                     $new_expired_date = $expired_date->format('Y-m-d');
-        //                     $like_expired_date = false;
-        //                     for ($i=0; $i < count($current_BonusPoint); $i++) {
-        //                         $value = $current_BonusPoint[$i];
-        //                         if($value['type'] === 2){
-        //                             if($value['expired_date'] == $new_expired_date){
-        //                                 $value['amount_point'] = $value['amount_point'] + (int) $amount_point;
-        //                                 $value['start_date'] = $now->format('Y-m-d');
-        //                                 $value['extra_point'] = $value['extra_point'] + (int) $extra_point;
+                            $user->setBonusPoint($current_BonusPoint);
+                            $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
+                            $user->setPoint((int) $new_Point);
+                        }else{
+                            //var_dump($current_BonusPoint);exit(json_encode(array('aaaa'=>"Will be OK")));
+                            $new_expired_date = $expired_date->format('Y-m-d');
+                            $like_expired_date = false;
+                            for ($i=0; $i < count($current_BonusPoint); $i++) {
+                                $value = $current_BonusPoint[$i];
+                                if($value['type'] === 2){
+                                    if($value['expired_date'] == $new_expired_date){
+                                        $value['amount_point'] = $value['amount_point'] + (int) $amount_point;
+                                        $value['start_date'] = $now->format('Y-m-d');
+                                        $value['extra_point'] = $value['extra_point'] + (int) $extra_point;
 
-        //                                 $current_BonusPoint[$i] = $value;
-        //                                 $like_expired_date = true;
-        //                             }
-        //                         }
-        //                     }
-
-        //                     $new_TotalExtraPoint = $current_TotalExtraPoint + $extra_point;
-        //                     $new_Point = $current_Point + $extra_point;
-        //                     if($like_expired_date){
-        //                         $user->setBonusPoint($current_BonusPoint);
-        //                         $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
-        //                         $user->setPoint((int) $new_Point);
-        //                     }else{
-        //                         $current_BonusPoint[] = $new_BonusPoint;
-        //                         $user->setBonusPoint($current_BonusPoint);
-        //                         $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
-        //                         $user->setPoint((int) $new_Point);
-        //                     }                            
-
-        //                 }
-        //             }
-                    
-        //             $dm->persist($user);
-        //             $dm->flush();
-
-        //         }               
-        //     }
-        // }
-
-
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        //$users = $dm->getRepository('VietlandUserBundle:User')->findAll();
-        $now = new \DateTime(date('Y-m-d'));
-        $current_date = $now->format('Y-m-d');
-
-        $function = 'function(){
-                        var rt = false;
-                        if(typeof this.bonusPoint != ""){                            
-                            var arr = this.bonusPoint;
-                            for(var i = 0; i < arr.length; i++){
-                                var obj = arr[i];
-                                var d = obj.expired_date;
-                                if(d == "'.$current_date.'"){
-                                    rt = true;
+                                        $current_BonusPoint[$i] = $value;
+                                        $like_expired_date = true;
+                                    }
                                 }
                             }
-                        }
-                        return rt;
-                    }';            
-        
-        $users = $dm->createQueryBuilder('VietlandUserBundle:User')->field('bonusPoint')->exists(true)->where($function)->sort('id', 'desc')->getQuery()->execute();
 
-        $num = count($users);
-
-        $now = new \DateTime(date('Y-m-d'));
-        $current_date = $now->format('Y-m-d');
-
-        foreach($users as $user){
-            $current_BonusPoint = $user->getBonusPoint();
-            
-            if(!empty($current_BonusPoint)){
-                $current_Point = $user->getPoint();
-                $current_TotalExtraPoint = $user->getTotalExtraPoint();
-
-                $num_bonus = count($current_BonusPoint);
-                for ($i=0; $i < $num_bonus; $i++) {
-                    $value = $current_BonusPoint[$i];
-                    if($value['expired_date'] === $current_date){
-                        //get redeem point of user
-                        $date = new \DateTime($value['start_date']. ' 00:00:00');
-                        $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
-                                    ->field('uid')->equals($user->getId())
-                                    ->field('created')->gte($date)->sort('time', 'desc')->getQuery()->execute();
-                        $redeem_point = 0;
-                        foreach ($redeems as $obj) {
-                            $redeem_point = $obj->getPoint();
-                            break;
-                        }
-                        //end get redeem point
-
-                        if($value['type'] === 2){
-                            if($redeem_point <= $value['extra_point']){
-                                $expired_point = $value['extra_point'] - $redeem_point;
-
-                                $current_TotalExtraPoint = $current_TotalExtraPoint - $expired_point;
-                                $current_Point = $current_Point - $expired_point;
-                                unset($current_BonusPoint[$i]);
+                            $new_TotalExtraPoint = $current_TotalExtraPoint + $extra_point;
+                            $new_Point = $current_Point + $extra_point;
+                            if($like_expired_date){
+                                $user->setBonusPoint($current_BonusPoint);
+                                $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
+                                $user->setPoint((int) $new_Point);
                             }else{
-                                $current_TotalExtraPoint = $current_TotalExtraPoint - $value['extra_point'];
-                                unset($current_BonusPoint[$i]);
-                            }
+                                $current_BonusPoint[] = $new_BonusPoint;
+                                $user->setBonusPoint($current_BonusPoint);
+                                $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
+                                $user->setPoint((int) $new_Point);
+                            }                            
+
                         }
                     }
-                }
+                    
+                    $dm->persist($user);
+                    $dm->flush();
 
-                //updated value of BonusPoint for user
-                $user->setBonusPoint($current_BonusPoint);
-                $user->setTotalExtraPoint((int) $current_TotalExtraPoint);
-                $user->setPoint((int) $current_Point);
-
-                $dm->persist($user);
-                $dm->flush();
+                }               
             }
         }
+
+
+        // $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        // //$users = $dm->getRepository('VietlandUserBundle:User')->findAll();
+        // $now = new \DateTime(date('Y-m-d'));
+        // $current_date = $now->format('Y-m-d');
+
+        // $function = 'function(){
+        //                 var rt = false;
+        //                 if(typeof this.bonusPoint != ""){                            
+        //                     var arr = this.bonusPoint;
+        //                     for(var i = 0; i < arr.length; i++){
+        //                         var obj = arr[i];
+        //                         var d = obj.expired_date;
+        //                         if(d == "'.$current_date.'"){
+        //                             rt = true;
+        //                         }
+        //                     }
+        //                 }
+        //                 return rt;
+        //             }';            
+        
+        // $users = $dm->createQueryBuilder('VietlandUserBundle:User')->field('bonusPoint')->exists(true)->where($function)->sort('id', 'desc')->getQuery()->execute();
+
+        // $num = count($users);
+
+        // $now = new \DateTime(date('Y-m-d'));
+        // $current_date = $now->format('Y-m-d');
+
+        // foreach($users as $user){
+        //     $current_BonusPoint = $user->getBonusPoint();
+            
+        //     if(!empty($current_BonusPoint)){
+        //         $current_Point = $user->getPoint();
+        //         $current_TotalExtraPoint = $user->getTotalExtraPoint();
+
+        //         $num_bonus = count($current_BonusPoint);
+        //         for ($i=0; $i < $num_bonus; $i++) {
+        //             $value = $current_BonusPoint[$i];
+        //             if($value['expired_date'] === $current_date){
+        //                 //get redeem point of user
+        //                 $date = new \DateTime($value['start_date']. ' 00:00:00');
+        //                 $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
+        //                             ->field('uid')->equals($user->getId())
+        //                             ->field('created')->gte($date)->sort('time', 'desc')->getQuery()->execute();
+        //                 $redeem_point = 0;
+        //                 foreach ($redeems as $obj) {
+        //                     $redeem_point = $obj->getPoint();
+        //                     break;
+        //                 }
+        //                 //end get redeem point
+
+        //                 if($value['type'] === 2){
+        //                     if($redeem_point <= $value['extra_point']){
+        //                         $expired_point = $value['extra_point'] - $redeem_point;
+
+        //                         $current_TotalExtraPoint = $current_TotalExtraPoint - $expired_point;
+        //                         $current_Point = $current_Point - $expired_point;
+        //                         unset($current_BonusPoint[$i]);
+        //                     }else{
+        //                         $current_TotalExtraPoint = $current_TotalExtraPoint - $value['extra_point'];
+        //                         unset($current_BonusPoint[$i]);
+        //                     }
+        //                 }
+        //             }
+        //         }
+
+        //         //updated value of BonusPoint for user
+        //         $user->setBonusPoint($current_BonusPoint);
+        //         $user->setTotalExtraPoint((int) $current_TotalExtraPoint);
+        //         $user->setPoint((int) $current_Point);
+
+        //         $dm->persist($user);
+        //         $dm->flush();
+        //     }
+        // }
 
         exit(json_encode(array(
             'result' => true,

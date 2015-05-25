@@ -71,6 +71,85 @@ class LoadJobsCommand extends ContainerAwareCommand
             $this->logger('process_bill', " --> $cmd");
             exec($cmd);
         }
+
+
+        //---->begin check bonus point - expired date
+        //$dm = $this->get('doctrine.odm.mongodb.document_manager');
+        //$users = $dm->getRepository('VietlandUserBundle:User')->findAll();
+        $now = new \DateTime(date('Y-m-d'));
+        $current_date = $now->format('Y-m-d');
+
+        $function = 'function(){
+                        var rt = false;
+                        if(typeof this.bonusPoint != ""){                            
+                            var arr = this.bonusPoint;
+                            for(var i = 0; i < arr.length; i++){
+                                var obj = arr[i];
+                                var d = obj.expired_date;
+                                if(d == "'.$current_date.'"){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';            
+        
+        $users = $dm->createQueryBuilder('VietlandUserBundle:User')->field('bonusPoint')->exists(true)->where($function)->sort('id', 'desc')->getQuery()->execute();
+
+        $num = count($users);
+
+        $now = new \DateTime(date('Y-m-d'));
+        $current_date = $now->format('Y-m-d');
+
+        foreach($users as $user){
+            $current_BonusPoint = $user->getBonusPoint();
+            
+            if(!empty($current_BonusPoint)){
+                $current_Point = $user->getPoint();
+                $current_TotalExtraPoint = $user->getTotalExtraPoint();
+
+                $num_bonus = count($current_BonusPoint);
+                for ($i=0; $i < $num_bonus; $i++) {
+                    $value = $current_BonusPoint[$i];
+                    if($value['expired_date'] === $current_date){
+                        //get redeem point of user
+                        $date = new \DateTime($value['start_date']. ' 00:00:00');
+                        $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
+                                    ->field('uid')->equals($user->getId())
+                                    ->field('created')->gte($date)->sort('time', 'desc')->getQuery()->execute();
+                        $redeem_point = 0;
+                        foreach ($redeems as $obj) {
+                            $redeem_point = $obj->getPoint();
+                            break;
+                        }
+                        //end get redeem point
+
+                        if($value['type'] === 2){
+                            if($redeem_point <= $value['extra_point']){
+                                $expired_point = $value['extra_point'] - $redeem_point;
+
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $expired_point;
+                                $current_Point = $current_Point - $expired_point;
+                                unset($current_BonusPoint[$i]);
+                            }else{
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $value['extra_point'];
+                                unset($current_BonusPoint[$i]);
+                            }
+                        }
+                    }
+                }
+
+                //updated value of BonusPoint for user
+                $user->setBonusPoint($current_BonusPoint);
+                $user->setTotalExtraPoint((int) $current_TotalExtraPoint);
+                $user->setPoint((int) $current_Point);
+
+                $dm->persist($user);
+                $dm->flush();
+            }
+        }
+
+        //---> end check bonus point
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

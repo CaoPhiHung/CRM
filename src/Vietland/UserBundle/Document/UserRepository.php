@@ -661,6 +661,28 @@ class UserRepository extends DocumentRepository {
             $builder->field('join')->lte(new \DateTime($data['tjoiningdate']));
         }
 
+        //Bonus Point is expired on the date
+        if(!empty($data['fexpireddate']) && !empty($data['texpireddate'])){
+            $from_expired_date = date('Y-m-d', strtotime($data['fexpireddate']));
+            $to_expired_date = date('Y-m-d', strtotime($data['texpireddate']));
+
+            $function = 'function(){
+                        var rt = false;
+                        if(typeof this.bonusPoint != ""){                            
+                            var arr = this.bonusPoint;
+                            for(var i = 0; i < arr.length; i++){
+                                var obj = arr[i];
+                                var d = obj.expired_date;
+                                if(d >= "'.$from_expired_date.'" && d <= "'.$to_expired_date.'" ){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';
+            $builder->field('bonusPoint')->exists(true)->where($function);
+        }
+
         //field user_id
         if(!empty($data['list_uid'])){
             $builder->field('_id')->in(explode(',', $data['list_uid']));
