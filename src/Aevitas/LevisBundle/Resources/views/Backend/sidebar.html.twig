@@ -32,16 +32,20 @@
                 <li><a href="{{ path('backend_list_template_rule') }}"><span>Rules Management</span></a></li>
             </ul>
         </li>
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_STAFF') %}
         <li class="hasSubmenu active">
             <a data-toggle="collapse" class="glyphicons sort color-7" href="#menu_manage_users"><i></i><span>Users</span></a>
             <ul class="collapse  {% if 'list' in routearray %} in {% endif %}" id="menu_manage_users">
                 <li><a href="{{ path('backend_import_user') }}"><span>Import Users</span></a></li>
                 <li><a href="{{ path('backend_group_list') }}"><span>Groups Manager</span></a></li>
                 <li><a href="{{path('backend_user_list')}}"><span>{{'User Management' | trans}}</span></a></li>
+                {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('backend_staff_list') }}">{{ 'Staff Management' | trans }}</a></li>
+                {% endif %}
                 <li><a href="{{path('backend_customer_code_list')}}">{{'Customer Code' | trans}}</a></li>
+                {% if is_granted('ROLE_ADVANCE_SEARCH') %}
                 <li><a href="{{path('backend_user_advancedsearch')}}">{{'Advanced Search' | trans}}</a></li>
+                {% endif %}
             </ul>
         </li>
 {% endif %}

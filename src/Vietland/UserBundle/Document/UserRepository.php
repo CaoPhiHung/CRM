@@ -426,7 +426,7 @@ class UserRepository extends DocumentRepository {
                     for(var i = 0; i < arr.length; i++){
                         var obj = arr[i];
                         var d = obj.date;
-                        if(d.getDate() == '.($day+1).' &&  d.getMonth() == '.($month-1).' && d.getFullYear() == '.$year.'){
+                        if(d.getDate() == '.($day+1).' &&  d.getMonth() == '.($month-1).'){
                             rt = true;
                         }
                     }
@@ -648,9 +648,9 @@ class UserRepository extends DocumentRepository {
                 }
             }
             //Point Balance
-            if($data['point']== '2'){
-                $builder->field('point')->gt((int) $data['fpoint'] + 1);
-                $builder->field('point')->lt((int) $data['tpoint'] - 1);
+            if($data['point'] == '2'){
+                $builder->field('point')->gte((int) $data['fpoint']);
+                $builder->field('point')->lte((int) $data['tpoint']);
                 $builder->field('point')->sort('desc');
             }
         }

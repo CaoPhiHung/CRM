@@ -42,6 +42,7 @@ class User extends BaseUser implements Logger {
     const ROLE_POINT = 'ROLE_POINT';
     const ROLE_GIFT = 'ROLE_GIFT';
     const ROLE_STORE = 'ROLE_STORE';
+    const ROLE_ADVANCE_SEARCH = 'ROLE_ADVANCE_SEARCH';
     /**
      * @MongoDB\Id(strategy="increment")
      */
@@ -1557,7 +1558,7 @@ class User extends BaseUser implements Logger {
     }
 
     static function getRoleOptions($trans) {
-        return array(self::ROLE_ADMIN => 'Admin', self::ROLE_USER => 'User', self::ROLE_REPORT => 'Report', self::ROLE_STAFF => 'Store Staff Memember', self::ROLE_POINT => 'Manage Point', self::ROLE_GIFT => 'Manage Gift', self::ROLE_STORE => 'Manage Store Information');
+        return array(self::ROLE_ADMIN => 'Admin',self::ROLE_ADVANCE_SEARCH => 'Advance Search', self::ROLE_USER => 'User', self::ROLE_REPORT => 'Report', self::ROLE_STAFF => 'Store Staff Memember', self::ROLE_POINT => 'Manage Point', self::ROLE_GIFT => 'Manage Gift', self::ROLE_STORE => 'Manage Store Information');
     }
 
     public function addStaff(Group $staff) {
