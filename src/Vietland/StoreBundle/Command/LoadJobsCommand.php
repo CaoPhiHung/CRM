@@ -123,6 +123,18 @@ class LoadJobsCommand extends ContainerAwareCommand
                             break;
                         }
                         //end get redeem point
+                        if($value['type'] === 1){
+                            if($redeem_point <= $value['extra_point']){
+                                $expired_point = $value['extra_point'] - $redeem_point;
+
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $expired_point;
+                                $current_Point = $current_Point - $expired_point;
+                                unset($current_BonusPoint[$i]);
+                            }else{
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $value['extra_point'];
+                                unset($current_BonusPoint[$i]);
+                            }
+                        }
 
                         if($value['type'] === 2){
                             if($redeem_point <= $value['extra_point']){

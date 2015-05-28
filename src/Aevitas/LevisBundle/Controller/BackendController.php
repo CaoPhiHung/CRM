@@ -608,15 +608,18 @@ class BackendController extends Controller {
 
                     $now = new \DateTime(date('Y-m-d'));                    
 
-                    if($type_bonus === "2"){
-                        $extra_point = $amount_point;
+                    if($type_bonus === "1"){
+                        if($amount_point <= $current_Point){
+                            continue;
+                        }
+                        $extra_point = $amount_point - $current_Point;
                         $new_BonusPoint = array(
-                                        "type" => (int)$type_bonus,
-                                        "amount_point" => (int) $amount_point,
-                                        "start_date" => $now->format('Y-m-d'),
-                                        "expired_date" => $expired_date->format('Y-m-d'),
-                                        "extra_point" => (int) $extra_point
-                                    );
+                                            "type" => (int)$type_bonus,
+                                            "amount_point" => (int) $amount_point,
+                                            "start_date" => $now->format('Y-m-d'),
+                                            "expired_date" => $expired_date->format('Y-m-d'),
+                                            "extra_point" => (int) $extra_point
+                                        );
                         //exit(json_encode(array('aaaa'=>"Will be OK")));
                         if(empty($current_BonusPoint)){
                             $new_TotalExtraPoint = $current_TotalExtraPoint + $extra_point;
@@ -632,7 +635,7 @@ class BackendController extends Controller {
                             $like_expired_date = false;
                             for ($i=0; $i < count($current_BonusPoint); $i++) {
                                 $value = $current_BonusPoint[$i];
-                                if($value['type'] === 2){
+                                if($value['type'] === 1){
                                     if($value['expired_date'] == $new_expired_date){
                                         $value['amount_point'] = $value['amount_point'] + (int) $amount_point;
                                         $value['start_date'] = $now->format('Y-m-d');
@@ -657,6 +660,63 @@ class BackendController extends Controller {
                                 $user->setPoint((int) $new_Point);
                             }                            
 
+                        }
+                    }
+
+                    if($type_bonus === "2"){
+                        if($amount_point <= 0){
+                            $new_Point = $current_Point + $amount_point;
+                            $user->setPoint((int) $new_Point);
+                        }else{
+                            $extra_point = $amount_point;
+                            $new_BonusPoint = array(
+                                                "type" => (int)$type_bonus,
+                                                "amount_point" => (int) $amount_point,
+                                                "start_date" => $now->format('Y-m-d'),
+                                                "expired_date" => $expired_date->format('Y-m-d'),
+                                                "extra_point" => (int) $extra_point
+                                            );
+                            //exit(json_encode(array('aaaa'=>"Will be OK")));
+                            if(empty($current_BonusPoint)){
+                                $new_TotalExtraPoint = $current_TotalExtraPoint + $extra_point;
+                                $new_Point = $current_Point + $extra_point;                            
+                                $current_BonusPoint[] = $new_BonusPoint;
+
+                                $user->setBonusPoint($current_BonusPoint);
+                                $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
+                                $user->setPoint((int) $new_Point);
+                            }else{
+                                //var_dump($current_BonusPoint);exit(json_encode(array('aaaa'=>"Will be OK")));
+                                $new_expired_date = $expired_date->format('Y-m-d');
+                                $like_expired_date = false;
+                                for ($i=0; $i < count($current_BonusPoint); $i++) {
+                                    $value = $current_BonusPoint[$i];
+                                    if($value['type'] === 2){
+                                        if($value['expired_date'] == $new_expired_date){
+                                            $value['amount_point'] = $value['amount_point'] + (int) $amount_point;
+                                            $value['start_date'] = $now->format('Y-m-d');
+                                            $value['extra_point'] = $value['extra_point'] + (int) $extra_point;
+
+                                            $current_BonusPoint[$i] = $value;
+                                            $like_expired_date = true;
+                                        }
+                                    }
+                                }
+
+                                $new_TotalExtraPoint = $current_TotalExtraPoint + $extra_point;
+                                $new_Point = $current_Point + $extra_point;
+                                if($like_expired_date){
+                                    $user->setBonusPoint($current_BonusPoint);
+                                    $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
+                                    $user->setPoint((int) $new_Point);
+                                }else{
+                                    $current_BonusPoint[] = $new_BonusPoint;
+                                    $user->setBonusPoint($current_BonusPoint);
+                                    $user->setTotalExtraPoint((int) $new_TotalExtraPoint);
+                                    $user->setPoint((int) $new_Point);
+                                }                            
+
+                            }
                         }
                     }
                     
