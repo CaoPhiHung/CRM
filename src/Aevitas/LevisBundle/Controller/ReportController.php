@@ -1107,7 +1107,7 @@ class ReportController extends Controller {
                     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index + 5), '');
                 }
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 5), $log->getCreated()->format('Y-m-d'));
-                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 5), $log->getCreated()->format('Y-m-d'));
+                
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 5), $log->getAction());
                 if ($log->getAction() == UserLog::BUYITEM) {
                     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('E' . ($index + 5), $log->getMd5());
@@ -1131,6 +1131,29 @@ class ReportController extends Controller {
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 5), $point);
                 $index++;
             }
+            $start = new \DateTime($data['start']);
+            $end = new \DateTime($data['end'] . ' 23:59:59');
+            $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
+                            ->field('created')->lte($end)
+                            ->field('created')->gte($start)->sort('time', 'desc')->getQuery()->execute();
+            
+            foreach ($redeems as $obj) {
+                if($obj->getUser()->getName() == $user->getName() && $obj->getBPoint() != ""){
+                    $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index + 5), $obj->getStore()->getName());
+                    $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 5), $obj->getCreated()->format('Y-m-d h:i:s'));
+                    $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 5), $obj->getPoint());
+                    $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 5), "redeemed");
+                    $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 5), $obj->getUser()->getPoint());
+                        $index++;
+                }
+
+                if (!is_object($obj->getStore()) || !is_object($obj->getUser())) {
+                    continue;
+                }
+            }
+
+
+
             $excelService->excelObj->getActiveSheet()->setTitle('Member Statement');
             // Set active sheet index to the first sheet, so Excel opens this as the first sheet
             $excelService->excelObj->setActiveSheetIndex(0);
@@ -1204,6 +1227,7 @@ class ReportController extends Controller {
                 if (!is_object($obj->getStore()) || !is_object($obj->getUser())) {
                     continue;
                 }
+                if($obj->getBPoint() != ""){
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index + 4), $obj->getHash());
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('B' . ($index + 4), $obj->getStore()->getName());
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 4), $obj->getUser()->getName());
@@ -1216,6 +1240,7 @@ class ReportController extends Controller {
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('J' . ($index + 4), $obj->getCreated()->format('h:i:s d/m/Y'));
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('K' . ($index + 4), $obj->getType());
                 $index++;
+                }
             }
             $excelService->excelObj->getActiveSheet()->setTitle('Redeemption Report');
             // Set active sheet index to the first sheet, so Excel opens this as the first sheet

@@ -408,7 +408,6 @@ class StoreController extends Controller {
                         'msg' => 'false'
             )));
         }
-
         $cvObj->setAuth(true);
         $dm->persist($cvObj);
 
