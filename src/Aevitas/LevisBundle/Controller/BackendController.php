@@ -567,9 +567,9 @@ class BackendController extends Controller {
                     $user->setModifyStatusDate();
 
                     // Mailchimp api add subcriseber to list
-                    $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
-                                        $user->getLastname(),$user->getUsername(),$user->getStatus(),
-                                        $user->getReason());
+                    // $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+                    //                     $user->getLastname(),$user->getUsername(),$user->getStatus(),
+                    //                     $user->getReason());
                     $dm->persist($user);
                     $dm->flush();
                 }               

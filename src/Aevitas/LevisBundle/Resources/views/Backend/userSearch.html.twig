@@ -446,16 +446,18 @@
                     uid += $(this).attr("value") + ',';
                 }
             });
-            var href = jQuery("#export_user").attr('href');
-            var p = href.indexOf("&list_uid");
-            if(p != -1){
-                href = href.substring(0, p-1);
-                href = href + "&list_uid=" + uid;
-            }else{
-                href = href + "&list_uid=" + uid;
+            if(uid != ''){
+                var href = jQuery("#export_user").attr('href');
+                var p = href.indexOf("&list_uid");
+                if(p != -1){
+                    href = href.substring(0, p-1);
+                    href = href + "&list_uid=" + uid;
+                }else{
+                    href = href + "&list_uid=" + uid;
+                }
+                //alert(href);return false;
+                jQuery("#export_user").attr('href', href);
             }
-            //alert(href);return false;
-            jQuery("#export_user").attr('href', href);
         });
 
         jQuery("#add_points").click(function(){

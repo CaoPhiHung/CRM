@@ -77,6 +77,48 @@ class User extends BaseUser implements Logger {
      */
     protected $totalExtraPoint;
 
+
+    /**
+     * @MongoDB\String
+     */
+    protected $registerStore;
+
+    /**
+     *
+     * @MongoDB\Int
+     */
+    protected $totalBill;
+
+    /**
+     *
+     * @MongoDB\Int
+     */
+    protected $totalPayment;
+
+    /**
+     *
+     * @MongoDB\Int
+     */
+    protected $totalRedeemPoint;
+
+    /**
+     *
+     * @MongoDB\Int
+     */
+    protected $pointToNextLevel;
+
+    /**
+     *
+     * @MongoDB\Int
+     */
+    protected $lastMonthBillNo;
+
+    /**
+     *
+     * @MongoDB\Int
+     */
+    protected $noDayDeactive;
+
     /**
      * @MongoDB\String
      */
@@ -505,6 +547,13 @@ class User extends BaseUser implements Logger {
         $this->cellphone = 'notyet_' . $this->generateReadableRandomString(10);
         $this->status = true;
         $this->modifyStatusDate = new \DateTime(date('Y-m-d'));
+        $this->registerStore = '';
+        $this->totalBill = 0;
+        $this->totalPayment = 0;
+        $this->totalRedeemPoint = 0;
+        $this->pointToNextLevel = 0;
+        $this->lastMonthBillNo = 0;
+        $this->noDayDeactive = 0;
     }
 
     public function getJoined() {
@@ -800,6 +849,69 @@ class User extends BaseUser implements Logger {
 
     public function setTotalExtraPoint($point) {
         $this->totalExtraPoint = (int) $point;
+        return $this;
+    }
+
+    public function getRegisterStore() {
+        return $this->registerStore;
+    }
+
+    public function setRegisterStore($register_store) {
+        $this->registerStore = $register_store;
+        return $this;
+    }
+
+    public function getTotalBill() {
+        return $this->totalBill;
+    }
+
+    public function setTotalBill($bill) {
+        $this->totalBill = (int) $bill;
+        return $this;
+    }
+
+    public function getTotalPayment() {
+        return $this->totalPayment;
+    }
+
+    public function setTotalPayment($total_pament) {
+        $this->totalPayment = (int) $total_pament;
+        return $this;
+    }
+
+    public function getTotalRedeemPoint() {
+        return $this->totalRedeemPoint;
+    }
+
+    public function setTotalRedeemPoint($total_redeem_point) {
+        $this->totalRedeemPoint = (int) $total_redeem_point;
+        return $this;
+    }
+
+    public function getPointToNextLevel() {
+        return $this->pointToNextLevel;
+    }
+
+    public function setPointToNextLevel($point) {
+        $this->pointToNextLevel = (int) $point;
+        return $this;
+    }
+
+    public function getLastMonthBillNo() {
+        return $this->lastMonthBillNo;
+    }
+
+    public function setLastMonthBillNo($month) {
+        $this->lastMonthBillNo = (int) $month;
+        return $this;
+    }
+
+    public function getNoDayDeactive() {
+        return $this->noDayDeactive;
+    }
+
+    public function setNoDayDeactive($num_day) {
+        $this->noDayDeactive = (int) $num_day;
         return $this;
     }
 
