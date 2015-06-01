@@ -373,6 +373,22 @@ class StoreController extends Controller {
         $authcode = $cvObj->getHash();
         
         $msg = $this->renderView(":sms:redeemProcess.html.twig", array('authcode' => $authcode));
+        echo json_encode($authcode);die;
+        //mailchimp
+        // $listID = 'ad11aeda1e'; //list enable
+        //         if($status == false){
+        //             $listID = 'eb01b9b503'; // list disable
+        //         }
+        //         $result = $this->call('lists/subscribe', array(
+        //         'id'                => $listID,
+        //         'email'             => array('email'=>$email),
+        //         'merge_vars'        => array('EMAIL'=> $email, 'FNAME'=>$fname, 'MNAME'=> $mname  ,'LNAME'=> $lname,
+        //                                     'UNAME'=> $username,'STATUS'=>$status,'REASON'=>$reason),
+        //         'double_optin'      => false,
+        //         'update_existing'   => true,
+        //         'replace_interests' => false,
+        //         'send_welcome'      => false,
+        //     ));
         $this->get('sms_sender')
                 ->setPhone($phoneNo)
                 ->setSms($msg)

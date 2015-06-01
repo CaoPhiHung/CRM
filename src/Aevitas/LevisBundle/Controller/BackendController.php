@@ -566,12 +566,28 @@ class BackendController extends Controller {
                     $user->setReason($reason);
                     $user->setModifyStatusDate();
 
-                    // Mailchimp api add subcriseber to list
+                    //Mailchimp api add subcriseber to list
                     // $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
                     //                     $user->getLastname(),$user->getUsername(),$user->getStatus(),
                     //                     $user->getReason());
                     $dm->persist($user);
-                    $dm->flush();
+                    $dm->flush(); 
+                    if($status == 'true'){
+                            $msg = $this->renderView(":sms:enableCustomer.html.twig", array('fullname' => $user->getFirstname()));
+                            $this->get('sms_sender')
+                            ->setPhone($user->getCellphone())
+                            ->setSms($msg)
+                            ->send()
+                    ;
+                    }else{
+                            $msg = $this->renderView(":sms:disableCustomer.html.twig", array('fullname' => $user->getFirstname()));
+                            $this->get('sms_sender')
+                            ->setPhone($user->getCellphone())
+                            ->setSms($msg)
+                            ->send()
+                    ;
+                    }
+
                 }               
             }
         }

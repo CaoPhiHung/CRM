@@ -413,10 +413,18 @@ class ReportController extends Controller {
         $cities = array();
         $districts = array();
         foreach ($users as $user) {
-            $total_bill = $repo->getTotalBill($data,"",$user->getId());
-            $user->setTotalBill($total_bill);
-            $dm->persist($user);
-            $dm->flush();
+            if($user->getTotalRedeemPoint() == 0 ){
+                $total_bill = $repo->getTotalRedeemPoint($data,$user->getId());
+                $user->setTotalRedeemPoint($total_bill);
+                if($total_bill == 0){
+                    $user->setTotalRedeemPoint(1);
+                }
+                //$total_bill = $repo->getRegisteredStore($data,$user->getId());
+                
+                $dm->persist($user);
+                $dm->flush();
+
+            }
             // $cCode = $user->getCCode();
 
             // $email= (string)$user->getEmail();
@@ -457,11 +465,11 @@ class ReportController extends Controller {
             // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('P' . ($index + 1), $user->getDistrict());
             // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Q' . ($index + 1), $user->getCity());
             // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index + 1), $user->getJoined());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $repo->getRegisteredStore($data,$user->getId()));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $repo->getTotalBill($data,"",$user->getId()));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $repo->getTotalPayment($data,"",$user->getId()));
+            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $user->getRegisterStore());
+            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $user->getTotalBill());
+            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $user->getTotalPayment());
             // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $repo->getTotalRedeemPoint($data,$user->getId()));
+            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $user->getTotalRedeemPoint();
             // //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index + 1), $user->getTotalExtraPoint());
             // //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index + 1), $user->getExpriationsDay()->format('Y-m-d'));
             // $level = $user->getLevel();
@@ -476,7 +484,6 @@ class ReportController extends Controller {
             // $index++;
             
         }
-        // die();
         $excelService->excelObj->getActiveSheet()->setTitle('User List Filter');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $excelService->excelObj->setActiveSheetIndex(0);
@@ -1131,7 +1138,9 @@ class ReportController extends Controller {
                 $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 5), $point);
                 $index++;
             }
-            $start = new \DateTime($data['start']);
+
+
+            $start = new \DateTime('2015-01-01' . ' 23:59:59');
             $end = new \DateTime($data['end'] . ' 23:59:59');
             $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
                             ->field('created')->lte($end)

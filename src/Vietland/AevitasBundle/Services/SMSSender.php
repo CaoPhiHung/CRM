@@ -69,8 +69,8 @@ class SMSSender {
             return;
         }
 
-        $this->sms = $this->clean($this->sms);
-       //$phone='0902505501';
+        //$this->sms = $this->clean($this->sms);
+        //$this->phone='0932170135';
         //$url = 'http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocK hachHang?msisdn='.$this->phone.'&alias=LEVIS&message='.$this->sms.'&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123';
         $url = 
 "http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=".$this->phone."&alias=LEVIS&message=" 

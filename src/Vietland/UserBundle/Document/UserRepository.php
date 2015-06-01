@@ -151,7 +151,7 @@ class UserRepository extends DocumentRepository {
 
     public function seekRedeemUsers($data) {
         $builder = $this->createQueryBuilder();
-        $builder->field('enabled')->equals(true)->field('posId')->exists(true)->field('CCode')->exists(true);
+        $builder->field('status')->equals(true)->field('posId')->exists(true)->field('CCode')->exists(true);
         if (isset($data['name'])) {
             $builder->addOr($builder->expr()->field('firstname')->equals(new \MongoRegex('/' . $data['name'] . '/i')));
             $builder->addOr($builder->expr()->field('lastname')->equals(new \MongoRegex('/' . $data['name'] . '/i')));
