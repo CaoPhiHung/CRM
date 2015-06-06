@@ -57,6 +57,7 @@ function trickDone() {
 }
 
 function callbackItem(data) {
+    console.log("callbackItem");
 
     db.socket.emit('thread', {
         id: data.process_id,
@@ -172,7 +173,7 @@ function callbackItem(data) {
 
 // Continous command
 thread.on('thread_item', function(data) {
-
+    console.log("thread_item");
     // STOP OVER
     if (data.current == data.cmds.length + 1) {
         process_complete[data.process_id] = true;
@@ -209,7 +210,7 @@ thread.on('thread_item', function(data) {
     current = data.current
     cmd = data.cmds[current - 1].process_cmd
     data.job_id = data.cmds[current - 1].job_id
-
+    console.log(cmd);
     exec(cmd, function(err, stdout, stderr) {
 
         if (err) {
@@ -227,6 +228,7 @@ thread.on('thread_item', function(data) {
 })
 
 thread.on('thread', function(data) {
+    console.log("thread");
     thread.emit('thread_item', {
         job_id: data.job_id,
         process_id: data.process_id,
@@ -237,6 +239,7 @@ thread.on('thread', function(data) {
 })
 
 process.on('process', function(data) {
+    console.log("process");
 
     if (data.process_id >= process_queue.length + 1) {
         return;
@@ -247,7 +250,7 @@ process.on('process', function(data) {
     cmds = []
 
     for (var i in bills) {
-
+        console.log("Billidnoo: " + bill.ledgerID  + "Ledgerid " + bill.ledgerID );
         bill = bills[i]
         app_root = path.resolve(__dirname + '/../../../')
         cmd =  'php ' + app_root + '/app/console crm:processbill '
@@ -255,6 +258,7 @@ process.on('process', function(data) {
         cmd += ' --billidno=' + bill.Billidno + ' '
         cmd += ' --env=prod'
 
+        console.log(cmd);
         cmds.push({
             job_id: bill.job_id,
             process_cmd: cmd,
@@ -285,6 +289,7 @@ process.on('process', function(data) {
 })
 
 function drop(db, callback) {
+    console.log("drop");
 	var c_users = db.collection('users');
     var c_jobqueue = db.collection('jobqueue');
     var c_aevitaslog = db.collection('aevitaslog');
@@ -292,6 +297,7 @@ function drop(db, callback) {
 }
 
 function start_process(num) {
+    console.log("start_process");
     db.current_process = 1;
 
     for (var i = 0; i <= process_queue.length; i++) {
@@ -307,6 +313,7 @@ function start_process(num) {
 }
 
 function search_bill(db, callback) {
+    console.log("search_bill");
     jobqueue = db.collection('jobqueue')
     jobqueue.find({status: {'$ne': true}}, function(err, jobs) {
         jobs.each(function(err, job) {
@@ -316,11 +323,12 @@ function search_bill(db, callback) {
 }
 
 function queue_bill(bill) {
+    console.log("queue_bill");
     db.collection('jobqueue')
 }
 
 function process_bill(results) {
-
+    console.log("process_bill");
     job_bill = [];
     users = [];
     process_queue = [];
@@ -364,17 +372,18 @@ var connection = new sql.Connection(config, function(err) {
 });
 
 start = function() {
+    console.log("debug start");
     app_root = path.resolve(__dirname + '/../../../')
     cmd =  'php ' + app_root + '/app/console crm:syncbill '
     cmd += ' --env=prod'
-
+    console.log(cmd);
     exec(cmd, function(err, stdout, stderr) {
         repair();
     })
 }
 
 repair = function() {
-
+    console.log("debug repair");
     var results = []
 
     // Scan in job queue
@@ -384,6 +393,7 @@ repair = function() {
         
         for (i in jobs) {
             job = jobs[i]
+           // job = jobs[0]
             data = JSON.parse(job.data)
             results.push({
                 job_id: job._id,
@@ -392,7 +402,10 @@ repair = function() {
                 ledgerID: data.ledgerID,
                 Billidno: data.Billidno
             })
+            
         }
+
+        console.log(results);
 
         process_bill(results)
     })

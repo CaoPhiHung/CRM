@@ -22,6 +22,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Aevitas\PointBundle\EventListener\EarnPointEvent;
 use Vietland\UserBundle\Document\UserLog;
 use Vietland\UserBundle\Document\User;
+use Vietland\AevitasBundle\Services;
 
 class ProcessBillCommand extends ContainerAwareCommand {
 
@@ -44,6 +45,8 @@ class ProcessBillCommand extends ContainerAwareCommand {
         // Get argument from commandline
         $billno = $input->getOption('billidno');
         $ledgerid = $input->getOption('ledgerid');
+        // var_dump("im here");
+        // die();
 
         // SQL Server Entity Manager
         $em = $this->getContainer()->get('doctrine')->getManager();
@@ -262,6 +265,9 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                     $birthday   = new \DateTime($info["BGDueDate"]);
                 else
                     $birthday="";
+
+                //new user
+                $totalPayment = $user->getTotalPayment() + (int)$data['NetValue'];
                 $user->setCellphone($phone)
                      ->setCCode($data['PartyID'])
                      ->setUsername($data['PartyID'])
@@ -274,7 +280,17 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                      ->setRoles(array())
                      ->setEnabled(true)
                      ->generateRegcode()
+                     ->setTotalBill(1)
+                     ->setTotalPayment($totalPayment)
+                     ->setRegisterStore($data['StoreName'])
                      ->setPlainPassword($user->getCellphone());
+
+                     $this->addSubToDisableEnableList($email,$firstname,$middlename,$lastname,$user->getRegcode());
+                     $sms = "Chao mung" + $firstname+ "den voi chuong trinh Star Club,hay cap nhat day du thong tin cua ban tai www.starclubvn.com với mã đăng ký " + $data['PartyID'];
+        $this->sendNew('0931270135',$sms);
+         //                      var_dump($data['PartyID']);
+         // die();     
+
                 if(!empty($birthday))
                      $user->setDob($birthday, true);
                 try {
@@ -303,6 +319,18 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                     $str .= chr(13) . chr(10) . '--billno: ' . $billno . ' --ccode: ' . $data['PartyID'] . ' --cellphone: ' . $data['CellNo'];
                     $this->logger('bill_error', $str);
                 }
+            }else{
+                //old user
+                $total_bill = $this->getCaculateTotalBill("",$user->getId());
+                $total_bill = $total_bill + 1;
+                $user->setTotalBill((int) $total_bill);
+
+                $totalPayment = $this->getCalculateTotalPayment("",$user->getId());
+                $totalPayment = $totalPayment + (int)$data['NetValue'];
+                $user->setTotalPayment($totalPayment);
+                $dm->persist($user);
+                $dm->flush();
+                //$userManager->updateUser($user, true);
             }
 
             $storeinfo = array('aName' => $sample['AccountsName'], 'bName' => $sample['BranchName'], 'Amount' => $sample['Amount'], 'itemNumber' => count($results), 'bDate' => new \DateTime($sample['BillDate']));
@@ -360,6 +388,216 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
         }
 
         file_put_contents($file, $message, FILE_APPEND);
+    }
+
+    //new calculate totalpayment function
+        //get Total Payment
+    public function getCalculateTotalPayment($number_day,$id){
+        $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+        $day = date("j", strtotime($lastdate));
+        $month = date("n", strtotime($lastdate));
+        $year = date("Y", strtotime($lastdate));
+        
+        $function = 'function(){
+                        var rt = false;
+                        var d = this.created;
+                        if( this.action == "buyitem"){
+                            if(d.getFullYear() > '.$year.'){
+                                rt = true;
+                            }
+                            if(d.getFullYear() == '.$year.'){
+                                if(d.getDate() >= '.($day).' &&  d.getMonth() == '.($month-1).'){
+                                    rt = true;
+                                }
+                                if(d.getMonth() > '.($month-1).'){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';
+                    $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
+               // $am = $this->get('doctrine.odm.mongodb.document_manager');
+       // $dm = $am->getManager();
+        $mongo = new \MongoClient();
+        $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+        $col_log = $mongo->$db->aevitaslog;
+        $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+        $totalPayemnt = 0;
+        if(!empty($aevitagslog)){
+            $index = 0;
+            $length_arr = count($aevitagslog);
+            foreach ($aevitagslog as $doc) {
+                //$totalPayment = $doc['totalPayment'];
+                if($doc['user']['$id'] == $id){
+                    $totalPayemnt = $totalPayemnt + $doc['totalPayment'];
+                }
+                
+            }
+            //return $totalPayemnt;
+        }     
+        return $totalPayemnt;
+    }
+
+    //new calculate bill function
+        //get Total Bill
+    public function getCaculateTotalBill($number_day,$id){
+
+        $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+        $day = date("j", strtotime($lastdate));
+        $month = date("n", strtotime($lastdate));
+        $year = date("Y", strtotime($lastdate));
+        
+        $function = 'function(){
+                        var rt = false;
+                        var d = this.created;
+                        if( this.action == "buyitem"){
+                            if(d.getFullYear() > '.$year.'){
+                                rt = true;
+                            }
+                            if(d.getFullYear() == '.$year.'){
+                                if(d.getDate() >= '.($day).' &&  d.getMonth() == '.($month-1).'){
+                                    rt = true;
+                                }
+                                if(d.getMonth() > '.($month-1).'){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';
+                    $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
+               // $am = $this->get('doctrine.odm.mongodb.document_manager');
+       // $dm = $am->getManager();
+        $mongo = new \MongoClient();
+        $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+        $col_log = $mongo->$db->aevitaslog;
+        $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+        $bill_count = 0;
+        if(!empty($aevitagslog)){
+            $index = 0;
+            $length_arr = count($aevitagslog);
+            foreach ($aevitagslog as $doc) {
+                $index++;
+                if($doc['user']['$id'] == $id){
+                    $bill_count++;
+                }
+                
+            }
+            return $bill_count;
+        }     
+        return 0;
+    }
+
+    //new sms function -Hung
+
+    public function sendNew($phone,$sms) {
+
+        //$this->sms = $this->clean($this->sms);
+        //$this->phone='0932170135';
+        //$url = 'http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocK hachHang?msisdn='.$this->phone.'&alias=LEVIS&message='.$this->sms.'&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123';
+        $url = 
+"http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=".$phone."&alias=LEVIS&message=" 
+.$sms. "&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123";
+        //file_get_contents("http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=0906881469&alias=LEVIS&message=abc&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123");
+        // return;
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $this->ProcessResponse($response);
+    }
+
+
+
+    public function ProcessResponse($response) {
+        try {
+            $xml = simplexml_load_string($response);
+            if ($xml === FALSE) {
+                trigger_error("can't parsing XML from response");
+            }
+            $this->returnCode = $xml->Code;
+            $this->returnMsg = $xml->Message;
+            $this->returnTime = $xml->Time;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            throw new Exception("Error Processing Request", 1);
+            
+        }
+    }
+
+    //new mail function
+
+                    /**
+     * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
+     * @param  string $method The API method to call, e.g. 'lists/list'
+     * @param  array  $args   An array of arguments to pass to the method. Will be json-encoded for you.
+     * @return array          Associative array of json decoded API response.
+     */
+    public function call($method, $args=array(), $timeout = 10)
+    {
+        return $this->makeRequest($method, $args, $timeout);
+    }
+
+    /**
+     * Performs the underlying HTTP request. Not very exciting
+     * @param  string $method The API method to be called
+     * @param  array  $args   Assoc array of parameters to be passed
+     * @return array          Assoc array of decoded result
+     */
+    private function makeRequest($method, $args=array(), $timeout = 10)
+    {      
+        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        list(, $datacentre) = explode('-', $args['apikey']);
+        $this->api_endpoint = str_replace('<dc>', $datacentre, 'https://<dc>.api.mailchimp.com/2.0');
+        $url = $this->api_endpoint.'/'.$method.'.json';
+
+        if (function_exists('curl_init') && function_exists('curl_setopt')){
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');       
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($args));
+            $result = curl_exec($ch);
+            curl_close($ch);
+        } else {
+            $json_data = json_encode($args);
+            $result    = file_get_contents($url, null, stream_context_create(array(
+                'http' => array(
+                    'protocol_version' => 1.1,
+                    'user_agent'       => 'PHP-MCAPI/2.0',
+                    'method'           => 'POST',
+                    'header'           => "Content-type: application/json\r\n".
+                                          "Connection: close\r\n" .
+                                          "Content-length: " . strlen($json_data) . "\r\n",
+                    'content'          => $json_data,
+                ),
+            )));
+        }
+
+        return $result ? json_decode($result, true) : false;
+    }
+
+        public function addSubToDisableEnableList($email,$fname,$mname,$lname,$code){
+                $listID = '78ff5dfa4c'; //list enable
+                $result = $this->call('lists/subscribe', array(
+                'id'                => $listID,
+                'email'             => array('email'=>$email),
+                'merge_vars'        => array('EMAIL'=> $email, 'FNAME'=>$fname, 'MNAME'=> $mname  ,'LNAME'=> $lname,
+                                            'REGCODE'=> $code),
+                'double_optin'      => false,
+                'update_existing'   => true,
+                'replace_interests' => false,
+                'send_welcome'      => false,
+            ));
     }
 
 }

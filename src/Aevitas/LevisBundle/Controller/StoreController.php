@@ -27,6 +27,7 @@ use FOS\UserBundle\FOSUserEvents;
 use Vietland\AevitasBundle\Helper\Pagination;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Vietland\UserBundle\Document\UserLog;
+use Vietland\UserBundle\Document\Mailchimp;
 
 class StoreController extends Controller {
     //put your code here
@@ -278,7 +279,7 @@ class StoreController extends Controller {
     }
 
     /**
-     * @Route("/backend/staff/point2vnd", name="backend_staff_point2vnd")
+      * @Route("/backend/staff/point2vnd", name="backend_staff_point2vnd")
      * @Secure(roles="ROLE_STAFF, ROLE_STORE")
      * @Template()
      */
@@ -332,10 +333,63 @@ class StoreController extends Controller {
         )));
     }
 
+                /**
+     * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
+     * @param  string $method The API method to call, e.g. 'lists/list'
+     * @param  array  $args   An array of arguments to pass to the method. Will be json-encoded for you.
+     * @return array          Associative array of json decoded API response.
+     */
+    public function call($method, $args=array(), $timeout = 10)
+    {
+        return $this->makeRequest($method, $args, $timeout);
+    }
+
+    /**
+     * Performs the underlying HTTP request. Not very exciting
+     * @param  string $method The API method to be called
+     * @param  array  $args   Assoc array of parameters to be passed
+     * @return array          Assoc array of decoded result
+     */
+    private function makeRequest($method, $args=array(), $timeout = 10)
+    {      
+        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        list(, $datacentre) = explode('-', $args['apikey']);
+        $this->api_endpoint = str_replace('<dc>', $datacentre, 'https://<dc>.api.mailchimp.com/2.0');
+        $url = $this->api_endpoint.'/'.$method.'.json';
+
+        if (function_exists('curl_init') && function_exists('curl_setopt')){
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');       
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($args));
+            $result = curl_exec($ch);
+            curl_close($ch);
+        } else {
+            $json_data = json_encode($args);
+            $result    = file_get_contents($url, null, stream_context_create(array(
+                'http' => array(
+                    'protocol_version' => 1.1,
+                    'user_agent'       => 'PHP-MCAPI/2.0',
+                    'method'           => 'POST',
+                    'header'           => "Content-type: application/json\r\n".
+                                          "Connection: close\r\n" .
+                                          "Content-length: " . strlen($json_data) . "\r\n",
+                    'content'          => $json_data,
+                ),
+            )));
+        }
+
+        return $result ? json_decode($result, true) : false;
+    }
+
     /**
      * @Route("/backend/staff/redeemption-process", name="backend_staff_redeemption_process")
      * @Secure(roles="ROLE_STAFF, ROLE_STORE")
-     * @Method({"POST"})
      * @Template()
      */
     public function RedeemptionProcessAction(Request $request) {
@@ -372,28 +426,26 @@ class StoreController extends Controller {
         $phoneNo = $user->getCellphone();
         $authcode = $cvObj->getHash();
         
+                $listID = '678bbd96d3'; //list redeem
+                $result = $this->call('lists/subscribe', array(
+                'id'                => $listID,
+                'email'             => array('email'=>$user->getEmail()),
+                'merge_vars'        => array('EMAIL'=> $user->getEmail(), 'FNAME'=>$user->getFirstname(), 'MNAME'=> $user->getMiddlename()  ,'LNAME'=> $user->getLastname(),
+                                            'REDEEM'=> $authcode),
+                'double_optin'      => false,
+                'update_existing'   => true,
+                'replace_interests' => false,
+                'send_welcome'      => false,
+            ));
+
         $msg = $this->renderView(":sms:redeemProcess.html.twig", array('authcode' => $authcode));
-        echo json_encode($authcode);die;
-        //mailchimp
-        // $listID = 'ad11aeda1e'; //list enable
-        //         if($status == false){
-        //             $listID = 'eb01b9b503'; // list disable
-        //         }
-        //         $result = $this->call('lists/subscribe', array(
-        //         'id'                => $listID,
-        //         'email'             => array('email'=>$email),
-        //         'merge_vars'        => array('EMAIL'=> $email, 'FNAME'=>$fname, 'MNAME'=> $mname  ,'LNAME'=> $lname,
-        //                                     'UNAME'=> $username,'STATUS'=>$status,'REASON'=>$reason),
-        //         'double_optin'      => false,
-        //         'update_existing'   => true,
-        //         'replace_interests' => false,
-        //         'send_welcome'      => false,
-        //     ));
+
         $this->get('sms_sender')
                 ->setPhone($phoneNo)
                 ->setSms($msg)
-                ->send()
+                ->send($authcode)
         ;
+
         return new Response(json_encode(array(
                     'msg' => 'completed',
                     'store' => $store->getName(),
@@ -435,6 +487,12 @@ class StoreController extends Controller {
         $aPoint = $user->getPoint();
 
         $cvObj->setBPoint($bPoint)->setAPoint($aPoint);
+        
+        $newTotalPayment = $user->getTotalPayment() + $cvObj->getPoint();
+        $user->setTotalPayment($newTotalPayment);
+        $dm->persist($user);
+        $dm->flush();
+
         ### add userlog here ...
         $schema = array('BillNo' => $authcode);
         $userRedeemLog = new UserLog();

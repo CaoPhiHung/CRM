@@ -10,7 +10,7 @@ namespace Aevitas\LevisBundle\Controller;
 class ReportController__JMSInjector
 {
     public static function inject($container) {
-        require_once '/var/www/html/levis-crm-dev/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-ReportController.php';
+        require_once '/var/www/html/levis-crm/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-ReportController.php';
         $a = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\ReportController' => array('indexAction' => array(0 => 'security.access.method_interceptor'), 'exportAdvancedSearchAction' => array(0 => 'security.access.method_interceptor'), 'exportSearchAction' => array(0 => 'security.access.method_interceptor'), 'newMemberReportAction' => array(0 => 'security.access.method_interceptor'), 'birthdayReportAction' => array(0 => 'security.access.method_interceptor'), 'anniversarydayReportAction' => array(0 => 'security.access.method_interceptor'), 'notShoppedReportAction' => array(0 => 'security.access.method_interceptor'), 'userStatementAction' => array(0 => 'security.access.method_interceptor'), 'redeemptionReportAction' => array(0 => 'security.access.method_interceptor'))));
         $instance = new \EnhancedProxy_5f74aff1b08380ad8d530d721fcd2a1c429d0f2d\__CG__\Aevitas\LevisBundle\Controller\ReportController();
         $instance->__CGInterception__setLoader($a);

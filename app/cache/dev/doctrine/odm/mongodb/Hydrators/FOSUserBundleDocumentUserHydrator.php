@@ -91,6 +91,78 @@ class FOSUserBundleDocumentUserHydrator implements HydratorInterface
             $hydratedData['reason'] = $return;
         }
 
+        /** @Field(type="collection") */
+        if (isset($data['bonusPoint'])) {
+            $value = $data['bonusPoint'];
+            $return = $value;
+            $this->class->reflFields['bonusPoint']->setValue($document, $return);
+            $hydratedData['bonusPoint'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['totalExtraPoint'])) {
+            $value = $data['totalExtraPoint'];
+            $return = (int) $value;
+            $this->class->reflFields['totalExtraPoint']->setValue($document, $return);
+            $hydratedData['totalExtraPoint'] = $return;
+        }
+
+        /** @Field(type="string") */
+        if (isset($data['registerStore'])) {
+            $value = $data['registerStore'];
+            $return = (string) $value;
+            $this->class->reflFields['registerStore']->setValue($document, $return);
+            $hydratedData['registerStore'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['totalBill'])) {
+            $value = $data['totalBill'];
+            $return = (int) $value;
+            $this->class->reflFields['totalBill']->setValue($document, $return);
+            $hydratedData['totalBill'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['totalPayment'])) {
+            $value = $data['totalPayment'];
+            $return = (int) $value;
+            $this->class->reflFields['totalPayment']->setValue($document, $return);
+            $hydratedData['totalPayment'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['totalRedeemPoint'])) {
+            $value = $data['totalRedeemPoint'];
+            $return = (int) $value;
+            $this->class->reflFields['totalRedeemPoint']->setValue($document, $return);
+            $hydratedData['totalRedeemPoint'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['pointToNextLevel'])) {
+            $value = $data['pointToNextLevel'];
+            $return = (int) $value;
+            $this->class->reflFields['pointToNextLevel']->setValue($document, $return);
+            $hydratedData['pointToNextLevel'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['lastMonthBillNo'])) {
+            $value = $data['lastMonthBillNo'];
+            $return = (int) $value;
+            $this->class->reflFields['lastMonthBillNo']->setValue($document, $return);
+            $hydratedData['lastMonthBillNo'] = $return;
+        }
+
+        /** @Field(type="int") */
+        if (isset($data['noDayDeactive'])) {
+            $value = $data['noDayDeactive'];
+            $return = (int) $value;
+            $this->class->reflFields['noDayDeactive']->setValue($document, $return);
+            $hydratedData['noDayDeactive'] = $return;
+        }
+
         /** @Field(type="string") */
         if (isset($data['salt'])) {
             $value = $data['salt'];

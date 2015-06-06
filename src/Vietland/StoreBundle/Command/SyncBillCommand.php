@@ -190,6 +190,8 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
 
         // Index by cell phone
         foreach ($results as $key => $result) {
+            //var_dump($result);
+            //die();
 
             $data[$result['PartyID']] = $result;
 
@@ -212,6 +214,17 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
             $duplicated[$key] = $index;
         }
        $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
+
+       // find user status is disabled
+        $users = $dm->getRepository('VietlandUserBundle:User')->findBy(array('status' => false));
+        $list_userid = array();
+        // var_dump("here");
+        // die();
+        if(!empty($users)){
+            foreach ($users as $user) {
+                $list_userid[] = $user->getCCode();
+            }
+        }
         if (count($bill_diff_from_erp)) {
             // Initialize user array information
             $users = array(); 
@@ -230,8 +243,15 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
                     return;
                 }
 
+                if(!empty($list_userid) && in_array($id, $list_userid)){
+                    $message .= " is ignored. Account ID = $id - This user is disabled";
+                    //$this->logger('process_bill', '----------->CCode = '.$data['PartyID'].' . This user is disabled! <----------');
+                    $this->logger('jobqueue', $message);
+                    return;
+                }
+
                 $message .= ' is transfered successful !';
-                // $this->logger('jobqueue', $message);
+                $this->logger('jobqueue', $message);
 
                 // Get job in job queue indentified by BillID
                 $job = $dm->getRepository('VietlandStoreBundle:Jobqueue')

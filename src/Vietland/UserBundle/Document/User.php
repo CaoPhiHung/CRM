@@ -534,7 +534,7 @@ class User extends BaseUser implements Logger {
         parent::__construct();
         $this->staff = new ArrayCollection();
         $this->anni = new ArrayCollection();
-        $this->bonusPoint = new ArrayCollection();
+        $this->bonusPoint = null;
         $this->wishlist = array();
         $this->nlt = true;
         $this->qlf = 0;

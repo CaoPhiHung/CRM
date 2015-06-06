@@ -42,4 +42,4 @@ console.log(stdout);console.log(error);
 
 }, 1000*60);
 
-require('daemon')();
+//require('daemon')();

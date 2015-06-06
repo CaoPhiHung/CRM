@@ -14,35 +14,14 @@ Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
 Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
 --billno: 113032905798101 --ccode: 8315007287 --cellphone: 0975972115
 
-Caught exception: Address in mailbox given [ngoc_anh06062011c] does not comply with RFC 2822, 3.6.2.
---billno: 8532925230201 --ccode: 8315006016 --cellphone: 0916272579
+Caught exception: Address in mailbox given [tuyet76712gmail.com] does not comply with RFC 2822, 3.6.2.
+--billno: 19442906406401 --ccode: 8315003048 --cellphone: 0909584871
 
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 114142909222601 --ccode: 8315007191 --cellphone: 0903825829
+Caught exception: 127.0.0.1:27017: E11000 duplicate key error index: levis_20.users.$CCode_1_cellphone_1  dup key: { : "8315005377", : "0902577608" }
+--billno: 29802926332101 --ccode: 8315005377 --cellphone: 0902577608
 
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 62142904306201 --ccode: 8315005786 --cellphone: 0934161888
+Caught exception: 127.0.0.1:27017: E11000 duplicate key error index: levis_20.users.$CCode_1_cellphone_1  dup key: { : "8315002297", : "0904178801" }
+--billno: 88182923527201 --ccode: 8315002297 --cellphone: 0904178801
 
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 29342925530801 --ccode: 8315003091 --cellphone: 0939229999
-
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 114732905798101 --ccode: 8315006823 --cellphone: 0966660065
-
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 8802925230201 --ccode: 8315006022 --cellphone: 0909219129
-
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 29932925530801 --ccode: 8315003072 --cellphone: 0908798917
-
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 78732905619501 --ccode: 8315006451 --cellphone: 0917107673
-
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 27062904496701 --ccode: 8315002367 --cellphone: 0909090191
-
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 57722911904801 --ccode: 8315006267 --cellphone: 0903576563
-
-Caught exception: Connection to mail.thanbacgroup.com:25 Timed Out
---billno: 84062923527201 --ccode: 8315005568 --cellphone: 0903486996
+Caught exception: 127.0.0.1:27017: E11000 duplicate key error index: levis_20.users.$CCode_1_cellphone_1  dup key: { : "8315911111", : "0906016210" }
+--billno: 52904000101 --ccode: 8315911111 --cellphone: 0906016210

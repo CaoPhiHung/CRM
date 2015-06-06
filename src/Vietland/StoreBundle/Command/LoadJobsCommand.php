@@ -62,6 +62,23 @@ class LoadJobsCommand extends ContainerAwareCommand
                 $this->logger('process_bill', '----------->CCode = '.$data['PartyID'].' . This user is disabled! <----------');
                 continue;
             }
+            //Total Bill
+            if($data['StoreName'] != ''){
+                $repo = $dm->getRepository('VietlandUserBundle:User');
+                $user = $repo->findOneBy(array('CCode' => $data['PartyID']));            
+                $total_bill = $user->getTotalBill();
+                if($total_bill > 0){
+                    $total_bill = $total_bill + 1;
+                    $user->setTotalBill($total_bill);
+                }else{
+                    $total_bill = 1;
+                    $user->setTotalBill($total_bill);
+                    $user->setRegisterStore($data['StoreName']);
+                }
+                $dm->persist($user);
+                $dm->flush();
+            }   
+            //end Total Bill
 
             $cmd = 'php ' . $path . 'app/console crm:processbill '
                     . '--ledgerid=' . $data['ledgerID'].' '

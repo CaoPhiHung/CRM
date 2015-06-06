@@ -10,7 +10,7 @@ namespace Aevitas\LevisBundle\Controller;
 class BackendController__JMSInjector
 {
     public static function inject($container) {
-        require_once '/var/www/html/levis-crm-dev/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-BackendController.php';
+        require_once '/var/www/html/levis-crm/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-BackendController.php';
         $a = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\BackendController' => array('indexAction' => array(0 => 'security.access.method_interceptor'), 'listUserAction' => array(0 => 'security.access.method_interceptor'), 'advancedSearchUserAction' => array(0 => 'security.access.method_interceptor'), 'staffManagerAction' => array(0 => 'security.access.method_interceptor'), 'listSearchAction' => array(0 => 'security.access.method_interceptor'), 'listAdvancedSearchAction' => array(0 => 'security.access.method_interceptor'), 'resendRegCodeAction' => array(0 => 'security.access.method_interceptor'), 'cartListAction' => array(0 => 'security.access.method_interceptor'), 'cartListStoreStaffAction' => array(0 => 'security.access.method_interceptor'), 'editCartAction' => array(0 => 'security.access.method_interceptor'), 'checkPosBillAction' => array(0 => 'security.access.method_interceptor'), 'checkBillAction' => array(0 => 'security.access.method_interceptor'))));
         $instance = new \EnhancedProxy_e8429cda71fc5b63043e64a6c954546f4ae0f0b1\__CG__\Aevitas\LevisBundle\Controller\BackendController();
         $instance->__CGInterception__setLoader($a);

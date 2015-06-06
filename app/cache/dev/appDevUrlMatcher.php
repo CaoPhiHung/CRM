@@ -869,14 +869,8 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
                         // backend_staff_redeemption_process
                         if ($pathinfo === '/backend/staff/redeemption-process') {
-                            if ($this->context->getMethod() != 'POST') {
-                                $allow[] = 'POST';
-                                goto not_backend_staff_redeemption_process;
-                            }
-
                             return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\StoreController::RedeemptionProcessAction',  '_route' => 'backend_staff_redeemption_process',);
                         }
-                        not_backend_staff_redeemption_process:
 
                         // backend_staff_redeemption_auth
                         if ($pathinfo === '/backend/staff/redeemption-auth') {

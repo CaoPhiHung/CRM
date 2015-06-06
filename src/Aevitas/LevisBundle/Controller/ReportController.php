@@ -407,81 +407,109 @@ class ReportController extends Controller {
         $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index), 'Next Level')->getStyle('AA' . ($index))->applyFromArray($styleArray);
         $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index), 'Point to next Level')->getStyle('AB' . ($index))->applyFromArray($styleArray);
         $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index), 'Last buy')->getStyle('AC' . ($index))->applyFromArray($styleArray);
-        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index), 'Last 30 days bills No')->getStyle('AD' . ($index))->applyFromArray($styleArray);
-        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index), 'Days From Deactivated')->getStyle('AE' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index), 'Days From Deactivated')->getStyle('AD' . ($index))->applyFromArray($styleArray);
 
         $cities = array();
         $districts = array();
         foreach ($users as $user) {
-            if($user->getTotalRedeemPoint() == 0 ){
-                $total_bill = $repo->getTotalRedeemPoint($data,$user->getId());
-                $user->setTotalRedeemPoint($total_bill);
-                if($total_bill == 0){
-                    $user->setTotalRedeemPoint(1);
-                }
-                //$total_bill = $repo->getRegisteredStore($data,$user->getId());
+           // if($user->getTotalRedeemPoint() == 1){
+           //     $user->setTotalRedeemPoint(0);
+           //     $dm->persist($user);
+           //     $dm->flush();
+           // }
+            // if($user->getTotalRedeemPoint() == 0 ){
+            //     $total_bill = $repo->getTotalRedeemPoint($data,$user->getId());
+            //     $user->setTotalRedeemPoint($total_bill);
+            //     if($total_bill == 0){
+            //         $user->setTotalRedeemPoint(1);
+            //     }
+            //     //$total_bill = $repo->getRegisteredStore($data,$user->getId());
                 
-                $dm->persist($user);
-                $dm->flush();
+            //     $dm->persist($user);
+            //     $dm->flush();
 
-            }
-            // $cCode = $user->getCCode();
-
-            // $email= (string)$user->getEmail();
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index + 1), $email);
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('B' . ($index + 1), castutf8($user->getFirstname()));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 1), castutf8($user->getMiddlename()));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 1), castutf8($user->getLastname()));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('E' . ($index + 1), castutf8($user->getUsername()));
-
-            // $now = new \DateTime(date('Y-m-d'));
-
-            // $disabledDate =  $user->getModifyStatusDate()->format('Y-m-d');
-            // // (int) ((dt2.getTime() - dt1.getTime()) / (1000 * 60 * 60 * 24));
-            // $datediff=  (strtotime($now->format('Y-m-d')) - strtotime($disabledDate))/(60*60*24);
-
-            // $reason = castutf8($user->getReason());
-            // $status = "Disabled";
-            // if($user->getStatus() == TRUE){
-            //     $status = "Enabled";
-            //     $datediff= '';
-            //     $reason='';
-            //     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), '');
-            //     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), '');
             // }
 
 
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index + 1), $status);
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), $reason);          
+            //totalBill
+            // if($user->getTotalBill() == 0 ){
+            //     $total_bill = $repo->getTotalBill($data,"",$user->getId());
+            //     $user->setTotalBill($total_bill);
+            //     $dm->persist($user);
+            //     $dm->flush();
+            // }
+
+            //totalPayment
+            // if($user->getTotalPayment() == 0 ){
+            //     $total_bill = $repo->getTotalPayment($data,"",$user->getId());
+            //     $user->setTotalPayment($total_bill);
+            //     $dm->persist($user);
+            //     $dm->flush();
+            // }
+
+            //registerStore
+            // if($user->getRegisterStore() == "" ){
+            //     $total_bill = $repo->getRegisteredStore($data,$user->getId());
+            //     $user->setRegisterStore($total_bill);
+            //     $dm->persist($user);
+            //     $dm->flush();
+            // }
+
+            $cCode = $user->getCCode();
+
+            $email= (string)$user->getEmail();
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index + 1), $email);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('B' . ($index + 1), castutf8($user->getFirstname()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 1), castutf8($user->getMiddlename()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 1), castutf8($user->getLastname()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('E' . ($index + 1), castutf8($user->getUsername()));
+
+            $now = new \DateTime(date('Y-m-d'));
+
+            $disabledDate =  $user->getModifyStatusDate()->format('Y-m-d');
+            // (int) ((dt2.getTime() - dt1.getTime()) / (1000 * 60 * 60 * 24));
+            $datediff=  (strtotime($now->format('Y-m-d')) - strtotime($disabledDate))/(60*60*24);
+
+            $reason = castutf8($user->getReason());
+            $status = "Disabled";
+            if($user->getStatus() == TRUE){
+                $status = "Enabled";
+                $datediff= '';
+                $reason='';
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), '');
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 1), '');
+            }
+
+
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('F' . ($index + 1), $status);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 1), $reason);          
             
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index + 1), $user->getSexLabel());
-            // if (is_object($user->getDob()))
-            //     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('J' . ($index + 1), $user->getDob()->format('Y-m-d'));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('K' . ($index + 1), $user->getMarriageLabel());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('L' . ($index + 1), $user->getRegcode());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('M' . ($index + 1), (string)$cCode);
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('N' . ($index + 1), $user->getCellphone());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('O' . ($index + 1), $user->getAddress1());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('P' . ($index + 1), $user->getDistrict());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Q' . ($index + 1), $user->getCity());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index + 1), $user->getJoined());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $user->getRegisterStore());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $user->getTotalBill());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $user->getTotalPayment());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $user->getTotalRedeemPoint();
-            // //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index + 1), $user->getTotalExtraPoint());
-            // //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index + 1), $user->getExpriationsDay()->format('Y-m-d'));
-            // $level = $user->getLevel();
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Z' . ($index + 1), $level);
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index + 1), $user->getNextLevel());
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index + 1), $user->pointToNextLevel($repo->getTotalPayment($data,"",$user->getId())));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index + 1), $user->getLastbuy()->format('Y-m-d'));
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $repo->getTotalBill($data,30,$user->getId()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('I' . ($index + 1), $user->getSexLabel());
+            if (is_object($user->getDob()))
+                $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('J' . ($index + 1), $user->getDob()->format('Y-m-d'));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('K' . ($index + 1), $user->getMarriageLabel());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('L' . ($index + 1), $user->getRegcode());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('M' . ($index + 1), (string)$cCode);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('N' . ($index + 1), $user->getCellphone());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('O' . ($index + 1), $user->getAddress1());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('P' . ($index + 1), $user->getDistrict());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Q' . ($index + 1), $user->getCity());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('R' . ($index + 1), $user->getJoined());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('S' . ($index + 1), $user->getRegisterStore());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $user->getTotalBill());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $user->getTotalPayment());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $user->getTotalRedeemPoint());
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index + 1), $user->getTotalExtraPoint());
+            //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index + 1), $user->getExpriationsDay()->format('Y-m-d'));
+            $level = $user->getLevel();
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Z' . ($index + 1), $level);
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index + 1), $user->getNextLevel());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index + 1), $user->pointToNextLevel($user->getTotalPayment()));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index + 1), $user->getLastbuy()->format('Y-m-d'));
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $datediff);
 
-            // $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index + 1), $datediff);
-
-            // $index++;
+            $index++;
             
         }
         $excelService->excelObj->getActiveSheet()->setTitle('User List Filter');
@@ -1095,6 +1123,7 @@ class ReportController extends Controller {
             $prevTime = '';
             $point = 0;
             foreach ($logs as $log) {
+
                 if ($log->getPoint() == null && $log->getSubject() == 0) {
                     continue;
                 }
@@ -1139,7 +1168,6 @@ class ReportController extends Controller {
                 $index++;
             }
 
-
             $start = new \DateTime('2015-01-01' . ' 23:59:59');
             $end = new \DateTime($data['end'] . ' 23:59:59');
             $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
@@ -1161,7 +1189,46 @@ class ReportController extends Controller {
                 }
             }
 
+            //sadas
+        $lastdate = date('Y-m-d', strtotime("now -".""." days") );
+        $day = date("j", strtotime($lastdate));
+        $month = date("n", strtotime($lastdate));
+        $year = date("Y", strtotime($lastdate));
+        
+        $function = 'function(){
+                        var rt = false;
+                        var d = this.created;
+                        if( this.action == "upprofile"){
+                            if(d.getFullYear() > '.$year.'){
+                                rt = true;
+                            }
+                            if(d.getFullYear() == '.$year.'){
+                                if(d.getDate() >= '.($day).' &&  d.getMonth() == '.($month-1).'){
+                                    rt = true;
+                                }
+                                if(d.getMonth() > '.($month-1).'){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';
 
+
+
+        $mongo = new \MongoClient();
+        $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+        $col_log = $mongo->$db->aevitaslog;
+        $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+
+                foreach ($aevitagslog as $doc) {
+                    if($doc['user']['$id'] == $id && $doc['point'] > 0){
+                        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 5), "upprofile");
+                        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 5), $doc['point']);
+                        $index++;
+                    }
+                
+            }
 
             $excelService->excelObj->getActiveSheet()->setTitle('Member Statement');
             // Set active sheet index to the first sheet, so Excel opens this as the first sheet

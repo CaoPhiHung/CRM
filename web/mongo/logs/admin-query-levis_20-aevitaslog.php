@@ -3167,3 +3167,1528 @@ array (
   'command' => 'findAll',
 )
 ================
+2015-04-22 09:30:57
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":175726
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-22 10:51:01
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":171854
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-22 11:05:20
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+function(){
+                                var rt = false;
+                                var d = this.created;
+                                if(typeof this.totalPayment != "undefined"){
+                                    
+                                        rt = true;
+                                    
+                                }
+                                return rt;
+                            }
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-22 11:12:17
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":171854
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-22 11:44:15
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177763
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-04-23 17:17:16
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":170014
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-05-29 18:40:16
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"schema[0].BillNo":"29822926332101"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-05-29 18:40:37
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"schema[0].BillNo":"143289882693221"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-05-29 18:40:52
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"schema.BillNo":"143289882693221"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-05-29 18:44:08
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"29822926332101"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-05-30 21:11:15
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177868
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-05-30 21:15:04
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-05-30 21:16:32
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+  'page' => '3',
+)
+================
+2015-05-30 21:16:37
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+  'page' => '2',
+)
+================
+2015-05-30 21:17:02
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+  'page' => '1',
+)
+================
+2015-05-30 21:18:29
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177825
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-01 20:05:00
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177884
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-01 20:22:13
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-01 20:22:37
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+  'page' => '2',
+)
+================
+2015-06-01 20:23:06
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+  'page' => '1',
+)
+================
+2015-06-01 20:28:56
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+  'page' => '2',
+)
+================
+2015-06-01 20:38:09
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+  'page' => '1',
+)
+================
+2015-06-01 20:41:57
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-01 21:04:59
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177856
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-02 16:56:57
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177886
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-02 17:08:48
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177886
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-02 17:08:54
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177586
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-02 17:08:58
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177586
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-02 22:27:59
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177586
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 01:19:33
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"21312925330501"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 01:31:52
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"88602923527201"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 01:34:28
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"88602923527201"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 01:37:06
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"88602923527201"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 01:38:16
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"88602923527201"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 10:37:19
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177889
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 13:35:01
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177889
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 22:57:42
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-03 22:58:53
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-04 22:21:11
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"114362906699001"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-04 22:22:20
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-04 22:44:18
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-04 22:48:22
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-04 22:49:44
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-04 23:54:05
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"114362906699001"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-05 00:11:45
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-05 00:35:51
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"114362906699001"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-05 00:55:45
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id":177896
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
