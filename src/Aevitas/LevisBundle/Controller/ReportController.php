@@ -407,7 +407,7 @@ class ReportController extends Controller {
         $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AA' . ($index), 'Next Level')->getStyle('AA' . ($index))->applyFromArray($styleArray);
         $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index), 'Point to next Level')->getStyle('AB' . ($index))->applyFromArray($styleArray);
         $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index), 'Last buy')->getStyle('AC' . ($index))->applyFromArray($styleArray);
-        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AE' . ($index), 'Days From Deactivated')->getStyle('AD' . ($index))->applyFromArray($styleArray);
+        $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index), 'Days From Deactivated')->getStyle('AD' . ($index))->applyFromArray($styleArray);
 
         $cities = array();
         $districts = array();
