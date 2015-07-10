@@ -24,6 +24,7 @@ use Vietland\UserBundle\Document\UserLog;
 use PHPExcel;
 use \PHPExcel_IOFactory as IOFactory;
 use \PHPExcel_Cell;
+use Vietland\AevitasBundle\Helper\Multithread\MailerTask;
 
 class BackendController extends Controller {
     /**
@@ -116,7 +117,7 @@ class BackendController extends Controller {
     }
     /**
      * @Route("/backend/user/list", name="backend_user_list")
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_ADMIN,ROLE_STAFF")
      */
     public function listUserAction() {
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
@@ -226,7 +227,7 @@ class BackendController extends Controller {
     }
     /**
      * @Route("/backend/user/seeking", name="backend_user_seeking")
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_ADMIN,ROLE_STAFF")
      */
     public function listSearchAction() {
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
@@ -541,31 +542,61 @@ class BackendController extends Controller {
                     $user->setModifyStatusDate();
 
                     //Mailchimp api add subcriseber to list
-                    $test= $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
-                                        $user->getLastname(),$status);
+                    //$test= $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+                    //                    $user->getLastname(),$status);
+                
+
                     $dm->persist($user);
                     $dm->flush(); 
-                    // if($status == 'true'){
+                    if($status == 'true'){
+                            $message = \Swift_Message::newInstance()
+                                ->setSubject($this->get('translator')->trans('Your account has been enable'))
+                                ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
+                                            //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
+                                ->setTo($user->getEmail())
+                                //->setTo('caophihung8392@gmail.com')
+                                ->setBody($this->renderView(':mail:enableUser.html.twig', array('name' => $user->getName())), 'text/html', 'utf8');
+                            $this->get('mailer')->send($message);
+
                     //         $msg = $this->renderView(":sms:enableCustomer.html.twig", array('fullname' => $user->getFirstname()));
                     //         $this->get('sms_sender')
                     //         ->setPhone($user->getCellphone())
                     //         ->setSms($msg)
                     //         ->send()
                     // ;
-                    // }else{
+                    }else{
+
+                            $message = \Swift_Message::newInstance()
+                                ->setSubject($this->get('translator')->trans('Your account has been disable'))
+                                ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
+                                            //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
+                                ->setTo($user->getEmail())
+                                //->setTo('caophihung8392@gmail.com')
+                                ->setBody($this->renderView(':mail:disableUser.html.twig', array('name' => $user->getName())), 'text/html', 'utf8');
+                            $this->get('mailer')->send($message);
+
+                            // $message = \Swift_Message::newInstance()
+                            //     ->setSubject($this->translator->trans('Your account has been disable'))
+                            //     ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
+                            //     // ->setTo($email)
+                            //     ->setTo('caophihung8392@gmail.com')
+                            //     ->setBody($this->templating->render(':mail:disableUser.html.twig', array('name' => $user->getName()), 
+                            //         'text/html', 'utf8');
+                            // $this->container->get('mailer')->send($message);
+
                     //         $msg = $this->renderView(":sms:disableCustomer.html.twig", array('fullname' => $user->getFirstname()));
                     //         $this->get('sms_sender')
                     //         ->setPhone($user->getCellphone())
                     //         ->setSms($msg)
                     //         ->send()
                     // ;
-                    // }
+                    }
 
                 }               
             }
         }
         
-        exit(json_encode(array('test' => $test,
+        exit(json_encode(array(
             'result' => true,
             'content' => 'CONTENT'
         )));
