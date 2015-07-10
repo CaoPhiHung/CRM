@@ -83,6 +83,30 @@ class FOSUserBundleDocumentUserHydrator implements HydratorInterface
             $hydratedData['modifyStatusDate'] = $return;
         }
 
+        /** @Field(type="date") */
+        if (isset($data['downgradeDate'])) {
+            $value = $data['downgradeDate'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['downgradeDate']->setValue($document, clone $return);
+            $hydratedData['downgradeDate'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['upgradeDate'])) {
+            $value = $data['upgradeDate'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['upgradeDate']->setValue($document, clone $return);
+            $hydratedData['upgradeDate'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['updateLevel'])) {
+            $value = $data['updateLevel'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['updateLevel']->setValue($document, clone $return);
+            $hydratedData['updateLevel'] = $return;
+        }
+
         /** @Field(type="string") */
         if (isset($data['reason'])) {
             $value = $data['reason'];

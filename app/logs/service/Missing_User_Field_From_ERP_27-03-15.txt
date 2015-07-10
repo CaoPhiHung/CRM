@@ -1,3 +1,0 @@
-phone -> 01864582212 | email -> 8315005797@tbfvietnam.com | gender -> 1 | birthday -> empty | firstname -> PHAN | lastname -> BONG | middlename -> THI KIM | ccode -> 8315005797 | postid -> 121086
-phone -> 0932392392 | email -> 8315005918@tbfvietnam.com | gender -> 2 | birthday -> empty | firstname -> A TRAN TRONG MINH | lastname -> empty | middlename -> empty | ccode -> 8315005918 | postid -> 121110
-phone -> 0988398868 | email -> 8315005386@tbfvietnam.com | gender -> 1 | birthday -> empty | firstname -> PHAM | lastname -> THUY | middlename -> HONG | ccode -> 8315005386 | postid -> 121127

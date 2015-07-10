@@ -125,6 +125,18 @@ class User extends \Vietland\UserBundle\Document\User implements \Doctrine\ODM\M
         return parent::getNewroles();
     }
 
+    public function setBonusPoint(array $points)
+    {
+        $this->__load();
+        return parent::setBonusPoint($points);
+    }
+
+    public function getBonusPoint()
+    {
+        $this->__load();
+        return parent::getBonusPoint();
+    }
+
     public function getRef()
     {
         $this->__load();
@@ -195,6 +207,18 @@ class User extends \Vietland\UserBundle\Document\User implements \Doctrine\ODM\M
     {
         $this->__load();
         return parent::getLevel();
+    }
+
+    public function getNextLevel()
+    {
+        $this->__load();
+        return parent::getNextLevel();
+    }
+
+    public function pointToNextLevel($point)
+    {
+        $this->__load();
+        return parent::pointToNextLevel($point);
     }
 
     public function getCurrentLevel()
@@ -291,6 +315,102 @@ class User extends \Vietland\UserBundle\Document\User implements \Doctrine\ODM\M
     {
         $this->__load();
         return parent::setPoint($point);
+    }
+
+    public function getTotalExtraPoint()
+    {
+        $this->__load();
+        return parent::getTotalExtraPoint();
+    }
+
+    public function setTotalExtraPoint($point)
+    {
+        $this->__load();
+        return parent::setTotalExtraPoint($point);
+    }
+
+    public function getRegisterStore()
+    {
+        $this->__load();
+        return parent::getRegisterStore();
+    }
+
+    public function setRegisterStore($register_store)
+    {
+        $this->__load();
+        return parent::setRegisterStore($register_store);
+    }
+
+    public function getTotalBill()
+    {
+        $this->__load();
+        return parent::getTotalBill();
+    }
+
+    public function setTotalBill($bill)
+    {
+        $this->__load();
+        return parent::setTotalBill($bill);
+    }
+
+    public function getTotalPayment()
+    {
+        $this->__load();
+        return parent::getTotalPayment();
+    }
+
+    public function setTotalPayment($total_pament)
+    {
+        $this->__load();
+        return parent::setTotalPayment($total_pament);
+    }
+
+    public function getTotalRedeemPoint()
+    {
+        $this->__load();
+        return parent::getTotalRedeemPoint();
+    }
+
+    public function setTotalRedeemPoint($total_redeem_point)
+    {
+        $this->__load();
+        return parent::setTotalRedeemPoint($total_redeem_point);
+    }
+
+    public function getPointToNextLevel()
+    {
+        $this->__load();
+        return parent::getPointToNextLevel();
+    }
+
+    public function setPointToNextLevel($point)
+    {
+        $this->__load();
+        return parent::setPointToNextLevel($point);
+    }
+
+    public function getLastMonthBillNo()
+    {
+        $this->__load();
+        return parent::getLastMonthBillNo();
+    }
+
+    public function setLastMonthBillNo($month)
+    {
+        $this->__load();
+        return parent::setLastMonthBillNo($month);
+    }
+
+    public function getNoDayDeactive()
+    {
+        $this->__load();
+        return parent::getNoDayDeactive();
+    }
+
+    public function setNoDayDeactive($num_day)
+    {
+        $this->__load();
+        return parent::setNoDayDeactive($num_day);
     }
 
     public function getposId()
@@ -1187,6 +1307,78 @@ class User extends \Vietland\UserBundle\Document\User implements \Doctrine\ODM\M
         return parent::getReportAttributes();
     }
 
+    public function getStatus()
+    {
+        $this->__load();
+        return parent::getStatus();
+    }
+
+    public function setStatus($boolean)
+    {
+        $this->__load();
+        return parent::setStatus($boolean);
+    }
+
+    public function setModifyStatusDate()
+    {
+        $this->__load();
+        return parent::setModifyStatusDate();
+    }
+
+    public function getModifyStatusDate()
+    {
+        $this->__load();
+        return parent::getModifyStatusDate();
+    }
+
+    public function setReason($reason)
+    {
+        $this->__load();
+        return parent::setReason($reason);
+    }
+
+    public function getReason()
+    {
+        $this->__load();
+        return parent::getReason();
+    }
+
+    public function setDowngradeDate()
+    {
+        $this->__load();
+        return parent::setDowngradeDate();
+    }
+
+    public function getDowngradeDate()
+    {
+        $this->__load();
+        return parent::getDowngradeDate();
+    }
+
+    public function setUpgradeDate()
+    {
+        $this->__load();
+        return parent::setUpgradeDate();
+    }
+
+    public function getUpgradeDate()
+    {
+        $this->__load();
+        return parent::getUpgradeDate();
+    }
+
+    public function setUpdateLevel()
+    {
+        $this->__load();
+        return parent::setUpdateLevel();
+    }
+
+    public function getUpdateLevel()
+    {
+        $this->__load();
+        return parent::getUpdateLevel();
+    }
+
     public function __get($name)
     {
         $this->__load();
@@ -1490,7 +1682,7 @@ class User extends \Vietland\UserBundle\Document\User implements \Doctrine\ODM\M
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'lastLogin', 'locked', 'expired', 'expiresAt', 'confirmationToken', 'passwordRequestedAt', 'roles', 'id', 'point', 'bonuspoints', 'bonusexpired', 'posId', 'dob', 'sex', 'address1', 'address2', 'dship', 'address3', 'commonname', 'state', 'district', 'city', 'ref', 'phone', 'fax', 'brand', 'aniversary', 'accountid', 'accounttype', 'cellphone', 'fbid', 'glid', 'avatar', 'avatarCoords', 'age', 'ttpay', 'ava', 'type', 'firstname', 'lastname', 'middlename', 'about', 'logs', 'staff', 'cropped', 'storeId', 'mari', 'nlt', 'lastlogs', 'kids', 'ocpu', 'inco', 'anni', 'edt', 'CCode', 'qlf', 'level', 'uLevel', 'kp', 'lastKp', 'lastbuy', 'join', 'edited', 'change', 'regcode', 'wishlist', 'newroles', 'carts', 'trdate', 'ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'ans6', 'ans7', 'lang', 'refcel', 'used');
+        return array('__isInitialized__', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'lastLogin', 'locked', 'expired', 'expiresAt', 'confirmationToken', 'passwordRequestedAt', 'roles', 'id', 'point', 'bonuspoints', 'bonusexpired', 'bonusPoint', 'totalExtraPoint', 'registerStore', 'totalBill', 'totalPayment', 'totalRedeemPoint', 'pointToNextLevel', 'lastMonthBillNo', 'noDayDeactive', 'posId', 'dob', 'sex', 'status', 'modifyStatusDate', 'reason', 'address1', 'address2', 'dship', 'address3', 'commonname', 'state', 'district', 'city', 'ref', 'phone', 'fax', 'brand', 'aniversary', 'accountid', 'accounttype', 'cellphone', 'fbid', 'glid', 'avatar', 'avatarCoords', 'age', 'ttpay', 'ava', 'type', 'firstname', 'lastname', 'middlename', 'about', 'logs', 'staff', 'cropped', 'storeId', 'mari', 'nlt', 'lastlogs', 'kids', 'ocpu', 'inco', 'anni', 'edt', 'CCode', 'qlf', 'level', 'uLevel', 'kp', 'lastKp', 'lastbuy', 'join', 'edited', 'change', 'regcode', 'wishlist', 'newroles', 'carts', 'trdate', 'ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'ans6', 'ans7', 'lang', 'refcel', 'used', 'downgradeDate', 'upgradeDate', 'updateLevel');
     }
 
     public function __clone()

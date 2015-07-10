@@ -44,8 +44,33 @@ class LoadJobsCommand extends ContainerAwareCommand
         // find user status is disabled
         $users = $dm->getRepository('VietlandUserBundle:User')->findBy(array('status' => false));
         $list_userid = array();
-        // var_dump("here");
-        // die();
+
+        //send monthly birthday email
+        // $now = new \DateTime(date('Y-m-d'));
+        // $current_date = $now->format('Y-m-d');
+
+        //     $month = date("m",strtotime($current_date ));
+        //     $start = new \DateTime("".$month."/01/2015");
+        //     $end = new \DateTime("".$month."/31/2015");
+
+        // //var_dump($start);
+
+        //         $function = "function() { var dob = this.dob, start = new Date('" . $start->format('Y-m-d') . "'), end = new Date('" . $end->format('Y-m-d') . ' 23:59:59' . "'), rt = false;
+        //         if(typeof this.dob != 'undefined'){
+        //             dob.setFullYear('" . $start->format('Y') . "');
+        //             if(start.getTime() <= dob.getTime() && dob.getTime() <= end.getTime()) rt = true;
+        //         };
+        //         return rt;
+        //         }";
+        // $usersDOB = $dm->createQueryBuilder('VietlandUserBundle:User')->field('dob')->exists(true)->where($function)->sort('id', 'desc')->getQuery()->execute();
+        //         //$num = count($usersDOB);
+        //         //var_dump($num);
+        
+        // foreach($usersDOB as $user){
+        //     $test= $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),$user->getLastname(),$user->getPoint(),$user->getLevel(),$user->getNextLevel(),$user->getDob());
+        // }
+        // end send monthly email
+        
         if(!empty($users)){
             foreach ($users as $user) {
                 $list_userid[] = $user->getCCode();
@@ -62,23 +87,6 @@ class LoadJobsCommand extends ContainerAwareCommand
                 $this->logger('process_bill', '----------->CCode = '.$data['PartyID'].' . This user is disabled! <----------');
                 continue;
             }
-            //Total Bill
-            if($data['StoreName'] != ''){
-                $repo = $dm->getRepository('VietlandUserBundle:User');
-                $user = $repo->findOneBy(array('CCode' => $data['PartyID']));            
-                $total_bill = $user->getTotalBill();
-                if($total_bill > 0){
-                    $total_bill = $total_bill + 1;
-                    $user->setTotalBill($total_bill);
-                }else{
-                    $total_bill = 1;
-                    $user->setTotalBill($total_bill);
-                    $user->setRegisterStore($data['StoreName']);
-                }
-                $dm->persist($user);
-                $dm->flush();
-            }   
-            //end Total Bill
 
             $cmd = 'php ' . $path . 'app/console crm:processbill '
                     . '--ledgerid=' . $data['ledgerID'].' '
@@ -103,7 +111,7 @@ class LoadJobsCommand extends ContainerAwareCommand
                             for(var i = 0; i < arr.length; i++){
                                 var obj = arr[i];
                                 var d = obj.expired_date;
-                                if(d == "'.$current_date.'"){
+                                if(d <= "'.$current_date.'"){
                                     rt = true;
                                 }
                             }
@@ -115,8 +123,8 @@ class LoadJobsCommand extends ContainerAwareCommand
 
         $num = count($users);
 
-        $now = new \DateTime(date('Y-m-d'));
-        $current_date = $now->format('Y-m-d');
+        // $now = new \DateTime(date('Y-m-d'));
+        // $current_date = $now->format('Y-m-d');
 
         foreach($users as $user){
             $current_BonusPoint = $user->getBonusPoint();
@@ -128,7 +136,7 @@ class LoadJobsCommand extends ContainerAwareCommand
                 $num_bonus = count($current_BonusPoint);
                 for ($i=0; $i < $num_bonus; $i++) {
                     $value = $current_BonusPoint[$i];
-                    if($value['expired_date'] === $current_date){
+                    if($value['expired_date'] <= $current_date){
                         //get redeem point of user
                         $date = new \DateTime($value['start_date']. ' 00:00:00');
                         $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
@@ -179,6 +187,102 @@ class LoadJobsCommand extends ContainerAwareCommand
         }
 
         //---> end check bonus point
+
+        //----------------------------------------------------
+        //------------->Begin Downgrade Action<---------------
+        //----------------------------------------------------
+        $repo = $dm->getRepository('VietlandUserBundle:User');
+        $data = array();
+        $data['dm'] = $this->getContainer()->get('doctrine_mongodb');
+        
+        //PROCESS: no purchase activity for 12 months AND purchase level of each Tier
+        $user_payment = $repo->getTotalPaymentOfUser($data);
+        $month12_before = date('Y-m-d', strtotime("now -12 month") );
+        
+        $users = $dm->getRepository('VietlandUserBundle:User')->findAll();
+        $now = new \DateTime(date('Y-m-d'). ' 00:00:00');
+        
+        foreach ($users as $user) {
+            $date_update_level = $user->getUpdateLevel();
+            $registration_date = $user->getJoined();
+            $level = $user->getCurrentLevel();
+            $uid = $user->getId();
+            $status = $user->getStatus();
+            $level_downgrade = null;
+
+            if(isset($user_payment[$uid])){
+                if($date_update_level != null){
+                    if($date_update_level < $month12_before){
+                        if($level == 1){
+                            if($user_payment[$uid] < 1000000){
+                                $level_downgrade = 1;
+                                $status = false;
+                            }
+
+                        }
+                        if($level == 2){
+                            if($user_payment[$uid] < 4000000){
+                                $level_downgrade = 1;
+                            }
+                        }
+                        if($level == 3){
+                            if($user_payment[$uid] < 10000000){
+                               $level_downgrade = 2;
+                            }
+                        }
+                    }
+                }else{
+                    if($registration_date < $month12_before){
+                        if($level == 1){
+                            if($user_payment[$uid] < 1000000){
+                                $level_downgrade = 1;
+                                $status = false;
+                            }
+
+                        }
+                        if($level == 2){
+                            if($user_payment[$uid] < 4000000){
+                                $level_downgrade = 1;
+                            }
+                        }
+                        if($level == 3){
+                            if($user_payment[$uid] < 10000000){
+                                $level_downgrade = 2;
+                            }
+                        }
+                    }
+                }
+
+                //Silver: 12 months no shopping inactive customer , more 3 month no shopping truncate the points
+                if($level == 1 && $status == false){
+                    $month3_before = date('Y-m-d', strtotime("now -3 month"));
+                    if($date_update_level < $month3_before){
+                        //truncate the points
+                        $user->setPoint(0);
+                            
+                        $dm->persist($user);
+                        $dm->flush(); 
+                        //send mail - sms
+                        //Cho nay kiem tra sau 3 thang ke tu ngay inactive -> khong shopping thi truncat point
+                        //Co can gui mail khong
+                    }
+                }
+
+                if(!empty($level_downgrade)){
+                    //downgrade
+                    $user->setStatus($status);
+                    $user->setCurrentLevel($level_downgrade);
+                    $user->setDowngradeDate($now);
+                    $user->setUpdateLevel($now);
+                    
+                    $dm->persist($user);
+                    $dm->flush(); 
+                    //send mail - sms
+                }
+
+            }
+        }
+        //-------->End Downgrade Action
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -201,5 +305,42 @@ class LoadJobsCommand extends ContainerAwareCommand
         }
 
         file_put_contents($file, $message, FILE_APPEND);
+    }
+
+        //new mail function
+        public function addSubToDisableEnableList($email,$fname,$mname,$lname,$point,$clevel,$nlevel,$dob){
+        $listID = '9a02d65624'; //list enable
+
+        $fullname = $fname." ".$mname. " " .$lname;
+
+        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        
+        $data = array(
+            "email_address" => $email,
+            "status" => "subscribed",
+            'merge_fields' => array("FNAME"=>$fullname,
+                "POINT"=>$point,
+                "CLEVEL"=>$clevel,
+                "NLEVEL"=>$nlevel,
+                "DOB"=>$dob->format('Y-m-d'))
+        );
+
+        $apiKeyParts = explode('-', $args['apikey']);
+        $shard = $apiKeyParts[1];
+
+        $url = 'https://' . $shard . '.api.mailchimp.com/3.0/lists/'.$listID.'/members/';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);              
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);            
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: apikey 908a07f410ddc8c45c09108d5396583a-us10"));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
     }
 }

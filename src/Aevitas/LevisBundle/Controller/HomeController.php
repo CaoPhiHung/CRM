@@ -191,26 +191,23 @@ class HomeController extends Controller {
             $form->bind($request);
 
             if ($form->isValid()) {
-
                 $pointrule = $this->get('point.rule');
                 $points = $user->getUpdatedPoints($pointrule->getPointConfig());
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
                 $userManager->updateUser($user);
+
                 if (null === $response = $event->getResponse()) {
                     $url = $this->container->get('router')->generate('levis_home_register_online_step2');
                     $response = new RedirectResponse($url);
                 }
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-                
                 $dispatcher->dispatch('user.earn.point', new EarnPointEvent($user, UserLog::SIGNUP_ONLINE));
                 $session = $request->getSession();
                 $session->set('signup', true);
-
                 return $response;
-
             }
         }
         return new Response($this->renderView('AevitasLevisBundle:Front:registerOnline.html.twig', array('form' => $form->createView())));
@@ -232,7 +229,7 @@ class HomeController extends Controller {
                     ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
                     /*                         ->setReplyTo('getsocial@atipso.com', 'Atipso Team') */
                     ->setTo($user->getEmail())
-                    ->setBody($this->renderView(':mail:signuponline.html.twig', array('user' => $user)), 'text/html', 'utf8');
+                    ->setBody($this->renderView(':mail:enableUser.html.twig', array('user' => $user)), 'text/html', 'utf8');
             $this->get('mailer')->send($message);
             $session->remove('signup');
         }

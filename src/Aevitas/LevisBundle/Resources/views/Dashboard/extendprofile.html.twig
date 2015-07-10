@@ -254,4 +254,10 @@ var query = '{{path('home_search_district')}}', upload = '{{path('cpanel_user_up
             }
         })
     });
+    jQuery(function() {
+        //$( "input#anni_date" ).prop( "disabled", true );
+        //$( ".annies input" ).prop( "disabled", true );
+        $( ".annies input#form_date" ).prop( "disabled", true );
+        $( ".annies input#anni_date" ).prop( "disabled", true );
+    });
 {% endblock %}

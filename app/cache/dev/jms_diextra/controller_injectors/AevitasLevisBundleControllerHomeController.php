@@ -11,9 +11,9 @@ class HomeController__JMSInjector
 {
     public static function inject($container) {
         require_once '/var/www/html/levis-crm/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-HomeController.php';
-        $g = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\HomeController' => array('facebookLoginAction' => array(0 => 'security.access.method_interceptor'), 'registerOnlineStep2Action' => array(0 => 'security.access.method_interceptor'), 'registerOnlineStep3Action' => array(0 => 'security.access.method_interceptor'), 'addAnniversaryAction' => array(0 => 'security.access.method_interceptor'), 'saveAnniversaryAction' => array(0 => 'security.access.method_interceptor'), 'registerStep4Action' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentAction' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentStep2Action' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentStep3Action' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentFinalStepAction' => array(0 => 'security.access.method_interceptor'))));
+        $b = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\HomeController' => array('facebookLoginAction' => array(0 => 'security.access.method_interceptor'), 'registerOnlineStep2Action' => array(0 => 'security.access.method_interceptor'), 'registerOnlineStep3Action' => array(0 => 'security.access.method_interceptor'), 'addAnniversaryAction' => array(0 => 'security.access.method_interceptor'), 'saveAnniversaryAction' => array(0 => 'security.access.method_interceptor'), 'registerStep4Action' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentAction' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentStep2Action' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentStep3Action' => array(0 => 'security.access.method_interceptor'), 'completeEnrollmentFinalStepAction' => array(0 => 'security.access.method_interceptor'))));
         $instance = new \EnhancedProxy_7e876b334352dbf2127797975530b2e07e6bbb18\__CG__\Aevitas\LevisBundle\Controller\HomeController();
-        $instance->__CGInterception__setLoader($g);
+        $instance->__CGInterception__setLoader($b);
         return $instance;
     }
 }

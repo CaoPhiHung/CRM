@@ -215,6 +215,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::StatusDisabledAction',  '_route' => 'backend_user_status_disabled',);
             }
 
+            // backend_user_downgrade
+            if ($pathinfo === '/backend/user/downgrade') {
+                return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::DowngradeAction',  '_route' => 'backend_user_downgrade',);
+            }
+
             // backend_user_addpoints
             if ($pathinfo === '/backend/user/addpoints') {
                 return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::AddPointsAction',  '_route' => 'backend_user_addpoints',);
@@ -243,6 +248,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // user_import
         if ($pathinfo === '/import') {
             return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::userImportAction',  '_route' => 'user_import',);
+        }
+
+        // update_email
+        if ($pathinfo === '/update_email') {
+            return array (  '_controller' => 'Aevitas\\LevisBundle\\Controller\\BackendController::updateEmailAction',  '_route' => 'update_email',);
         }
 
         if (0 === strpos($pathinfo, '/checkout/step')) {

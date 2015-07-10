@@ -4692,3 +4692,267 @@ array (
   'command' => 'findAll',
 )
 ================
+2015-06-05 17:53:37
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"19872906406401"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-05 17:54:08
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"121372909222601"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-05 17:54:08
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"121372909222601"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 00:36:11
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"md5":"121432909222601"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 17:06:05
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177912
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 17:10:31
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 177912
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 17:30:22
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 173815
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 19:49:34
+array (
+  'db' => 'levis_20',
+  'collection' => 'aevitaslog',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"user.$id": 173815
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================

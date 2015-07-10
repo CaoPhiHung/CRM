@@ -1,2 +1,0 @@
-phone -> 0914398480 | email -> 8315005843@tbfvietnam.com | gender -> 2 | birthday -> empty | firstname -> A NGUYEN QUANG THANG | lastname -> empty | middlename -> empty | ccode -> 8315005843 | postid -> 120728
-phone -> 0904698866 | email -> 8315005840@tbfvietnam.com | gender -> 2 | birthday -> empty | firstname -> A DINH TRONG KY | lastname -> empty | middlename -> empty | ccode -> 8315005840 | postid -> 120735

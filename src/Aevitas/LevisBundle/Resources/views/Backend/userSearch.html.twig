@@ -93,8 +93,9 @@
     </div>
     <div class="section_right">
         <input type="submit" class="btn btn-action" value="Search"/>
-        <input type="button" class="btn btn-action" value="Resend RegCode"/>
-        <input type="button" class="btn btn-action" value="Downgrade"/>
+        <input type="button" class="btn btn-action" id="btn_clearall" value="Clear All"/>
+        {# <input type="button" class="btn btn-action" value="Resend RegCode"/> #}
+        <input type="button" class="btn btn-action" id="btn_downgrade" value="Downgrade"/>
     </div>
     <div class="line_section"></div>
 
@@ -272,10 +273,20 @@
 
 <a href="{{exporturl}}" id="export_user" class="btn btn-primary">{{'Export' | trans}}</a>
 
-<form action="{{ path('user_import') }}"  {{ form_enctype(import) }} method="POST">
+{# <form action="{{ path('user_import') }}"  {{ form_enctype(import) }} method="POST">
         {{ form_rest(import) }}
     <button class="btn btn-primary">Import</button>
+</form> #}
+
+<form action="{{ path('update_email') }}"  {{ form_enctype(import) }} method="POST">
+        <div>
+            <label for="form_file_email" class="required">File Email</label>
+            <input type="file" id="form_file_email" name="file_email" required="required">
+        </div>
+        <input type="hidden" id="form__token" name="form[_token]" value="d84c1cdf192da20776183a96af8df22def959071">
+    <button class="btn btn-primary">Update Email</button>
 </form>
+
 <div id="open-form-delete" style="display: none;" title="!Important">
     Are you sure want to delete this item ?
 </div>
@@ -453,7 +464,11 @@
                     href = href.substring(0, p-1);
                     href = href + "&list_uid=" + uid;
                 }else{
-                    href = href + "&list_uid=" + uid;
+                    if(href == "/backend/user/exportadvancedseeking"){
+                        href = href + "?list_uid=" + uid;
+                    }else{
+                        href = href + "?list_uid=" + uid;
+                    }
                 }
                 //alert(href);return false;
                 jQuery("#export_user").attr('href', href);
@@ -494,6 +509,89 @@
                     location.reload();
                 }
             });
+        });
+
+        jQuery("#btn_downgrade").click(function(){                        
+            var uid = '';
+            $('.check-row').each(function() {
+                if(this.checked == true){
+                    uid += $(this).attr("value") + ',';
+                }
+            });
+            //----->temp: process follow select users
+            if(uid == ''){
+                alert('Please first make the selection from the list');
+                return false;
+            }
+
+            $.ajax({
+                url: '{{ path('backend_user_downgrade') }}',
+                dataType: 'json',
+                type: 'post',
+                data: {userid:uid},
+                success: function(response){
+                    $('.loading-bar').hide();
+                    console.log(response);
+                    if (typeof(response.error)!='undefined'){
+                        alert(response.error);
+                        return;
+                    }
+                    
+
+                    alert('Updated successfull!');
+                    location.reload();
+                }
+            });
+        });
+
+        jQuery("#btn_clearall").click(function(){
+            var advancedsearch_url = '{{ url('backend_user_advancedsearch') }}';
+            window.location.href  = advancedsearch_url;
+        });
+
+        jQuery("#form_tier").change(function() {
+            //var tier_value = jQuery("#form_tier").val();
+            jQuery("#form_from_tier").val(null);
+            jQuery("#form_to_tier").val(null);
+        });
+
+        jQuery("#form_from_tier").change(function() {
+            var tier_value = jQuery("#form_tier").val();
+            var from_tier_value = jQuery("#form_from_tier").val();
+            if(tier_value == 1){
+                switch(from_tier_value){
+                    case '1':
+                        jQuery("#form_to_tier").val(2);
+                        break;
+                    case '2':
+                        jQuery("#form_to_tier").val(3);
+                        break;
+                    case '3':
+                        jQuery("#form_to_tier").val(3);
+                        break;
+                    default:
+                        jQuery("#form_to_tier").val(null);
+                        break;
+                }
+            }else if(tier_value == 2){
+                switch(from_tier_value){
+                    case '1':
+                        jQuery("#form_to_tier").val(1);
+                        break;
+                    case '2':
+                        jQuery("#form_to_tier").val(1);
+                        break;
+                    case '3':
+                        jQuery("#form_to_tier").val(2);
+                        break;
+                    default:
+                        jQuery("#form_to_tier").val(null);
+                        break;
+                }
+            }
+            
+            // jQuery("#form_from_tier").val(null);
+            // jQuery("#form_to_tier").val(null);
         });
 
     });

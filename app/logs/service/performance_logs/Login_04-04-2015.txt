@@ -1,2 +1,0 @@
-Login Time -> 693 ms
-Login Time -> 2678 ms

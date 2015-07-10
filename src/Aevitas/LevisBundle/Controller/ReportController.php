@@ -1026,7 +1026,7 @@ class ReportController extends Controller {
 
     /**
      * @Route("/backend/user/user_statement/{id}", name="backend_report_userstatement")
-     * @Secure(roles="ROLE_ADMIN, ROLE_REPORT")
+     * @Secure(roles="ROLE_ADMIN,ROLE_STAFF, ROLE_REPORT")
      * @Template()
      */
     public function userStatementAction($id) {

@@ -21,6 +21,10 @@ use Aevitas\LevisBundle\Document\GiftMeta;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Vietland\UserBundle\Document\UserLog;
+use PHPExcel;
+use \PHPExcel_IOFactory as IOFactory;
+use \PHPExcel_Cell;
+
 class BackendController extends Controller {
     /**
      * @Route("/backend", name="backend_index")
@@ -187,6 +191,7 @@ class BackendController extends Controller {
         $export = $this->get('router')->generate('backend_user_exportadvancedseeking',$data);
         $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
         $import = $this->createFormBuilder()->add('file', 'file')->getForm();
+        $update_email = $this->createFormBuilder()->add('file_email', 'file')->getForm();
         return new Response($this->renderView('AevitasLevisBundle:Backend:userSearch.html.twig', array(
                     'users' => $users, 'pagination' => $pagination->getView($this), 'form_level' => $form_level->createView(),
                     'form_gender' => $form_gender->createView(),
@@ -199,6 +204,7 @@ class BackendController extends Controller {
                     'form_point' => $form_point->createView(),
                     'form_bonuspoint' => $form_bonuspoint->createView(),
                     'import' => $import->createView(),
+                    'update_email' => $update_email->createView(),
                     'exporturl' => $export
         )));
     }
@@ -252,75 +258,39 @@ class BackendController extends Controller {
         )));
     }
 
-            /**
-     * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
-     * @param  string $method The API method to call, e.g. 'lists/list'
-     * @param  array  $args   An array of arguments to pass to the method. Will be json-encoded for you.
-     * @return array          Associative array of json decoded API response.
-     */
-    public function call($method, $args=array(), $timeout = 10)
-    {
-        return $this->makeRequest($method, $args, $timeout);
-    }
-
-    /**
-     * Performs the underlying HTTP request. Not very exciting
-     * @param  string $method The API method to be called
-     * @param  array  $args   Assoc array of parameters to be passed
-     * @return array          Assoc array of decoded result
-     */
-    private function makeRequest($method, $args=array(), $timeout = 10)
-    {      
-        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
-        list(, $datacentre) = explode('-', $args['apikey']);
-        $this->api_endpoint = str_replace('<dc>', $datacentre, 'https://<dc>.api.mailchimp.com/2.0');
-        $url = $this->api_endpoint.'/'.$method.'.json';
-
-        if (function_exists('curl_init') && function_exists('curl_setopt')){
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');       
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($args));
-            $result = curl_exec($ch);
-            curl_close($ch);
-        } else {
-            $json_data = json_encode($args);
-            $result    = file_get_contents($url, null, stream_context_create(array(
-                'http' => array(
-                    'protocol_version' => 1.1,
-                    'user_agent'       => 'PHP-MCAPI/2.0',
-                    'method'           => 'POST',
-                    'header'           => "Content-type: application/json\r\n".
-                                          "Connection: close\r\n" .
-                                          "Content-length: " . strlen($json_data) . "\r\n",
-                    'content'          => $json_data,
-                ),
-            )));
+    //Hung fix - 1/7/2015
+    public function addSubToDisableEnableList($email,$fname,$mname,$lname,$status){
+        $listID = 'ee10dd30f5'; //list enable
+        if($status == false){
+            $listID = 'eb01b9b503'; // list disable
         }
+        $fullname = $fname." ".$mname. " " .$lname;
+        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        
+        $data = array(
+            "email_address" => $email,
+            "status" => "subscribed",
+            'merge_fields' => array("FNAME"=>$fullname)
+        );
 
-        return $result ? json_decode($result, true) : false;
-    }
+        $apiKeyParts = explode('-', $args['apikey']);
+        $shard = $apiKeyParts[1];
 
-    public function addSubToDisableEnableList($email,$fname,$mname,$lname,$username,$status,$reason){
-                $listID = 'ad11aeda1e'; //list enable
-                if($status == false){
-                    $listID = 'eb01b9b503'; // list disable
-                }
-                $result = $this->call('lists/subscribe', array(
-                'id'                => $listID,
-                'email'             => array('email'=>$email),
-                'merge_vars'        => array('EMAIL'=> $email, 'FNAME'=>$fname, 'MNAME'=> $mname  ,'LNAME'=> $lname,
-                                            'UNAME'=> $username,'STATUS'=>$status,'REASON'=>$reason),
-                'double_optin'      => false,
-                'update_existing'   => true,
-                'replace_interests' => false,
-                'send_welcome'      => false,
-            ));
+        $url = 'https://' . $shard . '.api.mailchimp.com/3.0/lists/'.$listID.'/members/';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);              
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);            
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: apikey 908a07f410ddc8c45c09108d5396583a-us10"));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
+
     }
 
 
@@ -392,6 +362,7 @@ class BackendController extends Controller {
         $export = $this->get('router')->generate('backend_user_exportadvancedseeking',$data);
         $pagination = new Pagination($page, $repo->getCount(), $request->getUri(), $limit);
         $import = $this->createFormBuilder()->add('file', 'file')->getForm();
+        $update_email = $this->createFormBuilder()->add('file_email', 'file')->getForm();
         return new Response($this->renderView('AevitasLevisBundle:Backend:userSearch.html.twig', array(
                     'data' => $data, 'users' => $users, 'pagination' => $pagination->getView($this), 'form_level' => $form_level->createView(),
                     'form_gender' => $form_gender->createView(),
@@ -404,6 +375,7 @@ class BackendController extends Controller {
                     'form_point' => $form_point->createView(),
                     'form_bonuspoint' => $form_bonuspoint->createView(),
                     'import' => $import->createView(),
+                    'update_email' => $update_email->createView(),
                     'exporturl' => $export
         )));
     }
@@ -554,6 +526,7 @@ class BackendController extends Controller {
         }else{
             $status = false;
         }
+        $test = 'true';
 
         $uid = null;
         $arr_userid = explode(',', $userid);
@@ -568,29 +541,72 @@ class BackendController extends Controller {
                     $user->setModifyStatusDate();
 
                     //Mailchimp api add subcriseber to list
-                    $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
-                                        $user->getLastname(),$user->getUsername(),$user->getStatus(),
-                                        $user->getReason());
+                    $test= $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+                                        $user->getLastname(),$status);
                     $dm->persist($user);
                     $dm->flush(); 
-                    if($status == 'true'){
-                            $msg = $this->renderView(":sms:enableCustomer.html.twig", array('fullname' => $user->getFirstname()));
-                            $this->get('sms_sender')
-                            ->setPhone($user->getCellphone())
-                            ->setSms($msg)
-                            ->send()
-                    ;
-                    }else{
-                            $msg = $this->renderView(":sms:disableCustomer.html.twig", array('fullname' => $user->getFirstname()));
-                            $this->get('sms_sender')
-                            ->setPhone($user->getCellphone())
-                            ->setSms($msg)
-                            ->send()
-                    ;
-                    }
+                    // if($status == 'true'){
+                    //         $msg = $this->renderView(":sms:enableCustomer.html.twig", array('fullname' => $user->getFirstname()));
+                    //         $this->get('sms_sender')
+                    //         ->setPhone($user->getCellphone())
+                    //         ->setSms($msg)
+                    //         ->send()
+                    // ;
+                    // }else{
+                    //         $msg = $this->renderView(":sms:disableCustomer.html.twig", array('fullname' => $user->getFirstname()));
+                    //         $this->get('sms_sender')
+                    //         ->setPhone($user->getCellphone())
+                    //         ->setSms($msg)
+                    //         ->send()
+                    // ;
+                    // }
 
                 }               
             }
+        }
+        
+        exit(json_encode(array('test' => $test,
+            'result' => true,
+            'content' => 'CONTENT'
+        )));
+    }
+
+    /**
+     * @Route("/backend/user/downgrade", name="backend_user_downgrade")
+     * 
+     */
+    public function DowngradeAction() {
+        $request  = $this->getRequest();
+        $userid = $request->get('userid');
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $repo = $dm->getRepository('VietlandUserBundle:User');
+        $data['user_id'] = $userid;        
+        $data['dm'] = $this->get('doctrine_mongodb');
+
+        $month12_before = date('Y-m-d', strtotime("now -12 month") );
+        $arr_userid = explode(',', $userid);
+        $users = $repo->getUserFromID($data);
+        $now = new \DateTime(date('Y-m-d'). ' 00:00:00');
+        
+        foreach ($users as $user) {
+            $level = $user->getCurrentLevel();
+            $status = $user->getStatus();
+            if($level === 2){
+                $level_downgrade = 1;
+            }else if($level === 3){
+                $level_downgrade = 2;
+            }else{
+                $level_downgrade = 1;
+            }
+            //disable user
+            $user->setCurrentLevel($level_downgrade);                        
+            $user->setDowngradeDate($now);
+            $user->setUpdateLevel($now);
+                
+            $dm->persist($user);
+            $dm->flush(); 
+            //send mail - sms
+            
         }
         
         exit(json_encode(array(
@@ -825,6 +841,7 @@ class BackendController extends Controller {
             'content' => 'CONTENT'
         )));
     }
+    
 
     /**
      * @Route("/check/posbill", name="admin_check_posbill")
@@ -991,5 +1008,86 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BET
         // $data = $import->getData();
         // $excelEngine->importToObject($data['file'], $this->get('fos_user.user_manager'), '\Vietland\\UserBundle\\Document\\User');
         return new \Symfony\Component\HttpFoundation\RedirectResponse($this->generateUrl('backend_user_list'));
+    }
+
+    /**
+     * @Route("/update_email", name="update_email")
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function updateEmailAction() {
+        // $uploadDir = '/var/www/html/levis-crm-dev/web/data/';
+
+        // $file_name = $_FILES['file_email']['name'];
+        // $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+        // $new_name = 'list_email_'.strtotime(date('Y-m-d h:i:s')).'.'.$ext;
+        // $target_file = $uploadDir . $new_name;
+        //if (move_uploaded_file($_FILES["file_email"]["tmp_name"], $target_file)) {
+        if ($_FILES['file_email']['name'] != '') {
+            $filename = $_FILES["file_email"]["tmp_name"];
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+
+            $objPHPExcel = new PHPExcel();
+            $inputFileType = IOFactory::identify($filename);
+            $objReader = IOFactory::createReader($inputFileType);             
+            $objReader->setReadDataOnly(true);            
+            $objPHPExcel = $objReader->load("$filename");             
+            $total_sheets=$objPHPExcel->getSheetCount();             
+            $allSheetName=$objPHPExcel->getSheetNames();
+            $objWorksheet  = $objPHPExcel->setActiveSheetIndex(0);
+            $highestRow    = $objWorksheet->getHighestRow();
+            $highestColumn = $objWorksheet->getHighestColumn();
+            $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+            $arraydata = array();
+            $list_ccode = '';
+            $data_email = array();
+
+            for ($row = 2; $row <= $highestRow;++$row)
+            {
+                for ($col = 0; $col <$highestColumnIndex;++$col)
+                {
+                    $value=$objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
+                    $arraydata[$row-2][$col]=$value;
+                }
+                $list_ccode .= $arraydata[$row-2][0].',';
+                $data_email[$arraydata[$row-2][0]] = $arraydata[$row-2][1];
+                //update email for user
+                // $user = $dm->getRepository('VietlandUserBundle:User')->findOneBy(array('CCode' => (string) $arraydata[$row-2][0]));
+                // $user->setEmail($arraydata[$row-2][1]);
+
+                // $dm->persist($user);
+                // $dm->flush();
+            }
+
+            //update email for user
+            $function = 'function(){
+                            var rt = false;
+                            var ccode = this.CCode;
+                            var list = "'.$list_ccode.'";
+                            var list_ccode = list.split(",");
+                            var n = list_ccode.length;
+                            for(var i = 0; i < n; i++){
+                                if(list_ccode[i] == ccode){
+                                    return true;
+                                }
+                                rt = false;
+                            }
+                            return rt;
+                        }';
+            //$users = $dm->getRepository('VietlandUserBundle:User')->findAll(array('$where' => $function));
+            $users = $dm->createQueryBuilder('VietlandUserBundle:User')
+                                ->field('CCode')->where($function)->getQuery()->execute();
+            $index = 0;            
+            foreach ($users as $user) {
+                $ccode = $user->getCCode();
+                $user->setEmail($data_email[$ccode]);
+                $dm->persist($user);
+                $dm->flush();
+
+                $index++;
+            }
+        }
+        
+        return new \Symfony\Component\HttpFoundation\RedirectResponse($this->generateUrl('backend_user_advancedsearch'));
     }
 }

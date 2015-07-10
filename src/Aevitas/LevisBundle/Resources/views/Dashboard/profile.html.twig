@@ -171,6 +171,7 @@ function crop(){
     $('form#frm').submit();
 }
 </script>
+
         {% endblock %}
 {% block javascript %}
 var query = '{{path('home_search_district')}}', upload = '{{path('cpanel_user_upload_image')}}', searchXhr, formvalid = true;
@@ -315,4 +316,6 @@ $('select#city').on('change', function() {
                 $("#district").select2("val", val);
             });
         }
+
 {% endblock %}
+

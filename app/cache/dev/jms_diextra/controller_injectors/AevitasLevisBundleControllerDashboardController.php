@@ -11,9 +11,9 @@ class DashboardController__JMSInjector
 {
     public static function inject($container) {
         require_once '/var/www/html/levis-crm/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-DashboardController.php';
-        $l = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\DashboardController' => array('dashboardAction' => array(0 => 'security.access.method_interceptor'), 'profileExtendedAction' => array(0 => 'security.access.method_interceptor'), 'profileAction' => array(0 => 'security.access.method_interceptor'), 'profileActivityAction' => array(0 => 'security.access.method_interceptor'), 'shoppingHistoryAction' => array(0 => 'security.access.method_interceptor'), 'updateAvatarAction' => array(0 => 'security.access.method_interceptor'), 'cropAvatar' => array(0 => 'security.access.method_interceptor'), 'saveTripleDateAction' => array(0 => 'security.access.method_interceptor'), 'userStatementAction' => array(0 => 'security.access.method_interceptor'))));
+        $g = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\DashboardController' => array('dashboardAction' => array(0 => 'security.access.method_interceptor'), 'profileExtendedAction' => array(0 => 'security.access.method_interceptor'), 'profileAction' => array(0 => 'security.access.method_interceptor'), 'profileActivityAction' => array(0 => 'security.access.method_interceptor'), 'shoppingHistoryAction' => array(0 => 'security.access.method_interceptor'), 'updateAvatarAction' => array(0 => 'security.access.method_interceptor'), 'cropAvatar' => array(0 => 'security.access.method_interceptor'), 'saveTripleDateAction' => array(0 => 'security.access.method_interceptor'), 'userStatementAction' => array(0 => 'security.access.method_interceptor'))));
         $instance = new \EnhancedProxy_345014e321e3c5eade5e936f9e0f5207c0409bc0\__CG__\Aevitas\LevisBundle\Controller\DashboardController();
-        $instance->__CGInterception__setLoader($l);
+        $instance->__CGInterception__setLoader($g);
         return $instance;
     }
 }

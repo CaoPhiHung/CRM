@@ -5312,3 +5312,234 @@ array (
   'command' => 'findAll',
 )
 ================
+2015-06-05 17:50:58
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"status":false
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-05 17:51:04
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"status":true
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 09:10:43
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"status": false
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 09:10:54
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"status"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 09:11:02
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"status":0
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 09:48:42
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"_id":64512904306201
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================
+2015-06-06 16:12:59
+array (
+  'db' => 'levis_20',
+  'collection' => 'jobqueue',
+  'action' => 'collection.index',
+  'format' => 'json',
+  'criteria' => '{
+"bill":"32952925530801"
+}',
+  'newobj' => '{
+	\'$set\': {
+		//your attributes
+	}
+}',
+  'field' => 
+  array (
+    0 => '_id',
+    1 => '',
+    2 => '',
+    3 => '',
+  ),
+  'order' => 
+  array (
+    0 => 'desc',
+    1 => 'asc',
+    2 => 'asc',
+    3 => 'asc',
+  ),
+  'limit' => '0',
+  'pagesize' => '10',
+  'command' => 'findAll',
+)
+================

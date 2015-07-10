@@ -81,7 +81,7 @@ class UserRepository extends DocumentRepository {
                 ->field('enabled')->equals(true)
                 ->where("function() { return this.roles.length == 0; }")
                 ->limit((int) $limit)
-                ->skip(((int) $page - 1) * (int) $limit);
+                ->skip(((int) $page - 1) * (int) $limit)->sort('id', 'desc');;
         $countQuery = clone $qb;
         $this->count = $countQuery->count()->getQuery()->execute();
         return $qb->getQuery()->execute();
@@ -504,7 +504,7 @@ class UserRepository extends DocumentRepository {
                 $bill_count = 1;
                 if(!empty($aevitagslog)){
                     $index = 0;
-                    $length_arr = count($aevitagslog);
+                    $length_arr = count(iterator_to_array($aevitagslog));
                     foreach ($aevitagslog as $doc) {
                         $index++;
                         if($doc['user']['$id'] !== $uid_before){
@@ -569,7 +569,7 @@ class UserRepository extends DocumentRepository {
                 if(!empty($aevitagslog)){                    
                     $totalPayment = 0;
                     $index = 0;
-                    $length_arr = count($aevitagslog);
+                    $length_arr = count(iterator_to_array($aevitagslog));
                     foreach ($aevitagslog as $doc) {
                         $index++;
                         if($doc['user']['$id'] !== $uid_before){
@@ -594,6 +594,71 @@ class UserRepository extends DocumentRepository {
                     }
                 }
                 $builder->field('_id')->in(explode(',', $str_uid));
+            }
+        }
+
+        //Tier search
+        if(!empty($data['tier'])){
+            if($data['tier'] == '2'){
+                $from_tier = $data['from_tier'];
+                $to_tier = $data['to_tier'];
+                $number_day = $data['tier_lastdays'];
+                $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+                $day = date("j", strtotime($lastdate));
+                $month = date("n", strtotime($lastdate));
+                $year = date("Y", strtotime($lastdate));
+                
+                $function = 'function(){
+                                var rt = false;
+                                var d = this.downgradeDate;
+                                if(this.downgradeDate != null){
+                                    if(d.getFullYear() > '.$year.'){
+                                        rt = true;
+                                    }
+                                    if(d.getFullYear() == '.$year.'){
+                                        if(d.getDate() >= '.($day+1).' &&  d.getMonth() == '.($month-1).'){
+                                            rt = true;
+                                        }
+                                        if(d.getMonth() > '.($month-1).'){
+                                            rt = true;
+                                        }
+                                    }
+                                }
+                                return rt;
+                            }';
+                $builder->field('downgradeDate')->exists(true)->where($function);
+                $builder->field('level')->equals((int) $to_tier);
+
+            }else if($data['tier'] == '1'){
+                $from_tier = $data['from_tier'];
+                $to_tier = $data['to_tier'];
+                $number_day = $data['tier_lastdays'];
+                $lastdate = date('Y-m-d', strtotime("now -".$number_day." days") );
+                $day = date("j", strtotime($lastdate));
+                $month = date("n", strtotime($lastdate));
+                $year = date("Y", strtotime($lastdate));
+                
+                $function = 'function(){
+                                var rt = false;
+                                var d = this.upgradeDate;
+                                if(this.upgradeDate != null){
+                                    if(d.getFullYear() > '.$year.'){
+                                        rt = true;
+                                    }
+                                    if(d.getFullYear() == '.$year.'){
+                                        if(d.getDate() >= '.($day+1).' &&  d.getMonth() == '.($month-1).'){
+                                            rt = true;
+                                        }
+                                        if(d.getMonth() > '.($month-1).'){
+                                            rt = true;
+                                        }
+                                    }
+                                }
+                                return rt;
+                            }';
+                $builder->field('upgradeDate')->exists(true)->where($function);
+                $builder->field('level')->equals((int) $to_tier);
+
             }
         }
 
@@ -752,6 +817,131 @@ class UserRepository extends DocumentRepository {
                         ->getQuery()
                         ->execute();
         ;
+    }
+
+    public function getUserSilver($data){
+        $builder = $this->createQueryBuilder();
+        $builder->field('enabled')->equals(true)->field('posId')->exists(true)->field('CCode')->exists(true);
+        
+        $builder->where("function() { return this.roles.length == 0; }");
+        
+        if (!empty($data['user_id'])){
+            $array_uid = explode(',', $data['user_id']);
+            $builder->field('_id')->in($array_uid);
+        }
+        //$now = new \DateTime(date('Y-m-d'). ' 23:59:59');
+        $now = getdate();
+        $function = 'function(){
+                    var rt = false;
+                    if(typeof this.lastbuy != ""){                            
+                        var lastbuy = this.lastbuy;
+                        var year = Number('.$now['year'].') - lastbuy.getFullYear();
+                        var month = Number('.$now['mon'].') - (lastbuy.getMonth() + 1);
+                        var day = Number('.$now['mday'].') - lastbuy.getDate();
+                        
+                        if(year > 1){
+                            rt = true;
+                        }else if(year == 1 && month > 3){
+                            rt = true;
+                        }else if(year == 1 && month == 3 && day > 0){
+                            rt = true;
+                        }
+                    }
+                    return rt;
+                }';
+        $builder->field('lastbuy')->exists(true)->where($function);
+        $level = 1;
+        $builder->field('level')->equals($level);
+
+        return $builder
+                        ->getQuery()
+                        ->execute();
+        ;
+    }
+
+    public function getUserFromID($data){
+        $builder = $this->createQueryBuilder();
+        $builder->field('enabled')->equals(true)->field('posId')->exists(true)->field('CCode')->exists(true);
+        
+        $builder->where("function() { return this.roles.length == 0; }");
+        
+        if (!empty($data['user_id'])){
+            $array_uid = explode(',', $data['user_id']);
+            $list_uid = array();
+            for($i = 0; $i < count($array_uid)-1; $i++){
+                $list_uid[$i] = (int) $array_uid[$i];
+            }
+            $builder->field('_id')->in($list_uid);
+        }
+        
+        return $builder
+                        ->getQuery()
+                        ->execute();
+        ;
+    }
+
+    public function getTotalPaymentOfUser($data){
+
+        $lastdate = date('Y-m-d', strtotime("now -12 month") );
+        $day = date("j", strtotime($lastdate));
+        $month = date("n", strtotime($lastdate));
+        $year = date("Y", strtotime($lastdate));
+        
+        $function = 'function(){
+                        var rt = false;
+                        var d = this.created;
+                        if(typeof this.totalPayment != "undefined"){
+                            if(d.getFullYear() > '.$year.'){
+                                rt = true;
+                            }
+                            if(d.getFullYear() == '.$year.'){
+                                if(d.getDate() >= '.($day+1).' &&  d.getMonth() == '.($month-1).'){
+                                    rt = true;
+                                }
+                                if(d.getMonth() > '.($month-1).'){
+                                    rt = true;
+                                }
+                            }
+                            
+                        }                       
+                        return rt;
+                    }';
+        $dm = $data['dm']->getManager();
+        $mongo = new \MongoClient();
+        $db = $dm->getConnection()->getConfiguration()->getDefaultDB();
+        $col_log = $mongo->$db->aevitaslog;
+        $aevitagslog = $col_log->find(array('$where' => $function))->sort(array('user.$id' => 1, "created" => 1));
+        
+        $str_uid = '';
+        $uid_before = '';
+        $user_payment = array();
+
+        if(!empty($aevitagslog)){                    
+            $totalPayment = 0;
+            $index = 0;
+            
+            $length_arr = count(iterator_to_array($aevitagslog));
+            foreach ($aevitagslog as $doc) {
+                $index++;
+                if($doc['user']['$id'] !== $uid_before){
+                    if($index > 1){
+                        $user_payment[$uid_before] = $totalPayment;
+                    }                                                   
+                    $totalPayment = $doc['totalPayment'];
+                    if($index == $length_arr){
+                        $user_payment[$doc['user']['$id']] = $totalPayment;
+                    }
+                }else{
+                    $totalPayment = $totalPayment + $doc['totalPayment'];
+                    if($index == $length_arr){
+                        $user_payment[$uid_before] = $totalPayment;
+                    }
+                }
+                $uid_before = $doc['user']['$id'];
+            }
+        }
+        return $user_payment;
+
     }
 
     public function findOneBy(array $criteria) {

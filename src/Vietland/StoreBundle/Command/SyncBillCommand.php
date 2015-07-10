@@ -188,10 +188,211 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
         $duplicated = array();
         $check_duplicate_cellphone_collection = array();
 
+
+        // find user status is disabled
+        $disableUsers = $dm->getRepository('VietlandUserBundle:User')->findBy(array('status' => false));
+        $list_userid = array();
+        // var_dump("here");
+        // die();
+        if(!empty($disableUsers)){
+            foreach ($disableUsers as $user) {
+                $list_userid[] = $user->getCCode();
+            }
+        }
+
+        //end find disabled
+
+
+        //---->begin check bonus point - expired date
+        //$dm = $this->get('doctrine.odm.mongodb.document_manager');
+        //$users = $dm->getRepository('VietlandUserBundle:User')->findAll();
+        $now = new \DateTime(date('Y-m-d'));
+        $current_date = $now->format('Y-m-d');
+
+        $function = 'function(){
+                        var rt = false;
+                        if(typeof this.bonusPoint != ""){                            
+                            var arr = this.bonusPoint;
+                            for(var i = 0; i < arr.length; i++){
+                                var obj = arr[i];
+                                var d = obj.expired_date;
+                                if(d <= "'.$current_date.'"){
+                                    rt = true;
+                                }
+                            }
+                        }
+                        return rt;
+                    }';            
+        
+        $usersbonus = $dm->createQueryBuilder('VietlandUserBundle:User')->field('bonusPoint')->exists(true)->where($function)->sort('id', 'desc')->getQuery()->execute();
+
+        $num = count($usersbonus);
+
+        // $now = new \DateTime(date('Y-m-d'));
+        // $current_date = $now->format('Y-m-d');
+
+        foreach($usersbonus as $user){
+            $current_BonusPoint = $user->getBonusPoint();
+            
+            if(!empty($current_BonusPoint)){
+                $current_Point = $user->getPoint();
+                $current_TotalExtraPoint = $user->getTotalExtraPoint();
+
+                $num_bonus = count($current_BonusPoint);
+                for ($i=0; $i < $num_bonus; $i++) {
+                    $value = $current_BonusPoint[$i];
+                    if($value['expired_date'] <= $current_date){
+                        //get redeem point of user
+                        $date = new \DateTime($value['start_date']. ' 00:00:00');
+                        $redeems = $dm->createQueryBuilder('AevitasLevisBundle:AbstractRedeem')
+                                    ->field('uid')->equals($user->getId())
+                                    ->field('created')->gte($date)->sort('time', 'desc')->getQuery()->execute();
+                        $redeem_point = 0;
+                        foreach ($redeems as $obj) {
+                            $redeem_point = $obj->getPoint();
+                            break;
+                        }
+                        //end get redeem point
+                        if($value['type'] === 1){
+                            if($redeem_point <= $value['extra_point']){
+                                $expired_point = $value['extra_point'] - $redeem_point;
+
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $expired_point;
+                                $current_Point = $current_Point - $expired_point;
+                                unset($current_BonusPoint[$i]);
+                            }else{
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $value['extra_point'];
+                                unset($current_BonusPoint[$i]);
+                            }
+                        }
+
+                        if($value['type'] === 2){
+                            if($redeem_point <= $value['extra_point']){
+                                $expired_point = $value['extra_point'] - $redeem_point;
+
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $expired_point;
+                                $current_Point = $current_Point - $expired_point;
+                                unset($current_BonusPoint[$i]);
+                            }else{
+                                $current_TotalExtraPoint = $current_TotalExtraPoint - $value['extra_point'];
+                                unset($current_BonusPoint[$i]);
+                            }
+                        }
+                    }
+                }
+
+                //updated value of BonusPoint for user
+                $user->setBonusPoint($current_BonusPoint);
+                $user->setTotalExtraPoint((int) $current_TotalExtraPoint);
+                $user->setPoint((int) $current_Point);
+
+                $dm->persist($user);
+                $dm->flush();
+            }
+        }
+
+        //---> end check bonus point
+
+        //----------------------------------------------------
+        //------------->Begin Downgrade Action<---------------
+        //----------------------------------------------------
+        $repo = $dm->getRepository('VietlandUserBundle:User');
+        $data = array();
+        $data['dm'] = $this->getContainer()->get('doctrine_mongodb');
+        
+        //PROCESS: no purchase activity for 12 months AND purchase level of each Tier
+        $user_payment = $repo->getTotalPaymentOfUser($data);
+        $month12_before = date('Y-m-d', strtotime("now -12 month") );
+        
+        $users = $dm->getRepository('VietlandUserBundle:User')->findAll();
+        $now = new \DateTime(date('Y-m-d'). ' 00:00:00');
+        
+        foreach ($users as $user) {
+            $date_update_level = $user->getUpdateLevel();
+            $registration_date = $user->getJoined();
+            $level = $user->getCurrentLevel();
+            $uid = $user->getId();
+            $status = $user->getStatus();
+            $level_downgrade = null;
+
+            if(isset($user_payment[$uid])){
+                if($date_update_level != null){
+                    if($date_update_level < $month12_before){
+                        if($level == 1){
+                            if($user_payment[$uid] < 1000000){
+                                $level_downgrade = 1;
+                                $status = false;
+                            }
+
+                        }
+                        if($level == 2){
+                            if($user_payment[$uid] < 4000000){
+                                $level_downgrade = 1;
+                            }
+                        }
+                        if($level == 3){
+                            if($user_payment[$uid] < 10000000){
+                               $level_downgrade = 2;
+                            }
+                        }
+                    }
+                }else{
+                    if($registration_date < $month12_before){
+                        if($level == 1){
+                            if($user_payment[$uid] < 1000000){
+                                $level_downgrade = 1;
+                                $status = false;
+                            }
+
+                        }
+                        if($level == 2){
+                            if($user_payment[$uid] < 4000000){
+                                $level_downgrade = 1;
+                            }
+                        }
+                        if($level == 3){
+                            if($user_payment[$uid] < 10000000){
+                                $level_downgrade = 2;
+                            }
+                        }
+                    }
+                }
+
+                //Silver: 12 months no shopping inactive customer , more 3 month no shopping truncate the points
+                if($level == 1 && $status == false){
+                    $month3_before = date('Y-m-d', strtotime("now -3 month"));
+                    if($date_update_level < $month3_before){
+                        //truncate the points
+                        $user->setPoint(0);
+                            
+                        $dm->persist($user);
+                        $dm->flush(); 
+                        //send mail - sms
+                        //Cho nay kiem tra sau 3 thang ke tu ngay inactive -> khong shopping thi truncat point
+                        //Co can gui mail khong
+                    }
+                }
+
+                if(!empty($level_downgrade)){
+                    //downgrade
+                    $user->setStatus($status);
+                    $user->setCurrentLevel($level_downgrade);
+                    $user->setDowngradeDate($now);
+                    $user->setUpdateLevel($now);
+                    
+                    $dm->persist($user);
+                    $dm->flush(); 
+                    //send mail - sms
+                }
+
+            }
+        }
+        //-------->End Downgrade Action
+
+
+
         // Index by cell phone
         foreach ($results as $key => $result) {
-            //var_dump($result);
-            //die();
 
             $data[$result['PartyID']] = $result;
 
@@ -214,17 +415,6 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
             $duplicated[$key] = $index;
         }
        $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
-
-       // find user status is disabled
-        $users = $dm->getRepository('VietlandUserBundle:User')->findBy(array('status' => false));
-        $list_userid = array();
-        // var_dump("here");
-        // die();
-        if(!empty($users)){
-            foreach ($users as $user) {
-                $list_userid[] = $user->getCCode();
-            }
-        }
         if (count($bill_diff_from_erp)) {
             // Initialize user array information
             $users = array(); 
@@ -244,14 +434,15 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
                 }
 
                 if(!empty($list_userid) && in_array($id, $list_userid)){
-                    $message .= " is ignored. Account ID = $id - This user is disabled";
-                    //$this->logger('process_bill', '----------->CCode = '.$data['PartyID'].' . This user is disabled! <----------');
+                //$this->logger('process_bill', '----------->CCode = '.$id.' . This user is disabled! <----------');
+                //continue;
+                    $message .= " is ignored. Account ID = $id is disabled!!!";
                     $this->logger('jobqueue', $message);
                     return;
-                }
+                 }
 
-                $message .= ' is transfered successful !';
-                $this->logger('jobqueue', $message);
+                //$message .= ' is transfered successful !';
+                // $this->logger('jobqueue', $message);
 
                 // Get job in job queue indentified by BillID
                 $job = $dm->getRepository('VietlandStoreBundle:Jobqueue')

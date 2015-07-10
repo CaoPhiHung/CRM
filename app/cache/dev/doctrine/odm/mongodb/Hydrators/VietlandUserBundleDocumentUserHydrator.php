@@ -67,30 +67,6 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $hydratedData['enabled'] = $return;
         }
 
-        /** @Field(type="boolean") */
-        if (isset($data['status'])) {
-            $value = $data['status'];
-            $return = (bool) $value;
-            $this->class->reflFields['status']->setValue($document, $return);
-            $hydratedData['status'] = $return;
-        }
-
-        /** @Field(type="date") */
-        if (isset($data['modifyStatusDate'])) {
-            $value = $data['modifyStatusDate'];
-            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
-            $this->class->reflFields['modifyStatusDate']->setValue($document, clone $return);
-            $hydratedData['modifyStatusDate'] = $return;
-        }
-
-        /** @Field(type="string") */
-        if (isset($data['reason'])) {
-            $value = $data['reason'];
-            $return = (string) $value;
-            $this->class->reflFields['reason']->setValue($document, $return);
-            $hydratedData['reason'] = $return;
-        }
-
         /** @Field(type="string") */
         if (isset($data['salt'])) {
             $value = $data['salt'];
@@ -179,6 +155,22 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $hydratedData['point'] = $return;
         }
 
+        /** @Field(type="int") */
+        if (isset($data['bonuspoints'])) {
+            $value = $data['bonuspoints'];
+            $return = (int) $value;
+            $this->class->reflFields['bonuspoints']->setValue($document, $return);
+            $hydratedData['bonuspoints'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['bonusexpired'])) {
+            $value = $data['bonusexpired'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['bonusexpired']->setValue($document, clone $return);
+            $hydratedData['bonusexpired'] = $return;
+        }
+
         /** @Field(type="collection") */
         if (isset($data['bonusPoint'])) {
             $value = $data['bonusPoint'];
@@ -251,22 +243,6 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $hydratedData['noDayDeactive'] = $return;
         }
 
-        /** @Field(type="int") */
-        if (isset($data['bonuspoints'])) {
-            $value = $data['bonuspoints'];
-            $return = (int) $value;
-            $this->class->reflFields['bonuspoints']->setValue($document, $return);
-            $hydratedData['bonuspoints'] = $return;
-        }
-
-        /** @Field(type="date") */
-        if (isset($data['bonusexpired'])) {
-            $value = $data['bonusexpired'];
-            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
-            $this->class->reflFields['bonusexpired']->setValue($document, clone $return);
-            $hydratedData['bonusexpired'] = $return;
-        }
-
         /** @Field(type="string") */
         if (isset($data['posId'])) {
             $value = $data['posId'];
@@ -289,6 +265,30 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $return = (int) $value;
             $this->class->reflFields['sex']->setValue($document, $return);
             $hydratedData['sex'] = $return;
+        }
+
+        /** @Field(type="boolean") */
+        if (isset($data['status'])) {
+            $value = $data['status'];
+            $return = (bool) $value;
+            $this->class->reflFields['status']->setValue($document, $return);
+            $hydratedData['status'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['modifyStatusDate'])) {
+            $value = $data['modifyStatusDate'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['modifyStatusDate']->setValue($document, clone $return);
+            $hydratedData['modifyStatusDate'] = $return;
+        }
+
+        /** @Field(type="string") */
+        if (isset($data['reason'])) {
+            $value = $data['reason'];
+            $return = (string) $value;
+            $this->class->reflFields['reason']->setValue($document, $return);
+            $hydratedData['reason'] = $return;
         }
 
         /** @Field(type="string") */
@@ -833,6 +833,30 @@ class VietlandUserBundleDocumentUserHydrator implements HydratorInterface
             $return = (float) $value;
             $this->class->reflFields['used']->setValue($document, $return);
             $hydratedData['used'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['downgradeDate'])) {
+            $value = $data['downgradeDate'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['downgradeDate']->setValue($document, clone $return);
+            $hydratedData['downgradeDate'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['upgradeDate'])) {
+            $value = $data['upgradeDate'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['upgradeDate']->setValue($document, clone $return);
+            $hydratedData['upgradeDate'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['updateLevel'])) {
+            $value = $data['updateLevel'];
+            if ($value instanceof \MongoDate) { $return = new \DateTime(); $return->setTimestamp($value->sec); } elseif (is_numeric($value)) { $return = new \DateTime(); $return->setTimestamp($value); } else { $return = new \DateTime($value); }
+            $this->class->reflFields['updateLevel']->setValue($document, clone $return);
+            $hydratedData['updateLevel'] = $return;
         }
         return $hydratedData;
     }

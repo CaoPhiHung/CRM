@@ -1,3 +1,0 @@
-phone -> 0949295186 | email -> 8315005573@tbfvietnam.com | gender -> 1 | birthday -> empty | firstname -> HA | lastname -> THUY | middlename -> MINH | ccode -> 8315005573 | postid -> 121819
-phone -> 0904306061 | email -> lienthanh792006@gmail.com | gender -> 2 | birthday -> empty | firstname -> NGUYEN | lastname -> THANH | middlename -> LIEN | ccode -> 8315005572 | postid -> 121829
-phone -> 0944328008 | email -> chido@powerland.vn | gender -> 1 | birthday -> empty | firstname -> DO | lastname -> CHI | middlename -> MY | ccode -> 8315004084 | postid -> 121855

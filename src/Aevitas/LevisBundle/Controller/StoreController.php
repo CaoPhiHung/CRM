@@ -27,7 +27,7 @@ use FOS\UserBundle\FOSUserEvents;
 use Vietland\AevitasBundle\Helper\Pagination;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Vietland\UserBundle\Document\UserLog;
-use Vietland\UserBundle\Document\Mailchimp;
+use Vietland\AevitasBundle\Helper\Multithread\MailerTask;
 
 class StoreController extends Controller {
     //put your code here
@@ -333,59 +333,37 @@ class StoreController extends Controller {
         )));
     }
 
-                /**
-     * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
-     * @param  string $method The API method to call, e.g. 'lists/list'
-     * @param  array  $args   An array of arguments to pass to the method. Will be json-encoded for you.
-     * @return array          Associative array of json decoded API response.
-     */
-    public function call($method, $args=array(), $timeout = 10)
-    {
-        return $this->makeRequest($method, $args, $timeout);
-    }
+    //     public function addSubToDisableEnableList($email,$fname,$mname,$lname,$authcode){
+    //     $listID = '678bbd96d3'; //list enable
 
-    /**
-     * Performs the underlying HTTP request. Not very exciting
-     * @param  string $method The API method to be called
-     * @param  array  $args   Assoc array of parameters to be passed
-     * @return array          Assoc array of decoded result
-     */
-    private function makeRequest($method, $args=array(), $timeout = 10)
-    {      
-        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
-        list(, $datacentre) = explode('-', $args['apikey']);
-        $this->api_endpoint = str_replace('<dc>', $datacentre, 'https://<dc>.api.mailchimp.com/2.0');
-        $url = $this->api_endpoint.'/'.$method.'.json';
+    //     $fullname = $fname." ".$mname. " " .$lname;
 
-        if (function_exists('curl_init') && function_exists('curl_setopt')){
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');       
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($args));
-            $result = curl_exec($ch);
-            curl_close($ch);
-        } else {
-            $json_data = json_encode($args);
-            $result    = file_get_contents($url, null, stream_context_create(array(
-                'http' => array(
-                    'protocol_version' => 1.1,
-                    'user_agent'       => 'PHP-MCAPI/2.0',
-                    'method'           => 'POST',
-                    'header'           => "Content-type: application/json\r\n".
-                                          "Connection: close\r\n" .
-                                          "Content-length: " . strlen($json_data) . "\r\n",
-                    'content'          => $json_data,
-                ),
-            )));
-        }
+    //     $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        
+    //     $data = array(
+    //         "email_address" => $email,
+    //         "status" => "subscribed",
+    //         'merge_fields' => array("FNAME"=>$fullname , "REDEEM" => $authcode)
+    //     );
 
-        return $result ? json_decode($result, true) : false;
-    }
+    //     $apiKeyParts = explode('-', $args['apikey']);
+    //     $shard = $apiKeyParts[1];
+
+    //     $url = 'https://' . $shard . '.api.mailchimp.com/3.0/lists/'.$listID.'/members/';
+
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, $url);              
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //     curl_setopt($ch, CURLOPT_TIMEOUT, 60);            
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: apikey 908a07f410ddc8c45c09108d5396583a-us10"));
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    //     $result = curl_exec($ch);
+    //     curl_close($ch);
+
+    //     return $result;
+    // }
 
     /**
      * @Route("/backend/staff/redeemption-process", name="backend_staff_redeemption_process")
@@ -394,19 +372,22 @@ class StoreController extends Controller {
      */
     public function RedeemptionProcessAction(Request $request) {
         $userid = $request->get('userid');
+        //exit(json_encode(array('error' => $userid)));
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $staff = $this->get('security.context')->getToken()->getUser();
         $store = $dm->getRepository('AevitasLevisBundle:Store')->findOneBy(array('oldId' => $staff->getStoreId()));
         $user = $dm->getRepository('VietlandUserBundle:User')->find((int) $userid);
+        //exit(json_encode(array('error' => $user)));
+
         if (!is_object($user)) {
-            exit(json_encode(array('error' => 'user not found')));
+            exit(json_encode(array('error' => 'user not found -----')));
         }
         $point = $user->getPoint();
         $p = $request->get('point');
 
         $redeemlimit = $this->get('point.rule')->redeemlimit;
         if ($point < $redeemlimit) {
-            exit(json_encode(array('error' => 'your point much be NOT less than redeem limit (<b>' . $redeemlimit . ' point</b>)')));
+            exit(json_encode(array('error' => 'Your point must greater than redeem limit (<b>' . $redeemlimit . ' point</b>)')));
         }
 
         $baserate = $this->get('point.rule')->getBaseRateRedeem($user->getCurrentLevel());
@@ -425,29 +406,31 @@ class StoreController extends Controller {
         #send SMS
         $phoneNo = $user->getCellphone();
         $authcode = $cvObj->getHash();
-        
-                $listID = '678bbd96d3'; //list redeem
-                $result = $this->call('lists/subscribe', array(
-                'id'                => $listID,
-                'email'             => array('email'=>$user->getEmail()),
-                'merge_vars'        => array('EMAIL'=> $user->getEmail(), 'FNAME'=>$user->getFirstname(), 'MNAME'=> $user->getMiddlename()  ,'LNAME'=> $user->getLastname(),
-                                            'REDEEM'=> $authcode),
-                'double_optin'      => false,
-                'update_existing'   => true,
-                'replace_interests' => false,
-                'send_welcome'      => false,
-            ));
 
-        $msg = $this->renderView(":sms:redeemProcess.html.twig", array('authcode' => $authcode));
+        //Mailchimp api add subcriseber to list
+        //$test = $this->addSubToDisableEnableList($user->getEmail(),$user->getFirstname(),$user->getMiddlename(),
+         //                   $user->getLastname(),$authcode);
 
-        $this->get('sms_sender')
-                ->setPhone($phoneNo)
-                ->setSms($msg)
-                ->send($authcode)
-        ;
+         $message = \Swift_Message::newInstance()
+                    ->setSubject($this->get('translator')->trans('Reedem OTP Password'))
+                    ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
+                                //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
+                    ->setTo($user->getEmail())
+                    ->setBody($this->renderView(':mail:redeemmail.html.twig', array('name' => $user->getName(),'code' =>$authcode)), 'text/html', 'utf8');
+            $this->get('mailer')->send($message);
+
+
+        // $msg = $this->renderView(":sms:redeemProcess.html.twig", array('authcode' => $authcode));
+
+        // $this->get('sms_sender')
+        //         ->setPhone($phoneNo)
+        //         ->setSms($msg)
+        //         ->send($authcode)
+        // ;
 
         return new Response(json_encode(array(
                     'msg' => 'completed',
+                    'authcode' => $authcode,
                     'store' => $store->getName(),
                     'point' => $p,
                     'baserate' => $baserate,

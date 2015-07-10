@@ -281,13 +281,14 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                      ->setEnabled(true)
                      ->generateRegcode()
                      ->setTotalBill(1)
+                     ->setBonusPoint(array())
                      ->setTotalPayment($totalPayment)
                      ->setRegisterStore($data['StoreName'])
                      ->setPlainPassword($user->getCellphone());
 
                      $this->addSubToDisableEnableList($email,$firstname,$middlename,$lastname,$user->getRegcode());
-                     $sms = "Chao mung" + $firstname+ "den voi chuong trinh Star Club,hay cap nhat day du thong tin cua ban tai www.starclubvn.com với mã đăng ký " + $data['PartyID'];
-        $this->sendNew('0931270135',$sms);
+        //              $sms = "Chao mung" + $firstname+ "den voi chuong trinh Star Club,hay cap nhat day du thong tin cua ban tai www.starclubvn.com với mã đăng ký " + $data['PartyID'];
+        // $this->sendNew('0931270135',$sms);
          //                      var_dump($data['PartyID']);
          // die();     
 
@@ -355,6 +356,7 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
         $job->setStatus(true);
         $dm->persist($job);
         $dm->flush();
+        
     }
 
     public function getRedeemPoint($bill_id)
@@ -531,73 +533,36 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
     }
 
     //new mail function
-
-                    /**
-     * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
-     * @param  string $method The API method to call, e.g. 'lists/list'
-     * @param  array  $args   An array of arguments to pass to the method. Will be json-encoded for you.
-     * @return array          Associative array of json decoded API response.
-     */
-    public function call($method, $args=array(), $timeout = 10)
-    {
-        return $this->makeRequest($method, $args, $timeout);
-    }
-
-    /**
-     * Performs the underlying HTTP request. Not very exciting
-     * @param  string $method The API method to be called
-     * @param  array  $args   Assoc array of parameters to be passed
-     * @return array          Assoc array of decoded result
-     */
-    private function makeRequest($method, $args=array(), $timeout = 10)
-    {      
-        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
-        list(, $datacentre) = explode('-', $args['apikey']);
-        $this->api_endpoint = str_replace('<dc>', $datacentre, 'https://<dc>.api.mailchimp.com/2.0');
-        $url = $this->api_endpoint.'/'.$method.'.json';
-
-        if (function_exists('curl_init') && function_exists('curl_setopt')){
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');       
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($args));
-            $result = curl_exec($ch);
-            curl_close($ch);
-        } else {
-            $json_data = json_encode($args);
-            $result    = file_get_contents($url, null, stream_context_create(array(
-                'http' => array(
-                    'protocol_version' => 1.1,
-                    'user_agent'       => 'PHP-MCAPI/2.0',
-                    'method'           => 'POST',
-                    'header'           => "Content-type: application/json\r\n".
-                                          "Connection: close\r\n" .
-                                          "Content-length: " . strlen($json_data) . "\r\n",
-                    'content'          => $json_data,
-                ),
-            )));
-        }
-
-        return $result ? json_decode($result, true) : false;
-    }
-
         public function addSubToDisableEnableList($email,$fname,$mname,$lname,$code){
-                $listID = '78ff5dfa4c'; //list enable
-                $result = $this->call('lists/subscribe', array(
-                'id'                => $listID,
-                'email'             => array('email'=>$email),
-                'merge_vars'        => array('EMAIL'=> $email, 'FNAME'=>$fname, 'MNAME'=> $mname  ,'LNAME'=> $lname,
-                                            'REGCODE'=> $code),
-                'double_optin'      => false,
-                'update_existing'   => true,
-                'replace_interests' => false,
-                'send_welcome'      => false,
-            ));
+        $listID = '78ff5dfa4c'; //list enable
+
+        $fullname = $fname." ".$mname. " " .$lname;
+
+        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        
+        $data = array(
+            "email_address" => $email,
+            "status" => "subscribed",
+            'merge_fields' => array("FNAME"=>$fullname,"REGCODE"=>$code)
+        );
+
+        $apiKeyParts = explode('-', $args['apikey']);
+        $shard = $apiKeyParts[1];
+
+        $url = 'https://' . $shard . '.api.mailchimp.com/3.0/lists/'.$listID.'/members/';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);              
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);            
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: apikey 908a07f410ddc8c45c09108d5396583a-us10"));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
     }
 
 }

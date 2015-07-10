@@ -138,6 +138,8 @@ class EarnPointListener {
 
         $this->logger("Calculate points");
 
+        $now = new \DateTime(date('Y-m-d'). ' 00:00:00');
+
         if (!is_null($lastOrder)) {
 
             // At least one bill
@@ -153,8 +155,13 @@ class EarnPointListener {
                 }
                 $nextLevel = $this->pointrule->getUserLevelInterval($interval);
 
-                if ($nextLevel)
+                if ($nextLevel){
                     $user->setLevel($nextLevel);
+
+                    //update date upgrade level
+                    $user->setUpgradeDate($now);
+                    $user->setUpdateLevel($now);
+                }
             }
         } else {
             // new user/update level require
@@ -164,6 +171,10 @@ class EarnPointListener {
                 $user->setLevel($nextLevel);
                 $baseRate = $pointRuleService->getBaseRate($user->getCurrentLevel());
                 $prev_level=$nextLevel;
+
+                //update date upgrade level
+                $user->setUpgradeDate($now);
+                $user->setUpdateLevel($now);
             }
         }
 
@@ -541,7 +552,7 @@ $user->getRegcode())),'text/html', 'utf8');
                                 ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
                                 ->setTo($email)
   ->setBody(
-$this->templating->render(':mail:signup.html.twig', array('user' => $user, 'code' => $user->getRegcode())), 
+$this->templating->render(':mail:newsignup.html.twig', array('name' => $user->getName(), 'code' => $user->getRegcode())), 
 'text/html', 'utf8');
 
                 try {

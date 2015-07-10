@@ -11,9 +11,9 @@ class GiftController__JMSInjector
 {
     public static function inject($container) {
         require_once '/var/www/html/levis-crm/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-GiftController.php';
-        $k = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\GiftController' => array('giftListAction' => array(0 => 'security.access.method_interceptor'), 'giftCreateAction' => array(0 => 'security.access.method_interceptor'), 'gifEditAction' => array(0 => 'security.access.method_interceptor'), 'giftAddCategories' => array(0 => 'security.access.method_interceptor'), 'categoryEditAction' => array(0 => 'security.access.method_interceptor'), 'categoriesListAction' => array(0 => 'security.access.method_interceptor'), 'importGiftAction' => array(0 => 'security.access.method_interceptor'), 'giftAddWishListAction' => array(0 => 'security.access.method_interceptor'))));
+        $f = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\GiftController' => array('giftListAction' => array(0 => 'security.access.method_interceptor'), 'giftCreateAction' => array(0 => 'security.access.method_interceptor'), 'gifEditAction' => array(0 => 'security.access.method_interceptor'), 'giftAddCategories' => array(0 => 'security.access.method_interceptor'), 'categoryEditAction' => array(0 => 'security.access.method_interceptor'), 'categoriesListAction' => array(0 => 'security.access.method_interceptor'), 'importGiftAction' => array(0 => 'security.access.method_interceptor'), 'giftAddWishListAction' => array(0 => 'security.access.method_interceptor'))));
         $instance = new \EnhancedProxy_21a06583a09fc60640e6a49f1914748735e7f951\__CG__\Aevitas\LevisBundle\Controller\GiftController();
-        $instance->__CGInterception__setLoader($k);
+        $instance->__CGInterception__setLoader($f);
         return $instance;
     }
 }

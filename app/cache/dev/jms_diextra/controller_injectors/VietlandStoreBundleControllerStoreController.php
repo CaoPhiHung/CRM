@@ -11,9 +11,9 @@ class StoreController__JMSInjector
 {
     public static function inject($container) {
         require_once '/var/www/html/levis-crm/app/cache/dev/jms_diextra/proxies/Vietland-StoreBundle-Controller-StoreController.php';
-        $m = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Vietland\\StoreBundle\\Controller\\StoreController' => array('updateUserAction' => array(0 => 'security.access.method_interceptor'), 'searchUserAction' => array(0 => 'security.access.method_interceptor'), 'shoppingAction' => array(0 => 'security.access.method_interceptor'), 'saveShoppingAction' => array(0 => 'security.access.method_interceptor'), 'updateformManagementNotify' => array(0 => 'security.access.method_interceptor'), 'checkingEmailAction' => array(0 => 'security.access.method_interceptor'), 'checkingCellphoneAction' => array(0 => 'security.access.method_interceptor'), 'listJobAction' => array(0 => 'security.access.method_interceptor'))));
+        $h = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Vietland\\StoreBundle\\Controller\\StoreController' => array('updateUserAction' => array(0 => 'security.access.method_interceptor'), 'searchUserAction' => array(0 => 'security.access.method_interceptor'), 'shoppingAction' => array(0 => 'security.access.method_interceptor'), 'saveShoppingAction' => array(0 => 'security.access.method_interceptor'), 'updateformManagementNotify' => array(0 => 'security.access.method_interceptor'), 'checkingEmailAction' => array(0 => 'security.access.method_interceptor'), 'checkingCellphoneAction' => array(0 => 'security.access.method_interceptor'), 'listJobAction' => array(0 => 'security.access.method_interceptor'))));
         $instance = new \EnhancedProxy_64530319cfee3b180d07d59965f147305559c150\__CG__\Vietland\StoreBundle\Controller\StoreController();
-        $instance->__CGInterception__setLoader($m);
+        $instance->__CGInterception__setLoader($h);
         return $instance;
     }
 }

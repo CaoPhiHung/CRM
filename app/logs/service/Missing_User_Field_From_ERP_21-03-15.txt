@@ -1,2 +1,0 @@
-phone -> 1222585553 | email -> 8315003097@tbfvietnam.com | gender -> 1 | birthday -> empty | firstname -> VU | lastname -> THUY NGAN | middlename -> THI | ccode -> 8315003097 | postid -> 120818
-phone -> 0913230029 | email -> 831500845@tbfvietnam.com | gender -> 2 | birthday -> empty | firstname -> pham thu hien | lastname -> empty | middlename -> empty | ccode -> 831500845 | postid -> 120823

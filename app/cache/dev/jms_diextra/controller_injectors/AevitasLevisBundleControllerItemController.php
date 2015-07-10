@@ -11,9 +11,9 @@ class ItemController__JMSInjector
 {
     public static function inject($container) {
         require_once '/var/www/html/levis-crm/app/cache/dev/jms_diextra/proxies/Aevitas-LevisBundle-Controller-ItemController.php';
-        $i = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\ItemController' => array('listAction' => array(0 => 'security.access.method_interceptor'), 'importAction' => array(0 => 'security.access.method_interceptor'))));
+        $d = new \JMS\AopBundle\Aop\InterceptorLoader($container, array('Aevitas\\LevisBundle\\Controller\\ItemController' => array('listAction' => array(0 => 'security.access.method_interceptor'), 'importAction' => array(0 => 'security.access.method_interceptor'))));
         $instance = new \EnhancedProxy_d86bb99a77d3f9c0510cbb946f677dc68f0e3af4\__CG__\Aevitas\LevisBundle\Controller\ItemController();
-        $instance->__CGInterception__setLoader($i);
+        $instance->__CGInterception__setLoader($d);
         return $instance;
     }
 }

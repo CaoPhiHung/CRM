@@ -3,8 +3,8 @@ parameters:
     smsactions: [confirmRedeem, redeemProcess, resendRegCode, signup]
     categories: [Eyewear, Watches, Footwear, Levis, 'Cosmetics & Fragrances']
     locale: en
-    #cdn: 'http://90.0.0.15'
-    cdn: 'http://www.starclubvn.com'
+    cdn: 'http://90.0.0.5'
+    #cdn: 'http://www.starclubvn.com'
     secret: 134sdfaewrfasdfe
     smsclient: CL8438
     smspassword: '123456789'

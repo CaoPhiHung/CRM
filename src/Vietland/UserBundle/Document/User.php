@@ -530,6 +530,21 @@ class User extends BaseUser implements Logger {
      */
     protected $used;
 
+    /**
+     * @MongoDB\Date
+     */
+    protected $downgradeDate;
+
+    /**
+     * @MongoDB\Date
+     */
+    protected $upgradeDate;
+
+    /**
+     * @MongoDB\Date
+     */
+    protected $updateLevel;
+
     public function __construct() {
         parent::__construct();
         $this->staff = new ArrayCollection();
@@ -554,6 +569,9 @@ class User extends BaseUser implements Logger {
         $this->pointToNextLevel = 0;
         $this->lastMonthBillNo = 0;
         $this->noDayDeactive = 0;
+        $this->downgradeDate = null;
+        $this->upgradeDate = null;
+        $this->updateLevel = null;
     }
 
     public function getJoined() {
@@ -2232,6 +2250,66 @@ class User extends BaseUser implements Logger {
 
     public function getReason() {
         return $this->reason;
+    }
+
+    /**
+     * Set DowngradeDate
+     *
+     * @param date $downgradeDate
+     */
+    public function setDowngradeDate() {
+         $this->downgradeDate = new \DateTime(date('Y-m-d'));
+        
+        return $this;
+    }
+
+    /**
+     * Get DowngradeDate
+     *
+     * @return date $downgradeDate
+     */
+    public function getDowngradeDate() {
+        return ($this->downgradeDate == null) ? null : $this->downgradeDate->format('Y-m-d');
+    }
+
+    /**
+     * Set UpgradeDate
+     *
+     * @param date $upgradeDate
+     */
+    public function setUpgradeDate() {
+         $this->upgradeDate = new \DateTime(date('Y-m-d'));
+        
+        return $this;
+    }
+
+    /**
+     * Get DowngradeDate
+     *
+     * @return date $downgradeDate
+     */
+    public function getUpgradeDate() {
+        return ($this->upgradeDate == null) ? null : $this->upgradeDate->format('Y-m-d');
+    }
+
+    /**
+     * Set UpdateLevel
+     *
+     * @param date $updateLevel
+     */
+    public function setUpdateLevel() {
+         $this->updateLevel = new \DateTime(date('Y-m-d'));
+        
+        return $this;
+    }
+
+    /**
+     * Get UpdateLevel
+     *
+     * @return date $updateLevel
+     */
+    public function getUpdateLevel() {
+        return ($this->updateLevel == null) ? null : $this->updateLevel->format('Y-m-d');
     }
 
     private function generateReadableRandomString($length = 12) {

@@ -92,7 +92,7 @@
                     cts += '<div>base rate: <span id="base-rate">'+response.baserate+' (1point = '+(parseInt(response.baserate))+'VND)</span></div>';
                     if (response.point < response.redeemlimit){
                         $('#myModal #bt-process').attr({'disabled':'disabled'})
-                        cts += '<div class="label label-warning">your point much be NOT less than redeem limit (<b>'+response.redeemlimit+' point</b>)</div>';
+                        cts += '<div class="label label-warning">Your point must greater than redeem limit (<b>'+response.redeemlimit+' point</b>)</div>';
                     }else{
                         $('#myModal #bt-process').removeAttr('disabled');
                         cts += '<div>points <input type="text" value="0" id="point-value" onkeyup="Point2Vnd(this,'+response.baserate+','+response.point+','+response.redeemlimit+')"/> to VND <input type="text" value="0" id="vnd-value"/>';

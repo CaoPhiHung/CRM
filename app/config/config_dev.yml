@@ -108,8 +108,8 @@ doctrine_mongodb:
 #                db: nhacthanh
 #                username: jayesh
 #                password: bao@jayesh
-                db: levis_20_dev
-    default_database: levis_20_dev
+                db: levis_20
+    default_database: levis_20
     document_managers:
         default:
             auto_mapping: true
