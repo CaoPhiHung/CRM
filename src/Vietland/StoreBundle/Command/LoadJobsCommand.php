@@ -71,6 +71,39 @@ class LoadJobsCommand extends ContainerAwareCommand
         // }
         // end send monthly email
         
+        //send birthday email
+        $now = new \DateTime(date('Y-m-d'));
+        $current_date = $now->format('Y-m-d');
+
+        $month = date("m",strtotime($current_date ));
+        $day = date("d",strtotime($current_date ));
+        $bday = new \DateTime("".$month."/".$day."/2015");
+        //     $end = new \DateTime("".$month."/31/2015");
+        //var_dump($current_date);
+        //var_dump($bday);
+          
+
+                $function = "function() { var dob = this.dob, day=".$day.", month= ".$month." , rt = false;
+                if(typeof this.dob != 'undefined'){
+
+                    
+                    if( day == dob.getDate() && month == (dob.getMonth() + 1) ) rt = true;
+                };
+                return rt;
+                }";
+        $usersBirthDay = $dm->createQueryBuilder('VietlandUserBundle:User')->field('dob')->exists(true)->where($function)->sort('id', 'desc')->getQuery()->execute();
+
+        
+        foreach($usersBirthDay as $user){
+            $test= $this->addSubToBirthDayList($user->getEmail(),$user->getName(),$user->getDob());
+             // var_dump($test);
+             //    die();  
+        }
+                //         $num = count($usersBirthDay);
+                // var_dump($num);
+                // die();  
+        //end birthday email
+        
         if(!empty($users)){
             foreach ($users as $user) {
                 $list_userid[] = $user->getCCode();
@@ -310,7 +343,6 @@ class LoadJobsCommand extends ContainerAwareCommand
         //new mail function
         public function addSubToDisableEnableList($email,$fname,$mname,$lname,$point,$clevel,$nlevel,$dob){
         $listID = '9a02d65624'; //list enable
-
         $fullname = $fname." ".$mname. " " .$lname;
 
         $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
@@ -323,6 +355,36 @@ class LoadJobsCommand extends ContainerAwareCommand
                 "CLEVEL"=>$clevel,
                 "NLEVEL"=>$nlevel,
                 "DOB"=>$dob->format('Y-m-d'))
+        );
+
+        $apiKeyParts = explode('-', $args['apikey']);
+        $shard = $apiKeyParts[1];
+
+        $url = 'https://' . $shard . '.api.mailchimp.com/3.0/lists/'.$listID.'/members/';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);              
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);            
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: apikey 908a07f410ddc8c45c09108d5396583a-us10"));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
+    }
+
+    public function addSubToBirthDayList($email,$fname,$dob){
+        $listID = '78ff5dfa4c'; //list enable
+
+        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
+        
+        $data = array(
+            "email_address" => $email,
+            "status" => "subscribed",
+            'merge_fields' => array("FNAME"=>$fname,"DOB"=>$dob->format('Y-m-d'))
         );
 
         $apiKeyParts = explode('-', $args['apikey']);
