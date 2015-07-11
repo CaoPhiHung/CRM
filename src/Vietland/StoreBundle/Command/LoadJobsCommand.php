@@ -76,21 +76,19 @@ class LoadJobsCommand extends ContainerAwareCommand
         $current_date = $now->format('Y-m-d');
 
         $month = date("m",strtotime($current_date ));
-        $day = date("d",strtotime($current_date ));
-        $bday = new \DateTime("".$month."/".$day."/2015");
+        $day = date("d",strtotime($current_date )) + 1;
+        //$bday = new \DateTime("".$month."/".$day."/2015");
         //     $end = new \DateTime("".$month."/31/2015");
         //var_dump($current_date);
-        //var_dump($bday);
           
+        $function = "function() { var dob = this.dob, day=".$day.", month= ".$month." , rt = false;
+        if(typeof this.dob != 'undefined'){
 
-                $function = "function() { var dob = this.dob, day=".$day.", month= ".$month." , rt = false;
-                if(typeof this.dob != 'undefined'){
-
-                    
-                    if( day == dob.getDate() && month == (dob.getMonth() + 1) ) rt = true;
-                };
-                return rt;
-                }";
+            
+            if( day == dob.getDate() && month == (dob.getMonth() + 1) ) rt = true;
+        };
+        return rt;
+        }";
         $usersBirthDay = $dm->createQueryBuilder('VietlandUserBundle:User')->field('dob')->exists(true)->where($function)->sort('id', 'desc')->getQuery()->execute();
 
         

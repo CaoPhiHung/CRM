@@ -286,7 +286,7 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                      ->setRegisterStore($data['StoreName'])
                      ->setPlainPassword($user->getCellphone());
 
-                     $this->addSubToDisableEnableList($email,$firstname,$middlename,$lastname,$user->getRegcode());
+                     //$this->addSubToDisableEnableList($email,$firstname,$middlename,$lastname,$user->getRegcode());
         //              $sms = "Chao mung" + $firstname+ "den voi chuong trinh Star Club,hay cap nhat day du thong tin cua ban tai www.starclubvn.com với mã đăng ký " + $data['PartyID'];
         // $this->sendNew('0931270135',$sms);
          //                      var_dump($data['PartyID']);
