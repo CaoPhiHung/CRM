@@ -499,7 +499,7 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('T' . ($index + 1), $user->getTotalBill());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('U' . ($index + 1), $user->getTotalPayment());
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('V' . ($index + 1), (string)$user->getPoint());
-            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $user->getTotalRedeemPoint());
+            $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('W' . ($index + 1),  $user->getUsedPoint());
             //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('X' . ($index + 1), $user->getTotalExtraPoint());
             //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('Y' . ($index + 1), $user->getExpriationsDay()->format('Y-m-d'));
             $level = $user->getLevel();
