@@ -93,7 +93,6 @@ class LoadJobsCommand extends ContainerAwareCommand
 
         
         foreach($usersBirthDay as $user){
-            
             $email = $user->getEmail();
             if(strpos($email,'@tbfvietnam.com') == false){
                 $test= $this->addSubToBirthDayList($user->getEmail(),$user->getName(),$user->getDob());

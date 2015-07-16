@@ -454,7 +454,8 @@ class ReportController extends Controller {
             //     $dm->persist($user);
             //     $dm->flush();
             // }
-
+            //if($index > 6760 && $index <= 6761){
+            //if($index == 6762){
             $cCode = $user->getCCode();
 
             $email= (string)$user->getEmail();
@@ -508,9 +509,10 @@ class ReportController extends Controller {
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AB' . ($index + 1), $user->pointToNextLevel($user->getTotalPayment()));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AC' . ($index + 1), $user->getLastbuy()->format('Y-m-d'));
             $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('AD' . ($index + 1), $datediff);
-
+            //}
             $index++;
-            
+            //if($index >= 6650) break;
+
         }
         $excelService->excelObj->getActiveSheet()->setTitle('User List Filter');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
