@@ -474,8 +474,11 @@ class HomeController extends Controller {
      * @Template("AevitasLevisBundle:Front:forgotPassword.html.twig")
      */
     public function forgotPasswordAction() {
+
+
         $request = $this->getRequest();
         $session = $this->get('session');
+
         $dm = $this->get('database_manager');
         $user = new User(); //temp user
         $form = $this->createFormBuilder($user)->add('email', 'email')->getForm();
@@ -484,17 +487,30 @@ class HomeController extends Controller {
             $userManager = $this->get('fos_user.user_manager');
             $form->bind($request);
             $checkUser = $userManager->findUserByUsername($user->getEmail());
+            //var_dump($user->getEmail());
             if ($form->isValid() && is_object($checkUser)) {
                 //user registration code as a change password confirmation code
                 $sessionid = $user->generateRegcode()->getRegcode();
                 $session->set('changepass', $sessionid);
+                // var_dump($sessionid);
+                // die();
+                // $message = \Swift_Message::newInstance()
+                //         ->setSubject($translator->trans('TBF Star Club - Request Change Password'))
+                //         ->setFrom('bichhang@tbfvietnam.com', 'TBF Loyalty Program')
+                //                                  ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
+                //         ->setTo($user->getEmail())
+                //         ->setBody($this->renderView(':mail:forgotPassword.html.twig', array('sessionid' => $sessionid)), 'text/html', 'utf8');
+                // $this->get('mailer')->send($message);
                 $message = \Swift_Message::newInstance()
-                        ->setSubject($translator->trans('TBF Star Club - Request Change Password'))
-                        ->setFrom('bichhang@tbfvietnam.com', 'TBF Loyalty Program')
-                        /*                         ->setReplyTo('getsocial@atipso.com', 'Atipso Team') */
-                        ->setTo($user->getEmail())
-                        ->setBody($this->renderView(':mail:forgotPassword.html.twig', array('sessionid' => $sessionid)), 'text/html', 'utf8');
-                $this->get('mailer')->send($message);
+                                ->setSubject($this->get('translator')->trans('Request Change Password'))
+                                ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
+                                            //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
+                                ->setTo($user->getEmail())
+                                //->setTo('caophihung8392@gmail.com')
+                                ->setBody($this->renderView(':mail:changePassword.html.twig', array('code' => $sessionid)), 'text/html', 'utf8');
+                            $this->get('mailer')->send($message);
+
+
                 $changePassword = $this->createFormBuilder($user)
                                 ->add('plainPassword', 'repeated', array('required' => true,
                                     'type' => 'password',
