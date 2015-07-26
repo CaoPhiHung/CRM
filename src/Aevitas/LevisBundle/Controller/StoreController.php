@@ -420,13 +420,13 @@ class StoreController extends Controller {
             $this->get('mailer')->send($message);
 
 
-        // $msg = $this->renderView(":sms:redeemProcess.html.twig", array('authcode' => $authcode));
+        $msg = $this->renderView(":sms:redeemProcess.html.twig", array('authcode' => $authcode));
 
-        // $this->get('sms_sender')
-        //         ->setPhone($phoneNo)
-        //         ->setSms($msg)
-        //         ->send($authcode)
-        // ;
+        $this->get('sms_sender')
+                ->setPhone($phoneNo)
+                ->setSms($msg)
+                ->send($authcode)
+        ;
 
         return new Response(json_encode(array(
                     'msg' => 'completed',

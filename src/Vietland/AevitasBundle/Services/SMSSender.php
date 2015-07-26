@@ -72,20 +72,69 @@ class SMSSender {
         //$this->sms = $this->clean($this->sms);
         //$this->phone='0932170135';
         //$url = 'http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocK hachHang?msisdn='.$this->phone.'&alias=LEVIS&message='.$this->sms.'&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123';
-        $url = 
-"http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=".$this->phone."&alias=LEVIS&message=" 
-.$this->sms. "&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123";
+//         $url = 
+// "http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=".$this->phone."&alias=LEVIS&message=" 
+// .$this->sms. "&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123";
         //file_get_contents("http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=0906881469&alias=LEVIS&message=abc&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123");
         // return;
-        $ch = curl_init();
-        $timeout = 5;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        $response = curl_exec($ch);
-        curl_close($ch);
 
-        return $this->ProcessResponse($response);
+        // $url= "https://sms.vht.com.vn/ccsms/json";
+        $sms = str_replace("+"," ",$this->sms);
+        $sms = str_replace("%3A"," :",$sms);
+        $data = array (
+                      'submission' => 
+                      array (
+                        'api_key' => '420355a1',
+                        'api_secret' => '21a66509',
+                        'sms' => 
+                        array (
+                          0 => 
+                          array (
+                            'brandname' => 'Levis',
+                            'text' => $sms,
+                            'to' => $this->phone,
+                          ),
+                        ),
+                      ),
+                    );
+        // var_dump(json_encode($data));
+        // die();
+
+
+        // $ch = curl_init();
+        // $timeout = 60;
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        // $response = curl_exec($ch);
+        // curl_close($ch);
+
+        // $data = '{
+        //           "submission":
+        //           {
+        //              "api_key":"420355a1",
+        //              "api_secret":"21a66509",
+        //              "sms": [
+        //                     {
+        //                          "brandname":"Levis",
+        //                          "text":"Hi There !",
+        //                          "to":"0932170135"
+        //                      }
+        //                       ]
+        //            }
+        //         }';
+
+        $url = "https://sms.vht.com.vn/ccsms/json";
+        $ch = curl_init(); $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);              
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);         
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $response = curl_exec($ch);
+
+        return $response;
     }
 
     /*clear special character

@@ -1046,14 +1046,8 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BET
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function updateEmailAction() {
-        // $uploadDir = '/var/www/html/levis-crm-dev/web/data/';
-
-        // $file_name = $_FILES['file_email']['name'];
-        // $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-
-        // $new_name = 'list_email_'.strtotime(date('Y-m-d h:i:s')).'.'.$ext;
-        // $target_file = $uploadDir . $new_name;
-        //if (move_uploaded_file($_FILES["file_email"]["tmp_name"], $target_file)) {
+        set_time_limit(100000);
+        
         if ($_FILES['file_email']['name'] != '') {
             $filename = $_FILES["file_email"]["tmp_name"];
             $dm = $this->get('doctrine.odm.mongodb.document_manager');
@@ -1112,11 +1106,11 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;"; //AND B.Billdate BET
             foreach ($users as $user) {
                 $ccode = $user->getCCode();
                 $user->setEmail($data_email[$ccode]);
-                $dm->persist($user);
-                $dm->flush();
+                $dm->persist($user);                
 
                 $index++;
             }
+            $dm->flush();
         }
         
         return new \Symfony\Component\HttpFoundation\RedirectResponse($this->generateUrl('backend_user_advancedsearch'));
