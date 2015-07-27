@@ -558,12 +558,12 @@ class BackendController extends Controller {
                                 ->setBody($this->renderView(':mail:enableUser.html.twig', array('name' => $user->getName())), 'text/html', 'utf8');
                             $this->get('mailer')->send($message);
 
-                    //         $msg = $this->renderView(":sms:enableCustomer.html.twig", array('fullname' => $user->getFirstname()));
-                    //         $this->get('sms_sender')
-                    //         ->setPhone($user->getCellphone())
-                    //         ->setSms($msg)
-                    //         ->send()
-                    // ;
+                            $msg = $this->renderView(":sms:enableCustomer.html.twig", array('fullname' => $user->getFirstname()));
+                            $this->get('sms_sender')
+                            ->setPhone($user->getCellphone())
+                            ->setSms($msg)
+                            ->send()
+                    ;
                     }else{
 
                             $message = \Swift_Message::newInstance()
@@ -584,12 +584,12 @@ class BackendController extends Controller {
                             //         'text/html', 'utf8');
                             // $this->container->get('mailer')->send($message);
 
-                    //         $msg = $this->renderView(":sms:disableCustomer.html.twig", array('fullname' => $user->getFirstname()));
-                    //         $this->get('sms_sender')
-                    //         ->setPhone($user->getCellphone())
-                    //         ->setSms($msg)
-                    //         ->send()
-                    // ;
+                            $msg = $this->renderView(":sms:disableCustomer.html.twig", array('fullname' => $user->getFirstname()));
+                            $this->get('sms_sender')
+                            ->setPhone($user->getCellphone())
+                            ->setSms($msg)
+                            ->send()
+                    ;
                     }
 
                 }               

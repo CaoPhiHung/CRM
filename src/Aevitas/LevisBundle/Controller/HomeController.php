@@ -229,7 +229,7 @@ class HomeController extends Controller {
                     ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
                     /*                         ->setReplyTo('getsocial@atipso.com', 'Atipso Team') */
                     ->setTo($user->getEmail())
-                    ->setBody($this->renderView(':mail:enableUser.html.twig', array('user' => $user)), 'text/html', 'utf8');
+                    ->setBody($this->renderView(':mail:enableUser.html.twig', array('name' => $user->getName())), 'text/html', 'utf8');
             $this->get('mailer')->send($message);
             $session->remove('signup');
         }
