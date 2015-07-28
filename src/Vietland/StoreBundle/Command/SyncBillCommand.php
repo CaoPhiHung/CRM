@@ -313,18 +313,19 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
             $level = $user->getCurrentLevel();
             $uid = $user->getId();
             $status = $user->getStatus();
+            $points = $user->getPoint();
             $level_downgrade = null;
 
             if(isset($user_payment[$uid])){
                 if($date_update_level != null){
                     if($date_update_level < $month12_before){
-                        if($level == 1){
-                            if($user_payment[$uid] < 1000000){
-                                $level_downgrade = 1;
-                                $status = false;
-                            }
+                        // if($level == 1){
+                        //     if($user_payment[$uid] < 1000000){
+                        //         $level_downgrade = 1;
+                        //         $status = false;
+                        //     }
 
-                        }
+                        // }
                         if($level == 2){
                             if($user_payment[$uid] < 4000000){
                                 $level_downgrade = 1;
@@ -336,15 +337,31 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
                             }
                         }
                     }
+
+                    //Silver: 15 months no shopping inactive customer and truncate the points
+                    if($level == 1){
+                        $month15_before = date('Y-m-d', strtotime("now -15 month"));
+                        if($date_update_level < $month15_before){
+                            if($level == 1){
+                                if($user_payment[$uid] < 1000000){
+                                    $level_downgrade = 1;
+                                    $status = false;
+                                    //truncate the points
+                                    $points = 0;
+                                }
+                            }                     
+                             
+                        }
+                    }
                 }else{
                     if($registration_date < $month12_before){
-                        if($level == 1){
-                            if($user_payment[$uid] < 1000000){
-                                $level_downgrade = 1;
-                                $status = false;
-                            }
+                        // if($level == 1){
+                        //     if($user_payment[$uid] < 1000000){
+                        //         $level_downgrade = 1;
+                        //         $status = false;
+                        //     }
 
-                        }
+                        // }
                         if($level == 2){
                             if($user_payment[$uid] < 4000000){
                                 $level_downgrade = 1;
@@ -356,20 +373,20 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
                             }
                         }
                     }
-                }
-
-                //Silver: 12 months no shopping inactive customer , more 3 month no shopping truncate the points
-                if($level == 1 && $status == false){
-                    $month3_before = date('Y-m-d', strtotime("now -3 month"));
-                    if($date_update_level < $month3_before){
-                        //truncate the points
-                        $user->setPoint(0);
-                            
-                        $dm->persist($user);
-                        $dm->flush(); 
-                        //send mail - sms
-                        //Cho nay kiem tra sau 3 thang ke tu ngay inactive -> khong shopping thi truncat point
-                        //Co can gui mail khong
+                    //Silver: 15 months no shopping inactive customer and truncate the points
+                    if($level == 1){
+                        $month15_before = date('Y-m-d', strtotime("now -15 month"));
+                        if($registration_date < $month15_before){
+                            if($level == 1){
+                                if($user_payment[$uid] < 1000000){
+                                    $level_downgrade = 1;
+                                    $status = false;
+                                    //truncate the points
+                                    $points = 0;
+                                }
+                            }                     
+                             
+                        }
                     }
                 }
 
@@ -377,6 +394,7 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
                     //downgrade
                     $user->setStatus($status);
                     $user->setCurrentLevel($level_downgrade);
+                    $user->setPoint((int) $points);
                     $user->setDowngradeDate($now);
                     $user->setUpdateLevel($now);
                     

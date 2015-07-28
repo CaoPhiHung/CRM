@@ -286,11 +286,8 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                      ->setRegisterStore($data['StoreName'])
                      ->setPlainPassword($user->getCellphone());
 
-                     //$this->addSubToDisableEnableList($email,$firstname,$middlename,$lastname,$user->getRegcode());
-        //              $sms = "Chao mung" + $firstname+ "den voi chuong trinh Star Club,hay cap nhat day du thong tin cua ban tai www.starclubvn.com với mã đăng ký " + $data['PartyID'];
-        // $this->sendNew('0931270135',$sms);
-         //                      var_dump($data['PartyID']);
-         // die();     
+                $sms = "Kinh gui ". $user->getName().",diem Star Club cua ban hien tai la ".$user->getPoint().",hay tan huong dich vu dac quyen cua Star Club, CT www.starclubvn.com";
+                $this->sendNew($phone,$sms);
 
                 if(!empty($birthday))
                      $user->setDob($birthday, true);
@@ -331,7 +328,8 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
                 $user->setTotalPayment($totalPayment);
                 $dm->persist($user);
                 $dm->flush();
-                //$userManager->updateUser($user, true);
+                $sms = "Kinh gui ". $user->getName().",diem Star Club cua ban hien tai la ".$user->getPoint().",hay tan huong dich vu dac quyen cua Star Club, CT www.starclubvn.com";
+                $this->sendNew($user->getPhone(),$sms);
             }
 
             $storeinfo = array('aName' => $sample['AccountsName'], 'bName' => $sample['BranchName'], 'Amount' => $sample['Amount'], 'itemNumber' => count($results), 'bDate' => new \DateTime($sample['BillDate']));
@@ -495,74 +493,35 @@ Order By B.BillDate DESC, B.Prefix, B.BillNo, B.BillIDNo;";
 
     public function sendNew($phone,$sms) {
 
-        //$this->sms = $this->clean($this->sms);
-        //$this->phone='0932170135';
-        //$url = 'http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocK hachHang?msisdn='.$this->phone.'&alias=LEVIS&message='.$this->sms.'&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123';
-        $url = 
-"http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=".$phone."&alias=LEVIS&message=" 
-.$sms. "&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123";
-        //file_get_contents("http://tbfvietnam.com:8083/ForwardMT.asmx/SendSmsChamSocKhachHang?msisdn=0906881469&alias=LEVIS&message=abc&contentType=0&authenticateUser=bacthanh&authenticatePass=bacthanh123");
-        // return;
-        $ch = curl_init();
-        $timeout = 5;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        $response = curl_exec($ch);
-        curl_close($ch);
+        $sms = str_replace("+"," ",$sms);
+        $sms = str_replace("%3A"," :",$sms);
+        $data = array (
+                      'submission' => 
+                      array (
+                        'api_key' => '420355a1',
+                        'api_secret' => '21a66509',
+                        'sms' => 
+                        array (
+                          0 => 
+                          array (
+                            'brandname' => 'Levis',
+                            'text' => $sms,
+                            'to' => $phone,
+                          ),
+                        ),
+                      ),
+                    );
 
-        return $this->ProcessResponse($response);
-    }
-
-
-
-    public function ProcessResponse($response) {
-        try {
-            $xml = simplexml_load_string($response);
-            if ($xml === FALSE) {
-                trigger_error("can't parsing XML from response");
-            }
-            $this->returnCode = $xml->Code;
-            $this->returnMsg = $xml->Message;
-            $this->returnTime = $xml->Time;
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            throw new Exception("Error Processing Request", 1);
-            
-        }
-    }
-
-    //new mail function
-        public function addSubToDisableEnableList($email,$fname,$mname,$lname,$code){
-        $listID = '78ff5dfa4c'; //list enable
-
-        $fullname = $fname." ".$mname. " " .$lname;
-
-        $args['apikey'] = '908a07f410ddc8c45c09108d5396583a-us10';
-        
-        $data = array(
-            "email_address" => $email,
-            "status" => "subscribed",
-            'merge_fields' => array("FNAME"=>$fullname,"REGCODE"=>$code)
-        );
-
-        $apiKeyParts = explode('-', $args['apikey']);
-        $shard = $apiKeyParts[1];
-
-        $url = 'https://' . $shard . '.api.mailchimp.com/3.0/lists/'.$listID.'/members/';
-
-        $ch = curl_init();
+        $url = "https://sms.vht.com.vn/ccsms/json";
+        $ch = curl_init(); $timeout = 5;
         curl_setopt($ch, CURLOPT_URL, $url);              
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);            
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: apikey 908a07f410ddc8c45c09108d5396583a-us10"));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);         
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        $result = curl_exec($ch);
-        curl_close($ch);
+        $response = curl_exec($ch);
 
-        return $result;
+        return $response;
     }
 
 }

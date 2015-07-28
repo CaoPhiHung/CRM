@@ -93,6 +93,7 @@ class LoadJobsCommand extends ContainerAwareCommand
 
         
         foreach($usersBirthDay as $user){
+            
             $email = $user->getEmail();
             if(strpos($email,'@tbfvietnam.com') == false){
                 $test= $this->addSubToBirthDayList($user->getEmail(),$user->getName(),$user->getDob());
@@ -242,18 +243,19 @@ class LoadJobsCommand extends ContainerAwareCommand
             $level = $user->getCurrentLevel();
             $uid = $user->getId();
             $status = $user->getStatus();
+            $points = $user->getPoint();
             $level_downgrade = null;
 
             if(isset($user_payment[$uid])){
                 if($date_update_level != null){
                     if($date_update_level < $month12_before){
-                        if($level == 1){
-                            if($user_payment[$uid] < 1000000){
-                                $level_downgrade = 1;
-                                $status = false;
-                            }
+                        // if($level == 1){
+                        //     if($user_payment[$uid] < 1000000){
+                        //         $level_downgrade = 1;
+                        //         $status = false;
+                        //     }
 
-                        }
+                        // }
                         if($level == 2){
                             if($user_payment[$uid] < 4000000){
                                 $level_downgrade = 1;
@@ -265,15 +267,31 @@ class LoadJobsCommand extends ContainerAwareCommand
                             }
                         }
                     }
+
+                    //Silver: 15 months no shopping inactive customer and truncate the points
+                    if($level == 1){
+                        $month15_before = date('Y-m-d', strtotime("now -15 month"));
+                        if($date_update_level < $month15_before){
+                            if($level == 1){
+                                if($user_payment[$uid] < 1000000){
+                                    $level_downgrade = 1;
+                                    $status = false;
+                                    //truncate the points
+                                    $points = 0;
+                                }
+                            }                     
+                             
+                        }
+                    }
                 }else{
                     if($registration_date < $month12_before){
-                        if($level == 1){
-                            if($user_payment[$uid] < 1000000){
-                                $level_downgrade = 1;
-                                $status = false;
-                            }
+                        // if($level == 1){
+                        //     if($user_payment[$uid] < 1000000){
+                        //         $level_downgrade = 1;
+                        //         $status = false;
+                        //     }
 
-                        }
+                        // }
                         if($level == 2){
                             if($user_payment[$uid] < 4000000){
                                 $level_downgrade = 1;
@@ -285,20 +303,20 @@ class LoadJobsCommand extends ContainerAwareCommand
                             }
                         }
                     }
-                }
-
-                //Silver: 12 months no shopping inactive customer , more 3 month no shopping truncate the points
-                if($level == 1 && $status == false){
-                    $month3_before = date('Y-m-d', strtotime("now -3 month"));
-                    if($date_update_level < $month3_before){
-                        //truncate the points
-                        $user->setPoint(0);
-                            
-                        $dm->persist($user);
-                        $dm->flush(); 
-                        //send mail - sms
-                        //Cho nay kiem tra sau 3 thang ke tu ngay inactive -> khong shopping thi truncat point
-                        //Co can gui mail khong
+                    //Silver: 15 months no shopping inactive customer and truncate the points
+                    if($level == 1){
+                        $month15_before = date('Y-m-d', strtotime("now -15 month"));
+                        if($registration_date < $month15_before){
+                            if($level == 1){
+                                if($user_payment[$uid] < 1000000){
+                                    $level_downgrade = 1;
+                                    $status = false;
+                                    //truncate the points
+                                    $points = 0;
+                                }
+                            }                     
+                             
+                        }
                     }
                 }
 
@@ -306,6 +324,7 @@ class LoadJobsCommand extends ContainerAwareCommand
                     //downgrade
                     $user->setStatus($status);
                     $user->setCurrentLevel($level_downgrade);
+                    $user->setPoint((int) $points);
                     $user->setDowngradeDate($now);
                     $user->setUpdateLevel($now);
                     
