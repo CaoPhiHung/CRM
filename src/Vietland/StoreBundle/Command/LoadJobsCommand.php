@@ -23,6 +23,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Vietland\UserBundle\Document\UserLog;
 use Vietland\StoreBundle\Document\Jobqueue;
 use Symfony\Component\Process\Process;
+use Vietland\AevitasBundle\Helper\Multithread\MailerTask;
 
 class LoadJobsCommand extends ContainerAwareCommand
 {
@@ -321,6 +322,7 @@ class LoadJobsCommand extends ContainerAwareCommand
                 }
 
                 if(!empty($level_downgrade)){
+                    $oldlevel = $user->getLevel();
                     //downgrade
                     $user->setStatus($status);
                     $user->setCurrentLevel($level_downgrade);
@@ -331,6 +333,17 @@ class LoadJobsCommand extends ContainerAwareCommand
                     $dm->persist($user);
                     $dm->flush(); 
                     //send mail - sms
+                    $sms = "Chung toi rat tiec phai thong bao tin nay.The Star Club cua ban da bi giam tu ". $oldlevel ." xuong ". $user->getLevel() .". Chi tiet www.starclubvn.com";
+                    $this->sendNew($user->getPhone(),$sms);
+
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject($this->get('translator')->trans('Your account has been downgrade'))
+                        ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
+                                    //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
+                        ->setTo($user->getEmail())
+                        //->setTo('caophihung8392@gmail.com')
+                        ->setBody($this->renderView(':mail:downgrade.html.twig', array('oldlevel' => $oldlevel, 'newlevel' => $user->getLevel())), 'text/html', 'utf8');
+                    $this->get('mailer')->send($message);   
                 }
 
             }
@@ -424,5 +437,40 @@ class LoadJobsCommand extends ContainerAwareCommand
         curl_close($ch);
 
         return $result;
+    }
+
+        //new sms function -Hung
+
+    public function sendNew($phone,$sms) {
+
+        $sms = str_replace("+"," ",$sms);
+        $sms = str_replace("%3A"," :",$sms);
+        $data = array (
+                      'submission' => 
+                      array (
+                        'api_key' => '420355a1',
+                        'api_secret' => '21a66509',
+                        'sms' => 
+                        array (
+                          0 => 
+                          array (
+                            'brandname' => 'Levis',
+                            'text' => $sms,
+                            'to' => $phone,
+                          ),
+                        ),
+                      ),
+                    );
+
+        $url = "https://sms.vht.com.vn/ccsms/json";
+        $ch = curl_init(); $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);              
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);         
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $response = curl_exec($ch);
+
+        return $response;
     }
 }
