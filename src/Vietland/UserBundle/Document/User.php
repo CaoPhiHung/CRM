@@ -2082,9 +2082,12 @@ class User extends BaseUser implements Logger {
     public function isAnniversaryToday() {
         if (is_object($this->anni)) {
             foreach ($this->anni as $anni) {
-                if (date('d', $anni->getDate()->getTimestamp()) == date('d')) {
-                    return $anni;
-                }
+                $d = $anni->getDate();
+                if(!empty($d)){
+                    if (date('d', $d->getTimestamp()) == date('d')) {
+                        return $anni;
+                    }
+                }                
             }
         }
         return;

@@ -402,11 +402,11 @@ group by Store.BranchName , Store.Branchid , Store.regionid , b.BillDate , b.eti
                     $dm->persist($user);
                     $dm->flush(); 
                     //send mail - sms
-                    $sms = "Chung toi rat tiec phai thong bao tin nay.The Star Club cua ban da bi giam tu ". $oldlevel ." xuong ". $user->getLevel(); .". Chi tiet www.starclubvn.com";
+                    $sms = "Chung toi rat tiec phai thong bao tin nay.The Star Club cua ban da bi giam tu ". $oldlevel ." xuong ". $user->getLevel() .". Chi tiet www.starclubvn.com";
                     $this->sendNew($user->getPhone(),$sms);
 
                     $message = \Swift_Message::newInstance()
-                        ->setSubject($this->get('translator')->trans('Your account has been downgrade'))
+                        ->setSubject('Your account has been downgrade')
                         ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
                                     //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
                         ->setTo($user->getEmail())

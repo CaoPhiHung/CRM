@@ -337,7 +337,7 @@ class LoadJobsCommand extends ContainerAwareCommand
                     $this->sendNew($user->getPhone(),$sms);
 
                     $message = \Swift_Message::newInstance()
-                        ->setSubject($this->get('translator')->trans('Your account has been downgrade'))
+                        ->setSubject('Your account has been downgrade')
                         ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
                                     //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
                         ->setTo($user->getEmail())
