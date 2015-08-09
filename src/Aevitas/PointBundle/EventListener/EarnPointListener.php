@@ -196,17 +196,18 @@ class EarnPointListener {
                     $user->setUpgradeDate($now);
                     $user->setUpdateLevel($now);
 
+                    $dm->persist($user);
+                    $dm->flush();
+
                     $sms = "Cam on ".$user->getName()." da mua sam.Ban da duoc thang hang tu ". $oldlevel ." len ". $user->getLevel() .". Chi tiet www.starclubvn.com";
                     $this->sendNew($user->getPhone(),$sms);
 
-                    $message = \Swift_Message::newInstance()
+                    /*$message = \Swift_Message::newInstance()
                         ->setSubject('Your account has been upgrade')
                         ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
-                                    //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
                         ->setTo($user->getEmail())
-                        //->setTo('caophihung8392@gmail.com')
                         ->setBody($this->renderView(':mail:upgrade.html.twig', array('name' => $user->getName(),'oldlevel' => $oldlevel, 'newlevel' => $user->getLevel())), 'text/html', 'utf8');
-                    $this->get('mailer')->send($message);
+                    $this->get('mailer')->send($message);*/
 
                 }
             }
@@ -224,17 +225,18 @@ class EarnPointListener {
                 $user->setUpgradeDate($now);
                 $user->setUpdateLevel($now);
 
+                $dm->persist($user);
+                $dm->flush();
+
                 $sms = "Cam on ".$user->getName()." da mua sam.Ban da duoc thang hang tu ". $oldlevel ." len ". $user->getLevel() .". Chi tiet www.starclubvn.com";
                 $this->sendNew($user->getPhone(),$sms);
 
-                $message = \Swift_Message::newInstance()
+                /*$message = \Swift_Message::newInstance()
                         ->setSubject('Your account has been upgrade')
                         ->setFrom('crm@thanbacgroup.com', 'Thanh Bac Fashion')
-                                    //             ->setReplyTo('getsocial@atipso.com', 'Atipso Team') 
                         ->setTo($user->getEmail())
-                        //->setTo('caophihung8392@gmail.com')
                         ->setBody($this->renderView(':mail:upgrade.html.twig', array('name' => $user->getName() ,'oldlevel' => $oldlevel, 'newlevel' => $user->getLevel())), 'text/html', 'utf8');
-                $this->get('mailer')->send($message);   
+                $this->get('mailer')->send($message);*/
 
             }
         }

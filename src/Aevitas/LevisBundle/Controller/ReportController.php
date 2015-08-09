@@ -1177,13 +1177,23 @@ class ReportController extends Controller {
                             ->field('created')->gte($start)->sort('time', 'desc')->getQuery()->execute();
             
             foreach ($redeems as $obj) {
-                if($obj->getUser()->getName() == $user->getName() && $obj->getBPoint() != ""){
+
+                if($obj->getUser()->getCCode() == $user->getCCode() && $obj->getBPoint() != ""){
+
+                    if( $obj->getUser()->getCCode() == "8315000420" && $obj->getCreated()->format('Y-m-d') == "2015-07-28"
+                    ||  $obj->getCreated()->format('Y-m-d') == "2015-07-29"){
+                        //$index++;
+                         
+                    }else{
+                    
                     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('A' . ($index + 5), $obj->getStore()->getName());
                     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('C' . ($index + 5), $obj->getCreated()->format('Y-m-d h:i:s'));
                     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('G' . ($index + 5), $obj->getPoint());
                     $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('D' . ($index + 5), "redeemed");
-                    $excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 5), $obj->getUser()->getPoint());
-                        $index++;
+                    //$excelService->excelObj->setActiveSheetIndex(0)->setCellValue('H' . ($index + 5), $obj->getUser()->getPoint());
+                    $index++;
+                    }
+                        
                 }
 
                 if (!is_object($obj->getStore()) || !is_object($obj->getUser())) {
